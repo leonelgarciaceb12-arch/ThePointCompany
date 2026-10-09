@@ -71,3 +71,11 @@ Las métricas distinguen siempre **facturación**, **ganancia bruta**, **gastos*
 ## Entrega y evolución
 
 La primera versión queda preparada para: autenticación por socio, permisos, auditoría, sincronización más frecuente, exportación y conexión posterior con Gscalate o Meta Ads. No se automatiza Meta Ads en esta etapa: se deja el módulo para carga manual de publicidad y el dashboard para incorporar esos gastos y resultados sin mezclar métricas.
+
+
+## Iteración de control y análisis avanzado
+
+- **Mantenimiento de datos:** cada entidad visible tendrá edición protegida y eliminación confirmada. Las ventas ajustarán sus líneas y métricas; si una venta descontó inventario, eliminarla devolverá el stock. Los productos con historial se archivarán para no romper la trazabilidad.
+- **Cotización:** el backend consultará periódicamente una fuente pública que replica cotizaciones de DolarHoy, mostrará dólar oficial, blue, MEP y CCL con compra/venta, hora de actualización y fuente visible. Si la fuente falla, se mostrará el último estado disponible/error sin inventar valores.
+- **Métricas avanzadas:** sumar resultado estimado después de gastos y publicidad, costo de mercadería vendida, margen bruto, tasa de recompra, porcentaje de ventas con cliente, concentración por canal, mejor día, ingreso promedio diario, cobertura aproximada de stock y relación publicidad/facturación. Las métricas se calculan por el período seleccionado y distinguen los datos incompletos.
+- **Interfaz:** agregar acciones de editar/eliminar en tablas y tarjetas, modales reutilizables, confirmación explícita antes de borrar, navegación para publicidad y objetivos, y un ticker de dólar siempre visible en el encabezado responsive.

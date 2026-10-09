@@ -21,6 +21,7 @@ import { ENV } from "./_core/env";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 let seedPromise: Promise<void> | null = null;
+let lastDollarRates: Array<{ moneda: string; casa: string; nombre: string; compra: number; venta: number; fechaActualizacion: string }> = [];
 
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
@@ -128,20 +129,51 @@ export async function getDashboard(from?: string, to?: string) {
   const salesWhere = from && to ? and(gte(sales.saleDate, from), lt(sales.saleDate, to)) : undefined;
   const expenseWhere = from && to ? and(gte(expenses.expenseDate, from), lt(expenses.expenseDate, to)) : undefined;
   const adsWhere = from && to ? and(gte(adCampaigns.adDate, from), lt(adCampaigns.adDate, to)) : undefined;
-  const [summary, units, inventory, lowStock, topProducts, topCustomers, recentSales, dueLoans, expensesTotal, adTotal, daily] = await Promise.all([
-    db.select({ revenue: sql<number>`coalesce(sum(${sales.total}),0)`, profit: sql<number>`coalesce(sum(case when ${sales.costKnown} = true then ${sales.profit} else 0 end),0)`, orders: sql<number>`count(*)`, incomplete: sql<number>`coalesce(sum(case when ${sales.costKnown} = false then 1 else 0 end),0)` }).from(sales).where(salesWhere),
-    db.select({ units: sql<number>`coalesce(sum(${saleItems.quantity}),0)` }).from(saleItems).leftJoin(sales, eq(saleItems.saleId, sales.id)).where(salesWhere),
+  const paidWhere = salesWhere ? and(salesWhere, eq(sales.status, "paid")) : eq(sales.status, "paid");
+  const [summary, units, inventory, lowStock, topProducts, topCustomers, recentSales, dueLoans, expensesTotal, adTotal, daily, channelRows, periodCustomerRows] = await Promise.all([
+    db.select({ revenue: sql<number>`coalesce(sum(${sales.total}),0)`, profit: sql<number>`coalesce(sum(case when ${sales.costKnown} = true then ${sales.profit} else 0 end),0)`, cogs: sql<number>`coalesce(sum(case when ${sales.costKnown} = true then ${sales.totalCost} else 0 end),0)`, orders: sql<number>`count(*)`, incomplete: sql<number>`coalesce(sum(case when ${sales.costKnown} = false then 1 else 0 end),0)` }).from(sales).where(paidWhere),
+    db.select({ units: sql<number>`coalesce(sum(${saleItems.quantity}),0)` }).from(saleItems).leftJoin(sales, eq(saleItems.saleId, sales.id)).where(paidWhere),
     db.select({ value: sql<number>`coalesce(sum(${products.stock} * ${products.cost}),0)`, units: sql<number>`coalesce(sum(${products.stock}),0)` }).from(products).where(eq(products.active, true)),
     db.select().from(products).where(and(eq(products.active, true), sql`${products.stock} <= ${products.minStock}`)).orderBy(asc(products.stock)).limit(8),
-    db.select({ name: products.name, category: products.category, units: sql<number>`coalesce(sum(${saleItems.quantity}),0)`, profit: sql<number>`coalesce(sum(${saleItems.profit}),0)` }).from(saleItems).leftJoin(products, eq(saleItems.productId, products.id)).groupBy(saleItems.productId, products.name, products.category).orderBy(desc(sql`sum(${saleItems.quantity})`)).limit(6),
-    db.select({ name: customers.name, spent: customers.spent, profit: customers.profit, lastPurchase: customers.lastPurchase, purchases: customers.purchases }).from(customers).orderBy(desc(customers.spent)).limit(6),
+    db.select({ name: products.name, category: products.category, units: sql<number>`coalesce(sum(${saleItems.quantity}),0)`, profit: sql<number>`coalesce(sum(${saleItems.profit}),0)` }).from(saleItems).innerJoin(sales, eq(saleItems.saleId, sales.id)).leftJoin(products, eq(saleItems.productId, products.id)).where(paidWhere).groupBy(saleItems.productId, products.name, products.category).orderBy(desc(sql`sum(${saleItems.quantity})`)).limit(6),
+    db.select({ id: customers.id, name: customers.name, spent: sql<number>`coalesce(sum(${sales.total}),0)`, profit: sql<number>`coalesce(sum(${sales.profit}),0)`, lastPurchase: sql<string>`max(${sales.saleDate})`, purchases: sql<number>`count(*)` }).from(sales).innerJoin(customers, eq(sales.customerId, customers.id)).where(paidWhere).groupBy(customers.id, customers.name).orderBy(desc(sql`sum(${sales.total})`)).limit(6),
     db.select().from(sales).orderBy(desc(sales.saleDate), desc(sales.id)).limit(8),
     db.select().from(loans).where(sql`${loans.balance} > 0`).orderBy(asc(loans.dueDate)).limit(8),
     db.select({ total: sql<number>`coalesce(sum(${expenses.amount}),0)` }).from(expenses).where(expenseWhere),
     db.select({ total: sql<number>`coalesce(sum(${adCampaigns.amount}),0)` }).from(adCampaigns).where(adsWhere),
-    db.select({ day: sales.saleDate, revenue: sql<number>`sum(${sales.total})`, profit: sql<number>`sum(case when ${sales.costKnown} = true then ${sales.profit} else 0 end)` }).from(sales).where(salesWhere).groupBy(sales.saleDate).orderBy(asc(sales.saleDate)).limit(31),
+    db.select({ day: sales.saleDate, revenue: sql<number>`sum(${sales.total})`, profit: sql<number>`sum(case when ${sales.costKnown} = true then ${sales.profit} else 0 end)` }).from(sales).where(paidWhere).groupBy(sales.saleDate).orderBy(asc(sales.saleDate)),
+    db.select({ channel: sales.channel, revenue: sql<number>`coalesce(sum(${sales.total}),0)`, orders: sql<number>`count(*)` }).from(sales).where(paidWhere).groupBy(sales.channel).orderBy(desc(sql`sum(${sales.total})`)).limit(8),
+    db.select({ customerId: sales.customerId, purchases: sql<number>`count(*)` }).from(sales).where(and(paidWhere, sql`${sales.customerId} is not null`)).groupBy(sales.customerId),
   ]);
-  return { summary: { ...summary[0], units: units[0]?.units ?? 0 }, inventory: inventory[0], lowStock, topProducts, topCustomers, recentSales, dueLoans, expenses: expensesTotal[0], ads: adTotal[0], daily };
+  const revenue = Number(summary[0]?.revenue ?? 0);
+  const grossProfit = Number(summary[0]?.profit ?? 0);
+  const expenseTotal = Number(expensesTotal[0]?.total ?? 0);
+  const adSpend = Number(adTotal[0]?.total ?? 0);
+  const unitsSold = Number(units[0]?.units ?? 0);
+  const currentStock = Number(inventory[0]?.units ?? 0);
+  const activeCustomers = periodCustomerRows.length;
+  const repeatCustomers = periodCustomerRows.filter(row => Number(row.purchases) > 1).length;
+  const attachedOrders = periodCustomerRows.reduce((sum, row) => sum + Number(row.purchases || 0), 0);
+  const periodDays = from && to ? Math.max(1, Math.ceil((new Date(`${to}T00:00:00`).getTime() - new Date(`${from}T00:00:00`).getTime()) / 86400000)) : Math.max(1, (daily.length || 1));
+  const bestDay = [...daily].sort((a, b) => Number(b.revenue ?? 0) - Number(a.revenue ?? 0))[0] ?? null;
+  const advanced = {
+    cogs: Number(summary[0]?.cogs ?? 0),
+    netEstimated: grossProfit - expenseTotal - adSpend,
+    grossMargin: revenue ? grossProfit / revenue * 100 : 0,
+    adShareOfRevenue: revenue ? adSpend / revenue * 100 : 0,
+    repeatRate: activeCustomers ? repeatCustomers / activeCustomers * 100 : 0,
+    customerAttachRate: Number(summary[0]?.orders ?? 0) ? attachedOrders / Number(summary[0]?.orders ?? 1) * 100 : 0,
+    averageDailyRevenue: revenue / periodDays,
+    profitPerOrder: Number(summary[0]?.orders ?? 0) ? grossProfit / Number(summary[0]?.orders ?? 1) : 0,
+    sellThrough: unitsSold + currentStock ? unitsSold / (unitsSold + currentStock) * 100 : 0,
+    stockCoverageDays: unitsSold ? currentStock / (unitsSold / periodDays) : null,
+    bestDay,
+    topChannel: channelRows[0] ?? null,
+    channels: channelRows,
+    activeCustomers,
+    repeatCustomers,
+  };
+  return { summary: { ...summary[0], units: unitsSold }, inventory: inventory[0], lowStock, topProducts, topCustomers, recentSales, dueLoans, expenses: expensesTotal[0], ads: adTotal[0], daily, advanced };
 }
 
 export async function listProducts(search?: string, category?: string) {
@@ -165,6 +197,91 @@ export async function createProduct(input: { name: string; category: string; sup
   const db = await getDb(); if (!db) throw new Error("Database is not available");
   const result = await db.insert(products).values({ name: input.name, category: input.category, supplier: input.supplier || "Propio", stock: input.stock, cost: toMoney(input.cost), minStock: input.minStock ?? 3, createdBy: input.userId, updatedBy: input.userId });
   return Number(result[0].insertId);
+}
+
+export async function updateProduct(id: number, input: { name: string; category: string; supplier?: string; stock: number; cost: number; minStock?: number; userId?: number }) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  return db.transaction(async tx => {
+    const current = (await tx.select().from(products).where(eq(products.id, id)).limit(1))[0];
+    if (!current) throw new Error("Producto no encontrado");
+    await tx.update(products).set({ name: input.name, category: input.category, supplier: input.supplier || "Propio", stock: input.stock, cost: toMoney(input.cost), minStock: input.minStock ?? 3, updatedBy: input.userId }).where(eq(products.id, id));
+    if (current.stock !== input.stock) await tx.insert(stockMovements).values({ productId: id, type: "adjustment", quantity: input.stock - current.stock, unitCost: toMoney(input.cost), notes: "Ajuste desde edición del producto", createdBy: input.userId, updatedBy: input.userId });
+    return { id };
+  });
+}
+
+export async function deleteProduct(id: number, userId?: number) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  return db.transaction(async tx => {
+    const saleLink = await tx.select({ id: saleItems.id }).from(saleItems).where(eq(saleItems.productId, id)).limit(1);
+    const movementLink = await tx.select({ id: stockMovements.id }).from(stockMovements).where(eq(stockMovements.productId, id)).limit(1);
+    if (saleLink.length || movementLink.length) {
+      await tx.update(products).set({ active: false, updatedBy: userId }).where(eq(products.id, id));
+      return { archived: true };
+    }
+    await tx.delete(products).where(eq(products.id, id));
+    return { archived: false };
+  });
+}
+
+async function refreshCustomerStats(tx: any, customerId: number | null | undefined) {
+  if (!customerId) return;
+  const rows = await tx.select({ purchases: sql<number>`count(*)`, spent: sql<number>`coalesce(sum(${sales.total}),0)`, profit: sql<number>`coalesce(sum(${sales.profit}),0)`, firstPurchase: sql<string>`min(${sales.saleDate})`, lastPurchase: sql<string>`max(${sales.saleDate})` }).from(sales).where(and(eq(sales.customerId, customerId), eq(sales.status, "paid")));
+  const row = rows[0];
+  await tx.update(customers).set({ purchases: Number(row?.purchases ?? 0), spent: toMoney(row?.spent), profit: toMoney(row?.profit), firstPurchase: row?.firstPurchase || null, lastPurchase: row?.lastPurchase || null }).where(eq(customers.id, customerId));
+}
+
+export async function updateSale(id: number, input: { date: string; customerId?: number | null; customerName?: string; customerPhone?: string; channel?: string; total: number; totalCost: number; costKnown?: boolean; description?: string; notes?: string; userId?: number }) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  return db.transaction(async tx => {
+    const current = (await tx.select().from(sales).where(eq(sales.id, id)).limit(1))[0];
+    if (!current) throw new Error("Venta no encontrada");
+    const oldCustomerId = current.customerId;
+    const costKnown = input.costKnown !== false;
+    const profit = costKnown ? input.total - input.totalCost : 0;
+    const storedCost = costKnown ? input.totalCost : 0;
+    await tx.update(sales).set({ saleDate: input.date, customerId: input.customerId ?? null, customerName: input.customerName || null, customerPhone: input.customerPhone || null, channel: input.channel || "WhatsApp", total: toMoney(input.total), totalCost: toMoney(storedCost), profit: toMoney(profit), margin: costKnown && input.total ? toMoney(profit / input.total * 100) : "0.00", costKnown, notes: input.notes, updatedBy: input.userId }).where(eq(sales.id, id));
+    const item = (await tx.select().from(saleItems).where(eq(saleItems.saleId, id)).orderBy(asc(saleItems.id)).limit(1))[0];
+    if (item) {
+      const quantity = Math.max(1, item.quantity);
+      await tx.update(saleItems).set({ description: input.description || item.description, unitPrice: toMoney(input.total / quantity), unitCost: toMoney(costKnown ? storedCost / quantity : 0), total: toMoney(input.total), costTotal: toMoney(storedCost), profit: toMoney(profit), costKnown, updatedBy: input.userId }).where(eq(saleItems.id, item.id));
+    }
+    await refreshCustomerStats(tx, oldCustomerId);
+    await refreshCustomerStats(tx, input.customerId);
+    return { id, profit };
+  });
+}
+
+export async function deleteSale(id: number, userId?: number) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  return db.transaction(async tx => {
+    const sale = (await tx.select().from(sales).where(eq(sales.id, id)).limit(1))[0];
+    if (!sale) throw new Error("Venta no encontrada");
+    const items = await tx.select().from(saleItems).where(eq(saleItems.saleId, id));
+    for (const item of items) if (item.fromInventory && item.productId) {
+      const product = (await tx.select().from(products).where(eq(products.id, item.productId)).limit(1))[0];
+      if (product) await tx.update(products).set({ stock: product.stock + item.quantity, updatedBy: userId }).where(eq(products.id, product.id));
+    }
+    await tx.delete(stockMovements).where(and(eq(stockMovements.referenceId, id), eq(stockMovements.type, "sale")));
+    await tx.delete(saleItems).where(eq(saleItems.saleId, id));
+    await tx.delete(sales).where(eq(sales.id, id));
+    await refreshCustomerStats(tx, sale.customerId);
+    return { id };
+  });
+}
+
+export async function updateCustomer(id: number, input: { name: string; phone?: string; locality?: string; notes?: string; userId?: number }) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  await db.update(customers).set({ name: input.name, phone: input.phone || null, locality: input.locality || null, notes: input.notes || null, updatedBy: input.userId }).where(eq(customers.id, id));
+  await db.update(sales).set({ customerName: input.name, customerPhone: input.phone || null, updatedBy: input.userId }).where(eq(sales.customerId, id));
+  return { id };
+}
+
+export async function deleteCustomer(id: number, userId?: number) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  await db.update(sales).set({ customerId: null, updatedBy: userId }).where(eq(sales.customerId, id));
+  await db.delete(customers).where(eq(customers.id, id));
+  return { id };
 }
 
 export async function adjustStock(input: { productId: number; quantity: number; type: "purchase" | "adjustment" | "return"; unitCost?: number; notes?: string; userId?: number }) {
@@ -250,4 +367,96 @@ export async function payReceivable(id: number, amount: number, userId?: number)
   const paid = Math.min(Number(row.principal), Number(row.paid) + amount); const balance = Math.max(0, Number(row.principal) - paid);
   await db.update(receivables).set({ paid: toMoney(paid), balance: toMoney(balance), status: balance === 0 ? "paid" : paid > 0 ? "partial" : "open", updatedBy: userId }).where(eq(receivables.id, id));
   return { balance };
+}
+
+
+export async function updateExpense(id: number, input: { date: string; category: string; description: string; amount: number; type?: string; notes?: string; userId?: number }) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  await db.update(expenses).set({ expenseDate: input.date, category: input.category, description: input.description, amount: toMoney(input.amount), type: input.type || "Operativo", notes: input.notes || null, updatedBy: input.userId }).where(eq(expenses.id, id));
+  return { id };
+}
+
+export async function deleteExpense(id: number) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  await db.delete(expenses).where(eq(expenses.id, id));
+  return { id };
+}
+
+export async function updateLoan(id: number, input: { kind: "loan" | "payable_merch" | "internal"; counterparty: string; description?: string; currency?: string; principal: number; paid: number; dueDate?: string; startDate?: string; notes?: string; userId?: number }) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  const paid = Math.min(input.principal, Math.max(0, input.paid)); const balance = Math.max(0, input.principal - paid);
+  await db.update(loans).set({ kind: input.kind, counterparty: input.counterparty, description: input.description || null, currency: input.currency || "USD", principal: toMoney(input.principal), paid: toMoney(paid), balance: toMoney(balance), startDate: input.startDate || null, dueDate: input.dueDate || null, status: balance === 0 ? "paid" : paid > 0 ? "partial" : "open", notes: input.notes || null, updatedBy: input.userId }).where(eq(loans.id, id));
+  return { id, balance };
+}
+
+export async function deleteLoan(id: number) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  await db.delete(loans).where(eq(loans.id, id));
+  return { id };
+}
+
+export async function updateReceivable(id: number, input: { customerName: string; phone?: string; description?: string; principal: number; paid: number; dueDate?: string; notes?: string; userId?: number }) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  const paid = Math.min(input.principal, Math.max(0, input.paid)); const balance = Math.max(0, input.principal - paid);
+  await db.update(receivables).set({ customerName: input.customerName, phone: input.phone || null, description: input.description || null, principal: toMoney(input.principal), paid: toMoney(paid), balance: toMoney(balance), dueDate: input.dueDate || null, status: balance === 0 ? "paid" : paid > 0 ? "partial" : "open", notes: input.notes || null, updatedBy: input.userId }).where(eq(receivables.id, id));
+  return { id, balance };
+}
+
+export async function deleteReceivable(id: number) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  await db.delete(receivables).where(eq(receivables.id, id));
+  return { id };
+}
+
+export async function createAd(input: { date: string; platform: string; campaign: string; amount: number; conversations?: number; results?: number; notes?: string; userId?: number }) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  const result = await db.insert(adCampaigns).values({ adDate: input.date, platform: input.platform, campaign: input.campaign, amount: toMoney(input.amount), conversations: input.conversations ?? 0, results: input.results ?? 0, notes: input.notes, createdBy: input.userId, updatedBy: input.userId });
+  return Number(result[0].insertId);
+}
+
+export async function updateAd(id: number, input: { date: string; platform: string; campaign: string; amount: number; conversations?: number; results?: number; notes?: string; userId?: number }) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  await db.update(adCampaigns).set({ adDate: input.date, platform: input.platform, campaign: input.campaign, amount: toMoney(input.amount), conversations: input.conversations ?? 0, results: input.results ?? 0, notes: input.notes || null, updatedBy: input.userId }).where(eq(adCampaigns.id, id));
+  return { id };
+}
+
+export async function deleteAd(id: number) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  await db.delete(adCampaigns).where(eq(adCampaigns.id, id));
+  return { id };
+}
+
+export async function updateObjective(id: number, input: { month: string; targetOrders: number; targetRevenue: number; targetProfit: number; targetNet: number; notes?: string; userId?: number }) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  await db.update(objectives).set({ month: input.month, targetOrders: input.targetOrders, targetRevenue: toMoney(input.targetRevenue), targetProfit: toMoney(input.targetProfit), targetNet: toMoney(input.targetNet), notes: input.notes || null, updatedBy: input.userId }).where(eq(objectives.id, id));
+  return { id };
+}
+
+export async function deleteObjective(id: number) {
+  const db = await getDb(); if (!db) throw new Error("Database is not available");
+  await db.delete(objectives).where(eq(objectives.id, id));
+  return { id };
+}
+
+export async function getDollarRates() {
+  const url = "https://dolarhoy.com/";
+  const parseAmount = (raw: string) => Number(raw.replace(/\./g, "").replace(",", ".").replace(/[^0-9.-]/g, ""));
+  try {
+    const response = await fetch(url, { signal: AbortSignal.timeout(6000), headers: { Accept: "text/html" } });
+    if (!response.ok) throw new Error(`DolarHoy respondió ${response.status}`);
+    const html = await response.text();
+    const rates: Array<{ moneda: string; casa: string; nombre: string; compra: number; venta: number; fechaActualizacion: string }> = [];
+    const add = (casa: string, nombre: string, compra: string, venta: string) => { if (Number.isFinite(parseAmount(compra)) && Number.isFinite(parseAmount(venta))) rates.push({ moneda: "USD", casa, nombre, compra: parseAmount(compra), venta: parseAmount(venta), fechaActualizacion: new Date().toISOString() }); };
+    const main = /<div class="title"><a class="titleText" href="\/cotizaciondolar(blue|oficial)"[^>]*>([^<]+)<\/a><\/div><div class="values">.*?<div class="compra">.*?<div class="val">\$([^<]+)<\/div>.*?<div class="venta">.*?<div class="val">\$([^<]+)<\/div>/gs;
+    for (const match of html.matchAll(main)) add(match[1] === "oficial" ? "oficial" : "blue", match[2].trim(), match[3].trim(), match[4].trim());
+    const table = /<a href="\/(cotizaciondolarbolsa|cotizaciondolarcontadoconliqui)"><div class="title">([^<]+)<\/div><div class="compra">([^<]+)<\/div><div class="venta">([^<]+)<\/div><\/a>/g;
+    for (const match of html.matchAll(table)) add(match[1] === "cotizaciondolarbolsa" ? "bolsa" : "contadoconliqui", match[2].trim(), match[3].trim(), match[4].trim());
+    if (rates.length < 4) throw new Error("DolarHoy no devolvió las cuatro cotizaciones esperadas");
+    lastDollarRates = rates;
+    const updatedLabel = html.match(/Actualizado por última vez:\s*([^<]+)/i)?.[1]?.trim() || "hora no informada";
+    return { source: "DolarHoy", sourceUrl: url, fetchedAt: new Date().toISOString(), updatedLabel, rates };
+  } catch (error) {
+    console.warn("[Dólar] No se pudo actualizar la cotización:", error);
+    return { source: "DolarHoy", sourceUrl: url, fetchedAt: new Date().toISOString(), updatedLabel: "último valor disponible", rates: lastDollarRates, stale: true, error: "No se pudo actualizar; se muestra el último valor válido" };
+  }
 }
