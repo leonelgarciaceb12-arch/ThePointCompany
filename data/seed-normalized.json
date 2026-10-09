@@ -13,7 +13,7 @@
       "legacyId": 2,
       "name": "Elfbar Ebcreate Bc Pro 40k puff",
       "category": "Vapers Descartables",
-      "stock": 383,
+      "stock": 354,
       "cost": 6.71,
       "supplier": "Propio",
       "minStock": 3
@@ -31,7 +31,7 @@
       "legacyId": 4,
       "name": "Elfbar Ice King 40k Puff",
       "category": "Vapers Descartables",
-      "stock": 116,
+      "stock": 102,
       "cost": 10.71,
       "supplier": "Propio",
       "minStock": 3
@@ -67,7 +67,7 @@
       "legacyId": 8,
       "name": "Mnke Bars 6k Puff",
       "category": "Vapers Descartables",
-      "stock": 111,
+      "stock": 110,
       "cost": 0.95,
       "supplier": "Propio",
       "minStock": 3
@@ -94,7 +94,7 @@
       "legacyId": 11,
       "name": "Ignite V400 V-Mix Boost Series 40k Puff",
       "category": "Vapers Descartables",
-      "stock": 24,
+      "stock": 12,
       "cost": 11.4,
       "supplier": "Propio",
       "minStock": 3
@@ -103,7 +103,7 @@
       "legacyId": 12,
       "name": "Geekbar Z35 35k Puff",
       "category": "Vapers Descartables",
-      "stock": 30,
+      "stock": 29,
       "cost": 7.4,
       "supplier": "Propio",
       "minStock": 3
@@ -112,7 +112,7 @@
       "legacyId": 13,
       "name": "Uwell Koko Prime (Recargable)",
       "category": "Vapers Recargables",
-      "stock": 4,
+      "stock": 3,
       "cost": 4.5,
       "supplier": "Propio",
       "minStock": 3
@@ -121,7 +121,7 @@
       "legacyId": 14,
       "name": "Smok Pen V2 (Recargable)",
       "category": "Vapers Recargables",
-      "stock": 3,
+      "stock": 0,
       "cost": 4.5,
       "supplier": "Propio",
       "minStock": 3
@@ -130,7 +130,7 @@
       "legacyId": 15,
       "name": "Maskking Salts 30ml (35mg)",
       "category": "Vapers Recargables",
-      "stock": 6,
+      "stock": 4,
       "cost": 5.9,
       "supplier": "Propio",
       "minStock": 3
@@ -139,7 +139,7 @@
       "legacyId": 16,
       "name": "Hypnos Salts 30ml (50mg)",
       "category": "Vapers Recargables",
-      "stock": 5,
+      "stock": 3,
       "cost": 5.4,
       "supplier": "Propio",
       "minStock": 3
@@ -148,7 +148,7 @@
       "legacyId": 17,
       "name": "Slugger Switch THC 2G",
       "category": "Cannabis/THC",
-      "stock": 9,
+      "stock": 0,
       "cost": 24.6,
       "supplier": "Propio",
       "minStock": 3
@@ -841,7 +841,7 @@
       "legacyId": 94,
       "name": "Funda Silicona (varios modelos)",
       "category": "Accesorios",
-      "stock": 216,
+      "stock": 215,
       "cost": 0.8,
       "supplier": "Propio",
       "minStock": 3
@@ -872,3168 +872,3257 @@
       "cost": 8.42,
       "supplier": "Propio",
       "minStock": 3
+    },
+    {
+      "legacyId": 98,
+      "name": "AirPods Pro 2 Gen",
+      "category": "Electrónica",
+      "stock": 0,
+      "cost": 8.0,
+      "supplier": "Propio",
+      "minStock": 3
     }
   ],
   "sales": [
     {
+      "legacyId": 1,
       "date": "2026-05-06",
       "description": "3 Elfbar Ice King 40k Puff",
       "total": 42.71,
       "profit": 14.23,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 1
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 2,
       "date": "2026-05-06",
       "description": "1 Honor & Glory 100ml",
       "total": 36.5,
       "profit": 17.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 2
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 3,
       "date": "2026-05-06",
       "description": "10 Elfbar Bc Create 40k Puff",
       "total": 127.7,
       "profit": 36.28,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 3
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 4,
       "date": "2026-05-06",
       "description": "1 Elfbar Bc Create 40k Puff",
       "total": 17.57,
       "profit": 8.42,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 4
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 5,
       "date": "2026-05-07",
       "description": "1 Elfbar Trio 40k Puff",
       "total": 18.25,
       "profit": 8.85,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 5
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 6,
       "date": "2026-05-07",
       "description": "1 Vapengin Maxbar 40k Puff",
       "total": 16.22,
       "profit": 10.72,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 6
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 7,
       "date": "2026-05-07",
       "description": "1 Decant 5ml Vulcan Feu, 1 Decant 5ml Vulcan Black Friday Edition, 1 Decant 5ml Odyssey Limoni, 1 Decant 5ml Al Haramain Amber Oud Dubai Night",
       "total": 16.1,
       "profit": 7.64,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 7
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 8,
       "date": "2026-05-08",
       "description": "1 Mnke Bars 6500 Puff",
       "total": 4.3,
       "profit": 3.43,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 8
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 9,
       "date": "2026-05-09",
       "description": "1 Klix 25k Puff, 1 Elfbar Bc Create 40k Puff",
       "total": 27.68,
       "profit": 13.88,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 9
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 10,
       "date": "2026-05-09",
       "description": "1 Vapor Storm 12k Puff, 1 Elfbar Trio 40k Puff, Ignite V400 V-Mix",
       "total": 45.9,
       "profit": 19.71,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 10
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 11,
       "date": "2026-05-09",
       "description": "1 Esencia Ignite 100ml (3mg)",
       "total": 10.12,
       "profit": 9.12,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 11
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 12,
       "date": "2026-05-10",
       "description": "5 AirPods Pro 2 Gen",
       "total": 47.5,
       "profit": 19.5,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 12
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 13,
       "date": "2026-05-10",
       "description": "1 Elfbar Ice King 40k Puff",
       "total": 17.5,
       "profit": 8.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 13
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 14,
       "date": "2026-05-10",
       "description": "10 Elfbar Ice King 40k Puff",
       "total": 130.93,
       "profit": 35.93,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 14
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 15,
       "date": "2026-05-11",
       "description": "1 Armaf Odyssey Mandarin Sky, 1 Lattafa The Kingdom 100ml",
       "total": 48.5,
       "profit": 39.61,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 15
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 16,
       "date": "2026-05-12",
       "description": "2 Elfbar Trio 40k puff, 1 Elfbar Bc Create 40k puff, 3 Ignite V400 V-Mix 40k puff, 1 Ignite V400 Sweet 40k puff",
       "total": 99.37,
       "profit": 27.02,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 16
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 17,
       "date": "2026-05-13",
       "description": "Armaf Odyssey Mandarin Sky 100ml",
       "total": 45.16,
       "profit": 22.6,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 17
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 18,
       "date": "2026-05-13",
       "description": "2 Maxbar 40k puff, 1 Elfbar Bc Create 40k puff",
       "total": 50.0,
       "profit": 28.8,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 18
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 19,
       "date": "2026-05-13",
       "description": "1 Luffbar 55k puff",
       "total": 20.22,
       "profit": 11.72,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 19
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 20,
       "date": "2026-05-14",
       "description": "1 Al Haramain Amber Oud Gold 100ml, 1 Afnan 9PM Black 100ml",
       "total": 76.0,
       "profit": 15.19,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 20
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 21,
       "date": "2026-05-14",
       "description": "2 Sachets Vital Honey",
       "total": 4.0,
       "profit": 2.9,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 21
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 22,
       "date": "2026-05-14",
       "description": "1 Cargador Completo Lightning 20W",
       "total": 9.45,
       "profit": 6.95,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 22
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 23,
       "date": "2026-05-14",
       "description": "1 French Avenue Liquid Brun 100ml",
       "total": 45.0,
       "profit": 8.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 23
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 24,
       "date": "2026-05-14",
       "description": "1 Vaso Cafetero Stanley",
       "total": 5.25,
       "profit": 4.75,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 24
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 25,
       "date": "2026-05-15",
       "description": "1 Decant 5ml 9PM Elixir Intense, 1 Decant 5ml Al Haramain Amber Oud Dubai Night.",
       "total": 8.1,
       "profit": 4.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 25
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 26,
       "date": "2026-05-15",
       "description": "1 Lattafa Khamrah Black 100ml, 1 Lattafa Eclaire 100ml",
       "total": 56.0,
       "profit": 13.5,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 26
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 27,
       "date": "2026-05-16",
       "description": "2 Mnke Bars 6k puff",
       "total": 10.81,
       "profit": 8.51,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 27
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 28,
       "date": "2026-05-17",
       "description": "1 Vapengin Maxbar 40k puff",
       "total": 16.21,
       "profit": 10.71,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 28
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 29,
       "date": "2026-05-18",
       "description": "1 Bharara King 100ml",
       "total": 60.7,
       "profit": 43.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 29
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 30,
       "date": "2026-05-18",
       "description": "3 Bharara King 100ml, 1 Armaf Odyssey Candee 100ml, 1 Rasasi Hawas Elixir 100ml",
       "total": 228.0,
       "profit": 54.3,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 30
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 31,
       "date": "2026-05-18",
       "description": "1 Crema Karsell 500ml, 1 Vaso Cafetero Stanley",
       "total": 23.64,
       "profit": 13.79,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 31
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 32,
       "date": "2026-05-20",
       "description": "4 Vasos Cafeteros 500ml",
       "total": 40.26,
       "profit": 19.26,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 32
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 33,
       "date": "2026-05-20",
       "description": "3 JBL Go 4 Pro",
       "total": 38.25,
       "profit": 19.05,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 33
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 34,
       "date": "2026-05-20",
       "description": "1 Pava Electrica",
       "total": 11.4,
       "profit": 5.9,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 34
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 35,
       "date": "2026-05-20",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 17.56,
       "profit": 8.06,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 35
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 36,
       "date": "2026-05-20",
       "description": "1 Smok Priv Bar 15k puff",
       "total": 10.13,
       "profit": 5.23,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 36
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 37,
       "date": "2026-05-20",
       "description": "1 Decant 5ml Rasasi Hawas Black, 1 Decant 5ml Rasasi Hawas Fire, 1 Decants 5ml Rasasi Hawas For Her, 1 Decant 5ml Armaf Odyssey Homme Black, 1 Decant 5ml Armaf Odyssey Bahamas Tropical, 1 Decant 5ml Club de Nuit Urban Man Elixir, 2 Decants 5ml Al Haramain Amber Oud Gold Edition, 1 Decant 5ml Afnan 9PM Elixir Intense, 1 Decant 5ml Lattafa Al Noble Ameer",
       "total": 30.4,
       "profit": 12.59,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 37
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 38,
       "date": "2026-05-20",
       "description": "1 Cargador Completo 20W Lightning",
       "total": 7.0,
       "profit": 4.5,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 38
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 39,
       "date": "2026-05-22",
       "description": "Mnke Bars 6k puff",
       "total": 5.4,
       "profit": 4.4,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 39
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 40,
       "date": "2026-05-22",
       "description": "1 Vapengin Maxbar 40k puff (sin capsulas extra)",
       "total": 9.45,
       "profit": 7.62,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 40
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 41,
       "date": "2026-05-23",
       "description": "Luffbar 40k puff",
       "total": 13.51,
       "profit": 6.51,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 41
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 42,
       "date": "2026-05-24",
       "description": "130 Albumes Portügueses Panini Mundial 2026 (Tapa Blanda)",
       "total": 1097.97,
       "profit": 245.17,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 42
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 43,
       "date": "2026-05-24",
       "description": "1 Yara Moi 100ml, 1 9PM Black 100ml",
       "total": 75.77,
       "profit": 33.37,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 43
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 44,
       "date": "2026-05-24",
       "description": "2 Ignite V25 2500 puff",
       "total": 10.81,
       "profit": 7.81,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 44
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 45,
       "date": "2026-05-24",
       "description": "1 Elfbar Trio 40k puff",
       "total": 15.54,
       "profit": 6.03,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 45
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 46,
       "date": "2026-05-25",
       "description": "1 Smok Nord Pro, 1 Esencia Ignite 100ml",
       "total": 20.5,
       "profit": 10.5,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 46
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 47,
       "date": "2026-05-25",
       "description": "1 Ignite V400 V-Sweet 40k puff",
       "total": 17.56,
       "profit": 7.31,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 47
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 48,
       "date": "2026-05-26",
       "description": "1 Smok Priv Bar 15k puff",
       "total": 10.13,
       "profit": 5.23,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 48
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 49,
       "date": "2026-05-26",
       "description": "1 Vapengin Maxbar 40k puff (sin capsulas extra)",
       "total": 8.1,
       "profit": 6.27,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 49
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 50,
       "date": "2026-05-26",
       "description": "16 Vapengin Maxbar 40k puff",
       "total": 166.0,
       "profit": 78.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 50
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 51,
       "date": "2026-05-26",
       "description": "1 Crema Karsell 500ml",
       "total": 10.13,
       "profit": 5.5,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 51
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 52,
       "date": "2026-05-28",
       "description": "5 Elfbar Reabbeats 50k puff,\n1 Adalya Ice Nic 50k puff, 2 Elfbar Bc Create 40k puff, 2 Ignite V400 V-Sweet 40k puff, 2 Ignite V400 V-Mix 40k puff",
       "total": 148.64,
       "profit": 30.14,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 52
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 53,
       "date": "2026-05-29",
       "description": "5 Elfbar Ice King 40k puff",
       "total": 70.0,
       "profit": 20.5,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 53
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 54,
       "date": "2026-05-29",
       "description": "3 Combos Recargables (Smok Pen V2)",
       "total": 40.5,
       "profit": 24.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 54
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 55,
       "date": "2026-05-29",
       "description": "3 Ignite V400 V-Mix, 2 Ignite V40 V-Sweet",
       "total": 72.5,
       "profit": 15.1,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 55
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 56,
       "date": "2026-05-30",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 17.56,
       "profit": 7.56,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 56
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 57,
       "date": "2026-05-30",
       "description": "1 Vapengin Maxbar Capsulas 10k puff",
       "total": 3.37,
       "profit": 1.57,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 57
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 58,
       "date": "2026-05-31",
       "description": "2 Elfbar Bc Create 40k Puff",
       "total": 35.13,
       "profit": 16.73,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 58
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 59,
       "date": "2026-05-31",
       "description": "2 Airpods Max \n2 Airpods Pro Gen 2\n2 Cargador Completo\n3 Cables Iphone Lightning - C\n2 Battery Pack",
       "total": 120.27,
       "profit": 62.27,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 59
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 60,
       "date": "2026-05-31",
       "description": "1 Vapengin Maxbar 40k puff",
       "total": 16.21,
       "profit": 10.71,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 60
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 61,
       "date": "2026-06-01",
       "description": "2 Elfbar Ice King 40k puff, 1 Elfbar Bc Create 40k puff",
       "total": 52.7,
       "profit": 23.7,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 61
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 62,
       "date": "2026-06-01",
       "description": "1 Al Haramain Amber Oud Gold Edition 100ml",
       "total": 50.67,
       "profit": 15.67,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 62
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 63,
       "date": "2026-06-01",
       "description": "2 Albumes Portugüeses Panini Mundial 2026 (Tapa Blanda)",
       "total": 21.62,
       "profit": 8.5,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 63
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 64,
       "date": "2026-06-01",
       "description": "1 Albumes Portugueses Panini Mundial 2026 (Tapa Blanda)",
       "total": 10.13,
       "profit": 3.57,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 64
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 65,
       "date": "2026-06-01",
       "description": "1 Ignite V400 V-Sweet 40k puff",
       "total": 17.56,
       "profit": 7.31,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 65
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 66,
       "date": "2026-06-01",
       "description": "1 Albumes Portugueses Panini Mundial 2026 (Tapa Blanda)",
       "total": 10.13,
       "profit": 3.57,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 66
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 67,
       "date": "2026-06-02",
       "description": "1 Vapengin Maxbar 40k puff (sin capsulas extra)",
       "total": 8.1,
       "profit": 6.27,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 67
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 68,
       "date": "2026-06-02",
       "description": "1 Airpods Pro 2 Gen",
       "total": 14.86,
       "profit": 7.86,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 68
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 69,
       "date": "2026-06-02",
       "description": "1 Vapengin Maxbar Capsulas 10k puff",
       "total": 3.37,
       "profit": 1.57,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 69
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 70,
       "date": "2026-06-03",
       "description": "1 Albumes Portügueses Panini Mundial 2026",
       "total": 10.81,
       "profit": 5.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 70
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 71,
       "date": "2026-06-03",
       "description": "1 Decant 5ml Afnan 9AM Dive",
       "total": 4.05,
       "profit": 2.45,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 71
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 72,
       "date": "2026-06-03",
       "description": "1 Vapengin Maxbar Capsulas 10k puff",
       "total": 3.37,
       "profit": 1.57,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 72
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 73,
       "date": "2026-06-03",
       "description": "1 Armaf Club de Nuit Intense Man 105ml",
       "total": 38.5,
       "profit": 6.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 73
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 74,
       "date": "2026-06-03",
       "description": "2 Decant 5ml Armaf Club de Nuit Intese Man,  1 Decant 5ml Lattafa Yara Tous, 1 Decant 5ml Al Haramain Dubai Night Extrait, 1 Decant 5ml Armaf Urban Man Elixir, 1 Decant 5ml Armaf Mandarin Sky, 1 Decants 5ml Lattafa Badee al Oud Noble Blush, 1 Decant 5ml Lattafa Eclaire, 1 Elfbar Ice King 40k puff, 2 Mnke Bars 6k puff",
       "total": 70.94,
       "profit": 45.91,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 74
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 75,
       "date": "2026-06-03",
       "description": "6 Vapengin Maxbar 40k puff, 4 Luffbar 40k puff",
       "total": 100.0,
       "profit": 39.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 75
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 76,
       "date": "2026-06-04",
       "description": "2 Vapengin Maxbar Capsulas 10k puff",
       "total": 6.75,
       "profit": 3.09,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 76
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 77,
       "date": "2026-06-04",
       "description": "5 Airpods Pro 2da Gen, 5 JBL Go 4 Pro, 5 Battery Pack 10.000 mAh",
       "total": 109.45,
       "profit": 12.45,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 77
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 78,
       "date": "2026-06-04",
       "description": "1 Vapengin Maxbar Capsulas 10k puff",
       "total": 3.37,
       "profit": 1.57,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 78
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 79,
       "date": "2026-06-04",
       "description": "1 Vapengin Maxbar 40k puff (sin capsulas extra)",
       "total": 8.1,
       "profit": 6.27,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 79
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 80,
       "date": "2026-06-04",
       "description": "1 Lattafa Khamrah Qahwa 100ml",
       "total": 31.75,
       "profit": 12.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 80
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 81,
       "date": "2026-06-05",
       "description": "1 Elfbar Trio 40k puff",
       "total": 17.56,
       "profit": 8.16,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 81
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 82,
       "date": "2026-06-05",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 17.56,
       "profit": 7.66,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 82
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 83,
       "date": "2026-06-05",
       "description": "1 Smok Priv Bar 15k puff",
       "total": 10.13,
       "profit": 5.23,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 83
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 84,
       "date": "2026-05-07",
       "description": "1 Reabbeats 50k puff",
       "total": 18.36,
       "profit": 9.11,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 84
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 85,
       "date": "2026-06-08",
       "description": "1 Lattafa Khamrah Black 100ml",
       "total": 27.5,
       "profit": 8.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 85
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 86,
       "date": "2026-06-08",
       "description": "5 Elfbar Ice King 40k puff, 1 Elfbar Bc 15k puff",
       "total": 79.1,
       "profit": 23.4,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 86
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 87,
       "date": "2026-06-09",
       "description": "1 Ignite V400 V-Sweet 40k puff",
       "total": 17.16,
       "profit": 6.9,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 87
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 88,
       "date": "2026-06-10",
       "description": "1 Vapengin Maxbar 40k puff (sin capsulas extra)",
       "total": 7.91,
       "profit": 6.08,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 88
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 89,
       "date": "2026-06-10",
       "description": "1 Battery Pack 10.000 mAh",
       "total": 10.66,
       "profit": 4.66,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 89
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 90,
       "date": "2026-06-10",
       "description": "10 Elfbar Ice King 40k puff, 10 Cargadores Completos 25w",
       "total": 177.5,
       "profit": 53.5,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 90
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 91,
       "date": "2026-06-11",
       "description": "2 Cremas Karsell 500ml y Albumes 1 Portugueses Panini Mundial 2026 (Tapa Blanda), y 1 Albumes Portugueses Panini Mundial 2026 (Tapa Dura)",
       "total": 45.42,
       "profit": 23.72,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 91
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 92,
       "date": "2026-06-11",
       "description": "3 Elfbar Reabbeats 50k puff, 1 Adalya Ice Nic, 2 Elfbar Bc Create 40k puff, y 4 Ignite V400 V-Sweet 40k puff",
       "total": 135.6,
       "profit": 56.95,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 92
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 93,
       "date": "2026-06-12",
       "description": "6 Esencias Ignite 100ml",
       "total": 30.0,
       "profit": 24.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 93
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 94,
       "date": "2026-06-12",
       "description": "1 Airpods Pro 2 Gen",
       "total": 16.03,
       "profit": 9.03,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 94
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 95,
       "date": "2026-06-12",
       "description": "2 Sachets Vital Honey",
       "total": 4.0,
       "profit": 2.9,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 95
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 96,
       "date": "2026-06-16",
       "description": "10 Elfbar Ice King 40k puff",
       "total": 133.24,
       "profit": 34.24,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 96
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 97,
       "date": "2026-06-16",
       "description": "11 Elfbar Ice King 40k puff, 1 Elfbar Bc Create 40k puff, 6 Vapor Storm 12k puff, 1 Parlante JBL Go 4 Pro, 5 Cargadores, 5 Completos USB-C to Lightning, 2 Uwell Koko Prime, 2 I Love Salt 30ml (35mg)",
       "total": 226.25,
       "profit": 65.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 97
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 98,
       "date": "2026-06-16",
       "description": "3 Albumes Portugueses Panini Mundial 2026 (Tapa Blanda), 3 Albumes Portugueses Panini Mundial 2026 (Tapa Dura)",
       "total": 49.96,
       "profit": 12.46,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 98
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 99,
       "date": "2026-06-16",
       "description": "1 Decant 5ml Lattafa Asad Black",
       "total": 3.99,
       "profit": 2.37,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 99
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 100,
       "date": "2026-06-17",
       "description": "3 Albumes Portugueses Panini Mundial 2026 (Tapa Blanda), 3 Albumes Portugueses Panini Mundial 2026 (Tapa Dura)",
       "total": 49.96,
       "profit": 12.46,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 100
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 101,
       "date": "2026-06-19",
       "description": "2 Albumes Portugüeses Panini Mundial 2026 (Tapa Blanda)",
       "total": 13.14,
       "profit": 2.74,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 101
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 102,
       "date": "2026-06-19",
       "description": "10 Albumes Portugueses Panini Mundial 2026 (Tapa Dura)",
       "total": 98.69,
       "profit": 25.69,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 102
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 103,
       "date": "2026-06-19",
       "description": "2 Albumes Portugüeses Panini Mundial 2026 (Tapa Blanda)",
       "total": 10.51,
       "profit": 0.11,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 103
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 104,
       "date": "2026-06-20",
       "description": "1 Elfbar Trio 40k puff, 1 Elfbar Reabbeats 50k puff",
       "total": 35.5,
       "profit": 16.85,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 104
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 105,
       "date": "2026-06-20",
       "description": "1 Armaf Club de Nuit Intense Man 105ml",
       "total": 48.65,
       "profit": 16.15,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 105
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 106,
       "date": "2026-06-20",
       "description": "1 Vapengin Maxbar 40k puff",
       "total": 13.14,
       "profit": 7.6,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 106
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 107,
       "date": "2026-06-20",
       "description": "1 Luffbar 55k puff",
       "total": 19.72,
       "profit": 11.22,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 107
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 108,
       "date": "2026-06-20",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 17.09,
       "profit": 7.19,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 108
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 109,
       "date": "2026-06-21",
       "description": "1 Decant 5ml Liquid Brun, 1 Decant 5ml Urban Man Elixir ",
       "total": 7.83,
       "profit": 4.26,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 109
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 110,
       "date": "2026-06-22",
       "description": "1 Vapengin Maxbar 40k puff ",
       "total": 13.15,
       "profit": 7.65,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 110
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 111,
       "date": "2026-06-22",
       "description": "1 Uwell Koko Prime, 1 Ice Juice Salt 30ml (35ml)",
       "total": 14.53,
       "profit": 9.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 111
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 112,
       "date": "2026-06-22",
       "description": "1 Elfbar Bc 15k puff",
       "total": 11.14,
       "profit": 5.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 112
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 113,
       "date": "2026-06-22",
       "description": "3 Elfbar Ice King 40k puff",
       "total": 51.14,
       "profit": 21.44,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 113
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 114,
       "date": "2026-06-24",
       "description": "5 Elfbar Trio 40k puff",
       "total": 70.0,
       "profit": 23.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 114
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 115,
       "date": "2026-06-24",
       "description": "1 Ignite V400 V-Sweet 40k puff",
       "total": 16.58,
       "profit": 6.33,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 115
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 116,
       "date": "2026-06-24",
       "description": "5 Ignite V400 V-Sweet 40k puff",
       "total": 72.5,
       "profit": 21.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 116
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 117,
       "date": "2026-06-25",
       "description": "5 Battery Pack 10.000 mAh, 1 Vital Honey, 1 Airpods Max",
       "total": 59.29,
       "profit": 10.89,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 117
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 118,
       "date": "2026-06-25",
       "description": "1 Elfbar Reabbeats 50k puff",
       "total": 17.3,
       "profit": 8.05,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 118
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 119,
       "date": "2026-06-25",
       "description": "1 Ignite V400 V-Mix 40k puff",
       "total": 18.58,
       "profit": 6.28,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 119
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 120,
       "date": "2026-06-27",
       "description": "1 Elfbar Trio 40k puff",
       "total": 16.86,
       "profit": 7.46,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 120
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 121,
       "date": "2026-06-28",
       "description": "1 Vapengin Maxbar Capsulas 10k puff",
       "total": 3.22,
       "profit": 1.38,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 121
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 122,
       "date": "2026-06-29",
       "description": "2 Elfbar Ice King 40 puff",
       "total": 33.5,
       "profit": 13.7,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 122
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 123,
       "date": "2026-06-29",
       "description": "10 Elfbar Ice King 40 puff",
       "total": 113.4,
       "profit": 14.4,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 123
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 124,
       "date": "2026-07-01",
       "description": "1 Vapengin Maxbar Capsulas 10k puff",
       "total": 3.18,
       "profit": 1.35,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 124
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 125,
       "date": "2026-07-02",
       "description": "82 Elfbar Ice King 40k puff",
       "total": 885.6,
       "profit": 42.13,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 125
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 126,
       "date": "2026-07-03",
       "description": "1 Lattafa Eclaire 100ml, 1 Lattafa Mayar Cherry 100ml, 2 Lattafa Yara Rosa 100ml, 3 Armaf Odyssey Mandarin Sky 100ml, 1 Armaf Odyssey Homme White 100ml, 1 Decant 5ml Lattafa Yara Rosa",
       "total": 193.75,
       "profit": 26.36,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 126
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 127,
       "date": "2026-07-03",
       "description": "2 Ignite V25 2,5k puff, 1 Airpods Max",
       "total": 21.66,
       "profit": 7.66,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 127
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 128,
       "date": "2026-07-04",
       "description": "1 Smok Priv Bar 15k puff",
       "total": 9.56,
       "profit": 5.06,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 128
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 129,
       "date": "2026-07-05",
       "description": "1 Luffbar 40k puff",
       "total": 16.66,
       "profit": 9.66,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 129
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 130,
       "date": "2026-07-06",
       "description": "1 Elfbar Bc 15k puff",
       "total": 10.89,
       "profit": 4.74,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 130
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 131,
       "date": "2026-07-06",
       "description": "1 Mnke Bars 6k puff",
       "total": 5.12,
       "profit": 4.17,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 131
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 132,
       "date": "2026-07-06",
       "description": "15 Elfbar Trio 40k puff",
       "total": 198.0,
       "profit": 57.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 132
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 133,
       "date": "2026-07-07",
       "description": "5 Mnke Bars 6k puff",
       "total": 16.67,
       "profit": 11.92,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 133
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 134,
       "date": "2026-07-07",
       "description": "1 Ignite V-Sweet V400 40k puff",
       "total": 16.61,
       "profit": 6.36,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 134
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 135,
       "date": "2026-07-07",
       "description": "10 Vasos Cafeteros Stanley",
       "total": 85.0,
       "profit": 32.5,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 135
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 136,
       "date": "2026-07-08",
       "description": "1 Elfbar Bc 15k puff",
       "total": 10.86,
       "profit": 4.71,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 136
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 137,
       "date": "2026-07-10",
       "description": "1 Elfbar Trio 40k puff",
       "total": 16.57,
       "profit": 7.17,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 137
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 138,
       "date": "2026-07-10",
       "description": "1 Al Haramain Amber Oud Gold Edition 100ml ",
       "total": 40.15,
       "profit": 5.15,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 138
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 139,
       "date": "2026-07-11",
       "description": "2 Mnke Bars 6k puff",
       "total": 6.41,
       "profit": 4.51,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 139
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 140,
       "date": "2026-07-11",
       "description": "1 Smok Priv Bar 15k puff y 1 Vapengin Maxbar Capsulas 10k puff",
       "total": 12.82,
       "profit": 6.09,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 140
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 141,
       "date": "2026-07-11",
       "description": "1 Geekbar Pulse X 25k Puff",
       "total": 12.82,
       "profit": 5.42,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 141
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 142,
       "date": "2026-07-13",
       "description": "1 Geekbar Pulse X 25k Puff",
       "total": 15.31,
       "profit": 6.06,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 142
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 143,
       "date": "2026-07-13",
       "description": "1 Luffbar 40k puff",
       "total": 16.59,
       "profit": 9.59,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 143
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 144,
       "date": "2026-07-14",
       "description": "1 Elfbar Trio 40k puff, 2 Luffbar 40k puff, 2 Smok Priv Bar 15k puff, 1 Ignite V25 2,5k puff",
       "total": 69.23,
       "profit": 34.53,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 144
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 145,
       "date": "2026-07-17",
       "description": "1 Elfbar Bc 15k puff",
       "total": 10.89,
       "profit": 4.74,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 145
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 146,
       "date": "2026-07-17",
       "description": "1 Luffbar 55k puff, 1 Elfbar Bc 15k puff, 1 Vapor Storm 12k puff, 1 Ignite V25 2,5 puff, 1 Battery Pack 10.000 mAh, 1 Cargador Completo 20W Lightning ",
       "total": 34.39,
       "profit": 5.74,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 146
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 147,
       "date": "2026-07-20",
       "description": "1 Geekbar Pulse X 25k Puff",
       "total": 15.25,
       "profit": 7.85,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 147
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 148,
       "date": "2026-07-21",
       "description": "3 Ignite V400 V-Mix 40k puff",
       "total": 38.09,
       "profit": 1.19,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 148
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 149,
       "date": "2026-07-21",
       "description": "1 Vapengin Maxbar Capsulas 10k puff",
       "total": 3.2,
       "profit": 1.37,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 149
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 150,
       "date": "2026-07-24",
       "description": "1 Vapengin Maxbar Capsulas 10k puff",
       "total": 3.2,
       "profit": 1.37,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 150
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 151,
       "date": "2026-07-24",
       "description": "6 Elfbar Bc Create 40k puff",
       "total": 48.91,
       "profit": 17.89,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 151
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 152,
       "date": "2026-07-24",
       "description": "1 Ignite V400 V-Mix 40k puff",
       "total": 18.58,
       "profit": 7.48,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 152
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 153,
       "date": "2026-07-24",
       "description": "20 Ignite V400 V-Mix 40k puff, 11 Elfbar Bc Create 40k puff",
       "total": 380.7,
       "profit": 101.83,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 153
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 154,
       "date": "2026-07-24",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 16.61,
       "profit": 6.71,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 154
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 155,
       "date": "2026-07-24",
       "description": "1 Ignite V400 V-Mix 40k puff",
       "total": 18.53,
       "profit": 7.43,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 155
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 156,
       "date": "2026-07-24",
       "description": "1 Elfbar Bc Create 40k puff",
       "total": 13.41,
       "profit": 8.24,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 156
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 157,
       "date": "2026-07-25",
       "description": "1 Lattafa Asad Elixir 100ml",
       "total": 43.58,
       "profit": 18.58,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 157
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 158,
       "date": "2026-07-26",
       "description": "2 Vapengin Maxbar Capsulas 10k puff",
       "total": 5.69,
       "profit": 2.03,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 158
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 159,
       "date": "2026-07-27",
       "description": "1 Elfbar Bc Create 40k puff",
       "total": 13.25,
       "profit": 7.9,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 159
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 160,
       "date": "2026-07-27",
       "description": "1 Vasos Cafeteros Stanley",
       "total": 10.62,
       "profit": 5.37,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 160
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 161,
       "date": "2026-07-27",
       "description": "1 Elfbar Bc 15k puff",
       "total": 9.37,
       "profit": 3.22,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 161
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 162,
       "date": "2026-07-28",
       "description": "5 Elfbar Ice King 40k puff",
       "total": 74.5,
       "profit": 48.65,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 162
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 163,
       "date": "2026-07-28",
       "description": "10 Elfbar Ice King 40k puff",
       "total": 109.37,
       "profit": 9.37,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 163
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 164,
       "date": "2026-07-28",
       "description": "1 Elfbar Rc Reabbeats 50k puff",
       "total": 17.5,
       "profit": 8.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 164
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 165,
       "date": "2026-07-28",
       "description": "12 Elfbar Bc Create 40k puff",
       "total": 91.25,
       "profit": 39.55,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 165
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 166,
       "date": "2026-07-29",
       "description": "5 Elfbar Bc Create 40k puff",
       "total": 40.0,
       "profit": 14.15,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 166
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 167,
       "date": "2026-07-29",
       "description": "5 Elfbar Bc Create 40k puff",
       "total": 40.0,
       "profit": 14.15,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 167
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 168,
       "date": "2026-07-29",
       "description": "1 Lattafa Art Of Universe 100ml",
       "total": 31.25,
       "profit": 6.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 168
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 169,
       "date": "2026-07-29",
       "description": "5 Elfbar Bc Create 40k puff",
       "total": 40.0,
       "profit": 14.15,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 169
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 170,
       "date": "2026-07-29",
       "description": "2 Mnke Bars 6k puff",
       "total": 6.25,
       "profit": 4.35,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 170
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 171,
       "date": "2026-07-31",
       "description": "5 Elfbar Bc Create 40k puff",
       "total": 40.0,
       "profit": 14.15,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 171
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 172,
       "date": "2026-07-31",
       "description": "1 Elfbar Rc Reabbeats 50k puff",
       "total": 17.5,
       "profit": 8.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 172
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 173,
       "date": "2026-07-31",
       "description": "1 Al Haramain Amber Oud Gold Edition 100ml ",
       "total": 50.0,
       "profit": 15.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 173
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 174,
       "date": "2026-07-31",
       "description": "1 Smok Priv Bar 15k puff, 1 Elfbar Ice King 40k puff",
       "total": 23.75,
       "profit": 8.95,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 174
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 175,
       "date": "2026-07-31",
       "description": "2 Vasos Cafeteros Stanley",
       "total": 17.5,
       "profit": 7.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 175
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 176,
       "date": "2026-07-31",
       "description": "1 Armaf Odyssey Mandarin Sky 100ml",
       "total": 32.0,
       "profit": 9.5,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 176
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 177,
       "date": "2026-08-01",
       "description": "1 Elfbar Bc 15k puff",
       "total": 10.6,
       "profit": 4.45,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 177
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 178,
       "date": "2026-08-03",
       "description": "6 Ignite V400 V-Mix 40k puff",
       "total": 91.42,
       "profit": 24.82,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 178
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 179,
       "date": "2026-08-03",
       "description": "10 Elfbar Ice King 40k puff",
       "total": 131.5,
       "profit": 31.6,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 179
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 180,
       "date": "2026-08-04",
       "description": "1 Mnke Bars 6k puff",
       "total": 5.12,
       "profit": 4.17,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 180
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 181,
       "date": "2026-08-05",
       "description": "2 Vasos Cafeteros Stanley",
       "total": 17.72,
       "profit": 7.22,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 181
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 182,
       "date": "2026-08-05",
       "description": "1 Airpod Pro 2 Gen",
       "total": 13.75,
       "profit": 2.5,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 182
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 183,
       "date": "2026-08-05",
       "description": "1 Rasasi Hawas Ice 100ml",
       "total": 43.75,
       "profit": 9.75,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 183
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 184,
       "date": "2026-08-06",
       "description": "1 Vapengin Maxbar Capsulas 10k puff",
       "total": 3.12,
       "profit": 1.29,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 184
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 185,
       "date": "2026-08-06",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 17.19,
       "profit": 7.29,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 185
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 186,
       "date": "2026-08-07",
       "description": "2 Armaf Odyssey Mega 100ml, 3 Afnan 9PM Black 100ml, 1 Lattafa Khamrah Qahwa 100ml, 1 Lattafa Badee al Oud Honor and Glory 100ml, 30 decants 5ml",
       "total": 184.81,
       "profit": 24.41,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 186
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 187,
       "date": "2026-08-07",
       "description": "1 Smok Priv Bar 15k puff",
       "total": 9.5,
       "profit": 4.59,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 187
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 188,
       "date": "2026-08-07",
       "description": "1 Elfbar Bc 15k puff",
       "total": 10.75,
       "profit": 4.6,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 188
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 189,
       "date": "2026-08-07",
       "description": "1 Luffbar 40k puff",
       "total": 16.45,
       "profit": 9.45,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 189
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 190,
       "date": "2026-08-07",
       "description": "1 Vapengin Maxbar Capsulas 10k puff",
       "total": 3.12,
       "profit": 1.29,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 190
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 191,
       "date": "2026-08-07",
       "description": "2 Ignite V400 V-Mix 40k puff, 1 Geekbar Pulse X 25k puff",
       "total": 41.58,
       "profit": 11.98,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 191
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 192,
       "date": "2026-08-07",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 15.18,
       "profit": 5.28,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 192
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 193,
       "date": "2026-08-07",
       "description": "1 Lattafa Khamrah Black 100ml",
       "total": 29.74,
       "profit": 10.24,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 193
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 194,
       "date": "2026-08-08",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 15.82,
       "profit": 5.92,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 194
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 195,
       "date": "2026-08-11",
       "description": "12 Elfbar Ice King 40k puff",
       "total": 94.93,
       "profit": -23.86,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 195
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 196,
       "date": "2026-08-12",
       "description": "1 Azzaro The Most Wanted Intense 100ml",
       "total": 75.94,
       "profit": 14.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 196
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 197,
       "date": "2026-08-14",
       "description": "25 Vasos Cafetetos Stanley",
       "total": 187.5,
       "profit": 56.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 197
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 198,
       "date": "2026-08-15",
       "description": "1 Ignite V400 V-Mix 40k puff",
       "total": 18.35,
       "profit": 7.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 198
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 199,
       "date": "2026-08-16",
       "description": "10 Elfbar Ice King 40k puff",
       "total": 113.92,
       "profit": 13.95,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 199
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 200,
       "date": "2026-08-16",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 17.08,
       "profit": 7.18,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 200
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 201,
       "date": "2026-08-16",
       "description": "3 Mnke Bars 6k puff",
       "total": 9.49,
       "profit": 6.64,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 201
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 202,
       "date": "2026-08-17",
       "description": "10 Elfbar Ice King 40k puff, 10 Mnke Bars 6k puff",
       "total": 132.95,
       "profit": 24.41,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 202
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 203,
       "date": "2026-08-17",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 17.08,
       "profit": 7.18,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 203
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 204,
       "date": "2026-08-18",
       "description": "1 Ignite V400 V-Mix 40k puff",
       "total": 18.35,
       "profit": 7.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 204
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 205,
       "date": "2026-08-19",
       "description": "7 Elfbar EbCreate Bc Pro 40k puff",
       "total": 60.25,
       "profit": 24.06,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 205
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 206,
       "date": "2026-08-19",
       "description": "5 Elfbar EbCreate Bc Pro 40k puff",
       "total": 47.29,
       "profit": 20.89,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 206
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 207,
       "date": "2026-08-19",
       "description": "1 Lattafa Yara Candy 100ml, 1 Decant 5ml Armaf Odyssey Mandarin Sky, 1 Decant 5ml Afnan 9PM Black, 1 Decant 5ml Rasasi Hawas Fire, 1 Decant 5ml French Avenue Vulcan Feu",
       "total": 40.25,
       "profit": 14.18,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 207
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 208,
       "date": "2026-08-20",
       "description": "1 Airpod Max",
       "total": 11.34,
       "profit": -0.67,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 208
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 209,
       "date": "2026-08-21",
       "description": "10 Ignite V400 V-Mix ",
       "total": 147.16,
       "profit": 36.16,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 209
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 210,
       "date": "2026-08-23",
       "description": "1 Vapengin Maxbar Capsulas 10k puff",
       "total": 3.14,
       "profit": 1.31,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 210
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 211,
       "date": "2026-08-24",
       "description": "2 Afnan 9PM Rebel 100ml, 1 Lattafa Badee Al Oud Noble Blush 100ml, 1 Lattafa Eclaire 100ml",
       "total": 118.5,
       "profit": 9.5,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 211
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 212,
       "date": "2026-08-24",
       "description": "3 Mnke Bars 6k puff",
       "total": 11.3,
       "profit": 8.45,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 212
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 213,
       "date": "2026-08-24",
       "description": "1 Elfbar Bc Touch 20k puff",
       "total": 14.44,
       "profit": 6.54,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 213
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 214,
       "date": "2026-08-25",
       "description": "1 Armaf Club de Nuit Urban Man Elixir 105ml",
       "total": 25.15,
       "profit": -1.34,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 214
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 215,
       "date": "2026-08-25",
       "description": "1 Armaf Check Mate King 100ml",
       "total": 42.13,
       "profit": 10.13,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 215
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 216,
       "date": "2026-08-25",
       "description": "5 Ignite V400 V-Mix 40k puff, 5 Elfbar Bc Create 40k puff, 1 Geekvape Aegis Nano, 1 Koko Prime, 2 Esencias Zomo 60ml (3mg)",
       "total": 162.89,
       "profit": 44.83,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 216
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 217,
       "date": "2026-08-25",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 16.68,
       "profit": 7.08,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 217
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 218,
       "date": "2026-08-26",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 16.68,
       "profit": 7.08,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 218
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 219,
       "date": "2026-08-26",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.08,
       "profit": 8.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 219
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 220,
       "date": "2026-08-27",
       "description": "1 Ignite V25 2,5k puff",
       "total": 4.98,
       "profit": 3.48,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 220
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 221,
       "date": "2026-08-28",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.08,
       "profit": 8.0,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 221
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 222,
       "date": "2026-08-28",
       "description": "7 Elfbar EbCreate Bc Pro 40k puff",
       "total": 67.29,
       "profit": 31.73,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 222
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 223,
       "date": "2026-08-29",
       "description": "1 Battery Pack 10.000 mAh, 1 Mnke Bars 6k puff",
       "total": 12.49,
       "profit": 5.64,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 223
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 224,
       "date": "2026-08-29",
       "description": "1 Armaf Odyssey Mandarin Sky 100ml",
       "total": 29.98,
       "profit": 7.48,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 224
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 225,
       "date": "2026-08-29",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.1,
       "profit": 8.03,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 225
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 226,
       "date": "2026-08-29",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.1,
       "profit": 8.03,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 226
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 227,
       "date": "2026-08-29",
       "description": "1 Smok Pen V2 (Recargable)",
       "total": 15.61,
       "profit": 11.11,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 227
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 228,
       "date": "2026-08-29",
       "description": "1 Mnke Bars 6k puff",
       "total": 4.99,
       "profit": 4.04,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 228
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 229,
       "date": "2026-08-31",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 229
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 230,
       "date": "2026-09-01",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 230
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 231,
       "date": "2026-09-01",
       "description": "1 Battery Pack 10.000 mAh, 1 Mnke Bars 6k puff",
       "total": 10.03,
       "profit": 4.03,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 231
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 232,
       "date": "2026-09-01",
       "description": "1 Lattafa Asad Bourbon 100ml, 1 Armaf Odyssey Mega 100ml, 2 Lattafa Badee Al Oud Honor & Glory 100ml, 1 Armaf Odyssey Chocolate Dubai 100ml,  1 Armaf Odyssey Aqua 100ml",
       "total": 154.23,
       "profit": 26.6,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 232
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 233,
       "date": "2026-09-02",
       "description": "10 Elfbar EbCreate Bc Pro 40k puff, 5 Elfbar Ice King 40k puff",
       "total": 154.85,
       "profit": 54.55,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 233
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 234,
       "date": "2026-09-02",
       "description": "5 Elfbar Ice King 40k puff, 4 Elfbar Trio 40k puff, 1 Elfbar Adjust MyFlavor 40k puff",
       "total": 130.4,
       "profit": 36.8,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 234
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 235,
       "date": "2026-09-02",
       "description": "10 Elfbar Bc EbCreate 40k puff, 1 Decant 5ml Lattafa Yara Candy 100ml, 1 Decant 5ml Lattafa Yara Elixir 100ml",
       "total": 97.17,
       "profit": 43.5,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 235
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 236,
       "date": "2026-09-02",
       "description": "2 Funda Silicona",
       "total": 6.26,
       "profit": 5.46,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 236
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 237,
       "date": "2026-09-02",
       "description": "5 Elfbar EbCreate Bc Pro 40k puff, 5 Ignite V-Mix V400 40k puff",
       "total": 109.71,
       "profit": 28.81,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 237
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 238,
       "date": "2026-09-02",
       "description": "10 Elfbar EbCreate Bc Pro 40k puff, 5 Elfbar Ice King 40k puff",
       "total": 155.48,
       "profit": 55.18,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 238
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 239,
       "date": "2026-09-03",
       "description": "5 Elfbar EbCreate Bc Pro 40k puff",
       "total": 47.46,
       "profit": 22.06,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 239
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 240,
       "date": "2026-09-04",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 240
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 241,
       "date": "2026-09-04",
       "description": "1 Geekvape Aegis Nano (Recargable)",
       "total": 20.08,
       "profit": 12.56,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 241
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 242,
       "date": "2026-09-04",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 242
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 243,
       "date": "2026-09-04",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 243
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 244,
       "date": "2026-09-04",
       "description": "1 Ignite V400 V-Mix 40k puff",
       "total": 18.18,
       "profit": 7.08,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 244
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 245,
       "date": "2026-09-05",
       "description": "5 Elfbar EbCreate Bc Pro 40k puff",
       "total": 47.41,
       "profit": 22.21,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 245
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 246,
       "date": "2026-09-05",
       "description": "7 Elfbar EbCreate Bc Pro 40k puff",
       "total": 66.66,
       "profit": 31.1,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 246
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 247,
       "date": "2026-09-05",
       "description": "63 Elfbar EbCreate Bc Pro 40k puff, 1 Lattafa Badee Al Oud Honor & Glory 100ml",
       "total": 412.0,
       "profit": 73.15,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 247
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 248,
       "date": "2026-09-06",
       "description": "3 Mnke Bars 6k puff",
       "total": 9.52,
       "profit": 6.97,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 248
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 249,
       "date": "2026-09-07",
       "description": "23 Elfbar Ice King 40k puff",
       "total": 273.7,
       "profit": 6.9,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 249
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 250,
       "date": "2026-09-07",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.33,
       "profit": 8.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 250
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 251,
       "date": "2026-09-08",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.33,
       "profit": 8.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 251
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 252,
       "date": "2026-09-08",
       "description": "1 Ignite V400 V-Mix 40k puff",
       "total": 18.23,
       "profit": 7.13,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 252
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 253,
       "date": "2026-09-08",
       "description": "1 Funda Silicona",
       "total": 3.14,
       "profit": 2.34,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 253
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 254,
       "date": "2026-09-09",
       "description": "1 Battery Pack 10.000 mAh",
       "total": 10.06,
       "profit": 4.06,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 254
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 255,
       "date": "2026-09-10",
       "description": "5 Mnke Bars 6k puff",
       "total": 17.5,
       "profit": 13.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 255
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 256,
       "date": "2026-09-10",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.33,
       "profit": 8.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 256
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 257,
       "date": "2026-09-11",
       "description": "1 Ignite V25 2,5k puff, 1 Mnke Bars 6k puff",
       "total": 9.18,
       "profit": 6.75,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 257
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 258,
       "date": "2026-09-14",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.33,
       "profit": 8.25,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 258
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 259,
       "date": "2026-09-15",
       "description": "1 Cargadores Completos iPhone (Pata Argentina), 1 Battery Pack 10.000 mAh",
       "total": 15.35,
       "profit": 6.54,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 259
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 260,
       "date": "2026-09-15",
       "description": "15 Elfbar Ice King 40k puff",
       "total": 196.74,
       "profit": 48.24,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 260
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 261,
       "date": "2026-09-15",
       "description": "8 Elfbar EbCreate Bc Pro 40k puff",
       "total": 76.0,
       "profit": 35.36,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 261
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 262,
       "date": "2026-09-15",
       "description": "10 Elfbar Ice King 40k puff",
       "total": 115.91,
       "profit": 16.91,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 262
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 263,
       "date": "2026-09-16",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 15.76,
       "profit": 5.76,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 263
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 264,
       "date": "2026-09-17",
       "description": "4 Elfbar EbCreate Bc Pro 40k puff, 2 Ignite V400 V-Mix 40k puff",
       "total": 68.59,
       "profit": 25.77,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 264
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 265,
       "date": "2026-09-17",
       "description": "1 Rasasi Hawas For Her 100ml, 1 Armaf Odyssey Mega 100ml",
       "total": 48.0,
       "profit": 12.57,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 265
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 266,
       "date": "2026-09-18",
       "description": "1 Battery Pack 10.000 mAh, 1 Funda Silicona",
       "total": 11.27,
       "profit": 4.47,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 266
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 267,
       "date": "2026-09-18",
       "description": "1 Mnke Bars 6k puff",
       "total": 11.27,
       "profit": 7.47,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 267
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 268,
       "date": "2026-09-18",
       "description": "1 Lost Mary Dura 35k puff",
       "total": 14.41,
       "profit": 6.13,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 268
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 269,
       "date": "2026-09-20",
       "description": "5 Mnke Bars 6k puff",
       "total": 17.5,
       "profit": 12.75,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 269
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 270,
       "date": "2026-09-20",
       "description": "1 Cargadores Completos iPhone (Pata Argentina)",
       "total": 5.95,
       "profit": 3.14,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 270
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 271,
       "date": "2026-09-20",
       "description": "1 Elfbar Trio 40 puff",
       "total": 16.29,
       "profit": 6.89,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 271
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 272,
       "date": "2026-09-20",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.15,
       "profit": 8.07,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 272
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 273,
       "date": "2026-09-21",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 15.66,
       "profit": 5.76,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 273
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 274,
       "date": "2026-09-21",
       "description": "1 Battery Pack 10.000 mAh",
       "total": 7.5,
       "profit": 1.5,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 274
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 275,
       "date": "2026-09-21",
       "description": "1 Uwell Koko Prime (Recargable)",
       "total": 12.53,
       "profit": 8.03,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 275
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 276,
       "date": "2026-09-22",
       "description": "6 Elfbar Ice King 40k puff, 4 Lost Mary Dura 35k puff",
       "total": 123.3,
       "profit": 30.78,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 276
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 277,
       "date": "2026-09-22",
       "description": "4 Cremas Karsell (replica) 500ml, 1 Lattafa Emeer 100ml",
       "total": 62.65,
       "profit": 18.65,
       "customer": null,
       "phone": null,
-      "channel": "Histórico Excel",
-      "legacyId": 277
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 278,
       "date": "2026-09-22",
       "description": "1 Mnke Bars 6k puff",
       "total": 5.11,
       "profit": 4.06,
       "customer": "Gino",
       "phone": "+54 9 351 858-1054",
-      "channel": "Histórico Excel",
-      "legacyId": 278
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 279,
       "date": "2026-09-23",
       "description": "1 Slugger Switch THC 2G",
       "total": 38.0,
       "profit": 13.4,
       "customer": "Benja Guillen",
       "phone": "+54 9 351 513-8114",
-      "channel": "Histórico Excel",
-      "legacyId": 279
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 280,
       "date": "2026-09-23",
       "description": "1 Vapengin Maxbar Capsulas 10k puff",
       "total": 3.13,
       "profit": 1.3,
       "customer": "Leo Reyna",
       "phone": "+54 9 351 382-1799",
-      "channel": "Histórico Excel",
-      "legacyId": 280
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 281,
       "date": "2026-09-24",
       "description": "2 Elfbar Ice King 40k puff, 5 Ignite V400 V-Mix 40k puff",
       "total": 84.8,
       "profit": 9.5,
       "customer": "Hugo Gonzales",
       "phone": "+54 9 351 273-7886",
-      "channel": "Histórico Excel",
-      "legacyId": 281
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 282,
       "date": "2026-09-24",
       "description": "10 Elfbar EbCreate Bc Pro 40k puff",
       "total": 90.0,
       "profit": 37.2,
       "customer": "Veronica Srebnik",
       "phone": "+54 9 11 3068-4771",
-      "channel": "Histórico Excel",
-      "legacyId": 282
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 283,
       "date": "2026-09-24",
       "description": "1 Vital Honey",
       "total": 5.57,
       "profit": -0.83,
       "customer": "Joaquin Gaido",
       "phone": "+54 9 3572 61-6393",
-      "channel": "Histórico Excel",
-      "legacyId": 283
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 284,
       "date": "2026-09-26",
       "description": "1 Ignite V400 V-Mix 40k puff",
       "total": 17.17,
       "profit": 7.07,
       "customer": "Santiago Duran",
       "phone": "+54 9 351 345-8695",
-      "channel": "Histórico Excel",
-      "legacyId": 284
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 285,
       "date": "2026-09-26",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 16.87,
       "profit": 6.97,
       "customer": "Facundo Manzano",
       "phone": "+54 9 351 666-4252",
-      "channel": "Histórico Excel",
-      "legacyId": 285
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 286,
       "date": "2026-09-26",
       "description": "10 Elfbar Ice King 40k puff",
       "total": 114.84,
       "profit": 15.58,
       "customer": "Nico Guillen",
       "phone": "+54 9 351 633-4527",
-      "channel": "Histórico Excel",
-      "legacyId": 286
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 287,
       "date": "2026-09-28",
       "description": "1 Uwell Koko Prime (Recargable), 1 Hypnos Salt 30ml (50mg)",
       "total": 15.47,
       "profit": 5.57,
       "customer": "Adriel",
       "phone": "+54 9 351 305-1197",
-      "channel": "Histórico Excel",
-      "legacyId": 287
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 288,
       "date": "2026-09-28",
       "description": "35 Elfbar EbCreate Bc Pro 40k puff",
       "total": 215.25,
       "profit": 30.45,
       "customer": "Bautista Restifo",
       "phone": "+54 9 11 3668-9087",
-      "channel": "Histórico Excel",
-      "legacyId": 288
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 289,
       "date": "2026-09-29",
       "description": "1 Uwell Koko Prime (Recargable), 1 Hypnos Salt 30ml (50mg)",
       "total": 15.47,
       "profit": 5.57,
       "customer": "Santino Valotto",
       "phone": "+54 9 351 622-4582",
-      "channel": "Histórico Excel",
-      "legacyId": 289
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 290,
       "date": "2026-09-29",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.15,
       "profit": 8.07,
       "customer": "Francisco Zingone",
       "phone": "+54 9 351 812-5173",
-      "channel": "Histórico Excel",
-      "legacyId": 290
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 291,
       "date": "2026-09-29",
       "description": "2 Ignite V400 V-Mix 40k puff",
       "total": 35.89,
       "profit": 13.69,
       "customer": "Tom",
       "phone": "+54 9 351 373-1614",
-      "channel": "Histórico Excel",
-      "legacyId": 291
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 292,
       "date": "2026-09-29",
       "description": "1 Uwell Koko Prime (Recargable), 1 Hypnos Salt 30ml (50mg)",
       "total": 15.47,
       "profit": 5.57,
       "customer": "Yael",
       "phone": "+54 9 351 564-1706",
-      "channel": "Histórico Excel",
-      "legacyId": 292
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 293,
       "date": "2026-09-30",
       "description": "5 Elfbar EbCreate Bc Pro 40k puff",
       "total": 47.41,
       "profit": 22.21,
       "customer": "Laureano Buenos Aires",
       "phone": "+54 9 236 457-6075",
-      "channel": "Histórico Excel",
-      "legacyId": 293
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 294,
       "date": "2026-09-30",
       "description": "2 Elfbar Trio 40k puff, 5 Elfbar EbCreate Bc Pro 40k puff, 5 Ignite V400 V-Mix 40k puff",
       "total": 139.23,
       "profit": 34.48,
       "customer": "Maxi",
       "phone": "+54 9 351 321-7029",
-      "channel": "Histórico Excel",
-      "legacyId": 294
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 295,
       "date": "2026-09-30",
       "description": "6 Ignite V400 V-Mix Boost Series 40k puff, 2 Ignite V400 V-Mix 40k puff",
       "total": 76.73,
       "profit": -0.96,
       "customer": "Hugo Gonzales",
       "phone": "+54 9 351 273-7886",
-      "channel": "Histórico Excel",
-      "legacyId": 295
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 296,
       "date": "2026-09-30",
       "description": "11 Elfbar EbCreate Bc Pro 40k",
       "total": 89.72,
       "profit": 31.53,
       "customer": "Santy",
       "phone": "+54 9 351 802-9520",
-      "channel": "Histórico Excel",
-      "legacyId": 296
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 297,
       "date": "2026-09-30",
       "description": "1 Uwell Koko Prime (Recargable), 1 Hypnos Salt 35ml (50mg)",
       "total": 15.77,
       "profit": 5.87,
       "customer": "Fabi",
       "phone": "+54 9 351 213-1970",
-      "channel": "Histórico Excel",
-      "legacyId": 297
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 298,
       "date": "2026-09-30",
       "description": "2 Smok Pen V2 (Recargable), 2 Maskking Salt 30ml (35mg)",
       "total": 29.08,
       "profit": 8.28,
       "customer": "Lautaro Casanova",
       "phone": "+54 9 351 231-7154",
-      "channel": "Histórico Excel",
-      "legacyId": 298
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 299,
       "date": "2026-09-30",
       "description": "1 Smok Pen V2 (Recargable), 1 Hypnos Salt 35ml (50mg)",
       "total": 15.77,
       "profit": 5.87,
       "customer": "Santi",
       "phone": "+54 9 3542 46-1459",
-      "channel": "Histórico Excel",
-      "legacyId": 299
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 300,
       "date": "2026-09-30",
       "description": "10 Elfbar Ice King 40k puff",
       "total": 114.48,
       "profit": 7.38,
       "customer": "Nico Guillen",
       "phone": "+54 9 351 633-4527",
-      "channel": "Histórico Excel",
-      "legacyId": 300
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 301,
       "date": "2026-10-01",
       "description": "14 Elfbar Ice King 40k puff",
       "total": 131.18,
       "profit": -18.75,
       "customer": "Ariel Miramar",
       "phone": "+54 9 3563 40-8553",
-      "channel": "Histórico Excel",
-      "legacyId": 301
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 302,
       "date": "2026-10-01",
       "description": "1 Ignite V400 V-Mix 40k puff",
       "total": 17.17,
       "profit": 7.07,
       "customer": "Alejo",
       "phone": "+54 9 351 764-3196",
-      "channel": "Histórico Excel",
-      "legacyId": 302
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 303,
       "date": "2026-10-01",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.15,
       "profit": 8.07,
       "customer": "Jeremias",
       "phone": "+54 9 351 211 3663",
-      "channel": "Histórico Excel",
-      "legacyId": 303
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 304,
       "date": "2026-10-01",
       "description": "1 Elfbar EbCreate Bc Pro 40k puff",
       "total": 13.15,
       "profit": 8.07,
       "customer": "Felipe",
       "phone": "+54 9 351 650 9578",
-      "channel": "Histórico Excel",
-      "legacyId": 304
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 305,
       "date": "2026-10-01",
       "description": "1 Decant 5ml Lattafa Yara Tous ",
       "total": 3.71,
       "profit": 2.29,
       "customer": "Lautaro",
       "phone": "+54 9 351 321-7682",
-      "channel": "Histórico Excel",
-      "legacyId": 305
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 306,
       "date": "2026-10-01",
       "description": "1 Smok Pen V2 (Recargable), 1 Hypnos Salt 35ml (50mg)",
       "total": 15.77,
       "profit": 5.87,
       "customer": "Fran",
       "phone": "+54 9 351 314 5559",
-      "channel": "Histórico Excel",
-      "legacyId": 306
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 307,
       "date": "2026-10-01",
       "description": "1 Smok Pen V2 (Recargable), 1 Maskking Salt 30ml (50mg)",
       "total": 15.77,
       "profit": 5.87,
       "customer": "Leon Pepi",
       "phone": "+54 9 351 365-7077",
-      "channel": "Histórico Excel",
-      "legacyId": 307
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 308,
       "date": "2026-10-03",
       "description": "5 Elfbar Ice King 40k puff,  6 Elfbar EbCreate Bc Pro 40k, 3 Battery Pack 10.000 mhA",
       "total": 136.13,
       "profit": 30.65,
       "customer": "Tobi",
       "phone": "+54 9 351 242 7737",
-      "channel": "Histórico Excel",
-      "legacyId": 308
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 309,
       "date": "2026-10-03",
-      "description": "1 Uwell Koko Prime (Recargable) + Maskking Salt 30ml (35mg)",
+      "description": "1 Uwell Koko Prime (Recargable), Maskking Salt 30ml (35mg)",
       "total": 15.77,
       "profit": 5.87,
       "customer": "Elias",
       "phone": "+54 9 351 878 2290",
-      "channel": "Histórico Excel",
-      "legacyId": 309
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 310,
       "date": "2026-10-03",
       "description": "1 Ignite V400 V-Mix 40k puff",
       "total": 17.17,
       "profit": 7.07,
       "customer": "Leon Pepi",
       "phone": "+54 9 351 365-7077",
-      "channel": "Histórico Excel",
-      "legacyId": 310
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 311,
       "date": "2026-10-03",
       "description": "1 Smok Pen V2 (Recargable), 1 Maskking Salt 30ml (50mg)",
       "total": 15.77,
       "profit": 5.87,
       "customer": "Thiago Vázquez",
       "phone": "+54 9 351 351 3820",
-      "channel": "Histórico Excel",
-      "legacyId": 311
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 312,
       "date": "2026-10-03",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 16.7,
       "profit": 5.99,
       "customer": "Juan Segura",
       "phone": "+54 9 351 701-2568",
-      "channel": "Histórico Excel",
-      "legacyId": 312
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 313,
       "date": "2026-10-03",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 15.47,
       "profit": 4.76,
       "customer": "Adriel",
       "phone": "+54 9 351 305-1197",
-      "channel": "Histórico Excel",
-      "legacyId": 313
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 314,
       "date": "2026-10-04",
       "description": "8 Ignite V400 V-Mix Boost Series 40k puff, 5 Ignite V400 V-Mix",
       "total": 170.16,
       "profit": 23.43,
       "customer": "Juani",
       "phone": "+54 9 351 768-7374",
-      "channel": "Histórico Excel",
-      "legacyId": 314
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 315,
       "date": "2026-10-04",
       "description": "1 Elfbar Ice King 40k puff",
       "total": 15.47,
       "profit": 4.76,
       "customer": "Fabi",
       "phone": "+54 9 351 213-1970",
-      "channel": "Histórico Excel",
-      "legacyId": 315
+      "channel": "Histórico Excel"
     },
     {
+      "legacyId": 316,
       "date": "2026-10-05",
-      "description": "1 Elfbar EbCreate Bc Pro 40k puff",
-      "total": 13.15,
-      "profit": 8.07,
+      "description": "Geekbar Z35 35k puff",
+      "total": 13.04,
+      "profit": 5.64,
       "customer": "Gaston Almeida",
       "phone": "+54 9 351 300-8614",
-      "channel": "Histórico Excel",
-      "legacyId": 316
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 317,
+      "date": "2026-10-06",
+      "description": "1 Slugger Switch THC 2G",
+      "total": 37.12,
+      "profit": 12.32,
+      "customer": "Sebastian Bazan",
+      "phone": "+54 9 351 215-6739",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 318,
+      "date": "2026-10-07",
+      "description": "1 Smok Pen V2 (Recargable), 1 Hypnos Salt 35ml (50mg)",
+      "total": 15.77,
+      "profit": 5.87,
+      "customer": "Valentina",
+      "phone": "+54 9 351 557 6774",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 319,
+      "date": "2026-10-07",
+      "description": "8 Slugger Switch THC 2G, 10 Elfbar Ice King 40k puff",
+      "total": 362.93,
+      "profit": 57.43,
+      "customer": "Nano",
+      "phone": "+54 9 351 593-5998",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 320,
+      "date": "2026-10-07",
+      "description": "2 Smok Pen V2 (Recargable), 1 Maskking Salt 30ml (35mg), 1 Hypnos Salt 30ml (50mg)",
+      "total": 31.54,
+      "profit": 11.74,
+      "customer": "Jere Og",
+      "phone": "+54 9 351 752-2299",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 321,
+      "date": "2026-10-07",
+      "description": "2 Elfbar Ice King 40k puff, 1 Mnke Bars 6k puff, 1 Uwell Koko Prime, 1 Maskking Salt 30ml (35mg), 1 Silicone case, 1 Ignite V400 V-Mix Boost Series 40k puff",
+      "total": 65.35,
+      "profit": 21.45,
+      "customer": "Elias",
+      "phone": "+54 9 351 878 2290",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 322,
+      "date": "2026-10-08",
+      "description": "1 Ignite V400 V-Mix Boost Series 40k puff",
+      "total": 18.01,
+      "profit": 6.61,
+      "customer": "Delfina",
+      "phone": "+54 351 805 3623",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 323,
+      "date": "2026-10-08",
+      "description": "2 Elfbar Ice King 40k puff",
+      "total": 33.41,
+      "profit": 11.99,
+      "customer": "Franco",
+      "phone": "+54 351 805 3623",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 324,
+      "date": "2026-10-08",
+      "description": "10 Ignite V400 V-Mix Boost Series 40k puff",
+      "total": 147.82,
+      "profit": 33.82,
+      "customer": "Juan",
+      "phone": "+54 9 351 770-5981",
+      "channel": "Histórico Excel"
     }
   ],
   "customers": [
@@ -4272,10 +4361,10 @@
     {
       "name": "Elias",
       "phone": "+54 9 351 878 2290",
-      "purchases": 1,
-      "spent": 15.77,
+      "purchases": 2,
+      "spent": 81.11999999999999,
       "firstPurchase": "2026-10-03",
-      "lastPurchase": "2026-10-03"
+      "lastPurchase": "2026-10-07"
     },
     {
       "name": "Thiago Vázquez",
@@ -4305,9 +4394,65 @@
       "name": "Gaston Almeida",
       "phone": "+54 9 351 300-8614",
       "purchases": 1,
-      "spent": 13.15,
+      "spent": 13.04,
       "firstPurchase": "2026-10-05",
       "lastPurchase": "2026-10-05"
+    },
+    {
+      "name": "Sebastian Bazan",
+      "phone": "+54 9 351 215-6739",
+      "purchases": 1,
+      "spent": 37.12,
+      "firstPurchase": "2026-10-06",
+      "lastPurchase": "2026-10-06"
+    },
+    {
+      "name": "Valentina",
+      "phone": "+54 9 351 557 6774",
+      "purchases": 1,
+      "spent": 15.77,
+      "firstPurchase": "2026-10-07",
+      "lastPurchase": "2026-10-07"
+    },
+    {
+      "name": "Nano",
+      "phone": "+54 9 351 593-5998",
+      "purchases": 1,
+      "spent": 362.93,
+      "firstPurchase": "2026-10-07",
+      "lastPurchase": "2026-10-07"
+    },
+    {
+      "name": "Jere Og",
+      "phone": "+54 9 351 752-2299",
+      "purchases": 1,
+      "spent": 31.54,
+      "firstPurchase": "2026-10-07",
+      "lastPurchase": "2026-10-07"
+    },
+    {
+      "name": "Delfina",
+      "phone": "+54 351 805 3623",
+      "purchases": 1,
+      "spent": 18.01,
+      "firstPurchase": "2026-10-08",
+      "lastPurchase": "2026-10-08"
+    },
+    {
+      "name": "Franco",
+      "phone": "+54 351 805 3623",
+      "purchases": 1,
+      "spent": 33.41,
+      "firstPurchase": "2026-10-08",
+      "lastPurchase": "2026-10-08"
+    },
+    {
+      "name": "Juan",
+      "phone": "+54 9 351 770-5981",
+      "purchases": 1,
+      "spent": 147.82,
+      "firstPurchase": "2026-10-08",
+      "lastPurchase": "2026-10-08"
     }
   ],
   "ads": [
@@ -4618,6 +4763,20 @@
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
       "amount": 12.68,
       "notes": null
+    },
+    {
+      "date": "2026-10-06",
+      "platform": "Meta Ads",
+      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "amount": 12.68,
+      "notes": null
+    },
+    {
+      "date": "2026-10-07",
+      "platform": "Meta Ads",
+      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "amount": 12.68,
+      "notes": null
     }
   ],
   "expenses": [
@@ -4664,6 +4823,7 @@
   ],
   "loans": [
     {
+      "sourceRow": 10,
       "counterparty": "Leonel Ceballos",
       "principal": 4500.0,
       "startDate": "2026-05-20",
@@ -4674,26 +4834,29 @@
       "currency": "USD"
     },
     {
+      "sourceRow": 11,
       "counterparty": "Lucho",
       "principal": 626.56,
       "startDate": "2026-09-15",
       "dueDate": "2026-10-15",
-      "paid": 0,
+      "paid": 0.0,
       "balance": 626.56,
       "notes": "Prestamos de Lucho",
       "currency": "USD"
     },
     {
+      "sourceRow": 12,
       "counterparty": "Mateo Portillo",
-      "principal": 891.44,
+      "principal": 500.0,
       "startDate": "2026-09-29",
       "dueDate": "2026-10-09",
-      "paid": 413.56,
-      "balance": 477.88000000000005,
-      "notes": "Mentoria y Vasos quencher",
+      "paid": 500.0,
+      "balance": 0.0,
+      "notes": "Mentoria",
       "currency": "USD"
     },
     {
+      "sourceRow": 13,
       "counterparty": "Bauti Restifo",
       "principal": 400.0,
       "startDate": "2026-10-02",
@@ -4704,43 +4867,58 @@
       "currency": "USD"
     },
     {
+      "sourceRow": 14,
       "counterparty": "Santiago Lopez",
       "principal": 1110.0,
       "startDate": "2026-09-30",
-      "dueDate": "2026-10-30",
-      "paid": 495.04,
-      "balance": 614.96,
+      "dueDate": "2026-10-10",
+      "paid": 680.68,
+      "balance": 429.32000000000005,
       "notes": "100 Elfbar Ice King 40k puff",
       "currency": "USD"
     },
     {
+      "sourceRow": 15,
       "counterparty": "Bauti Restifo",
       "principal": 1300.0,
-      "startDate": "2026-10-10",
-      "dueDate": "2026-11-10",
-      "paid": 0,
+      "startDate": "2026-10-11",
+      "dueDate": "2026-10-21",
+      "paid": 0.0,
       "balance": 1300.0,
       "notes": "200 Elfbar EbCreate Bc Pro 40k puff",
       "currency": "USD"
     },
     {
+      "sourceRow": 16,
       "counterparty": "Nico Novarino",
       "principal": 1005.0,
-      "startDate": "2026-10-06",
-      "dueDate": "2026-11-06",
+      "startDate": "2026-10-12",
+      "dueDate": "2026-10-22",
       "paid": 154.7,
       "balance": 850.3,
       "notes": "150 Elfbar EbCreate Bc Pro 40k puff",
       "currency": "USD"
     },
     {
-      "counterparty": "Santiago Ferrero",
-      "principal": 501.79,
-      "startDate": "2026-10-06",
-      "dueDate": "2026-11-06",
-      "paid": 0,
-      "balance": 501.79,
-      "notes": "30 Airpods Pro 2 Gen, 30 Elfbar EbCreate Bc Pro 40k puff",
+      "sourceRow": 17,
+      "counterparty": "Mateo Portillo",
+      "principal": 700.0,
+      "startDate": "2026-10-11",
+      "dueDate": "2026-10-21",
+      "paid": 0.0,
+      "balance": 700.0,
+      "notes": "100 Body Splash replica",
+      "currency": "USD"
+    },
+    {
+      "sourceRow": 18,
+      "counterparty": "Mateo Portillo",
+      "principal": 423.23,
+      "startDate": "2026-09-29",
+      "dueDate": "2026-10-08",
+      "paid": 187.53,
+      "balance": 235.70000000000002,
+      "notes": "49 Vasos quencher 1,2L",
       "currency": "USD"
     }
   ],
