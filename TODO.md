@@ -16,3 +16,5 @@
 - [x] Mantenimiento completo: editar y eliminar productos, ventas, clientes, gastos, publicidad, préstamos, deudores y objetivos desde la interfaz, con confirmación y preservación de historial cuando corresponda.
 - [x] Cotización visible: ticker de dólar oficial, blue, MEP y CCL con compra/venta, actualización periódica, hora, fuente directa DolarHoy y fallback al último valor válido.
 - [x] Métricas avanzadas: costo de mercadería vendida, resultado estimado, recompra, clientes vinculados, concentración de canales, mejor día, promedio diario, cobertura de stock y eficiencia de publicidad calculadas por período.
+
+- [x] Ventas con doble origen: el formulario permite descripción manual y selección opcional de inventario; al guardar copia descripción, cantidad, precio, costo unitario, costo total y ganancia en la línea de venta, y el inventario solo se usa para descontar stock.
