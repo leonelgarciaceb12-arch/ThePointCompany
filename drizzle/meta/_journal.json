@@ -8,6 +8,34 @@
       "when": 1788785580464,
       "tag": "0000_initial_users",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1791510788950,
+      "tag": "0001_talented_wiccan",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1791510916089,
+      "tag": "0002_outgoing_lady_vermin",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1791511140644,
+      "tag": "0003_brainy_pepper_potts",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1791511329957,
+      "tag": "0004_sharp_kronos",
+      "breakpoints": true
     }
   ]
 }

@@ -1,17 +1,7 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { boolean, date, decimal, index, int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
 
-/**
- * Core user table backing auth flow.
- * Extend this file with additional tables as your product grows.
- * Columns use camelCase to match both database fields and generated types.
- */
 export const users = mysqlTable("users", {
-  /**
-   * Surrogate primary key. Auto-incremented numeric value managed by the database.
-   * Use this for relations between tables.
-   */
   id: int("id").autoincrement().primaryKey(),
-  /** Manus OAuth identifier (openId) returned from the OAuth callback. Unique per user. */
   openId: varchar("openId", { length: 64 }).notNull().unique(),
   name: text("name"),
   email: varchar("email", { length: 320 }),
@@ -22,7 +12,156 @@ export const users = mysqlTable("users", {
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
 });
 
+const audit = {
+  createdBy: int("createdBy"),
+  updatedBy: int("updatedBy"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+};
+
+export const products = mysqlTable("products", {
+  id: int("id").autoincrement().primaryKey(),
+  legacyId: int("legacyId"),
+  name: varchar("name", { length: 255 }).notNull(),
+  category: varchar("category", { length: 120 }).notNull().default("Sin categoría"),
+  supplier: varchar("supplier", { length: 160 }).default("Propio"),
+  stock: int("stock").notNull().default(0),
+  cost: decimal("cost", { precision: 12, scale: 2 }).notNull().default("0"),
+  minStock: int("minStock").notNull().default(3),
+  notes: text("notes"),
+  active: boolean("active").notNull().default(true),
+  ...audit,
+}, table => ({ nameIdx: index("products_name_idx").on(table.name), categoryIdx: index("products_category_idx").on(table.category) }));
+
+export const customers = mysqlTable("customers", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 180 }).notNull(),
+  phone: varchar("phone", { length: 80 }),
+  locality: varchar("locality", { length: 140 }),
+  notes: text("notes"),
+  purchases: int("purchases").notNull().default(0),
+  spent: decimal("spent", { precision: 12, scale: 2 }).notNull().default("0"),
+  profit: decimal("profit", { precision: 12, scale: 2 }).notNull().default("0"),
+  firstPurchase: date("firstPurchase", { mode: "string" }),
+  lastPurchase: date("lastPurchase", { mode: "string" }),
+  ...audit,
+}, table => ({ phoneIdx: index("customers_phone_idx").on(table.phone), lastPurchaseIdx: index("customers_last_purchase_idx").on(table.lastPurchase) }));
+
+export const sales = mysqlTable("sales", {
+  id: int("id").autoincrement().primaryKey(),
+  legacyId: int("legacyId"),
+  saleDate: date("saleDate", { mode: "string" }).notNull(),
+  customerId: int("customerId"),
+  customerName: varchar("customerName", { length: 180 }),
+  customerPhone: varchar("customerPhone", { length: 80 }),
+  channel: varchar("channel", { length: 80 }).default("WhatsApp"),
+  total: decimal("total", { precision: 12, scale: 2 }).notNull().default("0"),
+  totalCost: decimal("totalCost", { precision: 12, scale: 2 }).notNull().default("0"),
+  profit: decimal("profit", { precision: 12, scale: 2 }).notNull().default("0"),
+  margin: decimal("margin", { precision: 8, scale: 2 }).notNull().default("0"),
+  costKnown: boolean("costKnown").notNull().default(true),
+  status: mysqlEnum("status", ["paid", "pending", "cancelled"]).notNull().default("paid"),
+  notes: text("notes"),
+  ...audit,
+}, table => ({ dateIdx: index("sales_date_idx").on(table.saleDate), customerIdx: index("sales_customer_idx").on(table.customerId) }));
+
+export const saleItems = mysqlTable("sale_items", {
+  id: int("id").autoincrement().primaryKey(),
+  saleId: int("saleId").notNull(),
+  productId: int("productId"),
+  description: text("description").notNull(),
+  quantity: int("quantity").notNull().default(1),
+  unitPrice: decimal("unitPrice", { precision: 12, scale: 2 }).notNull().default("0"),
+  unitCost: decimal("unitCost", { precision: 12, scale: 2 }).notNull().default("0"),
+  total: decimal("total", { precision: 12, scale: 2 }).notNull().default("0"),
+  costTotal: decimal("costTotal", { precision: 12, scale: 2 }).notNull().default("0"),
+  profit: decimal("profit", { precision: 12, scale: 2 }).notNull().default("0"),
+  costKnown: boolean("costKnown").notNull().default(true),
+  fromInventory: boolean("fromInventory").notNull().default(false),
+  supplier: varchar("supplier", { length: 160 }),
+  ...audit,
+}, table => ({ saleIdx: index("sale_items_sale_idx").on(table.saleId), productIdx: index("sale_items_product_idx").on(table.productId) }));
+
+export const stockMovements = mysqlTable("stock_movements", {
+  id: int("id").autoincrement().primaryKey(),
+  productId: int("productId").notNull(),
+  type: mysqlEnum("type", ["purchase", "sale", "adjustment", "return"]).notNull(),
+  quantity: int("quantity").notNull(),
+  unitCost: decimal("unitCost", { precision: 12, scale: 2 }).notNull().default("0"),
+  referenceId: int("referenceId"),
+  notes: text("notes"),
+  ...audit,
+}, table => ({ productIdx: index("stock_movements_product_idx").on(table.productId) }));
+
+export const expenses = mysqlTable("expenses", {
+  id: int("id").autoincrement().primaryKey(),
+  expenseDate: date("expenseDate", { mode: "string" }).notNull(),
+  category: varchar("category", { length: 120 }).notNull(),
+  description: varchar("description", { length: 255 }).notNull(),
+  amount: decimal("amount", { precision: 12, scale: 2 }).notNull().default("0"),
+  type: varchar("type", { length: 80 }).default("Operativo"),
+  platform: varchar("platform", { length: 80 }),
+  campaign: varchar("campaign", { length: 180 }),
+  notes: text("notes"),
+  ...audit,
+}, table => ({ dateIdx: index("expenses_date_idx").on(table.expenseDate) }));
+
+export const loans = mysqlTable("loans", {
+  id: int("id").autoincrement().primaryKey(),
+  kind: mysqlEnum("kind", ["loan", "payable_merch", "internal"]).notNull().default("loan"),
+  counterparty: varchar("counterparty", { length: 180 }).notNull(),
+  description: varchar("description", { length: 255 }),
+  currency: varchar("currency", { length: 12 }).notNull().default("USD"),
+  principal: decimal("principal", { precision: 12, scale: 2 }).notNull().default("0"),
+  paid: decimal("paid", { precision: 12, scale: 2 }).notNull().default("0"),
+  balance: decimal("balance", { precision: 12, scale: 2 }).notNull().default("0"),
+  startDate: date("startDate", { mode: "string" }),
+  dueDate: date("dueDate", { mode: "string" }),
+  status: mysqlEnum("status", ["open", "partial", "paid", "overdue"]).notNull().default("open"),
+  notes: text("notes"),
+  ...audit,
+}, table => ({ dueIdx: index("loans_due_idx").on(table.dueDate), statusIdx: index("loans_status_idx").on(table.status) }));
+
+export const receivables = mysqlTable("receivables", {
+  id: int("id").autoincrement().primaryKey(),
+  customerName: varchar("customerName", { length: 180 }).notNull(),
+  phone: varchar("phone", { length: 80 }),
+  description: varchar("description", { length: 255 }),
+  principal: decimal("principal", { precision: 12, scale: 2 }).notNull().default("0"),
+  paid: decimal("paid", { precision: 12, scale: 2 }).notNull().default("0"),
+  balance: decimal("balance", { precision: 12, scale: 2 }).notNull().default("0"),
+  dueDate: date("dueDate", { mode: "string" }),
+  status: mysqlEnum("status", ["open", "partial", "paid", "overdue"]).notNull().default("open"),
+  notes: text("notes"),
+  ...audit,
+}, table => ({ dueIdx: index("receivables_due_idx").on(table.dueDate), statusIdx: index("receivables_status_idx").on(table.status) }));
+
+export const adCampaigns = mysqlTable("ad_campaigns", {
+  id: int("id").autoincrement().primaryKey(),
+  adDate: date("adDate", { mode: "string" }).notNull(),
+  platform: varchar("platform", { length: 80 }).notNull().default("Meta Ads"),
+  campaign: varchar("campaign", { length: 180 }).notNull(),
+  amount: decimal("amount", { precision: 12, scale: 2 }).notNull().default("0"),
+  conversations: int("conversations").default(0),
+  results: int("results").default(0),
+  notes: text("notes"),
+  ...audit,
+}, table => ({ dateIdx: index("ad_campaigns_date_idx").on(table.adDate) }));
+
+export const objectives = mysqlTable("objectives", {
+  id: int("id").autoincrement().primaryKey(),
+  month: varchar("month", { length: 40 }).notNull(),
+  targetOrders: int("targetOrders").notNull().default(0),
+  targetRevenue: decimal("targetRevenue", { precision: 12, scale: 2 }).notNull().default("0"),
+  targetProfit: decimal("targetProfit", { precision: 12, scale: 2 }).notNull().default("0"),
+  targetNet: decimal("targetNet", { precision: 12, scale: 2 }).notNull().default("0"),
+  notes: text("notes"),
+  ...audit,
+});
+
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
-
-// TODO: Add your tables here
+export type Product = typeof products.$inferSelect;
+export type Customer = typeof customers.$inferSelect;
+export type Sale = typeof sales.$inferSelect;
+export type Loan = typeof loans.$inferSelect;
