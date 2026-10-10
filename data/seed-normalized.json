@@ -2,843 +2,6 @@
   "products": [
     {
       "legacyId": 1,
-      "name": "Elfbar Adjust MyFlavor 40k Puff",
-      "category": "Vapers Descartables",
-      "stock": 2,
-      "cost": 6.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 2,
-      "name": "Elfbar Ebcreate Bc Pro 40k puff",
-      "category": "Vapers Descartables",
-      "stock": 354,
-      "cost": 6.71,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 3,
-      "name": "Elfbar Bc Touch 20k Puff",
-      "category": "Vapers Descartables",
-      "stock": 8,
-      "cost": 7.9,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 4,
-      "name": "Elfbar Ice King 40k Puff",
-      "category": "Vapers Descartables",
-      "stock": 102,
-      "cost": 10.71,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 5,
-      "name": "Elfbar Trio 40k Puff",
-      "category": "Vapers Descartables",
-      "stock": 1,
-      "cost": 9.4,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 6,
-      "name": "Geekbar Pulse X 25k Puff",
-      "category": "Vapers Descartables",
-      "stock": 5,
-      "cost": 7.4,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 7,
-      "name": "Ignite V400 V-Mix 40k Puff",
-      "category": "Vapers Descartables",
-      "stock": 3,
-      "cost": 11.1,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 8,
-      "name": "Mnke Bars 6k Puff",
-      "category": "Vapers Descartables",
-      "stock": 110,
-      "cost": 0.95,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 9,
-      "name": "Vapenging Maxbar Capsulas 10k Puff",
-      "category": "Vapers Descartables",
-      "stock": 10,
-      "cost": 1.83,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 10,
-      "name": "Lost Mary Dura 35k Puff",
-      "category": "Vapers Descartables",
-      "stock": 20,
-      "cost": 8.28,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 11,
-      "name": "Ignite V400 V-Mix Boost Series 40k Puff",
-      "category": "Vapers Descartables",
-      "stock": 12,
-      "cost": 11.4,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 12,
-      "name": "Geekbar Z35 35k Puff",
-      "category": "Vapers Descartables",
-      "stock": 29,
-      "cost": 7.4,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 13,
-      "name": "Uwell Koko Prime (Recargable)",
-      "category": "Vapers Recargables",
-      "stock": 3,
-      "cost": 4.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 14,
-      "name": "Smok Pen V2 (Recargable)",
-      "category": "Vapers Recargables",
-      "stock": 0,
-      "cost": 4.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 15,
-      "name": "Maskking Salts 30ml (35mg)",
-      "category": "Vapers Recargables",
-      "stock": 4,
-      "cost": 5.9,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 16,
-      "name": "Hypnos Salts 30ml (50mg)",
-      "category": "Vapers Recargables",
-      "stock": 3,
-      "cost": 5.4,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 17,
-      "name": "Slugger Switch THC 2G",
-      "category": "Cannabis/THC",
-      "stock": 0,
-      "cost": 24.6,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 18,
-      "name": "Battery Pack 10.000 mAh",
-      "category": "Electrónica",
-      "stock": 1,
-      "cost": 6.75,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 19,
-      "name": "Vasos Cafeteros Stanley 500ml",
-      "category": "Electrónica",
-      "stock": 3,
-      "cost": 5.17,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 20,
-      "name": "Cargadores Completos iPhone (Pata Argentina)",
-      "category": "Electrónica",
-      "stock": 98,
-      "cost": 2.81,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 21,
-      "name": "Vital Honey",
-      "category": "Cosmético",
-      "stock": 3,
-      "cost": 6.4,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 22,
-      "name": "Gorras New Era Fifty59",
-      "category": "Ropa",
-      "stock": 8,
-      "cost": 16.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 23,
-      "name": "Afnan 9AM Dive 100ml",
-      "category": "Perfumes",
-      "stock": 5,
-      "cost": 24.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 24,
-      "name": "Afnan 9PM Black 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 25.1,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 25,
-      "name": "Afnan 9PM Elixir 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 33.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 26,
-      "name": "Afnan 9PM Purple Fem 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 23.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 27,
-      "name": "Al Haramain Amber Oud Dubai Night Extrait 100ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 35.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 28,
-      "name": "Al Haramain Amber Oud Exclusif 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 32.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 29,
-      "name": "Al Haramain Amber Oud Gold Edition 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 35.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 30,
-      "name": "Armaf Club De Nuit Bling 75ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 36.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 31,
-      "name": "Armaf Club De Nuit Iconic 105ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 30.15,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 32,
-      "name": "Armaf Club De Nuit Intense Man 105ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 35.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 33,
-      "name": "Armaf Club De Nuit Intense Woman 105ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 21.15,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 34,
-      "name": "Armaf Club De Nuit Precieux 55ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 37.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 35,
-      "name": "Armaf Club De Nuit Sillage 105ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 25.25,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 36,
-      "name": "Armaf Club De Nuit Untold 105ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 27.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 37,
-      "name": "Armaf Club De Nuit Urban Man Elixir 105ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 26.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 38,
-      "name": "Armaf Island Bliss 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 26.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 39,
-      "name": "Armaf Odyssey Aoud 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 16.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 40,
-      "name": "Armaf Odyssey Aqua 100ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 27.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 41,
-      "name": "Armaf Odyssey Artisto 100ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 32.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 42,
-      "name": "Armaf Odyssey Bahamas Tropical 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 29.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 43,
-      "name": "Armaf Odyssey Dubai Chocolat 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 16.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 44,
-      "name": "Armaf Odyssey Go Mango 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 27.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 45,
-      "name": "Armaf Odyssey Homme Black 100ml",
-      "category": "Perfumes",
-      "stock": 4,
-      "cost": 18.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 46,
-      "name": "Armaf Odyssey Limoni 100ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 19.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 47,
-      "name": "Armaf Odyssey Mandarin Sky 200ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 33.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 48,
-      "name": "Armaf Odyssey Mega 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 16.625,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 49,
-      "name": "Armaf Odyssey Spectra 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 18.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 50,
-      "name": "Armaf Odyssey Tyrant 100ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 16.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 51,
-      "name": "Bharara Double Bleu 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 37.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 52,
-      "name": "French Avenue Liquid Brun 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 37.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 53,
-      "name": "French Avenue Spectre Marron 80ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 24.75,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 54,
-      "name": "French Avenue Vulcan Black Friday Edition 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 31.8,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 55,
-      "name": "French Avenue Vulcan Feu 100ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 35.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 56,
-      "name": "Jean Paul Gaultier Scandal EDT 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 66.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 57,
-      "name": "Lattafa Al Noble Ameer 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 17.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 58,
-      "name": "Lattafa Al Noble Wazeer 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 17.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 59,
-      "name": "Lattafa Al Noble Zafeer 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 17.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 60,
-      "name": "Lattafa Asad Black 100ml",
-      "category": "Perfumes",
-      "stock": 4,
-      "cost": 24.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 61,
-      "name": "Lattafa Asad Bourbon 100ml",
-      "category": "Perfumes",
-      "stock": 4,
-      "cost": 29.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 62,
-      "name": "Lattafa Asad Elixir 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 25.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 63,
-      "name": "Lattafa Badee Al Oud Amethyst 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 17.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 64,
-      "name": "Lattafa Badee Al Oud Sublime 100ml",
-      "category": "Perfumes",
-      "stock": 4,
-      "cost": 19.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 65,
-      "name": "Lattafa Eclaire Banoffi 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 23.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 66,
-      "name": "Lattafa Fakhar Gold 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 19.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 67,
-      "name": "Lattafa Fakhar Platin 100ml",
-      "category": "Perfumes",
-      "stock": 4,
-      "cost": 17.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 68,
-      "name": "Lattafa Hayatti Black 100ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 11.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 69,
-      "name": "Lattafa Hayati Maleki 100ml",
-      "category": "Perfumes",
-      "stock": 3,
-      "cost": 10.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 70,
-      "name": "Lattafa Her Confession 100ml",
-      "category": "Perfumes",
-      "stock": 3,
-      "cost": 25.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 71,
-      "name": "Lattafa His Confession 100ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 23.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 72,
-      "name": "Lattafa Khamrah Black 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 19.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 73,
-      "name": "Lattafa Khamrah Dukhan 100ml",
-      "category": "Perfumes",
-      "stock": 3,
-      "cost": 18.35,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 74,
-      "name": "Lattafa Khamrah Qahwa 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 19.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 75,
-      "name": "Lattafa Mahir Black 100ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 18.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 76,
-      "name": "Lattafa Mayar Natural Intense 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 18.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 77,
-      "name": "Lattafa Niche Emarati Khanjar 85ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 35.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 78,
-      "name": "Lattafa Pisa 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 30.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 79,
-      "name": "Lattafa Pride Nebras 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 21.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 80,
-      "name": "Lattafa Qaed Al Fursan 90ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 13.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 81,
-      "name": "Lattafa Qaed Al Fursan Untamed 90ml",
-      "category": "Perfumes",
-      "stock": 3,
-      "cost": 11.75,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 82,
-      "name": "Lattafa Teriaq Intense 100ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 25.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 83,
-      "name": "Lattafa Velvet 100ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 10.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 84,
-      "name": "Lattafa Yara Candy 100ml",
-      "category": "Perfumes",
-      "stock": 3,
-      "cost": 18.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 85,
-      "name": "Lattafa Yara Elixir 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 22.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 86,
-      "name": "Lattafa Yara Moi 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 17.2,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 87,
-      "name": "Lattafa Yara Tous 100ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 20.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 88,
-      "name": "Rasasi Hawas Black 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 21.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 89,
-      "name": "Rasasi Hawas Elixir 100ml",
-      "category": "Perfumes",
-      "stock": 2,
-      "cost": 27.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 90,
-      "name": "Rasasi Hawas Fire 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 39.5,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 91,
-      "name": "Rasasi Hawas For Her 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 18.8,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 92,
-      "name": "Rasasi Hawas Tropical 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 34.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 93,
-      "name": "Rasasi Hawas Verde 100ml",
-      "category": "Perfumes",
-      "stock": 1,
-      "cost": 35.0,
-      "supplier": "Propio",
-      "minStock": 3
-    },
-    {
-      "legacyId": 94,
       "name": "Funda Silicona (varios modelos)",
       "category": "Accesorios",
       "stock": 215,
@@ -847,7 +10,7 @@
       "minStock": 3
     },
     {
-      "legacyId": 95,
+      "legacyId": 2,
       "name": "Frasquitos Decants 5ml",
       "category": "Bazar",
       "stock": 3,
@@ -856,29 +19,848 @@
       "minStock": 3
     },
     {
-      "legacyId": 96,
+      "legacyId": 3,
       "name": "Termo Con Sensor",
-      "category": "Electrónica",
+      "category": "Bazar",
       "stock": 98,
       "cost": 4.35,
       "supplier": "Propio",
       "minStock": 3
     },
     {
-      "legacyId": 97,
+      "legacyId": 4,
       "name": "Vaso Quencher 1,2L",
-      "category": "Accesorios",
+      "category": "Bazar",
       "stock": 49,
       "cost": 8.42,
       "supplier": "Propio",
       "minStock": 3
     },
     {
-      "legacyId": 98,
-      "name": "AirPods Pro 2 Gen",
+      "legacyId": 5,
+      "name": "Vasos Cafeteros Stanley 500ml",
+      "category": "Bazar",
+      "stock": 3,
+      "cost": 5.17,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 6,
+      "name": "Vital Honey",
+      "category": "Cosmético",
+      "stock": 3,
+      "cost": 6.4,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 7,
+      "name": "Battery Pack 10.000 mAh",
       "category": "Electrónica",
-      "stock": 0,
-      "cost": 8.0,
+      "stock": 1,
+      "cost": 6.75,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 8,
+      "name": "Cargadores Completos iPhone (Pata Argentina)",
+      "category": "Electrónica",
+      "stock": 98,
+      "cost": 2.81,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 9,
+      "name": "Afnan 9AM Dive 100ml",
+      "category": "Perfumes",
+      "stock": 5,
+      "cost": 24.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 10,
+      "name": "Afnan 9PM Black 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 25.1,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 11,
+      "name": "Afnan 9PM Elixir 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 33.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 12,
+      "name": "Afnan 9PM Purple Fem 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 23.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 13,
+      "name": "Al Haramain Amber Oud Dubai Night Extrait 100ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 35.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 14,
+      "name": "Al Haramain Amber Oud Exclusif 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 32.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 15,
+      "name": "Al Haramain Amber Oud Gold Edition 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 35.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 16,
+      "name": "Armaf Club De Nuit Bling 75ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 36.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 17,
+      "name": "Armaf Club De Nuit Iconic 105ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 30.15,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 18,
+      "name": "Armaf Club De Nuit Intense Man 105ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 35.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 19,
+      "name": "Armaf Club De Nuit Intense Woman 105ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 21.15,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 20,
+      "name": "Armaf Club De Nuit Precieux 55ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 37.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 21,
+      "name": "Armaf Club De Nuit Sillage 105ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 25.25,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 22,
+      "name": "Armaf Club De Nuit Untold 105ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 27.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 23,
+      "name": "Armaf Club De Nuit Urban Man Elixir 105ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 26.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 24,
+      "name": "Armaf Island Bliss 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 26.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 25,
+      "name": "Armaf Odyssey Aoud 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 16.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 26,
+      "name": "Armaf Odyssey Aqua 100ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 27.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 27,
+      "name": "Armaf Odyssey Artisto 100ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 32.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 28,
+      "name": "Armaf Odyssey Bahamas Tropical 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 29.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 29,
+      "name": "Armaf Odyssey Dubai Chocolat 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 16.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 30,
+      "name": "Armaf Odyssey Go Mango 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 27.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 31,
+      "name": "Armaf Odyssey Homme Black 100ml",
+      "category": "Perfumes",
+      "stock": 4,
+      "cost": 18.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 32,
+      "name": "Armaf Odyssey Limoni 100ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 19.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 33,
+      "name": "Armaf Odyssey Mandarin Sky 200ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 33.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 34,
+      "name": "Armaf Odyssey Mega 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 16.62,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 35,
+      "name": "Armaf Odyssey Spectra 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 18.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 36,
+      "name": "Armaf Odyssey Tyrant 100ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 16.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 37,
+      "name": "Bharara Double Bleu 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 37.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 38,
+      "name": "Body Splash Réplica",
+      "category": "Perfumes",
+      "stock": 100,
+      "cost": 7.09,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 39,
+      "name": "French Avenue Liquid Brun 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 37.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 40,
+      "name": "French Avenue Spectre Marron 80ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 24.75,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 41,
+      "name": "French Avenue Vulcan Black Friday Edition 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 31.8,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 42,
+      "name": "French Avenue Vulcan Feu 100ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 35.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 43,
+      "name": "Jean Paul Gaultier Scandal EDT 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 66.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 44,
+      "name": "Lattafa Al Noble Ameer 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 17.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 45,
+      "name": "Lattafa Al Noble Wazeer 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 17.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 46,
+      "name": "Lattafa Al Noble Zafeer 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 17.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 47,
+      "name": "Lattafa Asad Black 100ml",
+      "category": "Perfumes",
+      "stock": 4,
+      "cost": 24.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 48,
+      "name": "Lattafa Asad Bourbon 100ml",
+      "category": "Perfumes",
+      "stock": 4,
+      "cost": 29.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 49,
+      "name": "Lattafa Asad Elixir 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 25.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 50,
+      "name": "Lattafa Badee Al Oud Amethyst 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 17.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 51,
+      "name": "Lattafa Badee Al Oud Sublime 100ml",
+      "category": "Perfumes",
+      "stock": 4,
+      "cost": 19.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 52,
+      "name": "Lattafa Eclaire Banoffi 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 23.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 53,
+      "name": "Lattafa Fakhar Gold 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 19.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 54,
+      "name": "Lattafa Fakhar Platin 100ml",
+      "category": "Perfumes",
+      "stock": 4,
+      "cost": 17.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 55,
+      "name": "Lattafa Hayati Maleki 100ml",
+      "category": "Perfumes",
+      "stock": 3,
+      "cost": 10.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 56,
+      "name": "Lattafa Hayatti Black 100ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 11.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 57,
+      "name": "Lattafa Her Confession 100ml",
+      "category": "Perfumes",
+      "stock": 3,
+      "cost": 25.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 58,
+      "name": "Lattafa His Confession 100ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 23.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 59,
+      "name": "Lattafa Khamrah Black 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 19.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 60,
+      "name": "Lattafa Khamrah Dukhan 100ml",
+      "category": "Perfumes",
+      "stock": 3,
+      "cost": 18.35,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 61,
+      "name": "Lattafa Khamrah Qahwa 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 19.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 62,
+      "name": "Lattafa Mahir Black 100ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 18.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 63,
+      "name": "Lattafa Mayar Natural Intense 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 18.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 64,
+      "name": "Lattafa Niche Emarati Khanjar 85ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 35.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 65,
+      "name": "Lattafa Pisa 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 30.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 66,
+      "name": "Lattafa Pride Nebras 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 21.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 67,
+      "name": "Lattafa Qaed Al Fursan 90ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 13.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 68,
+      "name": "Lattafa Qaed Al Fursan Untamed 90ml",
+      "category": "Perfumes",
+      "stock": 3,
+      "cost": 11.75,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 69,
+      "name": "Lattafa Teriaq Intense 100ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 25.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 70,
+      "name": "Lattafa Velvet 100ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 10.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 71,
+      "name": "Lattafa Yara Candy 100ml",
+      "category": "Perfumes",
+      "stock": 3,
+      "cost": 18.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 72,
+      "name": "Lattafa Yara Elixir 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 22.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 73,
+      "name": "Lattafa Yara Moi 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 17.2,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 74,
+      "name": "Lattafa Yara Tous 100ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 20.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 75,
+      "name": "Rasasi Hawas Black 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 21.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 76,
+      "name": "Rasasi Hawas Elixir 100ml",
+      "category": "Perfumes",
+      "stock": 2,
+      "cost": 27.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 77,
+      "name": "Rasasi Hawas Fire 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 39.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 78,
+      "name": "Rasasi Hawas For Her 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 18.8,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 79,
+      "name": "Rasasi Hawas Tropical 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 34.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 80,
+      "name": "Rasasi Hawas Verde 100ml",
+      "category": "Perfumes",
+      "stock": 1,
+      "cost": 35.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 81,
+      "name": "Gorras New Era Fifty59",
+      "category": "Ropa",
+      "stock": 8,
+      "cost": 16.0,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 82,
+      "name": "Elfbar Adjust MyFlavor 40k Puff",
+      "category": "Vapers Descartables",
+      "stock": 2,
+      "cost": 6.5,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 83,
+      "name": "Elfbar Bc Touch 20k Puff",
+      "category": "Vapers Descartables",
+      "stock": 8,
+      "cost": 7.9,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 84,
+      "name": "Elfbar Ebcreate Bc Pro 40k puff",
+      "category": "Vapers Descartables",
+      "stock": 354,
+      "cost": 6.71,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 85,
+      "name": "Elfbar Ice King 40k Puff",
+      "category": "Vapers Descartables",
+      "stock": 57,
+      "cost": 10.71,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 86,
+      "name": "Elfbar Trio 40k Puff",
+      "category": "Vapers Descartables",
+      "stock": 1,
+      "cost": 9.4,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 87,
+      "name": "Geekbar Pulse X 25k Puff",
+      "category": "Vapers Descartables",
+      "stock": 5,
+      "cost": 7.4,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 88,
+      "name": "Geekbar Z35 35k Puff",
+      "category": "Vapers Descartables",
+      "stock": 29,
+      "cost": 7.4,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 89,
+      "name": "Ignite V400 V-Mix 40k Puff",
+      "category": "Vapers Descartables",
+      "stock": 3,
+      "cost": 11.1,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 90,
+      "name": "Ignite V400 V-Mix Boost Series 40k Puff",
+      "category": "Vapers Descartables",
+      "stock": 10,
+      "cost": 11.4,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 91,
+      "name": "Lost Mary Dura 35k Puff",
+      "category": "Vapers Descartables",
+      "stock": 19,
+      "cost": 8.28,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 92,
+      "name": "Mnke Bars 6k Puff",
+      "category": "Vapers Descartables",
+      "stock": 110,
+      "cost": 0.95,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 93,
+      "name": "Vapenging Maxbar Capsulas 10k Puff",
+      "category": "Vapers Descartables",
+      "stock": 10,
+      "cost": 1.83,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 94,
+      "name": "Hypnos Salt 30ml (35mg)",
+      "category": "Vapers Recargables",
+      "stock": 2,
+      "cost": 5.3,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 95,
+      "name": "Maskking Salts 30ml (35mg)",
+      "category": "Vapers Recargables",
+      "stock": 4,
+      "cost": 5.9,
+      "supplier": "Propio",
+      "minStock": 3
+    },
+    {
+      "legacyId": 96,
+      "name": "Uwell Koko Prime",
+      "category": "Vapers Recargables",
+      "stock": 2,
+      "cost": 4.5,
       "supplier": "Propio",
       "minStock": 3
     }
@@ -891,7 +873,7 @@
       "total": 42.71,
       "profit": 14.23,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -901,7 +883,7 @@
       "total": 36.5,
       "profit": 17.0,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -911,7 +893,7 @@
       "total": 127.7,
       "profit": 36.28,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -921,7 +903,7 @@
       "total": 17.57,
       "profit": 8.42,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -931,7 +913,7 @@
       "total": 18.25,
       "profit": 8.85,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -941,7 +923,7 @@
       "total": 16.22,
       "profit": 10.72,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -951,777 +933,777 @@
       "total": 16.1,
       "profit": 7.64,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
       "legacyId": 8,
-      "date": "2026-05-08",
-      "description": "1 Mnke Bars 6500 Puff",
-      "total": 4.3,
-      "profit": 3.43,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 9,
-      "date": "2026-05-09",
-      "description": "1 Klix 25k Puff, 1 Elfbar Bc Create 40k Puff",
-      "total": 27.68,
-      "profit": 13.88,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 10,
-      "date": "2026-05-09",
-      "description": "1 Vapor Storm 12k Puff, 1 Elfbar Trio 40k Puff, Ignite V400 V-Mix",
-      "total": 45.9,
-      "profit": 19.71,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 11,
-      "date": "2026-05-09",
-      "description": "1 Esencia Ignite 100ml (3mg)",
-      "total": 10.12,
-      "profit": 9.12,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 12,
-      "date": "2026-05-10",
-      "description": "5 AirPods Pro 2 Gen",
-      "total": 47.5,
-      "profit": 19.5,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 13,
-      "date": "2026-05-10",
-      "description": "1 Elfbar Ice King 40k Puff",
-      "total": 17.5,
-      "profit": 8.0,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 14,
-      "date": "2026-05-10",
-      "description": "10 Elfbar Ice King 40k Puff",
-      "total": 130.93,
-      "profit": 35.93,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 15,
-      "date": "2026-05-11",
-      "description": "1 Armaf Odyssey Mandarin Sky, 1 Lattafa The Kingdom 100ml",
-      "total": 48.5,
-      "profit": 39.61,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 16,
-      "date": "2026-05-12",
-      "description": "2 Elfbar Trio 40k puff, 1 Elfbar Bc Create 40k puff, 3 Ignite V400 V-Mix 40k puff, 1 Ignite V400 Sweet 40k puff",
-      "total": 99.37,
-      "profit": 27.02,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 17,
-      "date": "2026-05-13",
-      "description": "Armaf Odyssey Mandarin Sky 100ml",
-      "total": 45.16,
-      "profit": 22.6,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 18,
-      "date": "2026-05-13",
-      "description": "2 Maxbar 40k puff, 1 Elfbar Bc Create 40k puff",
-      "total": 50.0,
-      "profit": 28.8,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 19,
-      "date": "2026-05-13",
-      "description": "1 Luffbar 55k puff",
-      "total": 20.22,
-      "profit": 11.72,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 20,
-      "date": "2026-05-14",
-      "description": "1 Al Haramain Amber Oud Gold 100ml, 1 Afnan 9PM Black 100ml",
-      "total": 76.0,
-      "profit": 15.19,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 21,
-      "date": "2026-05-14",
-      "description": "2 Sachets Vital Honey",
-      "total": 4.0,
-      "profit": 2.9,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 22,
-      "date": "2026-05-14",
-      "description": "1 Cargador Completo Lightning 20W",
-      "total": 9.45,
-      "profit": 6.95,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 23,
-      "date": "2026-05-14",
-      "description": "1 French Avenue Liquid Brun 100ml",
-      "total": 45.0,
-      "profit": 8.0,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 24,
-      "date": "2026-05-14",
-      "description": "1 Vaso Cafetero Stanley",
-      "total": 5.25,
-      "profit": 4.75,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 25,
-      "date": "2026-05-15",
-      "description": "1 Decant 5ml 9PM Elixir Intense, 1 Decant 5ml Al Haramain Amber Oud Dubai Night.",
-      "total": 8.1,
-      "profit": 4.0,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 26,
-      "date": "2026-05-15",
-      "description": "1 Lattafa Khamrah Black 100ml, 1 Lattafa Eclaire 100ml",
-      "total": 56.0,
-      "profit": 13.5,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 27,
-      "date": "2026-05-16",
-      "description": "2 Mnke Bars 6k puff",
-      "total": 10.81,
-      "profit": 8.51,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 28,
-      "date": "2026-05-17",
-      "description": "1 Vapengin Maxbar 40k puff",
-      "total": 16.21,
-      "profit": 10.71,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 29,
-      "date": "2026-05-18",
-      "description": "1 Bharara King 100ml",
-      "total": 60.7,
-      "profit": 43.0,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 30,
-      "date": "2026-05-18",
-      "description": "3 Bharara King 100ml, 1 Armaf Odyssey Candee 100ml, 1 Rasasi Hawas Elixir 100ml",
-      "total": 228.0,
-      "profit": 54.3,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 31,
-      "date": "2026-05-18",
-      "description": "1 Crema Karsell 500ml, 1 Vaso Cafetero Stanley",
-      "total": 23.64,
-      "profit": 13.79,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 32,
-      "date": "2026-05-20",
-      "description": "4 Vasos Cafeteros 500ml",
-      "total": 40.26,
-      "profit": 19.26,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 33,
-      "date": "2026-05-20",
-      "description": "3 JBL Go 4 Pro",
-      "total": 38.25,
-      "profit": 19.05,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 34,
-      "date": "2026-05-20",
-      "description": "1 Pava Electrica",
-      "total": 11.4,
-      "profit": 5.9,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 35,
-      "date": "2026-05-20",
-      "description": "1 Elfbar Ice King 40k puff",
-      "total": 17.56,
-      "profit": 8.06,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 36,
-      "date": "2026-05-20",
-      "description": "1 Smok Priv Bar 15k puff",
-      "total": 10.13,
-      "profit": 5.23,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 37,
-      "date": "2026-05-20",
-      "description": "1 Decant 5ml Rasasi Hawas Black, 1 Decant 5ml Rasasi Hawas Fire, 1 Decants 5ml Rasasi Hawas For Her, 1 Decant 5ml Armaf Odyssey Homme Black, 1 Decant 5ml Armaf Odyssey Bahamas Tropical, 1 Decant 5ml Club de Nuit Urban Man Elixir, 2 Decants 5ml Al Haramain Amber Oud Gold Edition, 1 Decant 5ml Afnan 9PM Elixir Intense, 1 Decant 5ml Lattafa Al Noble Ameer",
-      "total": 30.4,
-      "profit": 12.59,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 38,
-      "date": "2026-05-20",
-      "description": "1 Cargador Completo 20W Lightning",
-      "total": 7.0,
-      "profit": 4.5,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 39,
-      "date": "2026-05-22",
-      "description": "Mnke Bars 6k puff",
-      "total": 5.4,
-      "profit": 4.4,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 40,
-      "date": "2026-05-22",
-      "description": "1 Vapengin Maxbar 40k puff (sin capsulas extra)",
-      "total": 9.45,
-      "profit": 7.62,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 41,
-      "date": "2026-05-23",
-      "description": "Luffbar 40k puff",
-      "total": 13.51,
-      "profit": 6.51,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 42,
-      "date": "2026-05-24",
-      "description": "130 Albumes Portügueses Panini Mundial 2026 (Tapa Blanda)",
-      "total": 1097.97,
-      "profit": 245.17,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 43,
-      "date": "2026-05-24",
-      "description": "1 Yara Moi 100ml, 1 9PM Black 100ml",
-      "total": 75.77,
-      "profit": 33.37,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 44,
-      "date": "2026-05-24",
-      "description": "2 Ignite V25 2500 puff",
-      "total": 10.81,
-      "profit": 7.81,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 45,
-      "date": "2026-05-24",
-      "description": "1 Elfbar Trio 40k puff",
-      "total": 15.54,
-      "profit": 6.03,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 46,
-      "date": "2026-05-25",
-      "description": "1 Smok Nord Pro, 1 Esencia Ignite 100ml",
-      "total": 20.5,
-      "profit": 10.5,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 47,
-      "date": "2026-05-25",
-      "description": "1 Ignite V400 V-Sweet 40k puff",
-      "total": 17.56,
-      "profit": 7.31,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 48,
-      "date": "2026-05-26",
-      "description": "1 Smok Priv Bar 15k puff",
-      "total": 10.13,
-      "profit": 5.23,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 49,
-      "date": "2026-05-26",
-      "description": "1 Vapengin Maxbar 40k puff (sin capsulas extra)",
-      "total": 8.1,
-      "profit": 6.27,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 50,
-      "date": "2026-05-26",
-      "description": "16 Vapengin Maxbar 40k puff",
-      "total": 166.0,
-      "profit": 78.0,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 51,
-      "date": "2026-05-26",
-      "description": "1 Crema Karsell 500ml",
-      "total": 10.13,
-      "profit": 5.5,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 52,
-      "date": "2026-05-28",
-      "description": "5 Elfbar Reabbeats 50k puff,\n1 Adalya Ice Nic 50k puff, 2 Elfbar Bc Create 40k puff, 2 Ignite V400 V-Sweet 40k puff, 2 Ignite V400 V-Mix 40k puff",
-      "total": 148.64,
-      "profit": 30.14,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 53,
-      "date": "2026-05-29",
-      "description": "5 Elfbar Ice King 40k puff",
-      "total": 70.0,
-      "profit": 20.5,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 54,
-      "date": "2026-05-29",
-      "description": "3 Combos Recargables (Smok Pen V2)",
-      "total": 40.5,
-      "profit": 24.0,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 55,
-      "date": "2026-05-29",
-      "description": "3 Ignite V400 V-Mix, 2 Ignite V40 V-Sweet",
-      "total": 72.5,
-      "profit": 15.1,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 56,
-      "date": "2026-05-30",
-      "description": "1 Elfbar Ice King 40k puff",
-      "total": 17.56,
-      "profit": 7.56,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 57,
-      "date": "2026-05-30",
-      "description": "1 Vapengin Maxbar Capsulas 10k puff",
-      "total": 3.37,
-      "profit": 1.57,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 58,
-      "date": "2026-05-31",
-      "description": "2 Elfbar Bc Create 40k Puff",
-      "total": 35.13,
-      "profit": 16.73,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 59,
-      "date": "2026-05-31",
-      "description": "2 Airpods Max \n2 Airpods Pro Gen 2\n2 Cargador Completo\n3 Cables Iphone Lightning - C\n2 Battery Pack",
-      "total": 120.27,
-      "profit": 62.27,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 60,
-      "date": "2026-05-31",
-      "description": "1 Vapengin Maxbar 40k puff",
-      "total": 16.21,
-      "profit": 10.71,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 61,
-      "date": "2026-06-01",
-      "description": "2 Elfbar Ice King 40k puff, 1 Elfbar Bc Create 40k puff",
-      "total": 52.7,
-      "profit": 23.7,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 62,
-      "date": "2026-06-01",
-      "description": "1 Al Haramain Amber Oud Gold Edition 100ml",
-      "total": 50.67,
-      "profit": 15.67,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 63,
-      "date": "2026-06-01",
-      "description": "2 Albumes Portugüeses Panini Mundial 2026 (Tapa Blanda)",
-      "total": 21.62,
-      "profit": 8.5,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 64,
-      "date": "2026-06-01",
-      "description": "1 Albumes Portugueses Panini Mundial 2026 (Tapa Blanda)",
-      "total": 10.13,
-      "profit": 3.57,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 65,
-      "date": "2026-06-01",
-      "description": "1 Ignite V400 V-Sweet 40k puff",
-      "total": 17.56,
-      "profit": 7.31,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 66,
-      "date": "2026-06-01",
-      "description": "1 Albumes Portugueses Panini Mundial 2026 (Tapa Blanda)",
-      "total": 10.13,
-      "profit": 3.57,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 67,
-      "date": "2026-06-02",
-      "description": "1 Vapengin Maxbar 40k puff (sin capsulas extra)",
-      "total": 8.1,
-      "profit": 6.27,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 68,
-      "date": "2026-06-02",
-      "description": "1 Airpods Pro 2 Gen",
-      "total": 14.86,
-      "profit": 7.86,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 69,
-      "date": "2026-06-02",
-      "description": "1 Vapengin Maxbar Capsulas 10k puff",
-      "total": 3.37,
-      "profit": 1.57,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 70,
-      "date": "2026-06-03",
-      "description": "1 Albumes Portügueses Panini Mundial 2026",
-      "total": 10.81,
-      "profit": 5.25,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 71,
-      "date": "2026-06-03",
-      "description": "1 Decant 5ml Afnan 9AM Dive",
-      "total": 4.05,
-      "profit": 2.45,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 72,
-      "date": "2026-06-03",
-      "description": "1 Vapengin Maxbar Capsulas 10k puff",
-      "total": 3.37,
-      "profit": 1.57,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 73,
-      "date": "2026-06-03",
-      "description": "1 Armaf Club de Nuit Intense Man 105ml",
-      "total": 38.5,
-      "profit": 6.0,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 74,
-      "date": "2026-06-03",
-      "description": "2 Decant 5ml Armaf Club de Nuit Intese Man,  1 Decant 5ml Lattafa Yara Tous, 1 Decant 5ml Al Haramain Dubai Night Extrait, 1 Decant 5ml Armaf Urban Man Elixir, 1 Decant 5ml Armaf Mandarin Sky, 1 Decants 5ml Lattafa Badee al Oud Noble Blush, 1 Decant 5ml Lattafa Eclaire, 1 Elfbar Ice King 40k puff, 2 Mnke Bars 6k puff",
-      "total": 70.94,
-      "profit": 45.91,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 75,
-      "date": "2026-06-03",
-      "description": "6 Vapengin Maxbar 40k puff, 4 Luffbar 40k puff",
-      "total": 100.0,
-      "profit": 39.0,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 76,
-      "date": "2026-06-04",
-      "description": "2 Vapengin Maxbar Capsulas 10k puff",
-      "total": 6.75,
-      "profit": 3.09,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 77,
-      "date": "2026-06-04",
-      "description": "5 Airpods Pro 2da Gen, 5 JBL Go 4 Pro, 5 Battery Pack 10.000 mAh",
-      "total": 109.45,
-      "profit": 12.45,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 78,
-      "date": "2026-06-04",
-      "description": "1 Vapengin Maxbar Capsulas 10k puff",
-      "total": 3.37,
-      "profit": 1.57,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 79,
-      "date": "2026-06-04",
-      "description": "1 Vapengin Maxbar 40k puff (sin capsulas extra)",
-      "total": 8.1,
-      "profit": 6.27,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 80,
-      "date": "2026-06-04",
-      "description": "1 Lattafa Khamrah Qahwa 100ml",
-      "total": 31.75,
-      "profit": 12.25,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 81,
-      "date": "2026-06-05",
-      "description": "1 Elfbar Trio 40k puff",
-      "total": 17.56,
-      "profit": 8.16,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 82,
-      "date": "2026-06-05",
-      "description": "1 Elfbar Ice King 40k puff",
-      "total": 17.56,
-      "profit": 7.66,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 83,
-      "date": "2026-06-05",
-      "description": "1 Smok Priv Bar 15k puff",
-      "total": 10.13,
-      "profit": 5.23,
-      "customer": null,
-      "phone": null,
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 84,
       "date": "2026-05-07",
       "description": "1 Reabbeats 50k puff",
       "total": 18.36,
       "profit": 9.11,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 9,
+      "date": "2026-05-08",
+      "description": "1 Mnke Bars 6500 Puff",
+      "total": 4.3,
+      "profit": 3.43,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 10,
+      "date": "2026-05-09",
+      "description": "1 Klix 25k Puff, 1 Elfbar Bc Create 40k Puff",
+      "total": 27.68,
+      "profit": 13.88,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 11,
+      "date": "2026-05-09",
+      "description": "1 Vapor Storm 12k Puff, 1 Elfbar Trio 40k Puff, Ignite V400 V-Mix",
+      "total": 45.9,
+      "profit": 19.71,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 12,
+      "date": "2026-05-09",
+      "description": "1 Esencia Ignite 100ml (3mg)",
+      "total": 10.12,
+      "profit": 9.12,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 13,
+      "date": "2026-05-10",
+      "description": "5 AirPods Pro 2 Gen",
+      "total": 47.5,
+      "profit": 19.5,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 14,
+      "date": "2026-05-10",
+      "description": "1 Elfbar Ice King 40k Puff",
+      "total": 17.5,
+      "profit": 8.0,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 15,
+      "date": "2026-05-10",
+      "description": "10 Elfbar Ice King 40k Puff",
+      "total": 130.93,
+      "profit": 35.93,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 16,
+      "date": "2026-05-11",
+      "description": "1 Armaf Odyssey Mandarin Sky, 1 Lattafa The Kingdom 100ml",
+      "total": 48.5,
+      "profit": 39.61,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 17,
+      "date": "2026-05-12",
+      "description": "2 Elfbar Trio 40k puff, 1 Elfbar Bc Create 40k puff, 3 Ignite V400 V-Mix 40k puff, 1 Ignite V400 Sweet 40k puff",
+      "total": 99.37,
+      "profit": 27.02,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 18,
+      "date": "2026-05-13",
+      "description": "Armaf Odyssey Mandarin Sky 100ml",
+      "total": 45.16,
+      "profit": 22.6,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 19,
+      "date": "2026-05-13",
+      "description": "2 Maxbar 40k puff, 1 Elfbar Bc Create 40k puff",
+      "total": 50.0,
+      "profit": 28.8,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 20,
+      "date": "2026-05-13",
+      "description": "1 Luffbar 55k puff",
+      "total": 20.22,
+      "profit": 11.72,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 21,
+      "date": "2026-05-14",
+      "description": "1 Al Haramain Amber Oud Gold 100ml, 1 Afnan 9PM Black 100ml",
+      "total": 76.0,
+      "profit": 15.19,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 22,
+      "date": "2026-05-14",
+      "description": "2 Sachets Vital Honey",
+      "total": 4.0,
+      "profit": 2.9,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 23,
+      "date": "2026-05-14",
+      "description": "1 Cargador Completo Lightning 20W",
+      "total": 9.45,
+      "profit": 6.95,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 24,
+      "date": "2026-05-14",
+      "description": "1 French Avenue Liquid Brun 100ml",
+      "total": 45.0,
+      "profit": 8.0,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 25,
+      "date": "2026-05-14",
+      "description": "1 Vaso Cafetero Stanley",
+      "total": 5.25,
+      "profit": 4.75,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 26,
+      "date": "2026-05-15",
+      "description": "1 Decant 5ml 9PM Elixir Intense, 1 Decant 5ml Al Haramain Amber Oud Dubai Night.",
+      "total": 8.1,
+      "profit": 4.0,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 27,
+      "date": "2026-05-15",
+      "description": "1 Lattafa Khamrah Black 100ml, 1 Lattafa Eclaire 100ml",
+      "total": 56.0,
+      "profit": 13.5,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 28,
+      "date": "2026-05-16",
+      "description": "2 Mnke Bars 6k puff",
+      "total": 10.81,
+      "profit": 8.51,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 29,
+      "date": "2026-05-17",
+      "description": "1 Vapengin Maxbar 40k puff",
+      "total": 16.21,
+      "profit": 10.71,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 30,
+      "date": "2026-05-18",
+      "description": "1 Bharara King 100ml",
+      "total": 60.7,
+      "profit": 43.0,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 31,
+      "date": "2026-05-18",
+      "description": "3 Bharara King 100ml, 1 Armaf Odyssey Candee 100ml, 1 Rasasi Hawas Elixir 100ml",
+      "total": 228.0,
+      "profit": 54.3,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 32,
+      "date": "2026-05-18",
+      "description": "1 Crema Karsell 500ml, 1 Vaso Cafetero Stanley",
+      "total": 23.64,
+      "profit": 13.79,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 33,
+      "date": "2026-05-20",
+      "description": "4 Vasos Cafeteros 500ml",
+      "total": 40.26,
+      "profit": 19.26,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 34,
+      "date": "2026-05-20",
+      "description": "3 JBL Go 4 Pro",
+      "total": 38.25,
+      "profit": 19.05,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 35,
+      "date": "2026-05-20",
+      "description": "1 Pava Electrica",
+      "total": 11.4,
+      "profit": 5.9,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 36,
+      "date": "2026-05-20",
+      "description": "1 Elfbar Ice King 40k puff",
+      "total": 17.56,
+      "profit": 8.06,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 37,
+      "date": "2026-05-20",
+      "description": "1 Smok Priv Bar 15k puff",
+      "total": 10.13,
+      "profit": 5.23,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 38,
+      "date": "2026-05-20",
+      "description": "1 Decant 5ml Rasasi Hawas Black, 1 Decant 5ml Rasasi Hawas Fire, 1 Decants 5ml Rasasi Hawas For Her, 1 Decant 5ml Armaf Odyssey Homme Black, 1 Decant 5ml Armaf Odyssey Bahamas Tropical, 1 Decant 5ml Club de Nuit Urban Man Elixir, 2 Decants 5ml Al Haramain Amber Oud Gold Edition, 1 Decant 5ml Afnan 9PM Elixir Intense, 1 Decant 5ml Lattafa Al Noble Ameer",
+      "total": 30.4,
+      "profit": 12.59,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 39,
+      "date": "2026-05-20",
+      "description": "1 Cargador Completo 20W Lightning",
+      "total": 7.0,
+      "profit": 4.5,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 40,
+      "date": "2026-05-22",
+      "description": "Mnke Bars 6k puff",
+      "total": 5.4,
+      "profit": 4.4,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 41,
+      "date": "2026-05-22",
+      "description": "1 Vapengin Maxbar 40k puff (sin capsulas extra)",
+      "total": 9.45,
+      "profit": 7.62,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 42,
+      "date": "2026-05-23",
+      "description": "Luffbar 40k puff",
+      "total": 13.51,
+      "profit": 6.51,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 43,
+      "date": "2026-05-24",
+      "description": "130 Albumes Portügueses Panini Mundial 2026 (Tapa Blanda)",
+      "total": 1097.97,
+      "profit": 245.17,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 44,
+      "date": "2026-05-24",
+      "description": "1 Yara Moi 100ml, 1 9PM Black 100ml",
+      "total": 75.77,
+      "profit": 33.37,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 45,
+      "date": "2026-05-24",
+      "description": "2 Ignite V25 2500 puff",
+      "total": 10.81,
+      "profit": 7.81,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 46,
+      "date": "2026-05-24",
+      "description": "1 Elfbar Trio 40k puff",
+      "total": 15.54,
+      "profit": 6.03,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 47,
+      "date": "2026-05-25",
+      "description": "1 Smok Nord Pro, 1 Esencia Ignite 100ml",
+      "total": 20.5,
+      "profit": 10.5,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 48,
+      "date": "2026-05-25",
+      "description": "1 Ignite V400 V-Sweet 40k puff",
+      "total": 17.56,
+      "profit": 7.31,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 49,
+      "date": "2026-05-26",
+      "description": "1 Smok Priv Bar 15k puff",
+      "total": 10.13,
+      "profit": 5.23,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 50,
+      "date": "2026-05-26",
+      "description": "1 Vapengin Maxbar 40k puff (sin capsulas extra)",
+      "total": 8.1,
+      "profit": 6.27,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 51,
+      "date": "2026-05-26",
+      "description": "16 Vapengin Maxbar 40k puff",
+      "total": 166.0,
+      "profit": 78.0,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 52,
+      "date": "2026-05-26",
+      "description": "1 Crema Karsell 500ml",
+      "total": 10.13,
+      "profit": 5.5,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 53,
+      "date": "2026-05-28",
+      "description": "5 Elfbar Reabbeats 50k puff,\n1 Adalya Ice Nic 50k puff, 2 Elfbar Bc Create 40k puff, 2 Ignite V400 V-Sweet 40k puff, 2 Ignite V400 V-Mix 40k puff",
+      "total": 148.64,
+      "profit": 30.14,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 54,
+      "date": "2026-05-29",
+      "description": "5 Elfbar Ice King 40k puff",
+      "total": 70.0,
+      "profit": 20.5,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 55,
+      "date": "2026-05-29",
+      "description": "3 Combos Recargables (Smok Pen V2)",
+      "total": 40.5,
+      "profit": 24.0,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 56,
+      "date": "2026-05-29",
+      "description": "3 Ignite V400 V-Mix, 2 Ignite V40 V-Sweet",
+      "total": 72.5,
+      "profit": 15.1,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 57,
+      "date": "2026-05-30",
+      "description": "1 Elfbar Ice King 40k puff",
+      "total": 17.56,
+      "profit": 7.56,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 58,
+      "date": "2026-05-30",
+      "description": "1 Vapengin Maxbar Capsulas 10k puff",
+      "total": 3.37,
+      "profit": 1.57,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 59,
+      "date": "2026-05-31",
+      "description": "2 Elfbar Bc Create 40k Puff",
+      "total": 35.13,
+      "profit": 16.73,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 60,
+      "date": "2026-05-31",
+      "description": "2 Airpods Max \n2 Airpods Pro Gen 2\n2 Cargador Completo\n3 Cables Iphone Lightning - C\n2 Battery Pack",
+      "total": 120.27,
+      "profit": 62.27,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 61,
+      "date": "2026-05-31",
+      "description": "1 Vapengin Maxbar 40k puff",
+      "total": 16.21,
+      "profit": 10.71,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 62,
+      "date": "2026-06-01",
+      "description": "2 Elfbar Ice King 40k puff, 1 Elfbar Bc Create 40k puff",
+      "total": 52.7,
+      "profit": 23.7,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 63,
+      "date": "2026-06-01",
+      "description": "1 Al Haramain Amber Oud Gold Edition 100ml",
+      "total": 50.67,
+      "profit": 15.67,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 64,
+      "date": "2026-06-01",
+      "description": "2 Albumes Portugüeses Panini Mundial 2026 (Tapa Blanda)",
+      "total": 21.62,
+      "profit": 8.5,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 65,
+      "date": "2026-06-01",
+      "description": "1 Albumes Portugueses Panini Mundial 2026 (Tapa Blanda)",
+      "total": 10.13,
+      "profit": 3.57,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 66,
+      "date": "2026-06-01",
+      "description": "1 Ignite V400 V-Sweet 40k puff",
+      "total": 17.56,
+      "profit": 7.31,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 67,
+      "date": "2026-06-01",
+      "description": "1 Albumes Portugueses Panini Mundial 2026 (Tapa Blanda)",
+      "total": 10.13,
+      "profit": 3.57,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 68,
+      "date": "2026-06-02",
+      "description": "1 Vapengin Maxbar 40k puff (sin capsulas extra)",
+      "total": 8.1,
+      "profit": 6.27,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 69,
+      "date": "2026-06-02",
+      "description": "1 Airpods Pro 2 Gen",
+      "total": 14.86,
+      "profit": 7.86,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 70,
+      "date": "2026-06-02",
+      "description": "1 Vapengin Maxbar Capsulas 10k puff",
+      "total": 3.37,
+      "profit": 1.57,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 71,
+      "date": "2026-06-03",
+      "description": "1 Albumes Portügueses Panini Mundial 2026",
+      "total": 10.81,
+      "profit": 5.25,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 72,
+      "date": "2026-06-03",
+      "description": "1 Decant 5ml Afnan 9AM Dive",
+      "total": 4.05,
+      "profit": 2.45,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 73,
+      "date": "2026-06-03",
+      "description": "1 Vapengin Maxbar Capsulas 10k puff",
+      "total": 3.37,
+      "profit": 1.57,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 74,
+      "date": "2026-06-03",
+      "description": "1 Armaf Club de Nuit Intense Man 105ml",
+      "total": 38.5,
+      "profit": 6.0,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 75,
+      "date": "2026-06-03",
+      "description": "2 Decant 5ml Armaf Club de Nuit Intese Man,  1 Decant 5ml Lattafa Yara Tous, 1 Decant 5ml Al Haramain Dubai Night Extrait, 1 Decant 5ml Armaf Urban Man Elixir, 1 Decant 5ml Armaf Mandarin Sky, 1 Decants 5ml Lattafa Badee al Oud Noble Blush, 1 Decant 5ml Lattafa Eclaire, 1 Elfbar Ice King 40k puff, 2 Mnke Bars 6k puff",
+      "total": 70.94,
+      "profit": 45.91,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 76,
+      "date": "2026-06-03",
+      "description": "6 Vapengin Maxbar 40k puff, 4 Luffbar 40k puff",
+      "total": 100.0,
+      "profit": 39.0,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 77,
+      "date": "2026-06-04",
+      "description": "2 Vapengin Maxbar Capsulas 10k puff",
+      "total": 6.75,
+      "profit": 3.09,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 78,
+      "date": "2026-06-04",
+      "description": "5 Airpods Pro 2da Gen, 5 JBL Go 4 Pro, 5 Battery Pack 10.000 mAh",
+      "total": 109.45,
+      "profit": 12.45,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 79,
+      "date": "2026-06-04",
+      "description": "1 Vapengin Maxbar Capsulas 10k puff",
+      "total": 3.37,
+      "profit": 1.57,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 80,
+      "date": "2026-06-04",
+      "description": "1 Vapengin Maxbar 40k puff (sin capsulas extra)",
+      "total": 8.1,
+      "profit": 6.27,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 81,
+      "date": "2026-06-04",
+      "description": "1 Lattafa Khamrah Qahwa 100ml",
+      "total": 31.75,
+      "profit": 12.25,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 82,
+      "date": "2026-06-05",
+      "description": "1 Elfbar Trio 40k puff",
+      "total": 17.56,
+      "profit": 8.16,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 83,
+      "date": "2026-06-05",
+      "description": "1 Elfbar Ice King 40k puff",
+      "total": 17.56,
+      "profit": 7.66,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 84,
+      "date": "2026-06-05",
+      "description": "1 Smok Priv Bar 15k puff",
+      "total": 10.13,
+      "profit": 5.23,
+      "customer": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1731,7 +1713,7 @@
       "total": 27.5,
       "profit": 8.0,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1741,7 +1723,7 @@
       "total": 79.1,
       "profit": 23.4,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1751,7 +1733,7 @@
       "total": 17.16,
       "profit": 6.9,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1761,7 +1743,7 @@
       "total": 7.91,
       "profit": 6.08,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1771,7 +1753,7 @@
       "total": 10.66,
       "profit": 4.66,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1781,7 +1763,7 @@
       "total": 177.5,
       "profit": 53.5,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1791,7 +1773,7 @@
       "total": 45.42,
       "profit": 23.72,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1801,7 +1783,7 @@
       "total": 135.6,
       "profit": 56.95,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1811,7 +1793,7 @@
       "total": 30.0,
       "profit": 24.0,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1821,7 +1803,7 @@
       "total": 16.03,
       "profit": 9.03,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1831,7 +1813,7 @@
       "total": 4.0,
       "profit": 2.9,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1841,7 +1823,7 @@
       "total": 133.24,
       "profit": 34.24,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1851,7 +1833,7 @@
       "total": 226.25,
       "profit": 65.25,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1861,7 +1843,7 @@
       "total": 49.96,
       "profit": 12.46,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1871,7 +1853,7 @@
       "total": 3.99,
       "profit": 2.37,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1881,7 +1863,7 @@
       "total": 49.96,
       "profit": 12.46,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1891,7 +1873,7 @@
       "total": 13.14,
       "profit": 2.74,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1901,7 +1883,7 @@
       "total": 98.69,
       "profit": 25.69,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1911,7 +1893,7 @@
       "total": 10.51,
       "profit": 0.11,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1921,7 +1903,7 @@
       "total": 35.5,
       "profit": 16.85,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1931,7 +1913,7 @@
       "total": 48.65,
       "profit": 16.15,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1941,7 +1923,7 @@
       "total": 13.14,
       "profit": 7.6,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1951,7 +1933,7 @@
       "total": 19.72,
       "profit": 11.22,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1961,27 +1943,27 @@
       "total": 17.09,
       "profit": 7.19,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
       "legacyId": 109,
       "date": "2026-06-21",
-      "description": "1 Decant 5ml Liquid Brun, 1 Decant 5ml Urban Man Elixir ",
+      "description": "1 Decant 5ml Liquid Brun, 1 Decant 5ml Urban Man Elixir",
       "total": 7.83,
       "profit": 4.26,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
       "legacyId": 110,
       "date": "2026-06-22",
-      "description": "1 Vapengin Maxbar 40k puff ",
+      "description": "1 Vapengin Maxbar 40k puff",
       "total": 13.15,
       "profit": 7.65,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -1991,7 +1973,7 @@
       "total": 14.53,
       "profit": 9.0,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2001,7 +1983,7 @@
       "total": 11.14,
       "profit": 5.0,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2011,7 +1993,7 @@
       "total": 51.14,
       "profit": 21.44,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2021,7 +2003,7 @@
       "total": 70.0,
       "profit": 23.0,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2031,7 +2013,7 @@
       "total": 16.58,
       "profit": 6.33,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2041,7 +2023,7 @@
       "total": 72.5,
       "profit": 21.25,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2051,7 +2033,7 @@
       "total": 59.29,
       "profit": 10.89,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2061,7 +2043,7 @@
       "total": 17.3,
       "profit": 8.05,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2071,7 +2053,7 @@
       "total": 18.58,
       "profit": 6.28,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2081,7 +2063,7 @@
       "total": 16.86,
       "profit": 7.46,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2091,7 +2073,7 @@
       "total": 3.22,
       "profit": 1.38,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2101,7 +2083,7 @@
       "total": 33.5,
       "profit": 13.7,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2111,7 +2093,7 @@
       "total": 113.4,
       "profit": 14.4,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2121,7 +2103,7 @@
       "total": 3.18,
       "profit": 1.35,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2131,7 +2113,7 @@
       "total": 885.6,
       "profit": 42.13,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2141,7 +2123,7 @@
       "total": 193.75,
       "profit": 26.36,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2151,7 +2133,7 @@
       "total": 21.66,
       "profit": 7.66,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2161,7 +2143,7 @@
       "total": 9.56,
       "profit": 5.06,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2171,7 +2153,7 @@
       "total": 16.66,
       "profit": 9.66,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2181,7 +2163,7 @@
       "total": 10.89,
       "profit": 4.74,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2191,7 +2173,7 @@
       "total": 5.12,
       "profit": 4.17,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2201,7 +2183,7 @@
       "total": 198.0,
       "profit": 57.0,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2211,7 +2193,7 @@
       "total": 16.67,
       "profit": 11.92,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2221,7 +2203,7 @@
       "total": 16.61,
       "profit": 6.36,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2231,7 +2213,7 @@
       "total": 85.0,
       "profit": 32.5,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2241,7 +2223,7 @@
       "total": 10.86,
       "profit": 4.71,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2251,17 +2233,17 @@
       "total": 16.57,
       "profit": 7.17,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
       "legacyId": 138,
       "date": "2026-07-10",
-      "description": "1 Al Haramain Amber Oud Gold Edition 100ml ",
+      "description": "1 Al Haramain Amber Oud Gold Edition 100ml",
       "total": 40.15,
       "profit": 5.15,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2271,7 +2253,7 @@
       "total": 6.41,
       "profit": 4.51,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2281,7 +2263,7 @@
       "total": 12.82,
       "profit": 6.09,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2291,7 +2273,7 @@
       "total": 12.82,
       "profit": 5.42,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2301,7 +2283,7 @@
       "total": 15.31,
       "profit": 6.06,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2311,7 +2293,7 @@
       "total": 16.59,
       "profit": 9.59,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2321,7 +2303,7 @@
       "total": 69.23,
       "profit": 34.53,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2331,17 +2313,17 @@
       "total": 10.89,
       "profit": 4.74,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
       "legacyId": 146,
       "date": "2026-07-17",
-      "description": "1 Luffbar 55k puff, 1 Elfbar Bc 15k puff, 1 Vapor Storm 12k puff, 1 Ignite V25 2,5 puff, 1 Battery Pack 10.000 mAh, 1 Cargador Completo 20W Lightning ",
+      "description": "1 Luffbar 55k puff, 1 Elfbar Bc 15k puff, 1 Vapor Storm 12k puff, 1 Ignite V25 2,5 puff, 1 Battery Pack 10.000 mAh, 1 Cargador Completo 20W Lightning",
       "total": 34.39,
       "profit": 5.74,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2351,7 +2333,7 @@
       "total": 15.25,
       "profit": 7.85,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2361,7 +2343,7 @@
       "total": 38.09,
       "profit": 1.19,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2371,7 +2353,7 @@
       "total": 3.2,
       "profit": 1.37,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2381,7 +2363,7 @@
       "total": 3.2,
       "profit": 1.37,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2391,7 +2373,7 @@
       "total": 48.91,
       "profit": 17.89,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2401,7 +2383,7 @@
       "total": 18.58,
       "profit": 7.48,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2411,7 +2393,7 @@
       "total": 380.7,
       "profit": 101.83,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2421,7 +2403,7 @@
       "total": 16.61,
       "profit": 6.71,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2431,7 +2413,7 @@
       "total": 18.53,
       "profit": 7.43,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2441,7 +2423,7 @@
       "total": 13.41,
       "profit": 8.24,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2451,7 +2433,7 @@
       "total": 43.58,
       "profit": 18.58,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2461,7 +2443,7 @@
       "total": 5.69,
       "profit": 2.03,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2471,7 +2453,7 @@
       "total": 13.25,
       "profit": 7.9,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2481,7 +2463,7 @@
       "total": 10.62,
       "profit": 5.37,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2491,7 +2473,7 @@
       "total": 9.37,
       "profit": 3.22,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2501,7 +2483,7 @@
       "total": 74.5,
       "profit": 48.65,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2511,7 +2493,7 @@
       "total": 109.37,
       "profit": 9.37,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2521,7 +2503,7 @@
       "total": 17.5,
       "profit": 8.25,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2531,7 +2513,7 @@
       "total": 91.25,
       "profit": 39.55,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2541,7 +2523,7 @@
       "total": 40.0,
       "profit": 14.15,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2551,7 +2533,7 @@
       "total": 40.0,
       "profit": 14.15,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2561,7 +2543,7 @@
       "total": 31.25,
       "profit": 6.25,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2571,7 +2553,7 @@
       "total": 40.0,
       "profit": 14.15,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2581,7 +2563,7 @@
       "total": 6.25,
       "profit": 4.35,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2591,7 +2573,7 @@
       "total": 40.0,
       "profit": 14.15,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2601,17 +2583,17 @@
       "total": 17.5,
       "profit": 8.25,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
       "legacyId": 173,
       "date": "2026-07-31",
-      "description": "1 Al Haramain Amber Oud Gold Edition 100ml ",
+      "description": "1 Al Haramain Amber Oud Gold Edition 100ml",
       "total": 50.0,
       "profit": 15.0,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2621,7 +2603,7 @@
       "total": 23.75,
       "profit": 8.95,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2631,7 +2613,7 @@
       "total": 17.5,
       "profit": 7.0,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2641,7 +2623,7 @@
       "total": 32.0,
       "profit": 9.5,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2651,7 +2633,7 @@
       "total": 10.6,
       "profit": 4.45,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2661,7 +2643,7 @@
       "total": 91.42,
       "profit": 24.82,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2671,7 +2653,7 @@
       "total": 131.5,
       "profit": 31.6,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2681,7 +2663,7 @@
       "total": 5.12,
       "profit": 4.17,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2691,7 +2673,7 @@
       "total": 17.72,
       "profit": 7.22,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2701,7 +2683,7 @@
       "total": 13.75,
       "profit": 2.5,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2711,7 +2693,7 @@
       "total": 43.75,
       "profit": 9.75,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2721,7 +2703,7 @@
       "total": 3.12,
       "profit": 1.29,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2731,7 +2713,7 @@
       "total": 17.19,
       "profit": 7.29,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2741,7 +2723,7 @@
       "total": 184.81,
       "profit": 24.41,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2751,7 +2733,7 @@
       "total": 9.5,
       "profit": 4.59,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2761,7 +2743,7 @@
       "total": 10.75,
       "profit": 4.6,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2771,7 +2753,7 @@
       "total": 16.45,
       "profit": 9.45,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2781,7 +2763,7 @@
       "total": 3.12,
       "profit": 1.29,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2791,7 +2773,7 @@
       "total": 41.58,
       "profit": 11.98,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2801,7 +2783,7 @@
       "total": 15.18,
       "profit": 5.28,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2811,7 +2793,7 @@
       "total": 29.74,
       "profit": 10.24,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2821,7 +2803,7 @@
       "total": 15.82,
       "profit": 5.92,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2831,7 +2813,7 @@
       "total": 94.93,
       "profit": -23.86,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2841,7 +2823,7 @@
       "total": 75.94,
       "profit": 14.0,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2851,7 +2833,7 @@
       "total": 187.5,
       "profit": 56.25,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2861,7 +2843,7 @@
       "total": 18.35,
       "profit": 7.25,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2871,7 +2853,7 @@
       "total": 113.92,
       "profit": 13.95,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2881,7 +2863,7 @@
       "total": 17.08,
       "profit": 7.18,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2891,7 +2873,7 @@
       "total": 9.49,
       "profit": 6.64,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2901,7 +2883,7 @@
       "total": 132.95,
       "profit": 24.41,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2911,7 +2893,7 @@
       "total": 17.08,
       "profit": 7.18,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2921,7 +2903,7 @@
       "total": 18.35,
       "profit": 7.25,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2931,7 +2913,7 @@
       "total": 60.25,
       "profit": 24.06,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2941,7 +2923,7 @@
       "total": 47.29,
       "profit": 20.89,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2951,7 +2933,7 @@
       "total": 40.25,
       "profit": 14.18,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2961,17 +2943,17 @@
       "total": 11.34,
       "profit": -0.67,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
       "legacyId": 209,
       "date": "2026-08-21",
-      "description": "10 Ignite V400 V-Mix ",
+      "description": "10 Ignite V400 V-Mix",
       "total": 147.16,
       "profit": 36.16,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2981,7 +2963,7 @@
       "total": 3.14,
       "profit": 1.31,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -2991,7 +2973,7 @@
       "total": 118.5,
       "profit": 9.5,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3001,7 +2983,7 @@
       "total": 11.3,
       "profit": 8.45,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3011,7 +2993,7 @@
       "total": 14.44,
       "profit": 6.54,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3021,7 +3003,7 @@
       "total": 25.15,
       "profit": -1.34,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3031,7 +3013,7 @@
       "total": 42.13,
       "profit": 10.13,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3041,7 +3023,7 @@
       "total": 162.89,
       "profit": 44.83,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3051,7 +3033,7 @@
       "total": 16.68,
       "profit": 7.08,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3061,7 +3043,7 @@
       "total": 16.68,
       "profit": 7.08,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3071,7 +3053,7 @@
       "total": 13.08,
       "profit": 8.0,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3081,7 +3063,7 @@
       "total": 4.98,
       "profit": 3.48,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3091,7 +3073,7 @@
       "total": 13.08,
       "profit": 8.0,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3101,7 +3083,7 @@
       "total": 67.29,
       "profit": 31.73,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3111,7 +3093,7 @@
       "total": 12.49,
       "profit": 5.64,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3121,7 +3103,7 @@
       "total": 29.98,
       "profit": 7.48,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3131,7 +3113,7 @@
       "total": 13.1,
       "profit": 8.03,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3141,7 +3123,7 @@
       "total": 13.1,
       "profit": 8.03,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3151,7 +3133,7 @@
       "total": 15.61,
       "profit": 11.11,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3161,7 +3143,7 @@
       "total": 4.99,
       "profit": 4.04,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3171,7 +3153,7 @@
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3181,7 +3163,7 @@
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3191,7 +3173,7 @@
       "total": 10.03,
       "profit": 4.03,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3201,7 +3183,7 @@
       "total": 154.23,
       "profit": 26.6,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3211,7 +3193,7 @@
       "total": 154.85,
       "profit": 54.55,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3221,7 +3203,7 @@
       "total": 130.4,
       "profit": 36.8,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3231,7 +3213,7 @@
       "total": 97.17,
       "profit": 43.5,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3241,7 +3223,7 @@
       "total": 6.26,
       "profit": 5.46,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3251,7 +3233,7 @@
       "total": 109.71,
       "profit": 28.81,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3261,7 +3243,7 @@
       "total": 155.48,
       "profit": 55.18,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3271,7 +3253,7 @@
       "total": 47.46,
       "profit": 22.06,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3281,7 +3263,7 @@
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3291,7 +3273,7 @@
       "total": 20.08,
       "profit": 12.56,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3301,7 +3283,7 @@
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3311,7 +3293,7 @@
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3321,7 +3303,7 @@
       "total": 18.18,
       "profit": 7.08,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3331,7 +3313,7 @@
       "total": 47.41,
       "profit": 22.21,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3341,7 +3323,7 @@
       "total": 66.66,
       "profit": 31.1,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3351,7 +3333,7 @@
       "total": 412.0,
       "profit": 73.15,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3361,7 +3343,7 @@
       "total": 9.52,
       "profit": 6.97,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3371,7 +3353,7 @@
       "total": 273.7,
       "profit": 6.9,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3381,7 +3363,7 @@
       "total": 13.33,
       "profit": 8.25,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3391,7 +3373,7 @@
       "total": 13.33,
       "profit": 8.25,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3401,7 +3383,7 @@
       "total": 18.23,
       "profit": 7.13,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3411,7 +3393,7 @@
       "total": 3.14,
       "profit": 2.34,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3421,7 +3403,7 @@
       "total": 10.06,
       "profit": 4.06,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3431,7 +3413,7 @@
       "total": 17.5,
       "profit": 13.25,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3441,7 +3423,7 @@
       "total": 13.33,
       "profit": 8.25,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3451,7 +3433,7 @@
       "total": 9.18,
       "profit": 6.75,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3461,7 +3443,7 @@
       "total": 13.33,
       "profit": 8.25,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3471,7 +3453,7 @@
       "total": 15.35,
       "profit": 6.54,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3481,7 +3463,7 @@
       "total": 196.74,
       "profit": 48.24,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3491,7 +3473,7 @@
       "total": 76.0,
       "profit": 35.36,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3501,7 +3483,7 @@
       "total": 115.91,
       "profit": 16.91,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3511,7 +3493,7 @@
       "total": 15.76,
       "profit": 5.76,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3521,7 +3503,7 @@
       "total": 68.59,
       "profit": 25.77,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3531,7 +3513,7 @@
       "total": 48.0,
       "profit": 12.57,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3541,7 +3523,7 @@
       "total": 11.27,
       "profit": 4.47,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3551,7 +3533,7 @@
       "total": 11.27,
       "profit": 7.47,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3561,7 +3543,7 @@
       "total": 14.41,
       "profit": 6.13,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3571,7 +3553,7 @@
       "total": 17.5,
       "profit": 12.75,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3581,7 +3563,7 @@
       "total": 5.95,
       "profit": 3.14,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3591,7 +3573,7 @@
       "total": 16.29,
       "profit": 6.89,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3601,7 +3583,7 @@
       "total": 13.15,
       "profit": 8.07,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3611,7 +3593,7 @@
       "total": 15.66,
       "profit": 5.76,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3621,7 +3603,7 @@
       "total": 7.5,
       "profit": 1.5,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3631,7 +3613,7 @@
       "total": 12.53,
       "profit": 8.03,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3641,7 +3623,7 @@
       "total": 123.3,
       "profit": 30.78,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3651,7 +3633,7 @@
       "total": 62.65,
       "profit": 18.65,
       "customer": null,
-      "phone": null,
+      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
       "channel": "Histórico Excel"
     },
     {
@@ -3927,7 +3909,7 @@
     {
       "legacyId": 305,
       "date": "2026-10-01",
-      "description": "1 Decant 5ml Lattafa Yara Tous ",
+      "description": "1 Decant 5ml Lattafa Yara Tous",
       "total": 3.71,
       "profit": 2.29,
       "customer": "Lautaro",
@@ -4086,16 +4068,6 @@
     },
     {
       "legacyId": 321,
-      "date": "2026-10-07",
-      "description": "2 Elfbar Ice King 40k puff, 1 Mnke Bars 6k puff, 1 Uwell Koko Prime, 1 Maskking Salt 30ml (35mg), 1 Silicone case, 1 Ignite V400 V-Mix Boost Series 40k puff",
-      "total": 65.35,
-      "profit": 21.45,
-      "customer": "Elias",
-      "phone": "+54 9 351 878 2290",
-      "channel": "Histórico Excel"
-    },
-    {
-      "legacyId": 322,
       "date": "2026-10-08",
       "description": "1 Ignite V400 V-Mix Boost Series 40k puff",
       "total": 18.01,
@@ -4105,7 +4077,7 @@
       "channel": "Histórico Excel"
     },
     {
-      "legacyId": 323,
+      "legacyId": 322,
       "date": "2026-10-08",
       "description": "2 Elfbar Ice King 40k puff",
       "total": 33.41,
@@ -4115,13 +4087,53 @@
       "channel": "Histórico Excel"
     },
     {
-      "legacyId": 324,
+      "legacyId": 323,
       "date": "2026-10-08",
       "description": "10 Ignite V400 V-Mix Boost Series 40k puff",
       "total": 147.82,
       "profit": 33.82,
       "customer": "Juan",
       "phone": "+54 9 351 770-5981",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 324,
+      "date": "2026-10-09",
+      "description": "1 Lost Mary Dura 35k puff",
+      "total": 14.28,
+      "profit": 6.0,
+      "customer": "Zaira",
+      "phone": "+54 9 351 650 9578",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 325,
+      "date": "2026-10-09",
+      "description": "30 Elfbar Ice King 40k puff",
+      "total": 330.0,
+      "profit": 8.7,
+      "customer": "Maximo Tinta",
+      "phone": "+54 9 11 5588-3529",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 326,
+      "date": "2026-10-09",
+      "description": "15 Elfbar Ice King 40k puff",
+      "total": 165.0,
+      "profit": 4.35,
+      "customer": "Maximo Tinta",
+      "phone": "+54 9 11 5588-3529",
+      "channel": "Histórico Excel"
+    },
+    {
+      "legacyId": 327,
+      "date": "2026-10-09",
+      "description": "2 Uwell Koko Prime (Recargable), 1 Hypnos Salt 30ml (35mg), 3 Ignite V400 Boost Series V-Mix 40k puff, 3 Elfbar Ice King 40k puff, 1 Mnke Bars 6k puff, 1 Maskking Salt 30ml (35mg), 1 Silicone case",
+      "total": 123.6,
+      "profit": 34.0,
+      "customer": "Elias",
+      "phone": "+54 9 351 878 2290",
       "channel": "Histórico Excel"
     }
   ],
@@ -4274,7 +4286,7 @@
       "name": "Fabi",
       "phone": "+54 9 351 213-1970",
       "purchases": 2,
-      "spent": 31.240000000000002,
+      "spent": 31.24,
       "firstPurchase": "2026-09-30",
       "lastPurchase": "2026-10-04"
     },
@@ -4362,9 +4374,9 @@
       "name": "Elias",
       "phone": "+54 9 351 878 2290",
       "purchases": 2,
-      "spent": 81.11999999999999,
+      "spent": 139.37,
       "firstPurchase": "2026-10-03",
-      "lastPurchase": "2026-10-07"
+      "lastPurchase": "2026-10-09"
     },
     {
       "name": "Thiago Vázquez",
@@ -4453,10 +4465,27 @@
       "spent": 147.82,
       "firstPurchase": "2026-10-08",
       "lastPurchase": "2026-10-08"
+    },
+    {
+      "name": "Zaira",
+      "phone": "+54 9 351 650 9578",
+      "purchases": 1,
+      "spent": 14.28,
+      "firstPurchase": "2026-10-09",
+      "lastPurchase": "2026-10-09"
+    },
+    {
+      "name": "Maximo Tinta",
+      "phone": "+54 9 11 5588-3529",
+      "purchases": 2,
+      "spent": 495.0,
+      "firstPurchase": "2026-10-09",
+      "lastPurchase": "2026-10-09"
     }
   ],
   "ads": [
     {
+      "sourceRow": 1,
       "date": "2026-08-15",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4464,6 +4493,7 @@
       "notes": null
     },
     {
+      "sourceRow": 2,
       "date": "2026-08-16",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4471,6 +4501,7 @@
       "notes": null
     },
     {
+      "sourceRow": 3,
       "date": "2026-08-17",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4478,6 +4509,7 @@
       "notes": null
     },
     {
+      "sourceRow": 4,
       "date": "2026-08-18",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4485,6 +4517,7 @@
       "notes": null
     },
     {
+      "sourceRow": 5,
       "date": "2026-08-19",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4492,6 +4525,7 @@
       "notes": null
     },
     {
+      "sourceRow": 6,
       "date": "2026-08-20",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4499,6 +4533,7 @@
       "notes": null
     },
     {
+      "sourceRow": 7,
       "date": "2026-08-21",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4506,6 +4541,7 @@
       "notes": null
     },
     {
+      "sourceRow": 8,
       "date": "2026-08-22",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4513,6 +4549,7 @@
       "notes": null
     },
     {
+      "sourceRow": 9,
       "date": "2026-08-23",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4520,6 +4557,7 @@
       "notes": null
     },
     {
+      "sourceRow": 10,
       "date": "2026-08-24",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4527,6 +4565,7 @@
       "notes": null
     },
     {
+      "sourceRow": 11,
       "date": "2026-08-25",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4534,6 +4573,7 @@
       "notes": null
     },
     {
+      "sourceRow": 12,
       "date": "2026-08-26",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4541,6 +4581,7 @@
       "notes": null
     },
     {
+      "sourceRow": 13,
       "date": "2026-08-27",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4548,6 +4589,7 @@
       "notes": null
     },
     {
+      "sourceRow": 14,
       "date": "2026-08-28",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4555,6 +4597,7 @@
       "notes": null
     },
     {
+      "sourceRow": 15,
       "date": "2026-08-29",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4562,6 +4605,7 @@
       "notes": null
     },
     {
+      "sourceRow": 16,
       "date": "2026-09-05",
       "platform": "Meta Ads",
       "campaign": "Activación de cuenta de anuncios",
@@ -4569,6 +4613,7 @@
       "notes": null
     },
     {
+      "sourceRow": 17,
       "date": "2026-09-05",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4576,6 +4621,7 @@
       "notes": null
     },
     {
+      "sourceRow": 18,
       "date": "2026-09-06",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4583,6 +4629,7 @@
       "notes": null
     },
     {
+      "sourceRow": 19,
       "date": "2026-09-07",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4590,6 +4637,7 @@
       "notes": null
     },
     {
+      "sourceRow": 20,
       "date": "2026-09-08",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4597,6 +4645,7 @@
       "notes": null
     },
     {
+      "sourceRow": 21,
       "date": "2026-09-09",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4604,6 +4653,7 @@
       "notes": null
     },
     {
+      "sourceRow": 22,
       "date": "2026-09-10",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4611,6 +4661,7 @@
       "notes": null
     },
     {
+      "sourceRow": 23,
       "date": "2026-09-11",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4618,6 +4669,7 @@
       "notes": null
     },
     {
+      "sourceRow": 24,
       "date": "2026-09-12",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4625,6 +4677,7 @@
       "notes": null
     },
     {
+      "sourceRow": 25,
       "date": "2026-09-13",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4632,6 +4685,7 @@
       "notes": null
     },
     {
+      "sourceRow": 26,
       "date": "2026-09-14",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4639,6 +4693,7 @@
       "notes": null
     },
     {
+      "sourceRow": 27,
       "date": "2026-09-16",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4646,6 +4701,7 @@
       "notes": null
     },
     {
+      "sourceRow": 28,
       "date": "2026-09-17",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4653,6 +4709,7 @@
       "notes": null
     },
     {
+      "sourceRow": 29,
       "date": "2026-09-20",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4660,6 +4717,7 @@
       "notes": null
     },
     {
+      "sourceRow": 30,
       "date": "2026-09-21",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4667,6 +4725,7 @@
       "notes": null
     },
     {
+      "sourceRow": 31,
       "date": "2026-09-22",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4674,6 +4733,7 @@
       "notes": null
     },
     {
+      "sourceRow": 32,
       "date": "2026-09-23",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4681,6 +4741,7 @@
       "notes": null
     },
     {
+      "sourceRow": 33,
       "date": "2026-09-24",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4688,6 +4749,7 @@
       "notes": null
     },
     {
+      "sourceRow": 34,
       "date": "2026-09-25",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4695,6 +4757,7 @@
       "notes": null
     },
     {
+      "sourceRow": 35,
       "date": "2026-09-26",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4702,6 +4765,7 @@
       "notes": null
     },
     {
+      "sourceRow": 36,
       "date": "2026-09-27",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4709,6 +4773,7 @@
       "notes": null
     },
     {
+      "sourceRow": 37,
       "date": "2026-09-28",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4716,6 +4781,7 @@
       "notes": null
     },
     {
+      "sourceRow": 38,
       "date": "2026-09-29",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4723,6 +4789,7 @@
       "notes": null
     },
     {
+      "sourceRow": 39,
       "date": "2026-09-30",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4730,6 +4797,7 @@
       "notes": null
     },
     {
+      "sourceRow": 40,
       "date": "2026-10-01",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4737,6 +4805,7 @@
       "notes": null
     },
     {
+      "sourceRow": 41,
       "date": "2026-10-02",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4744,6 +4813,7 @@
       "notes": null
     },
     {
+      "sourceRow": 42,
       "date": "2026-10-03",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4751,6 +4821,7 @@
       "notes": null
     },
     {
+      "sourceRow": 43,
       "date": "2026-10-04",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4758,6 +4829,7 @@
       "notes": null
     },
     {
+      "sourceRow": 44,
       "date": "2026-10-05",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4765,6 +4837,7 @@
       "notes": null
     },
     {
+      "sourceRow": 45,
       "date": "2026-10-06",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
@@ -4772,7 +4845,24 @@
       "notes": null
     },
     {
+      "sourceRow": 46,
       "date": "2026-10-07",
+      "platform": "Meta Ads",
+      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "amount": 12.68,
+      "notes": null
+    },
+    {
+      "sourceRow": 47,
+      "date": "2026-10-08",
+      "platform": "Meta Ads",
+      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "amount": 12.68,
+      "notes": null
+    },
+    {
+      "sourceRow": 48,
+      "date": "2026-10-09",
       "platform": "Meta Ads",
       "campaign": "Campaña de venta de vapes - estilo folleto genérico",
       "amount": 12.68,
@@ -4781,6 +4871,7 @@
   ],
   "expenses": [
     {
+      "sourceRow": 1,
       "date": "2026-09-11",
       "category": "Operación Israel",
       "description": "Señamos a Nahuel la operativa Israel",
@@ -4789,14 +4880,16 @@
       "type": "Operativo"
     },
     {
+      "sourceRow": 2,
       "date": "2026-09-23",
-      "category": "Mentoria",
+      "category": "1 mes de mentoria \"El Futuro\" (Acceso a grupo y Skool)",
       "description": "Saldamos 250 USDT para pago de mentoria Thiago Pignolo",
       "amount": 250.0,
       "notes": null,
       "type": "Operativo"
     },
     {
+      "sourceRow": 3,
       "date": "2026-09-25",
       "category": "Uber",
       "description": "Saldamos 5,32 USDT para pago de uber para retirar mercaderia",
@@ -4805,6 +4898,7 @@
       "type": "Operativo"
     },
     {
+      "sourceRow": 4,
       "date": "2026-09-25",
       "category": "Bar",
       "description": "Saldamos 2,63 USDT de compra en el bar La Blanca",
@@ -4813,72 +4907,80 @@
       "type": "Operativo"
     },
     {
+      "sourceRow": 5,
       "date": "2026-10-01",
       "category": "CapCut",
       "description": "Saldamos 17,23 USDT de suscripcion en CapCut Pro",
       "amount": 2.63,
-      "notes": "Sin intension",
+      "notes": "Sin intensión nos debito Mercado Pago",
+      "type": "Operativo"
+    },
+    {
+      "sourceRow": 6,
+      "date": "2026-10-08",
+      "category": "3 meses de mentoria Mateo Portillo 1:1",
+      "description": "Saldamos 500,00 USDT a Mateo Portillo por la mentoria por 3 meses",
+      "amount": 500.0,
+      "notes": "Inversión en apoyo y conocimiento",
+      "type": "Operativo"
+    },
+    {
+      "sourceRow": 7,
+      "date": "2026-10-09",
+      "category": "Cena",
+      "description": "Saldamos 4,96 USDT a Lo De Cristian por 6 empanadas",
+      "amount": 4.96,
+      "notes": null,
       "type": "Operativo"
     }
   ],
   "loans": [
     {
-      "sourceRow": 10,
-      "counterparty": "Leonel Ceballos",
-      "principal": 4500.0,
-      "startDate": "2026-05-20",
-      "dueDate": "2026-10-20",
-      "paid": 86.18,
-      "balance": 4413.82,
-      "notes": "Prestamos realizado por uno dee los dueños del negocio con capital propio que fue estafado",
-      "currency": "USD"
-    },
-    {
-      "sourceRow": 11,
-      "counterparty": "Lucho",
-      "principal": 626.56,
-      "startDate": "2026-09-15",
-      "dueDate": "2026-10-15",
-      "paid": 0.0,
-      "balance": 626.56,
-      "notes": "Prestamos de Lucho",
-      "currency": "USD"
-    },
-    {
-      "sourceRow": 12,
+      "sourceRow": 1,
       "counterparty": "Mateo Portillo",
-      "principal": 500.0,
+      "principal": 423.23,
       "startDate": "2026-09-29",
-      "dueDate": "2026-10-09",
-      "paid": 500.0,
-      "balance": 0.0,
-      "notes": "Mentoria",
+      "dueDate": "2026-10-08",
+      "paid": 187.53,
+      "balance": 235.7,
+      "notes": "49 Vasos quencher 1,2L",
       "currency": "USD"
     },
     {
-      "sourceRow": 13,
+      "sourceRow": 2,
+      "counterparty": "Santiago Lopez",
+      "principal": 1110.0,
+      "startDate": "2026-09-30",
+      "dueDate": "2026-10-10",
+      "paid": 680.68,
+      "balance": 429.32,
+      "notes": "100 Elfbar Ice King 40k puff",
+      "currency": "USD"
+    },
+    {
+      "sourceRow": 3,
       "counterparty": "Bauti Restifo",
       "principal": 400.0,
       "startDate": "2026-10-02",
       "dueDate": "2026-10-12",
       "paid": 193.64,
       "balance": 206.36,
-      "notes": "98 Termitos con sensor de temperatura temperatura",
+      "notes": "98 Termos con sensor de temperatura",
       "currency": "USD"
     },
     {
-      "sourceRow": 14,
-      "counterparty": "Santiago Lopez",
-      "principal": 1110.0,
-      "startDate": "2026-09-30",
-      "dueDate": "2026-10-10",
-      "paid": 680.68,
-      "balance": 429.32000000000005,
-      "notes": "100 Elfbar Ice King 40k puff",
+      "sourceRow": 4,
+      "counterparty": "Lucho",
+      "principal": 626.56,
+      "startDate": "2026-09-15",
+      "dueDate": "2026-10-15",
+      "paid": 0.0,
+      "balance": 626.56,
+      "notes": "Préstamo de Lucho",
       "currency": "USD"
     },
     {
-      "sourceRow": 15,
+      "sourceRow": 5,
       "counterparty": "Bauti Restifo",
       "principal": 1300.0,
       "startDate": "2026-10-11",
@@ -4889,18 +4991,7 @@
       "currency": "USD"
     },
     {
-      "sourceRow": 16,
-      "counterparty": "Nico Novarino",
-      "principal": 1005.0,
-      "startDate": "2026-10-12",
-      "dueDate": "2026-10-22",
-      "paid": 154.7,
-      "balance": 850.3,
-      "notes": "150 Elfbar EbCreate Bc Pro 40k puff",
-      "currency": "USD"
-    },
-    {
-      "sourceRow": 17,
+      "sourceRow": 6,
       "counterparty": "Mateo Portillo",
       "principal": 700.0,
       "startDate": "2026-10-11",
@@ -4911,14 +5002,25 @@
       "currency": "USD"
     },
     {
-      "sourceRow": 18,
-      "counterparty": "Mateo Portillo",
-      "principal": 423.23,
-      "startDate": "2026-09-29",
-      "dueDate": "2026-10-08",
-      "paid": 187.53,
-      "balance": 235.70000000000002,
-      "notes": "49 Vasos quencher 1,2L",
+      "sourceRow": 7,
+      "counterparty": "Nico Novarino",
+      "principal": 1005.0,
+      "startDate": "2026-10-12",
+      "dueDate": "2026-10-22",
+      "paid": 154.7,
+      "balance": 850.3,
+      "notes": "150 Elfbar EbCreate Bc Pro 40k puff",
+      "currency": "USD"
+    },
+    {
+      "sourceRow": 8,
+      "counterparty": "Leonel Ceballos",
+      "principal": 4500.0,
+      "startDate": "2026-05-20",
+      "dueDate": "2026-10-20",
+      "paid": 86.18,
+      "balance": 4413.82,
+      "notes": "Capital propio de Leonel (perdido en estafa)",
       "currency": "USD"
     }
   ],
