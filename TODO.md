@@ -6,7 +6,7 @@
 - [x] Ventas: venta desde inventario propio o manual; el inventario descuenta stock automáticamente, calcula costo/ganancia cuando el costo existe y marca «Costo pendiente» cuando falta.
 - [x] Clientes: compras, gasto, ganancia, última compra, días sin recompra y selección de cliente existente al cargar una venta.
 - [x] Dashboard: filtro de período, facturación, ganancia, margen, ticket promedio, unidades/pedidos, gastos, Meta Ads, deuda, rotación, bajo stock, clientes de mayor aporte y objetivo visible.
-- [x] Gastos y publicidad: alta, edición, eliminación y métricas de inversión, conversaciones y resultados atribuidos desde la interfaz.
+- [x] Gastos y publicidad: alta, edición y eliminación; la interfaz conserva el gasto verificado y muestra conversiones/resultados solo cuando exista sincronización real.
 - [x] Deudores y préstamos: existen cuentas por cobrar separadas de préstamos/mercadería a pagar, con monto, pagos parciales, saldo, vencimiento, estado y formularios de alta/cobro.
 - [x] Objetivos: objetivos mensuales importados, visibles, editables y eliminables desde la interfaz.
 - [x] Acceso móvil: navegación, tablas con scroll y formularios responsive; auditoría básica con usuario y timestamps en registros.
@@ -18,3 +18,7 @@
 - [x] Métricas avanzadas: costo de mercadería vendida, resultado estimado, recompra, clientes vinculados, concentración de canales, mejor día, promedio diario, cobertura de stock y eficiencia de publicidad calculadas por período.
 
 - [x] Ventas con doble origen: el formulario permite descripción manual y selección opcional de inventario; al guardar copia descripción, cantidad, precio, costo unitario, costo total y ganancia en la línea de venta, y el inventario solo se usa para descontar stock.
+
+- [x] Pagos de ventas: al registrar una venta se puede elegir “Pago todo” o “No pago todo”; el monto cobrado se guarda y el saldo restante crea automáticamente una cuenta en Deudores vinculada al cliente.
+- [x] Publicidad sin datos inventados: se quitó la carga manual de conversiones/resultados; mientras Meta Ads no esté sincronizado, la interfaz muestra N/A y conserva únicamente el gasto verificado.
+- [x] Correcciones operativas: Funda Silicona (varios modelos) queda en 197 unidades, Elfbar Ebcreate Bc Pro 40k puff queda con costo unitario USD 6,66 y se registró Francisco Rover con deuda de USD 186,33.

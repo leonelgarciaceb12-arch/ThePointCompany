@@ -296,7 +296,7 @@ export async function adjustStock(input: { productId: number; quantity: number; 
   });
 }
 
-export async function createSale(input: { date: string; channel?: string; customerName?: string; customerPhone?: string; customerId?: number; notes?: string; items: Array<{ productId?: number; description: string; quantity: number; unitPrice: number; unitCost?: number; fromInventory: boolean; supplier?: string }>; userId?: number }) {
+export async function createSale(input: { date: string; channel?: string; customerName?: string; customerPhone?: string; customerId?: number; notes?: string; paymentStatus?: "paid" | "partial"; paidAmount?: number; items: Array<{ productId?: number; description: string; quantity: number; unitPrice: number; unitCost?: number; fromInventory: boolean; supplier?: string }>; userId?: number }) {
   const db = await getDb(); if (!db) throw new Error("Database is not available");
   return db.transaction(async tx => {
     let total = 0, totalCost = 0, costKnown = true;
@@ -316,6 +316,9 @@ export async function createSale(input: { date: string; channel?: string; custom
       prepared.push({ item, cost, itemCostKnown, product });
     }
     const profit = costKnown ? total - totalCost : 0;
+    const paidAmount = input.paymentStatus === "partial" ? Math.max(0, Math.min(total, Number(input.paidAmount ?? 0))) : total;
+    const balance = Number((total - paidAmount).toFixed(2));
+    if (balance > 0 && !input.customerName?.trim()) throw new Error("Para registrar un pago parcial necesitás indicar el cliente que queda como deudor");
     const inserted = await tx.insert(sales).values({ saleDate: input.date, customerId: input.customerId, customerName: input.customerName, customerPhone: input.customerPhone, channel: input.channel || "WhatsApp", total: toMoney(total), totalCost: toMoney(totalCost), profit: toMoney(profit), margin: costKnown && total ? toMoney(profit / total * 100) : "0.00", costKnown, notes: input.notes, createdBy: input.userId, updatedBy: input.userId });
     const saleId = Number(inserted[0].insertId);
     for (const p of prepared) {
@@ -331,7 +334,12 @@ export async function createSale(input: { date: string; channel?: string; custom
       if (existing) await tx.update(customers).set({ purchases: existing.purchases + 1, spent: toMoney(Number(existing.spent) + total), profit: toMoney(Number(existing.profit) + profit), lastPurchase: input.date, updatedBy: input.userId }).where(eq(customers.id, existing.id));
       else await tx.insert(customers).values({ name: input.customerName, phone: input.customerPhone, purchases: 1, spent: toMoney(total), profit: toMoney(profit), firstPurchase: input.date, lastPurchase: input.date, createdBy: input.userId, updatedBy: input.userId });
     }
-    return { saleId, total, totalCost, profit, costKnown };
+    let receivableId: number | undefined;
+    if (balance > 0) {
+      const receivable = await tx.insert(receivables).values({ customerName: input.customerName!.trim(), phone: input.customerPhone, description: `Saldo pendiente de venta #${saleId}`, principal: toMoney(total), paid: toMoney(paidAmount), balance: toMoney(balance), dueDate: input.date, status: paidAmount > 0 ? "partial" : "open", notes: "Creado automáticamente al registrar una venta con pago parcial", createdBy: input.userId, updatedBy: input.userId });
+      receivableId = Number(receivable[0].insertId);
+    }
+    return { saleId, total, totalCost, profit, costKnown, paidAmount, balance, receivableId };
   });
 }
 
