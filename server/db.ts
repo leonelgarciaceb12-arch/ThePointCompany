@@ -172,6 +172,7 @@ export async function getDashboard(from?: string, to?: string) {
   const bestDay = [...daily].sort((a, b) => Number(b.revenue ?? 0) - Number(a.revenue ?? 0))[0] ?? null;
   const advanced = {
     cogs: Number(summary[0]?.cogs ?? 0),
+    netProfit: grossProfit - expenseTotal - adSpend,
     netEstimated: grossProfit - expenseTotal - adSpend,
     grossMargin: revenue ? grossProfit / revenue * 100 : 0,
     adShareOfRevenue: revenue ? adSpend / revenue * 100 : 0,
