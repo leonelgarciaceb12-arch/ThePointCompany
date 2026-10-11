@@ -30,3 +30,4 @@
 - [x] Cotización: DolarHoy permanece visible y destaca USDT como referencia recomendada, con valor USDT/ARS orientativo, fuente y hora, sin alterar históricos.
 - [x] Correcciones de inventario y Excel vigente: AirPods Pro 2 Gen queda en 30 unidades con costo USD 8; el Excel más reciente fija Funda Silicona en 193 y BC Create con costo USD 6,66; se conservaron productos manuales adicionales para no borrar trazabilidad.
 - [x] Experiencia: tema oscuro grafito no negro, gráficos y tablas encuadrados, altura/ancho de gráficos contenidos para todos los períodos, carga/refetch controlados y manifest instalable en modo standalone con ícono propio.
+- [x] Ajuste operativo 11/10/2026: se eliminó del dashboard el gráfico de facturación y ganancia; la última venta de Benja Guillen por USD 49,68 quedó en estado pendiente y creó una cuenta por cobrar abierta; se eliminó el compromiso de Santiago López por estar pagado.
