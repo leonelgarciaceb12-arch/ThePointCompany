@@ -4,7 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import {
   adjustStock, createAd, createExpense, createLoan, createProduct, createReceivable, createSale,
   deleteAd, deleteCustomer, deleteExpense, deleteLoan, deleteObjective, deleteProduct, deleteReceivable, deleteSale,
-  getDashboard, getDollarRates, listAds, listCustomers, listExpenses, listLoans, listObjectives, listProducts,
+  getDashboard, getDollarRates, getProjections, listAds, listCustomers, listExpenses, listLoans, listObjectives, listProducts,
   listReceivables, listSales, payLoan, payReceivable, updateAd, updateCustomer, updateExpense, updateLoan,
   updateObjective, updateProduct, updateReceivable, updateSale,
 } from "./db";
@@ -40,6 +40,7 @@ export const appRouter = router({
   }),
   business: router({
     dashboard: protectedProcedure.input(z.object({ from: z.string().optional(), to: z.string().optional() }).optional()).query(({ input }) => getDashboard(input?.from, input?.to)),
+    projections: protectedProcedure.input(z.object({ growthPercent: z.number().min(-50).max(200).optional() }).optional()).query(({ input }) => getProjections(input?.growthPercent ?? 15)),
     dollarRates: protectedProcedure.query(() => getDollarRates()),
     products: protectedProcedure.input(z.object({ search: z.string().optional(), category: z.string().optional() }).optional()).query(({ input }) => listProducts(input?.search, input?.category)),
     sales: protectedProcedure.input(z.object({ limit: z.number().int().positive().max(500).optional() }).optional()).query(({ input }) => listSales(input?.limit ?? 100)),

@@ -22,6 +22,19 @@ import { ENV } from "./_core/env";
 let _db: ReturnType<typeof drizzle> | null = null;
 let seedPromise: Promise<void> | null = null;
 let lastDollarRates: Array<{ moneda: string; casa: string; nombre: string; compra: number; venta: number; fechaActualizacion: string }> = [];
+let lastUsdtRate: { symbol: string; price: number; source: string; fetchedAt: string } | null = null;
+
+function debtStatus(principal: unknown, paid: unknown, balance: unknown, dueDate?: unknown): "open" | "partial" | "paid" | "overdue" {
+  const remaining = Number(balance ?? 0); const settled = Number(paid ?? 0);
+  if (remaining <= 0 || Number(principal ?? 0) > 0 && settled >= Number(principal)) return "paid";
+  const due = dueDate ? String(dueDate).slice(0, 10) : "";
+  if (due && due < new Date().toISOString().slice(0, 10)) return "overdue";
+  return settled > 0 ? "partial" : "open";
+}
+
+function presentDebt<T extends { principal: unknown; paid: unknown; balance: unknown; dueDate?: unknown }>(row: T) {
+  return { ...row, status: debtStatus(row.principal, row.paid, row.balance, row.dueDate) };
+}
 
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
@@ -108,13 +121,14 @@ export async function ensureSeeded() {
       let saleId: number;
       if (existing) saleId = existing.id;
       else {
-        const inserted = await db.insert(sales).values({ legacyId, saleDate: parseSeedDate(s.date as string) || "2026-01-01", customerId: s.customer ? customerMap.get(String(s.customer)) ?? null : null, customerName: s.customer ? String(s.customer) : null, customerPhone: s.phone ? String(s.phone) : null, channel: String(s.channel || "Histórico Excel"), total: toMoney(total), totalCost: toMoney(cost), profit: toMoney(profit), margin: total ? toMoney((profit / total) * 100) : "0.00", createdAt: now, updatedAt: now });
+        const inserted = await db.insert(sales).values({ legacyId, saleDate: parseSeedDate(s.date as string) || "2026-01-01", customerId: s.customer ? customerMap.get(String(s.customer)) ?? null : null, customerName: s.customer ? String(s.customer) : null, customerPhone: s.phone ? String(s.phone) : null, channel: String(s.channel || "WhatsApp"), total: toMoney(total), totalCost: toMoney(cost), profit: toMoney(profit), margin: total ? toMoney((profit / total) * 100) : "0.00", createdAt: now, updatedAt: now });
         saleId = Number(inserted[0].insertId);
       }
       const itemExists = (await db.select({ id: saleItems.id }).from(saleItems).where(eq(saleItems.saleId, saleId)).limit(1))[0];
       if (!itemExists) await db.insert(saleItems).values({ saleId, description: String(s.description), quantity: 1, unitPrice: toMoney(total), unitCost: toMoney(cost), total: toMoney(total), costTotal: toMoney(cost), profit: toMoney(profit), fromInventory: false, createdAt: now, updatedAt: now });
     }
-    if ((await count(adCampaigns)) === 0 && raw.ads.length) await db.insert(adCampaigns).values(raw.ads.map(a => ({ adDate: parseSeedDate(a.date as string) || "2026-01-01", platform: String(a.platform || "Meta Ads"), campaign: String(a.campaign || "Sin descripción"), amount: toMoney(a.amount), notes: a.notes ? String(a.notes) : null, createdAt: now, updatedAt: now })));
+    if ((await count(adCampaigns)) === 0 && raw.ads.length) await db.insert(adCampaigns).values(raw.ads.map(a => ({ adDate: parseSeedDate(a.date as string) || "2026-01-01", platform: String(a.platform || "Meta Ads"), campaign: "Campaña inicial propia de ventas - Multiples estilos", amount: toMoney(a.amount), notes: a.notes ? String(a.notes) : null, createdAt: now, updatedAt: now })));
+    await db.update(adCampaigns).set({ campaign: "Campaña inicial propia de ventas - Multiples estilos" }).where(sql`${adCampaigns.campaign} like '%estilo folleto%' or ${adCampaigns.campaign} like '%Campaña de venta de vapes%'`);
     if ((await count(expenses)) === 0 && raw.expenses.length) await db.insert(expenses).values(raw.expenses.map(e => ({ expenseDate: parseSeedDate(e.date as string) || "2026-01-01", category: String(e.category || "General"), description: String(e.description || "Gasto"), amount: toMoney(e.amount), type: String(e.type || "Operativo"), notes: e.notes ? String(e.notes) : null, createdAt: now, updatedAt: now })));
     if ((await count(loans)) === 0 && raw.loans.length) await db.insert(loans).values(raw.loans.map(l => ({ kind: "loan" as const, counterparty: String(l.counterparty), description: l.notes ? String(l.notes) : null, currency: String(l.currency || "USD"), principal: toMoney(l.principal), paid: toMoney(l.paid), balance: toMoney(l.balance), startDate: parseSeedDate(l.startDate as string), dueDate: parseSeedDate(l.dueDate as string), status: Number(l.balance || 0) <= 0 ? "paid" as const : "open" as const, notes: l.notes ? String(l.notes) : null, createdAt: now, updatedAt: now })));
     if ((await count(objectives)) === 0 && raw.objectives.length) await db.insert(objectives).values(raw.objectives.map(o => ({ month: String(o.month), targetOrders: Number(o.targetOrders || 0), targetRevenue: toMoney(o.targetRevenue), targetProfit: toMoney(o.targetProfit), targetNet: toMoney(o.targetNet), createdAt: now, updatedAt: now })));
@@ -129,21 +143,21 @@ export async function getDashboard(from?: string, to?: string) {
   const salesWhere = from && to ? and(gte(sales.saleDate, from), lt(sales.saleDate, to)) : undefined;
   const expenseWhere = from && to ? and(gte(expenses.expenseDate, from), lt(expenses.expenseDate, to)) : undefined;
   const adsWhere = from && to ? and(gte(adCampaigns.adDate, from), lt(adCampaigns.adDate, to)) : undefined;
-  const paidWhere = salesWhere ? and(salesWhere, eq(sales.status, "paid")) : eq(sales.status, "paid");
+  const activeSalesWhere = salesWhere ? and(salesWhere, sql`${sales.status} <> 'cancelled'`) : sql`${sales.status} <> 'cancelled'`;
   const [summary, units, inventory, lowStock, topProducts, topCustomers, recentSales, dueLoans, expensesTotal, adTotal, daily, channelRows, periodCustomerRows] = await Promise.all([
-    db.select({ revenue: sql<number>`coalesce(sum(${sales.total}),0)`, profit: sql<number>`coalesce(sum(case when ${sales.costKnown} = true then ${sales.profit} else 0 end),0)`, cogs: sql<number>`coalesce(sum(case when ${sales.costKnown} = true then ${sales.totalCost} else 0 end),0)`, orders: sql<number>`count(*)`, incomplete: sql<number>`coalesce(sum(case when ${sales.costKnown} = false then 1 else 0 end),0)` }).from(sales).where(paidWhere),
-    db.select({ units: sql<number>`coalesce(sum(${saleItems.quantity}),0)` }).from(saleItems).leftJoin(sales, eq(saleItems.saleId, sales.id)).where(paidWhere),
+    db.select({ revenue: sql<number>`coalesce(sum(${sales.total}),0)`, profit: sql<number>`coalesce(sum(case when ${sales.costKnown} = true then ${sales.profit} else 0 end),0)`, cogs: sql<number>`coalesce(sum(case when ${sales.costKnown} = true then ${sales.totalCost} else 0 end),0)`, orders: sql<number>`count(*)`, incomplete: sql<number>`coalesce(sum(case when ${sales.costKnown} = false then 1 else 0 end),0)` }).from(sales).where(activeSalesWhere),
+    db.select({ units: sql<number>`coalesce(sum(${saleItems.quantity}),0)` }).from(saleItems).leftJoin(sales, eq(saleItems.saleId, sales.id)).where(activeSalesWhere),
     db.select({ value: sql<number>`coalesce(sum(${products.stock} * ${products.cost}),0)`, units: sql<number>`coalesce(sum(${products.stock}),0)` }).from(products).where(eq(products.active, true)),
     db.select().from(products).where(and(eq(products.active, true), sql`${products.stock} <= ${products.minStock}`)).orderBy(asc(products.stock)).limit(8),
-    db.select({ name: products.name, category: products.category, units: sql<number>`coalesce(sum(${saleItems.quantity}),0)`, profit: sql<number>`coalesce(sum(${saleItems.profit}),0)` }).from(saleItems).innerJoin(sales, eq(saleItems.saleId, sales.id)).leftJoin(products, eq(saleItems.productId, products.id)).where(paidWhere).groupBy(saleItems.productId, products.name, products.category).orderBy(desc(sql`sum(${saleItems.quantity})`)).limit(6),
-    db.select({ id: customers.id, name: customers.name, spent: sql<number>`coalesce(sum(${sales.total}),0)`, profit: sql<number>`coalesce(sum(${sales.profit}),0)`, lastPurchase: sql<string>`max(${sales.saleDate})`, purchases: sql<number>`count(*)` }).from(sales).innerJoin(customers, eq(sales.customerId, customers.id)).where(paidWhere).groupBy(customers.id, customers.name).orderBy(desc(sql`sum(${sales.total})`)).limit(6),
-    db.select().from(sales).orderBy(desc(sales.saleDate), desc(sales.id)).limit(8),
+    db.select({ name: products.name, category: products.category, units: sql<number>`coalesce(sum(${saleItems.quantity}),0)`, profit: sql<number>`coalesce(sum(${saleItems.profit}),0)` }).from(saleItems).innerJoin(sales, eq(saleItems.saleId, sales.id)).leftJoin(products, eq(saleItems.productId, products.id)).where(activeSalesWhere).groupBy(saleItems.productId, products.name, products.category).orderBy(desc(sql`sum(${saleItems.quantity})`)).limit(6),
+    db.select({ id: customers.id, name: customers.name, spent: sql<number>`coalesce(sum(${sales.total}),0)`, profit: sql<number>`coalesce(sum(${sales.profit}),0)`, lastPurchase: sql<string>`max(${sales.saleDate})`, purchases: sql<number>`count(*)` }).from(sales).innerJoin(customers, eq(sales.customerId, customers.id)).where(activeSalesWhere).groupBy(customers.id, customers.name).orderBy(desc(sql`sum(${sales.total})`)).limit(6),
+    db.select().from(sales).where(activeSalesWhere).orderBy(desc(sales.saleDate), desc(sales.id)).limit(8),
     db.select().from(loans).where(sql`${loans.balance} > 0`).orderBy(asc(loans.dueDate)).limit(8),
     db.select({ total: sql<number>`coalesce(sum(${expenses.amount}),0)` }).from(expenses).where(expenseWhere),
     db.select({ total: sql<number>`coalesce(sum(${adCampaigns.amount}),0)` }).from(adCampaigns).where(adsWhere),
-    db.select({ day: sales.saleDate, revenue: sql<number>`sum(${sales.total})`, profit: sql<number>`sum(case when ${sales.costKnown} = true then ${sales.profit} else 0 end)` }).from(sales).where(paidWhere).groupBy(sales.saleDate).orderBy(asc(sales.saleDate)),
-    db.select({ channel: sales.channel, revenue: sql<number>`coalesce(sum(${sales.total}),0)`, orders: sql<number>`count(*)` }).from(sales).where(paidWhere).groupBy(sales.channel).orderBy(desc(sql`sum(${sales.total})`)).limit(8),
-    db.select({ customerId: sales.customerId, purchases: sql<number>`count(*)` }).from(sales).where(and(paidWhere, sql`${sales.customerId} is not null`)).groupBy(sales.customerId),
+    db.select({ day: sales.saleDate, revenue: sql<number>`sum(${sales.total})`, profit: sql<number>`sum(case when ${sales.costKnown} = true then ${sales.profit} else 0 end)` }).from(sales).where(activeSalesWhere).groupBy(sales.saleDate).orderBy(asc(sales.saleDate)),
+    db.select({ channel: sales.channel, revenue: sql<number>`coalesce(sum(${sales.total}),0)`, orders: sql<number>`count(*)` }).from(sales).where(activeSalesWhere).groupBy(sales.channel).orderBy(desc(sql`sum(${sales.total})`)).limit(8),
+    db.select({ customerId: sales.customerId, purchases: sql<number>`count(*)` }).from(sales).where(and(activeSalesWhere, sql`${sales.customerId} is not null`)).groupBy(sales.customerId),
   ]);
   const revenue = Number(summary[0]?.revenue ?? 0);
   const grossProfit = Number(summary[0]?.profit ?? 0);
@@ -173,7 +187,7 @@ export async function getDashboard(from?: string, to?: string) {
     activeCustomers,
     repeatCustomers,
   };
-  return { summary: { ...summary[0], units: unitsSold }, inventory: inventory[0], lowStock, topProducts, topCustomers, recentSales, dueLoans, expenses: expensesTotal[0], ads: adTotal[0], daily, advanced };
+  return { summary: { ...summary[0], units: unitsSold }, inventory: inventory[0], lowStock, topProducts, topCustomers, recentSales, dueLoans: dueLoans.map(presentDebt), expenses: expensesTotal[0], ads: adTotal[0], daily, advanced };
 }
 
 export async function listProducts(search?: string, category?: string) {
@@ -185,13 +199,13 @@ export async function listProducts(search?: string, category?: string) {
   return db.select().from(products).where(and(...filters)).orderBy(asc(products.category), asc(products.name));
 }
 
-export async function listSales(limit = 30) { const db = await getDb(); if (!db) return []; await ensureSeeded(); return db.select().from(sales).orderBy(desc(sales.saleDate), desc(sales.id)).limit(limit); }
+export async function listSales(limit = 30) { const db = await getDb(); if (!db) return []; await ensureSeeded(); return db.select().from(sales).where(sql`${sales.status} <> 'cancelled'`).orderBy(desc(sales.saleDate), desc(sales.id)).limit(limit); }
 export async function listCustomers() { const db = await getDb(); if (!db) return []; await ensureSeeded(); return db.select().from(customers).orderBy(desc(customers.spent)); }
 export async function listExpenses() { const db = await getDb(); if (!db) return []; await ensureSeeded(); return db.select().from(expenses).orderBy(desc(expenses.expenseDate), desc(expenses.id)).limit(100); }
-export async function listLoans() { const db = await getDb(); if (!db) return []; await ensureSeeded(); return db.select().from(loans).orderBy(asc(loans.dueDate)); }
+export async function listLoans() { const db = await getDb(); if (!db) return []; await ensureSeeded(); const rows = await db.select().from(loans).orderBy(asc(loans.dueDate)); return rows.map(presentDebt); }
 export async function listAds() { const db = await getDb(); if (!db) return []; await ensureSeeded(); return db.select().from(adCampaigns).orderBy(desc(adCampaigns.adDate), desc(adCampaigns.id)).limit(100); }
 export async function listObjectives() { const db = await getDb(); if (!db) return []; await ensureSeeded(); return db.select().from(objectives).orderBy(asc(objectives.id)); }
-export async function listReceivables() { const db = await getDb(); if (!db) return []; return db.select().from(receivables).where(sql`${receivables.balance} > 0`).orderBy(asc(receivables.dueDate)); }
+export async function listReceivables() { const db = await getDb(); if (!db) return []; await ensureSeeded(); const rows = await db.select().from(receivables).where(sql`${receivables.balance} > 0`).orderBy(asc(receivables.dueDate)); return rows.map(presentDebt); }
 
 export async function createProduct(input: { name: string; category: string; supplier?: string; stock: number; cost: number; minStock?: number; userId?: number }) {
   const db = await getDb(); if (!db) throw new Error("Database is not available");
@@ -336,7 +350,7 @@ export async function createSale(input: { date: string; channel?: string; custom
     }
     let receivableId: number | undefined;
     if (balance > 0) {
-      const receivable = await tx.insert(receivables).values({ customerName: input.customerName!.trim(), phone: input.customerPhone, description: `Saldo pendiente de venta #${saleId}`, principal: toMoney(total), paid: toMoney(paidAmount), balance: toMoney(balance), dueDate: input.date, status: paidAmount > 0 ? "partial" : "open", notes: "Creado automáticamente al registrar una venta con pago parcial", createdBy: input.userId, updatedBy: input.userId });
+      const receivable = await tx.insert(receivables).values({ customerName: input.customerName!.trim(), phone: input.customerPhone, description: `Saldo pendiente de venta #${saleId}`, principal: toMoney(total), paid: toMoney(paidAmount), balance: toMoney(balance), dueDate: input.date, status: debtStatus(total, paidAmount, balance, input.date), notes: "Creado automáticamente al registrar una venta con pago parcial", createdBy: input.userId, updatedBy: input.userId });
       receivableId = Number(receivable[0].insertId);
     }
     return { saleId, total, totalCost, profit, costKnown, paidAmount, balance, receivableId };
@@ -351,7 +365,7 @@ export async function createExpense(input: { date: string; category: string; des
 
 export async function createLoan(input: { kind: "loan" | "payable_merch" | "internal"; counterparty: string; description?: string; currency?: string; principal: number; dueDate?: string; startDate?: string; notes?: string; userId?: number }) {
   const db = await getDb(); if (!db) throw new Error("Database is not available");
-  const result = await db.insert(loans).values({ kind: input.kind, counterparty: input.counterparty, description: input.description, currency: input.currency || "USD", principal: toMoney(input.principal), balance: toMoney(input.principal), paid: "0.00", dueDate: input.dueDate, startDate: input.startDate, notes: input.notes, createdBy: input.userId, updatedBy: input.userId });
+  const result = await db.insert(loans).values({ kind: input.kind, counterparty: input.counterparty, description: input.description, currency: input.currency || "USD", principal: toMoney(input.principal), balance: toMoney(input.principal), paid: "0.00", dueDate: input.dueDate, startDate: input.startDate, status: debtStatus(input.principal, 0, input.principal, input.dueDate), notes: input.notes, createdBy: input.userId, updatedBy: input.userId });
   return Number(result[0].insertId);
 }
 
@@ -359,13 +373,13 @@ export async function payLoan(id: number, amount: number, userId?: number) {
   const db = await getDb(); if (!db) throw new Error("Database is not available");
   const row = (await db.select().from(loans).where(eq(loans.id, id)).limit(1))[0]; if (!row) throw new Error("Deuda no encontrada");
   const paid = Math.min(Number(row.principal), Number(row.paid) + amount); const balance = Math.max(0, Number(row.principal) - paid);
-  await db.update(loans).set({ paid: toMoney(paid), balance: toMoney(balance), status: balance === 0 ? "paid" : paid > 0 ? "partial" : "open", updatedBy: userId }).where(eq(loans.id, id));
+  await db.update(loans).set({ paid: toMoney(paid), balance: toMoney(balance), status: debtStatus(row.principal, paid, balance, row.dueDate), updatedBy: userId }).where(eq(loans.id, id));
   return { balance };
 }
 
 export async function createReceivable(input: { customerName: string; phone?: string; description?: string; principal: number; dueDate?: string; notes?: string; userId?: number }) {
   const db = await getDb(); if (!db) throw new Error("Database is not available");
-  const result = await db.insert(receivables).values({ customerName: input.customerName, phone: input.phone, description: input.description, principal: toMoney(input.principal), balance: toMoney(input.principal), paid: "0.00", dueDate: input.dueDate, notes: input.notes, createdBy: input.userId, updatedBy: input.userId });
+  const result = await db.insert(receivables).values({ customerName: input.customerName, phone: input.phone, description: input.description, principal: toMoney(input.principal), balance: toMoney(input.principal), paid: "0.00", dueDate: input.dueDate, status: debtStatus(input.principal, 0, input.principal, input.dueDate), notes: input.notes, createdBy: input.userId, updatedBy: input.userId });
   return Number(result[0].insertId);
 }
 
@@ -373,7 +387,7 @@ export async function payReceivable(id: number, amount: number, userId?: number)
   const db = await getDb(); if (!db) throw new Error("Database is not available");
   const row = (await db.select().from(receivables).where(eq(receivables.id, id)).limit(1))[0]; if (!row) throw new Error("Deudor no encontrado");
   const paid = Math.min(Number(row.principal), Number(row.paid) + amount); const balance = Math.max(0, Number(row.principal) - paid);
-  await db.update(receivables).set({ paid: toMoney(paid), balance: toMoney(balance), status: balance === 0 ? "paid" : paid > 0 ? "partial" : "open", updatedBy: userId }).where(eq(receivables.id, id));
+  await db.update(receivables).set({ paid: toMoney(paid), balance: toMoney(balance), status: debtStatus(row.principal, paid, balance, row.dueDate), updatedBy: userId }).where(eq(receivables.id, id));
   return { balance };
 }
 
@@ -393,7 +407,7 @@ export async function deleteExpense(id: number) {
 export async function updateLoan(id: number, input: { kind: "loan" | "payable_merch" | "internal"; counterparty: string; description?: string; currency?: string; principal: number; paid: number; dueDate?: string; startDate?: string; notes?: string; userId?: number }) {
   const db = await getDb(); if (!db) throw new Error("Database is not available");
   const paid = Math.min(input.principal, Math.max(0, input.paid)); const balance = Math.max(0, input.principal - paid);
-  await db.update(loans).set({ kind: input.kind, counterparty: input.counterparty, description: input.description || null, currency: input.currency || "USD", principal: toMoney(input.principal), paid: toMoney(paid), balance: toMoney(balance), startDate: input.startDate || null, dueDate: input.dueDate || null, status: balance === 0 ? "paid" : paid > 0 ? "partial" : "open", notes: input.notes || null, updatedBy: input.userId }).where(eq(loans.id, id));
+  await db.update(loans).set({ kind: input.kind, counterparty: input.counterparty, description: input.description || null, currency: input.currency || "USD", principal: toMoney(input.principal), paid: toMoney(paid), balance: toMoney(balance), startDate: input.startDate || null, dueDate: input.dueDate || null, status: debtStatus(input.principal, paid, balance, input.dueDate), notes: input.notes || null, updatedBy: input.userId }).where(eq(loans.id, id));
   return { id, balance };
 }
 
@@ -406,7 +420,7 @@ export async function deleteLoan(id: number) {
 export async function updateReceivable(id: number, input: { customerName: string; phone?: string; description?: string; principal: number; paid: number; dueDate?: string; notes?: string; userId?: number }) {
   const db = await getDb(); if (!db) throw new Error("Database is not available");
   const paid = Math.min(input.principal, Math.max(0, input.paid)); const balance = Math.max(0, input.principal - paid);
-  await db.update(receivables).set({ customerName: input.customerName, phone: input.phone || null, description: input.description || null, principal: toMoney(input.principal), paid: toMoney(paid), balance: toMoney(balance), dueDate: input.dueDate || null, status: balance === 0 ? "paid" : paid > 0 ? "partial" : "open", notes: input.notes || null, updatedBy: input.userId }).where(eq(receivables.id, id));
+  await db.update(receivables).set({ customerName: input.customerName, phone: input.phone || null, description: input.description || null, principal: toMoney(input.principal), paid: toMoney(paid), balance: toMoney(balance), dueDate: input.dueDate || null, status: debtStatus(input.principal, paid, balance, input.dueDate), notes: input.notes || null, updatedBy: input.userId }).where(eq(receivables.id, id));
   return { id, balance };
 }
 
@@ -446,6 +460,30 @@ export async function deleteObjective(id: number) {
   return { id };
 }
 
+export async function getProjections(growthPercent = 15) {
+  const db = await getDb(); if (!db) return null;
+  await ensureSeeded();
+  const now = new Date();
+  const end = new Date(now); end.setDate(end.getDate() + 1);
+  const start = new Date(now); start.setDate(start.getDate() - 30);
+  const from = start.toISOString().slice(0, 10); const to = end.toISOString().slice(0, 10);
+  const paidWhere = and(gte(sales.saleDate, from), lt(sales.saleDate, to), sql`${sales.status} <> 'cancelled'`);
+  const [summary, units, daysWithSales, expenseRows, adRows] = await Promise.all([
+    db.select({ revenue: sql<number>`coalesce(sum(${sales.total}),0)`, profit: sql<number>`coalesce(sum(case when ${sales.costKnown} = true then ${sales.profit} else 0 end),0)`, orders: sql<number>`count(*)`, incomplete: sql<number>`coalesce(sum(case when ${sales.costKnown} = false then 1 else 0 end),0)` }).from(sales).where(paidWhere),
+    db.select({ units: sql<number>`coalesce(sum(${saleItems.quantity}),0)` }).from(saleItems).innerJoin(sales, eq(saleItems.saleId, sales.id)).where(paidWhere),
+    db.select({ days: sql<number>`count(distinct ${sales.saleDate})` }).from(sales).where(paidWhere),
+    db.select({ total: sql<number>`coalesce(sum(${expenses.amount}),0)` }).from(expenses).where(and(gte(expenses.expenseDate, from), lt(expenses.expenseDate, to))),
+    db.select({ total: sql<number>`coalesce(sum(${adCampaigns.amount}),0)` }).from(adCampaigns).where(and(gte(adCampaigns.adDate, from), lt(adCampaigns.adDate, to))),
+  ]);
+  const revenue = Number(summary[0]?.revenue ?? 0); const profit = Number(summary[0]?.profit ?? 0); const orders = Number(summary[0]?.orders ?? 0);
+  const unitsSold = Number(units[0]?.units ?? 0); const expenseTotal = Number(expenseRows[0]?.total ?? 0); const adSpend = Number(adRows[0]?.total ?? 0);
+  const activeDays = Math.max(1, Number(daysWithSales[0]?.days ?? 0)); const growth = Math.max(-50, Math.min(200, Number(growthPercent) || 0)) / 100;
+  const nextMonthStart = new Date(now.getFullYear(), now.getMonth() + 1, 1); const nextMonthDays = new Date(now.getFullYear(), now.getMonth() + 2, 0).getDate();
+  const daily = { revenue: revenue / activeDays, profit: profit / activeDays, orders: orders / activeDays, units: unitsSold / activeDays, net: (profit - expenseTotal - adSpend) / activeDays };
+  const factor = 1 + growth;
+  return { period: { from, to: from === to ? to : new Date(now.getTime() - 86400000).toISOString().slice(0, 10), activeDays }, targetMonth: nextMonthStart.toLocaleDateString("es-AR", { month: "long", year: "numeric" }), targetMonthDays: nextMonthDays, growthPercent: growth * 100, current: { revenue, profit, orders, units: unitsSold, expenses: expenseTotal, adSpend, net: profit - expenseTotal - adSpend, incompleteCosts: Number(summary[0]?.incomplete ?? 0) }, projected: { revenue: daily.revenue * nextMonthDays * factor, profit: daily.profit * nextMonthDays * factor, orders: daily.orders * nextMonthDays * factor, units: daily.units * nextMonthDays * factor, net: daily.net * nextMonthDays * factor }, daily };
+}
+
 export async function getDollarRates() {
   const url = "https://dolarhoy.com/";
   const parseAmount = (raw: string) => Number(raw.replace(/\./g, "").replace(",", ".").replace(/[^0-9.-]/g, ""));
@@ -461,10 +499,14 @@ export async function getDollarRates() {
     for (const match of html.matchAll(table)) add(match[1] === "cotizaciondolarbolsa" ? "bolsa" : "contadoconliqui", match[2].trim(), match[3].trim(), match[4].trim());
     if (rates.length < 4) throw new Error("DolarHoy no devolvió las cuatro cotizaciones esperadas");
     lastDollarRates = rates;
+    try {
+      const usdtResponse = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=USDTARS", { signal: AbortSignal.timeout(5000), headers: { Accept: "application/json" } });
+      if (usdtResponse.ok) { const payload = await usdtResponse.json() as { symbol?: string; price?: string }; const price = Number(payload.price); if (Number.isFinite(price) && price > 0) lastUsdtRate = { symbol: payload.symbol || "USDTARS", price, source: "Binance", fetchedAt: new Date().toISOString() }; }
+    } catch { /* la referencia USDT es opcional; se conserva el último valor */ }
     const updatedLabel = html.match(/Actualizado por última vez:\s*([^<]+)/i)?.[1]?.trim() || "hora no informada";
-    return { source: "DolarHoy", sourceUrl: url, fetchedAt: new Date().toISOString(), updatedLabel, rates };
+    return { source: "DolarHoy", sourceUrl: url, fetchedAt: new Date().toISOString(), updatedLabel, rates, usdt: lastUsdtRate };
   } catch (error) {
     console.warn("[Dólar] No se pudo actualizar la cotización:", error);
-    return { source: "DolarHoy", sourceUrl: url, fetchedAt: new Date().toISOString(), updatedLabel: "último valor disponible", rates: lastDollarRates, stale: true, error: "No se pudo actualizar; se muestra el último valor válido" };
+    return { source: "DolarHoy", sourceUrl: url, fetchedAt: new Date().toISOString(), updatedLabel: "último valor disponible", rates: lastDollarRates, usdt: lastUsdtRate, stale: true, error: "No se pudo actualizar; se muestra el último valor válido" };
   }
 }

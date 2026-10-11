@@ -1,0 +1,20 @@
+{
+  "name": "The Point Company · Control de negocio",
+  "short_name": "The Point",
+  "description": "Tablero operativo para stock, ventas, caja y seguimiento comercial.",
+  "lang": "es-AR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#10171b",
+  "theme_color": "#10171b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/point-icon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -79,3 +79,35 @@ La primera versión queda preparada para: autenticación por socio, permisos, au
 - **Cotización:** el backend consultará periódicamente una fuente pública que replica cotizaciones de DolarHoy, mostrará dólar oficial, blue, MEP y CCL con compra/venta, hora de actualización y fuente visible. Si la fuente falla, se mostrará el último estado disponible/error sin inventar valores.
 - **Métricas avanzadas:** sumar resultado estimado después de gastos y publicidad, costo de mercadería vendida, margen bruto, tasa de recompra, porcentaje de ventas con cliente, concentración por canal, mejor día, ingreso promedio diario, cobertura aproximada de stock y relación publicidad/facturación. Las métricas se calculan por el período seleccionado y distinguen los datos incompletos.
 - **Interfaz:** agregar acciones de editar/eliminar en tablas y tarjetas, modales reutilizables, confirmación explícita antes de borrar, navegación para publicidad y objetivos, y un ticker de dólar siempre visible en el encabezado responsive.
+
+## Iteración profesional vigente
+
+Esta iteración conserva la arquitectura React/Express/tRPC/Drizzle y prioriza que cada dato sirva para decidir caja, rentabilidad, stock, cobranza y seguimiento comercial desde dos teléfonos.
+
+- **Deudores:** usar vencimiento editable, estado vencido automático, pagos parciales y seguimiento visual. Corregir Francisco Rover a USD 186,33 con vencimiento 10/10/2026. Para Elias, reflejar USD 53,51 pagados y el saldo pendiente a 7 días desde 10/10/2026 cuando el total pueda verificarse en el historial.
+- **Publicidad:** normalizar los registros existentes a `Campaña inicial propia de ventas - Multiples estilos`, eliminando fechas y la leyenda anterior. Mantener gasto real y mostrar N/A cuando no exista sincronización real con Meta Ads.
+- **Clientes:** mostrar días sin comprar, etiqueta de seguimiento y botón directo a WhatsApp cuando exista teléfono, con un mensaje inicial editable por URL.
+- **Proyecciones:** añadir una sección que calcule el siguiente mes usando el promedio diario/ritmo reciente y el crecimiento esperado configurable. Mostrar facturación, pedidos, ganancia bruta, resultado neto estimado, unidades y supuestos, separando proyección de dato real.
+- **Cotización:** conservar DolarHoy y sumar una referencia USDT/ARS orientativa con fuente/hora, destacando USDT como tipo de cambio recomendado sin recalcular ventas históricas.
+- **Datos operativos:** asegurar AirPods Pro 2 Gen (30 unidades, costo USD 8), Funda Silicone Case (197 unidades) y BC Create (costo USD 6,66), sin duplicar productos equivalentes.
+- **Rendimiento/PWA:** evitar refetch innecesario al cambiar de pestaña, habilitar manifest standalone de plataforma, declarar rutas SPA y mantener el layout oscuro grafito fluido en mobile.
+
+### Dirección visual de esta iteración
+
+- **Movimiento:** Apple-style utility editorial: precisión sobria, superficies profundas, alto contraste controlado y jerarquía tipográfica fuerte.
+- **Principios:** primero la decisión; datos reales antes que decoración; densidad progresiva; cada alerta tiene una acción.
+- **Paleta:** grafito azulada (`#10171b`) en vez de negro puro para reducir fatiga; superficies `#172126`/`#1d2a30`; texto marfil; teal `#4fd1c5` como firma; verde para rentabilidad y ámbar/rojo sólo para riesgo.
+- **Layout:** shell lateral en desktop y menú compacto en mobile; dashboard por capas de estado, tendencia y acción; tablas con overflow controlado.
+- **Firmas:** monograma TP, ticker de cotización como cápsula superior, KPI con línea de estado y microcopy del supuesto.
+- **Interacción y animación:** formularios cortos, toasts y enlaces de acción; transiciones de 160–220 ms, sin animaciones que retrasen la carga.
+- **Tipografía y voz:** Inter para UI/datos y Georgia para titulares/cifras; microcopy directo: “Proyección, no promesa” y “Costo desconocido: no inventamos ganancia”.
+
+### Estructura afectada
+
+- `server/db.ts`: normalización idempotente, query de proyecciones, clientes sin recompra y cotización USDT con fallback.
+- `server/routers.ts`: procedimiento protegido de proyecciones y contratos de vencimientos.
+- `client/src/pages/Home.tsx`: vista de proyecciones, seguimiento comercial, WhatsApp y estados de cobranza.
+- `client/src/index.css`: tema grafito, responsive y contención de tablas/gráficos.
+- `client/public/manus-routes.json`: rutas SPA completas y sincronizadas.
+
+Los cambios de datos se ejecutan de forma idempotente y no convierten costos faltantes en ganancias reales. La referencia USDT es informativa, no una integración de cobro ni asesoramiento financiero.

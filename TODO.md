@@ -22,3 +22,11 @@
 - [x] Pagos de ventas: al registrar una venta se puede elegir “Pago todo” o “No pago todo”; el monto cobrado se guarda y el saldo restante crea automáticamente una cuenta en Deudores vinculada al cliente.
 - [x] Publicidad sin datos inventados: se quitó la carga manual de conversiones/resultados; mientras Meta Ads no esté sincronizado, la interfaz muestra N/A y conserva únicamente el gasto verificado.
 - [x] Correcciones operativas: Funda Silicona (varios modelos) queda en 197 unidades, Elfbar Ebcreate Bc Pro 40k puff queda con costo unitario USD 6,66 y se registró Francisco Rover con deuda de USD 186,33.
+
+- [x] Deudores: Francisco Rover queda con USD 186,33 y vencimiento 10/10/2026; Elias refleja USD 53,51 pagados y USD 70,09 pendientes con vencimiento 17/10/2026, sin duplicar cuentas. Préstamos y deudores calculan y muestran estados abierto, pago parcial, vencido o pagado.
+- [x] Publicidad: todos los registros existentes muestran `Campaña inicial propia de ventas - Multiples estilos`, sin “estilo folleto” ni fecha en la descripción; la limpieza histórica es idempotente para frases heredadas y no agrega conversiones/resultados no sincronizados.
+- [x] Clientes: cada cliente muestra días desde la última compra, estado de seguimiento y botón directo a WhatsApp cuando tiene teléfono; los teléfonos argentinos se convierten al formato internacional 549.
+- [x] Proyecciones: la sección proyecta matemáticamente para el mes siguiente facturación, ganancia bruta, resultado neto estimado, pedidos, unidades y ritmo diario, mostrando crecimiento esperado y supuestos.
+- [x] Cotización: DolarHoy permanece visible y destaca USDT como referencia recomendada, con valor USDT/ARS orientativo, fuente y hora, sin alterar históricos.
+- [x] Correcciones de inventario: AirPods Pro 2 Gen queda en 30 unidades con costo USD 8, Funda Silicona en 197 y BC Create con costo USD 6,66, sin duplicados.
+- [x] Experiencia: tema oscuro grafito no negro, gráficos y tablas encuadrados, carga/refetch controlados y manifest instalable en modo standalone con ícono propio.
