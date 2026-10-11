@@ -364,9 +364,9 @@ export async function createExpense(input: { date: string; category: string; des
   return Number(result[0].insertId);
 }
 
-export async function createLoan(input: { kind: "loan" | "payable_merch" | "internal"; counterparty: string; description?: string; currency?: string; principal: number; dueDate?: string; startDate?: string; notes?: string; userId?: number }) {
+export async function createLoan(input: { kind: "loan" | "payable_merch" | "internal"; counterparty: string; description?: string; currency?: string; interestRate?: number; interestPeriod?: "monthly" | "weekly"; principal: number; dueDate?: string; startDate?: string; notes?: string; userId?: number }) {
   const db = await getDb(); if (!db) throw new Error("Database is not available");
-  const result = await db.insert(loans).values({ kind: input.kind, counterparty: input.counterparty, description: input.description, currency: input.currency || "USD", principal: toMoney(input.principal), balance: toMoney(input.principal), paid: "0.00", dueDate: input.dueDate, startDate: input.startDate, status: debtStatus(input.principal, 0, input.principal, input.dueDate), notes: input.notes, createdBy: input.userId, updatedBy: input.userId });
+  const result = await db.insert(loans).values({ kind: input.kind, counterparty: input.counterparty, description: input.description, currency: input.currency || "USD", interestRate: toMoney(input.interestRate ?? 0), interestPeriod: input.interestPeriod || "monthly", principal: toMoney(input.principal), balance: toMoney(input.principal), paid: "0.00", dueDate: input.dueDate, startDate: input.startDate, status: debtStatus(input.principal, 0, input.principal, input.dueDate), notes: input.notes, createdBy: input.userId, updatedBy: input.userId });
   return Number(result[0].insertId);
 }
 
@@ -405,10 +405,10 @@ export async function deleteExpense(id: number) {
   return { id };
 }
 
-export async function updateLoan(id: number, input: { kind: "loan" | "payable_merch" | "internal"; counterparty: string; description?: string; currency?: string; principal: number; paid: number; dueDate?: string; startDate?: string; notes?: string; userId?: number }) {
+export async function updateLoan(id: number, input: { kind: "loan" | "payable_merch" | "internal"; counterparty: string; description?: string; currency?: string; interestRate?: number; interestPeriod?: "monthly" | "weekly"; principal: number; paid: number; dueDate?: string; startDate?: string; notes?: string; userId?: number }) {
   const db = await getDb(); if (!db) throw new Error("Database is not available");
   const paid = Math.min(input.principal, Math.max(0, input.paid)); const balance = Math.max(0, input.principal - paid);
-  await db.update(loans).set({ kind: input.kind, counterparty: input.counterparty, description: input.description || null, currency: input.currency || "USD", principal: toMoney(input.principal), paid: toMoney(paid), balance: toMoney(balance), startDate: input.startDate || null, dueDate: input.dueDate || null, status: debtStatus(input.principal, paid, balance, input.dueDate), notes: input.notes || null, updatedBy: input.userId }).where(eq(loans.id, id));
+  await db.update(loans).set({ kind: input.kind, counterparty: input.counterparty, description: input.description || null, currency: input.currency || "USD", interestRate: toMoney(input.interestRate ?? 0), interestPeriod: input.interestPeriod || "monthly", principal: toMoney(input.principal), paid: toMoney(paid), balance: toMoney(balance), startDate: input.startDate || null, dueDate: input.dueDate || null, status: debtStatus(input.principal, paid, balance, input.dueDate), notes: input.notes || null, updatedBy: input.userId }).where(eq(loans.id, id));
   return { id, balance };
 }
 

@@ -40,3 +40,11 @@ body,.app-shell{background:var(--paper);color:var(--ink)}
 .chart-wrap .recharts-responsive-container { width: 100% !important; max-width: 100% !important; min-width: 0 !important; }
 .chart-wrap svg { display: block; max-width: 100%; }
 @media (max-width:760px) { .chart-wrap { height: 195px; } .chart-wrap .recharts-wrapper, .chart-wrap .recharts-surface { max-width: 100%; } }
+
+/* Iteración financiera y PWA */
+.metric-card-featured{position:relative;overflow:hidden;border-color:#4a8b85!important;box-shadow:0 12px 30px rgba(20,80,78,.18),inset 0 1px 0 rgba(154,232,223,.16)!important;transform:translateY(-1px)}
+.metric-card-featured:after{content:"";position:absolute;inset:0 auto auto 0;width:100%;height:3px;background:linear-gradient(90deg,#68c9be,#d2b274);opacity:.9}
+.install-button{white-space:nowrap}
+@media(max-width:760px){.install-button{font-size:10px;padding:8px 9px}.install-button svg{display:none}.top-actions .install-button{display:inline-flex}}
+@media(max-width:420px){.install-button{font-size:0;width:32px;height:32px;padding:0;justify-content:center}.install-button svg{display:block}}
+.dark-theme .metric-card-featured{border-color:#4c8f89!important;box-shadow:0 14px 32px rgba(0,0,0,.24),inset 0 1px 0 rgba(154,232,223,.12)!important}

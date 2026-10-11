@@ -112,6 +112,8 @@ export const loans = mysqlTable("loans", {
   counterparty: varchar("counterparty", { length: 180 }).notNull(),
   description: varchar("description", { length: 255 }),
   currency: varchar("currency", { length: 12 }).notNull().default("USD"),
+  interestRate: decimal("interestRate", { precision: 8, scale: 2 }).notNull().default("0"),
+  interestPeriod: mysqlEnum("interestPeriod", ["monthly", "weekly"]).notNull().default("monthly"),
   principal: decimal("principal", { precision: 12, scale: 2 }).notNull().default("0"),
   paid: decimal("paid", { precision: 12, scale: 2 }).notNull().default("0"),
   balance: decimal("balance", { precision: 12, scale: 2 }).notNull().default("0"),
