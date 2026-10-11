@@ -4,7 +4,7 @@
       "legacyId": 1,
       "name": "Funda Silicona (varios modelos)",
       "category": "Accesorios",
-      "stock": 215,
+      "stock": 193,
       "cost": 0.8,
       "supplier": "Propio",
       "minStock": 3
@@ -22,7 +22,7 @@
       "legacyId": 3,
       "name": "Termo Con Sensor",
       "category": "Bazar",
-      "stock": 98,
+      "stock": 97,
       "cost": 4.35,
       "supplier": "Propio",
       "minStock": 3
@@ -40,7 +40,7 @@
       "legacyId": 5,
       "name": "Vasos Cafeteros Stanley 500ml",
       "category": "Bazar",
-      "stock": 3,
+      "stock": 0,
       "cost": 5.17,
       "supplier": "Propio",
       "minStock": 3
@@ -67,7 +67,7 @@
       "legacyId": 8,
       "name": "Cargadores Completos iPhone (Pata Argentina)",
       "category": "Electrónica",
-      "stock": 98,
+      "stock": 96,
       "cost": 2.81,
       "supplier": "Propio",
       "minStock": 3
@@ -302,7 +302,7 @@
       "name": "Armaf Odyssey Mega 100ml",
       "category": "Perfumes",
       "stock": 1,
-      "cost": 16.62,
+      "cost": 16.625,
       "supplier": "Propio",
       "minStock": 3
     },
@@ -335,9 +335,9 @@
     },
     {
       "legacyId": 38,
-      "name": "Body Splash Réplica",
+      "name": "Body Splash Victoria Secret Réplica",
       "category": "Perfumes",
-      "stock": 100,
+      "stock": 97,
       "cost": 7.09,
       "supplier": "Propio",
       "minStock": 3
@@ -346,7 +346,7 @@
       "legacyId": 39,
       "name": "French Avenue Liquid Brun 100ml",
       "category": "Perfumes",
-      "stock": 1,
+      "stock": 0,
       "cost": 37.0,
       "supplier": "Propio",
       "minStock": 3
@@ -752,7 +752,7 @@
       "name": "Elfbar Ebcreate Bc Pro 40k puff",
       "category": "Vapers Descartables",
       "stock": 354,
-      "cost": 6.71,
+      "cost": 6.66,
       "supplier": "Propio",
       "minStock": 3
     },
@@ -823,7 +823,7 @@
       "legacyId": 92,
       "name": "Mnke Bars 6k Puff",
       "category": "Vapers Descartables",
-      "stock": 110,
+      "stock": 107,
       "cost": 0.95,
       "supplier": "Propio",
       "minStock": 3
@@ -873,8 +873,8 @@
       "total": 42.71,
       "profit": 14.23,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 2,
@@ -883,8 +883,8 @@
       "total": 36.5,
       "profit": 17.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 3,
@@ -893,8 +893,8 @@
       "total": 127.7,
       "profit": 36.28,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 4,
@@ -903,8 +903,8 @@
       "total": 17.57,
       "profit": 8.42,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 5,
@@ -913,8 +913,8 @@
       "total": 18.25,
       "profit": 8.85,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 6,
@@ -923,8 +923,8 @@
       "total": 16.22,
       "profit": 10.72,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 7,
@@ -933,8 +933,8 @@
       "total": 16.1,
       "profit": 7.64,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 8,
@@ -943,8 +943,8 @@
       "total": 18.36,
       "profit": 9.11,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 9,
@@ -953,8 +953,8 @@
       "total": 4.3,
       "profit": 3.43,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 10,
@@ -963,8 +963,8 @@
       "total": 27.68,
       "profit": 13.88,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 11,
@@ -973,8 +973,8 @@
       "total": 45.9,
       "profit": 19.71,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 12,
@@ -983,8 +983,8 @@
       "total": 10.12,
       "profit": 9.12,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 13,
@@ -993,8 +993,8 @@
       "total": 47.5,
       "profit": 19.5,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 14,
@@ -1003,8 +1003,8 @@
       "total": 17.5,
       "profit": 8.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 15,
@@ -1013,8 +1013,8 @@
       "total": 130.93,
       "profit": 35.93,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 16,
@@ -1023,8 +1023,8 @@
       "total": 48.5,
       "profit": 39.61,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 17,
@@ -1033,8 +1033,8 @@
       "total": 99.37,
       "profit": 27.02,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 18,
@@ -1043,8 +1043,8 @@
       "total": 45.16,
       "profit": 22.6,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 19,
@@ -1053,8 +1053,8 @@
       "total": 50.0,
       "profit": 28.8,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 20,
@@ -1063,8 +1063,8 @@
       "total": 20.22,
       "profit": 11.72,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 21,
@@ -1073,8 +1073,8 @@
       "total": 76.0,
       "profit": 15.19,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 22,
@@ -1083,8 +1083,8 @@
       "total": 4.0,
       "profit": 2.9,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 23,
@@ -1093,8 +1093,8 @@
       "total": 9.45,
       "profit": 6.95,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 24,
@@ -1103,8 +1103,8 @@
       "total": 45.0,
       "profit": 8.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 25,
@@ -1113,8 +1113,8 @@
       "total": 5.25,
       "profit": 4.75,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 26,
@@ -1123,8 +1123,8 @@
       "total": 8.1,
       "profit": 4.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 27,
@@ -1133,8 +1133,8 @@
       "total": 56.0,
       "profit": 13.5,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 28,
@@ -1143,8 +1143,8 @@
       "total": 10.81,
       "profit": 8.51,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 29,
@@ -1153,8 +1153,8 @@
       "total": 16.21,
       "profit": 10.71,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 30,
@@ -1163,8 +1163,8 @@
       "total": 60.7,
       "profit": 43.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 31,
@@ -1173,8 +1173,8 @@
       "total": 228.0,
       "profit": 54.3,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 32,
@@ -1183,8 +1183,8 @@
       "total": 23.64,
       "profit": 13.79,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 33,
@@ -1193,8 +1193,8 @@
       "total": 40.26,
       "profit": 19.26,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 34,
@@ -1203,8 +1203,8 @@
       "total": 38.25,
       "profit": 19.05,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 35,
@@ -1213,8 +1213,8 @@
       "total": 11.4,
       "profit": 5.9,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 36,
@@ -1223,8 +1223,8 @@
       "total": 17.56,
       "profit": 8.06,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 37,
@@ -1233,8 +1233,8 @@
       "total": 10.13,
       "profit": 5.23,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 38,
@@ -1243,8 +1243,8 @@
       "total": 30.4,
       "profit": 12.59,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 39,
@@ -1253,8 +1253,8 @@
       "total": 7.0,
       "profit": 4.5,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 40,
@@ -1263,8 +1263,8 @@
       "total": 5.4,
       "profit": 4.4,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 41,
@@ -1273,8 +1273,8 @@
       "total": 9.45,
       "profit": 7.62,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 42,
@@ -1283,8 +1283,8 @@
       "total": 13.51,
       "profit": 6.51,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 43,
@@ -1293,8 +1293,8 @@
       "total": 1097.97,
       "profit": 245.17,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 44,
@@ -1303,8 +1303,8 @@
       "total": 75.77,
       "profit": 33.37,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 45,
@@ -1313,8 +1313,8 @@
       "total": 10.81,
       "profit": 7.81,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 46,
@@ -1323,8 +1323,8 @@
       "total": 15.54,
       "profit": 6.03,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 47,
@@ -1333,8 +1333,8 @@
       "total": 20.5,
       "profit": 10.5,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 48,
@@ -1343,8 +1343,8 @@
       "total": 17.56,
       "profit": 7.31,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 49,
@@ -1353,8 +1353,8 @@
       "total": 10.13,
       "profit": 5.23,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 50,
@@ -1363,8 +1363,8 @@
       "total": 8.1,
       "profit": 6.27,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 51,
@@ -1373,8 +1373,8 @@
       "total": 166.0,
       "profit": 78.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 52,
@@ -1383,8 +1383,8 @@
       "total": 10.13,
       "profit": 5.5,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 53,
@@ -1393,8 +1393,8 @@
       "total": 148.64,
       "profit": 30.14,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 54,
@@ -1403,8 +1403,8 @@
       "total": 70.0,
       "profit": 20.5,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 55,
@@ -1413,8 +1413,8 @@
       "total": 40.5,
       "profit": 24.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 56,
@@ -1423,8 +1423,8 @@
       "total": 72.5,
       "profit": 15.1,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 57,
@@ -1433,8 +1433,8 @@
       "total": 17.56,
       "profit": 7.56,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 58,
@@ -1443,8 +1443,8 @@
       "total": 3.37,
       "profit": 1.57,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 59,
@@ -1453,8 +1453,8 @@
       "total": 35.13,
       "profit": 16.73,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 60,
@@ -1463,8 +1463,8 @@
       "total": 120.27,
       "profit": 62.27,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 61,
@@ -1473,8 +1473,8 @@
       "total": 16.21,
       "profit": 10.71,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 62,
@@ -1483,8 +1483,8 @@
       "total": 52.7,
       "profit": 23.7,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 63,
@@ -1493,8 +1493,8 @@
       "total": 50.67,
       "profit": 15.67,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 64,
@@ -1503,8 +1503,8 @@
       "total": 21.62,
       "profit": 8.5,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 65,
@@ -1513,8 +1513,8 @@
       "total": 10.13,
       "profit": 3.57,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 66,
@@ -1523,8 +1523,8 @@
       "total": 17.56,
       "profit": 7.31,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 67,
@@ -1533,8 +1533,8 @@
       "total": 10.13,
       "profit": 3.57,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 68,
@@ -1543,8 +1543,8 @@
       "total": 8.1,
       "profit": 6.27,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 69,
@@ -1553,8 +1553,8 @@
       "total": 14.86,
       "profit": 7.86,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 70,
@@ -1563,8 +1563,8 @@
       "total": 3.37,
       "profit": 1.57,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 71,
@@ -1573,8 +1573,8 @@
       "total": 10.81,
       "profit": 5.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 72,
@@ -1583,8 +1583,8 @@
       "total": 4.05,
       "profit": 2.45,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 73,
@@ -1593,8 +1593,8 @@
       "total": 3.37,
       "profit": 1.57,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 74,
@@ -1603,8 +1603,8 @@
       "total": 38.5,
       "profit": 6.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 75,
@@ -1613,8 +1613,8 @@
       "total": 70.94,
       "profit": 45.91,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 76,
@@ -1623,8 +1623,8 @@
       "total": 100.0,
       "profit": 39.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 77,
@@ -1633,8 +1633,8 @@
       "total": 6.75,
       "profit": 3.09,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 78,
@@ -1643,8 +1643,8 @@
       "total": 109.45,
       "profit": 12.45,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 79,
@@ -1653,8 +1653,8 @@
       "total": 3.37,
       "profit": 1.57,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 80,
@@ -1663,8 +1663,8 @@
       "total": 8.1,
       "profit": 6.27,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 81,
@@ -1673,8 +1673,8 @@
       "total": 31.75,
       "profit": 12.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 82,
@@ -1683,8 +1683,8 @@
       "total": 17.56,
       "profit": 8.16,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 83,
@@ -1693,8 +1693,8 @@
       "total": 17.56,
       "profit": 7.66,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 84,
@@ -1703,8 +1703,8 @@
       "total": 10.13,
       "profit": 5.23,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 85,
@@ -1713,8 +1713,8 @@
       "total": 27.5,
       "profit": 8.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 86,
@@ -1723,8 +1723,8 @@
       "total": 79.1,
       "profit": 23.4,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 87,
@@ -1733,8 +1733,8 @@
       "total": 17.16,
       "profit": 6.9,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 88,
@@ -1743,8 +1743,8 @@
       "total": 7.91,
       "profit": 6.08,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 89,
@@ -1753,8 +1753,8 @@
       "total": 10.66,
       "profit": 4.66,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 90,
@@ -1763,8 +1763,8 @@
       "total": 177.5,
       "profit": 53.5,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 91,
@@ -1773,8 +1773,8 @@
       "total": 45.42,
       "profit": 23.72,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 92,
@@ -1783,8 +1783,8 @@
       "total": 135.6,
       "profit": 56.95,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 93,
@@ -1793,8 +1793,8 @@
       "total": 30.0,
       "profit": 24.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 94,
@@ -1803,8 +1803,8 @@
       "total": 16.03,
       "profit": 9.03,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 95,
@@ -1813,8 +1813,8 @@
       "total": 4.0,
       "profit": 2.9,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 96,
@@ -1823,8 +1823,8 @@
       "total": 133.24,
       "profit": 34.24,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 97,
@@ -1833,8 +1833,8 @@
       "total": 226.25,
       "profit": 65.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 98,
@@ -1843,8 +1843,8 @@
       "total": 49.96,
       "profit": 12.46,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 99,
@@ -1853,8 +1853,8 @@
       "total": 3.99,
       "profit": 2.37,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 100,
@@ -1863,8 +1863,8 @@
       "total": 49.96,
       "profit": 12.46,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 101,
@@ -1873,8 +1873,8 @@
       "total": 13.14,
       "profit": 2.74,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 102,
@@ -1883,8 +1883,8 @@
       "total": 98.69,
       "profit": 25.69,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 103,
@@ -1893,8 +1893,8 @@
       "total": 10.51,
       "profit": 0.11,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 104,
@@ -1903,8 +1903,8 @@
       "total": 35.5,
       "profit": 16.85,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 105,
@@ -1913,8 +1913,8 @@
       "total": 48.65,
       "profit": 16.15,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 106,
@@ -1923,8 +1923,8 @@
       "total": 13.14,
       "profit": 7.6,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 107,
@@ -1933,8 +1933,8 @@
       "total": 19.72,
       "profit": 11.22,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 108,
@@ -1943,8 +1943,8 @@
       "total": 17.09,
       "profit": 7.19,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 109,
@@ -1953,8 +1953,8 @@
       "total": 7.83,
       "profit": 4.26,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 110,
@@ -1963,8 +1963,8 @@
       "total": 13.15,
       "profit": 7.65,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 111,
@@ -1973,8 +1973,8 @@
       "total": 14.53,
       "profit": 9.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 112,
@@ -1983,8 +1983,8 @@
       "total": 11.14,
       "profit": 5.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 113,
@@ -1993,8 +1993,8 @@
       "total": 51.14,
       "profit": 21.44,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 114,
@@ -2003,8 +2003,8 @@
       "total": 70.0,
       "profit": 23.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 115,
@@ -2013,8 +2013,8 @@
       "total": 16.58,
       "profit": 6.33,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 116,
@@ -2023,8 +2023,8 @@
       "total": 72.5,
       "profit": 21.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 117,
@@ -2033,8 +2033,8 @@
       "total": 59.29,
       "profit": 10.89,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 118,
@@ -2043,8 +2043,8 @@
       "total": 17.3,
       "profit": 8.05,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 119,
@@ -2053,8 +2053,8 @@
       "total": 18.58,
       "profit": 6.28,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 120,
@@ -2063,8 +2063,8 @@
       "total": 16.86,
       "profit": 7.46,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 121,
@@ -2073,8 +2073,8 @@
       "total": 3.22,
       "profit": 1.38,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 122,
@@ -2083,8 +2083,8 @@
       "total": 33.5,
       "profit": 13.7,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 123,
@@ -2093,8 +2093,8 @@
       "total": 113.4,
       "profit": 14.4,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 124,
@@ -2103,8 +2103,8 @@
       "total": 3.18,
       "profit": 1.35,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 125,
@@ -2113,8 +2113,8 @@
       "total": 885.6,
       "profit": 42.13,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 126,
@@ -2123,8 +2123,8 @@
       "total": 193.75,
       "profit": 26.36,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 127,
@@ -2133,8 +2133,8 @@
       "total": 21.66,
       "profit": 7.66,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 128,
@@ -2143,8 +2143,8 @@
       "total": 9.56,
       "profit": 5.06,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 129,
@@ -2153,8 +2153,8 @@
       "total": 16.66,
       "profit": 9.66,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 130,
@@ -2163,8 +2163,8 @@
       "total": 10.89,
       "profit": 4.74,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 131,
@@ -2173,8 +2173,8 @@
       "total": 5.12,
       "profit": 4.17,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 132,
@@ -2183,8 +2183,8 @@
       "total": 198.0,
       "profit": 57.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 133,
@@ -2193,8 +2193,8 @@
       "total": 16.67,
       "profit": 11.92,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 134,
@@ -2203,8 +2203,8 @@
       "total": 16.61,
       "profit": 6.36,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 135,
@@ -2213,8 +2213,8 @@
       "total": 85.0,
       "profit": 32.5,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 136,
@@ -2223,8 +2223,8 @@
       "total": 10.86,
       "profit": 4.71,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 137,
@@ -2233,8 +2233,8 @@
       "total": 16.57,
       "profit": 7.17,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 138,
@@ -2243,8 +2243,8 @@
       "total": 40.15,
       "profit": 5.15,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 139,
@@ -2253,8 +2253,8 @@
       "total": 6.41,
       "profit": 4.51,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 140,
@@ -2263,8 +2263,8 @@
       "total": 12.82,
       "profit": 6.09,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 141,
@@ -2273,8 +2273,8 @@
       "total": 12.82,
       "profit": 5.42,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 142,
@@ -2283,8 +2283,8 @@
       "total": 15.31,
       "profit": 6.06,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 143,
@@ -2293,8 +2293,8 @@
       "total": 16.59,
       "profit": 9.59,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 144,
@@ -2303,8 +2303,8 @@
       "total": 69.23,
       "profit": 34.53,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 145,
@@ -2313,8 +2313,8 @@
       "total": 10.89,
       "profit": 4.74,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 146,
@@ -2323,8 +2323,8 @@
       "total": 34.39,
       "profit": 5.74,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 147,
@@ -2333,8 +2333,8 @@
       "total": 15.25,
       "profit": 7.85,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 148,
@@ -2343,8 +2343,8 @@
       "total": 38.09,
       "profit": 1.19,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 149,
@@ -2353,8 +2353,8 @@
       "total": 3.2,
       "profit": 1.37,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 150,
@@ -2363,8 +2363,8 @@
       "total": 3.2,
       "profit": 1.37,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 151,
@@ -2373,8 +2373,8 @@
       "total": 48.91,
       "profit": 17.89,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 152,
@@ -2383,8 +2383,8 @@
       "total": 18.58,
       "profit": 7.48,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 153,
@@ -2393,8 +2393,8 @@
       "total": 380.7,
       "profit": 101.83,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 154,
@@ -2403,8 +2403,8 @@
       "total": 16.61,
       "profit": 6.71,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 155,
@@ -2413,8 +2413,8 @@
       "total": 18.53,
       "profit": 7.43,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 156,
@@ -2423,8 +2423,8 @@
       "total": 13.41,
       "profit": 8.24,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 157,
@@ -2433,8 +2433,8 @@
       "total": 43.58,
       "profit": 18.58,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 158,
@@ -2443,8 +2443,8 @@
       "total": 5.69,
       "profit": 2.03,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 159,
@@ -2453,8 +2453,8 @@
       "total": 13.25,
       "profit": 7.9,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 160,
@@ -2463,8 +2463,8 @@
       "total": 10.62,
       "profit": 5.37,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 161,
@@ -2473,8 +2473,8 @@
       "total": 9.37,
       "profit": 3.22,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 162,
@@ -2483,8 +2483,8 @@
       "total": 74.5,
       "profit": 48.65,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 163,
@@ -2493,8 +2493,8 @@
       "total": 109.37,
       "profit": 9.37,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 164,
@@ -2503,8 +2503,8 @@
       "total": 17.5,
       "profit": 8.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 165,
@@ -2513,8 +2513,8 @@
       "total": 91.25,
       "profit": 39.55,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 166,
@@ -2523,8 +2523,8 @@
       "total": 40.0,
       "profit": 14.15,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 167,
@@ -2533,8 +2533,8 @@
       "total": 40.0,
       "profit": 14.15,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 168,
@@ -2543,8 +2543,8 @@
       "total": 31.25,
       "profit": 6.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 169,
@@ -2553,8 +2553,8 @@
       "total": 40.0,
       "profit": 14.15,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 170,
@@ -2563,8 +2563,8 @@
       "total": 6.25,
       "profit": 4.35,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 171,
@@ -2573,8 +2573,8 @@
       "total": 40.0,
       "profit": 14.15,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 172,
@@ -2583,8 +2583,8 @@
       "total": 17.5,
       "profit": 8.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 173,
@@ -2593,8 +2593,8 @@
       "total": 50.0,
       "profit": 15.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 174,
@@ -2603,8 +2603,8 @@
       "total": 23.75,
       "profit": 8.95,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 175,
@@ -2613,8 +2613,8 @@
       "total": 17.5,
       "profit": 7.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 176,
@@ -2623,8 +2623,8 @@
       "total": 32.0,
       "profit": 9.5,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 177,
@@ -2633,8 +2633,8 @@
       "total": 10.6,
       "profit": 4.45,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 178,
@@ -2643,8 +2643,8 @@
       "total": 91.42,
       "profit": 24.82,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 179,
@@ -2653,8 +2653,8 @@
       "total": 131.5,
       "profit": 31.6,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 180,
@@ -2663,8 +2663,8 @@
       "total": 5.12,
       "profit": 4.17,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 181,
@@ -2673,8 +2673,8 @@
       "total": 17.72,
       "profit": 7.22,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 182,
@@ -2683,8 +2683,8 @@
       "total": 13.75,
       "profit": 2.5,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 183,
@@ -2693,8 +2693,8 @@
       "total": 43.75,
       "profit": 9.75,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 184,
@@ -2703,8 +2703,8 @@
       "total": 3.12,
       "profit": 1.29,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 185,
@@ -2713,8 +2713,8 @@
       "total": 17.19,
       "profit": 7.29,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 186,
@@ -2723,8 +2723,8 @@
       "total": 184.81,
       "profit": 24.41,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 187,
@@ -2733,8 +2733,8 @@
       "total": 9.5,
       "profit": 4.59,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 188,
@@ -2743,8 +2743,8 @@
       "total": 10.75,
       "profit": 4.6,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 189,
@@ -2753,8 +2753,8 @@
       "total": 16.45,
       "profit": 9.45,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 190,
@@ -2763,8 +2763,8 @@
       "total": 3.12,
       "profit": 1.29,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 191,
@@ -2773,8 +2773,8 @@
       "total": 41.58,
       "profit": 11.98,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 192,
@@ -2783,8 +2783,8 @@
       "total": 15.18,
       "profit": 5.28,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 193,
@@ -2793,8 +2793,8 @@
       "total": 29.74,
       "profit": 10.24,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 194,
@@ -2803,8 +2803,8 @@
       "total": 15.82,
       "profit": 5.92,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 195,
@@ -2813,8 +2813,8 @@
       "total": 94.93,
       "profit": -23.86,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 196,
@@ -2823,8 +2823,8 @@
       "total": 75.94,
       "profit": 14.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 197,
@@ -2833,8 +2833,8 @@
       "total": 187.5,
       "profit": 56.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 198,
@@ -2843,8 +2843,8 @@
       "total": 18.35,
       "profit": 7.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 199,
@@ -2853,8 +2853,8 @@
       "total": 113.92,
       "profit": 13.95,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 200,
@@ -2863,8 +2863,8 @@
       "total": 17.08,
       "profit": 7.18,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 201,
@@ -2873,8 +2873,8 @@
       "total": 9.49,
       "profit": 6.64,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 202,
@@ -2883,8 +2883,8 @@
       "total": 132.95,
       "profit": 24.41,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 203,
@@ -2893,8 +2893,8 @@
       "total": 17.08,
       "profit": 7.18,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 204,
@@ -2903,8 +2903,8 @@
       "total": 18.35,
       "profit": 7.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 205,
@@ -2913,8 +2913,8 @@
       "total": 60.25,
       "profit": 24.06,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 206,
@@ -2923,8 +2923,8 @@
       "total": 47.29,
       "profit": 20.89,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 207,
@@ -2933,8 +2933,8 @@
       "total": 40.25,
       "profit": 14.18,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 208,
@@ -2943,8 +2943,8 @@
       "total": 11.34,
       "profit": -0.67,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 209,
@@ -2953,8 +2953,8 @@
       "total": 147.16,
       "profit": 36.16,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 210,
@@ -2963,8 +2963,8 @@
       "total": 3.14,
       "profit": 1.31,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 211,
@@ -2973,8 +2973,8 @@
       "total": 118.5,
       "profit": 9.5,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 212,
@@ -2983,8 +2983,8 @@
       "total": 11.3,
       "profit": 8.45,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 213,
@@ -2993,8 +2993,8 @@
       "total": 14.44,
       "profit": 6.54,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 214,
@@ -3003,8 +3003,8 @@
       "total": 25.15,
       "profit": -1.34,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 215,
@@ -3013,8 +3013,8 @@
       "total": 42.13,
       "profit": 10.13,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 216,
@@ -3023,8 +3023,8 @@
       "total": 162.89,
       "profit": 44.83,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 217,
@@ -3033,8 +3033,8 @@
       "total": 16.68,
       "profit": 7.08,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 218,
@@ -3043,8 +3043,8 @@
       "total": 16.68,
       "profit": 7.08,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 219,
@@ -3053,8 +3053,8 @@
       "total": 13.08,
       "profit": 8.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 220,
@@ -3063,8 +3063,8 @@
       "total": 4.98,
       "profit": 3.48,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 221,
@@ -3073,8 +3073,8 @@
       "total": 13.08,
       "profit": 8.0,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 222,
@@ -3083,8 +3083,8 @@
       "total": 67.29,
       "profit": 31.73,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 223,
@@ -3093,8 +3093,8 @@
       "total": 12.49,
       "profit": 5.64,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 224,
@@ -3103,8 +3103,8 @@
       "total": 29.98,
       "profit": 7.48,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 225,
@@ -3113,8 +3113,8 @@
       "total": 13.1,
       "profit": 8.03,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 226,
@@ -3123,8 +3123,8 @@
       "total": 13.1,
       "profit": 8.03,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 227,
@@ -3133,8 +3133,8 @@
       "total": 15.61,
       "profit": 11.11,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 228,
@@ -3143,8 +3143,8 @@
       "total": 4.99,
       "profit": 4.04,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 229,
@@ -3153,8 +3153,8 @@
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 230,
@@ -3163,8 +3163,8 @@
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 231,
@@ -3173,8 +3173,8 @@
       "total": 10.03,
       "profit": 4.03,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 232,
@@ -3183,8 +3183,8 @@
       "total": 154.23,
       "profit": 26.6,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 233,
@@ -3193,8 +3193,8 @@
       "total": 154.85,
       "profit": 54.55,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 234,
@@ -3203,8 +3203,8 @@
       "total": 130.4,
       "profit": 36.8,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 235,
@@ -3213,8 +3213,8 @@
       "total": 97.17,
       "profit": 43.5,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 236,
@@ -3223,8 +3223,8 @@
       "total": 6.26,
       "profit": 5.46,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 237,
@@ -3233,8 +3233,8 @@
       "total": 109.71,
       "profit": 28.81,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 238,
@@ -3243,8 +3243,8 @@
       "total": 155.48,
       "profit": 55.18,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 239,
@@ -3253,8 +3253,8 @@
       "total": 47.46,
       "profit": 22.06,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 240,
@@ -3263,8 +3263,8 @@
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 241,
@@ -3273,8 +3273,8 @@
       "total": 20.08,
       "profit": 12.56,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 242,
@@ -3283,8 +3283,8 @@
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 243,
@@ -3293,8 +3293,8 @@
       "total": 13.16,
       "profit": 8.08,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 244,
@@ -3303,8 +3303,8 @@
       "total": 18.18,
       "profit": 7.08,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 245,
@@ -3313,8 +3313,8 @@
       "total": 47.41,
       "profit": 22.21,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 246,
@@ -3323,8 +3323,8 @@
       "total": 66.66,
       "profit": 31.1,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 247,
@@ -3333,8 +3333,8 @@
       "total": 412.0,
       "profit": 73.15,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 248,
@@ -3343,8 +3343,8 @@
       "total": 9.52,
       "profit": 6.97,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 249,
@@ -3353,8 +3353,8 @@
       "total": 273.7,
       "profit": 6.9,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 250,
@@ -3363,8 +3363,8 @@
       "total": 13.33,
       "profit": 8.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 251,
@@ -3373,8 +3373,8 @@
       "total": 13.33,
       "profit": 8.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 252,
@@ -3383,8 +3383,8 @@
       "total": 18.23,
       "profit": 7.13,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 253,
@@ -3393,8 +3393,8 @@
       "total": 3.14,
       "profit": 2.34,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 254,
@@ -3403,8 +3403,8 @@
       "total": 10.06,
       "profit": 4.06,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 255,
@@ -3413,8 +3413,8 @@
       "total": 17.5,
       "profit": 13.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 256,
@@ -3423,8 +3423,8 @@
       "total": 13.33,
       "profit": 8.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 257,
@@ -3433,8 +3433,8 @@
       "total": 9.18,
       "profit": 6.75,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 258,
@@ -3443,8 +3443,8 @@
       "total": 13.33,
       "profit": 8.25,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 259,
@@ -3453,8 +3453,8 @@
       "total": 15.35,
       "profit": 6.54,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 260,
@@ -3463,8 +3463,8 @@
       "total": 196.74,
       "profit": 48.24,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 261,
@@ -3473,8 +3473,8 @@
       "total": 76.0,
       "profit": 35.36,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 262,
@@ -3483,8 +3483,8 @@
       "total": 115.91,
       "profit": 16.91,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 263,
@@ -3493,8 +3493,8 @@
       "total": 15.76,
       "profit": 5.76,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 264,
@@ -3503,8 +3503,8 @@
       "total": 68.59,
       "profit": 25.77,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 265,
@@ -3513,8 +3513,8 @@
       "total": 48.0,
       "profit": 12.57,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 266,
@@ -3523,8 +3523,8 @@
       "total": 11.27,
       "profit": 4.47,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 267,
@@ -3533,8 +3533,8 @@
       "total": 11.27,
       "profit": 7.47,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 268,
@@ -3543,8 +3543,8 @@
       "total": 14.41,
       "profit": 6.13,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 269,
@@ -3553,8 +3553,8 @@
       "total": 17.5,
       "profit": 12.75,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 270,
@@ -3563,8 +3563,8 @@
       "total": 5.95,
       "profit": 3.14,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 271,
@@ -3573,8 +3573,8 @@
       "total": 16.29,
       "profit": 6.89,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 272,
@@ -3583,8 +3583,8 @@
       "total": 13.15,
       "profit": 8.07,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 273,
@@ -3593,8 +3593,8 @@
       "total": 15.66,
       "profit": 5.76,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 274,
@@ -3603,8 +3603,8 @@
       "total": 7.5,
       "profit": 1.5,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 275,
@@ -3613,8 +3613,8 @@
       "total": 12.53,
       "profit": 8.03,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 276,
@@ -3623,8 +3623,8 @@
       "total": 123.3,
       "profit": 30.78,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 277,
@@ -3633,8 +3633,8 @@
       "total": 62.65,
       "profit": 18.65,
       "customer": null,
-      "phone": "Periodo antes del seguimiento de clientes, no hay registro",
-      "channel": "Histórico Excel"
+      "phone": null,
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 278,
@@ -3644,7 +3644,7 @@
       "profit": 4.06,
       "customer": "Gino",
       "phone": "+54 9 351 858-1054",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 279,
@@ -3654,7 +3654,7 @@
       "profit": 13.4,
       "customer": "Benja Guillen",
       "phone": "+54 9 351 513-8114",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 280,
@@ -3664,7 +3664,7 @@
       "profit": 1.3,
       "customer": "Leo Reyna",
       "phone": "+54 9 351 382-1799",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 281,
@@ -3674,7 +3674,7 @@
       "profit": 9.5,
       "customer": "Hugo Gonzales",
       "phone": "+54 9 351 273-7886",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 282,
@@ -3684,7 +3684,7 @@
       "profit": 37.2,
       "customer": "Veronica Srebnik",
       "phone": "+54 9 11 3068-4771",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 283,
@@ -3694,7 +3694,7 @@
       "profit": -0.83,
       "customer": "Joaquin Gaido",
       "phone": "+54 9 3572 61-6393",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 284,
@@ -3704,7 +3704,7 @@
       "profit": 7.07,
       "customer": "Santiago Duran",
       "phone": "+54 9 351 345-8695",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 285,
@@ -3714,7 +3714,7 @@
       "profit": 6.97,
       "customer": "Facundo Manzano",
       "phone": "+54 9 351 666-4252",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 286,
@@ -3724,7 +3724,7 @@
       "profit": 15.58,
       "customer": "Nico Guillen",
       "phone": "+54 9 351 633-4527",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 287,
@@ -3734,7 +3734,7 @@
       "profit": 5.57,
       "customer": "Adriel",
       "phone": "+54 9 351 305-1197",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 288,
@@ -3744,7 +3744,7 @@
       "profit": 30.45,
       "customer": "Bautista Restifo",
       "phone": "+54 9 11 3668-9087",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 289,
@@ -3754,7 +3754,7 @@
       "profit": 5.57,
       "customer": "Santino Valotto",
       "phone": "+54 9 351 622-4582",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 290,
@@ -3764,7 +3764,7 @@
       "profit": 8.07,
       "customer": "Francisco Zingone",
       "phone": "+54 9 351 812-5173",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 291,
@@ -3774,7 +3774,7 @@
       "profit": 13.69,
       "customer": "Tom",
       "phone": "+54 9 351 373-1614",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 292,
@@ -3784,7 +3784,7 @@
       "profit": 5.57,
       "customer": "Yael",
       "phone": "+54 9 351 564-1706",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 293,
@@ -3794,7 +3794,7 @@
       "profit": 22.21,
       "customer": "Laureano Buenos Aires",
       "phone": "+54 9 236 457-6075",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 294,
@@ -3804,7 +3804,7 @@
       "profit": 34.48,
       "customer": "Maxi",
       "phone": "+54 9 351 321-7029",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 295,
@@ -3814,7 +3814,7 @@
       "profit": -0.96,
       "customer": "Hugo Gonzales",
       "phone": "+54 9 351 273-7886",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 296,
@@ -3824,7 +3824,7 @@
       "profit": 31.53,
       "customer": "Santy",
       "phone": "+54 9 351 802-9520",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 297,
@@ -3834,7 +3834,7 @@
       "profit": 5.87,
       "customer": "Fabi",
       "phone": "+54 9 351 213-1970",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 298,
@@ -3844,7 +3844,7 @@
       "profit": 8.28,
       "customer": "Lautaro Casanova",
       "phone": "+54 9 351 231-7154",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 299,
@@ -3854,7 +3854,7 @@
       "profit": 5.87,
       "customer": "Santi",
       "phone": "+54 9 3542 46-1459",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 300,
@@ -3864,7 +3864,7 @@
       "profit": 7.38,
       "customer": "Nico Guillen",
       "phone": "+54 9 351 633-4527",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 301,
@@ -3874,7 +3874,7 @@
       "profit": -18.75,
       "customer": "Ariel Miramar",
       "phone": "+54 9 3563 40-8553",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 302,
@@ -3884,7 +3884,7 @@
       "profit": 7.07,
       "customer": "Alejo",
       "phone": "+54 9 351 764-3196",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 303,
@@ -3894,7 +3894,7 @@
       "profit": 8.07,
       "customer": "Jeremias",
       "phone": "+54 9 351 211 3663",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 304,
@@ -3904,7 +3904,7 @@
       "profit": 8.07,
       "customer": "Felipe",
       "phone": "+54 9 351 650 9578",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 305,
@@ -3914,7 +3914,7 @@
       "profit": 2.29,
       "customer": "Lautaro",
       "phone": "+54 9 351 321-7682",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 306,
@@ -3924,7 +3924,7 @@
       "profit": 5.87,
       "customer": "Fran",
       "phone": "+54 9 351 314 5559",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 307,
@@ -3934,7 +3934,7 @@
       "profit": 5.87,
       "customer": "Leon Pepi",
       "phone": "+54 9 351 365-7077",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 308,
@@ -3944,7 +3944,7 @@
       "profit": 30.65,
       "customer": "Tobi",
       "phone": "+54 9 351 242 7737",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 309,
@@ -3954,7 +3954,7 @@
       "profit": 5.87,
       "customer": "Elias",
       "phone": "+54 9 351 878 2290",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 310,
@@ -3964,7 +3964,7 @@
       "profit": 7.07,
       "customer": "Leon Pepi",
       "phone": "+54 9 351 365-7077",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 311,
@@ -3974,7 +3974,7 @@
       "profit": 5.87,
       "customer": "Thiago Vázquez",
       "phone": "+54 9 351 351 3820",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 312,
@@ -3984,7 +3984,7 @@
       "profit": 5.99,
       "customer": "Juan Segura",
       "phone": "+54 9 351 701-2568",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 313,
@@ -3994,7 +3994,7 @@
       "profit": 4.76,
       "customer": "Adriel",
       "phone": "+54 9 351 305-1197",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 314,
@@ -4004,7 +4004,7 @@
       "profit": 23.43,
       "customer": "Juani",
       "phone": "+54 9 351 768-7374",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 315,
@@ -4014,7 +4014,7 @@
       "profit": 4.76,
       "customer": "Fabi",
       "phone": "+54 9 351 213-1970",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 316,
@@ -4024,7 +4024,7 @@
       "profit": 5.64,
       "customer": "Gaston Almeida",
       "phone": "+54 9 351 300-8614",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 317,
@@ -4034,7 +4034,7 @@
       "profit": 12.32,
       "customer": "Sebastian Bazan",
       "phone": "+54 9 351 215-6739",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 318,
@@ -4044,7 +4044,7 @@
       "profit": 5.87,
       "customer": "Valentina",
       "phone": "+54 9 351 557 6774",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 319,
@@ -4054,7 +4054,7 @@
       "profit": 57.43,
       "customer": "Nano",
       "phone": "+54 9 351 593-5998",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 320,
@@ -4064,7 +4064,7 @@
       "profit": 11.74,
       "customer": "Jere Og",
       "phone": "+54 9 351 752-2299",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 321,
@@ -4074,7 +4074,7 @@
       "profit": 6.61,
       "customer": "Delfina",
       "phone": "+54 351 805 3623",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 322,
@@ -4084,7 +4084,7 @@
       "profit": 11.99,
       "customer": "Franco",
       "phone": "+54 351 805 3623",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 323,
@@ -4094,7 +4094,7 @@
       "profit": 33.82,
       "customer": "Juan",
       "phone": "+54 9 351 770-5981",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 324,
@@ -4104,7 +4104,7 @@
       "profit": 6.0,
       "customer": "Zaira",
       "phone": "+54 9 351 650 9578",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 325,
@@ -4114,7 +4114,7 @@
       "profit": 8.7,
       "customer": "Maximo Tinta",
       "phone": "+54 9 11 5588-3529",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 326,
@@ -4124,7 +4124,7 @@
       "profit": 4.35,
       "customer": "Maximo Tinta",
       "phone": "+54 9 11 5588-3529",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
     },
     {
       "legacyId": 327,
@@ -4134,7 +4134,57 @@
       "profit": 34.0,
       "customer": "Elias",
       "phone": "+54 9 351 878 2290",
-      "channel": "Histórico Excel"
+      "channel": "WhatsApp"
+    },
+    {
+      "legacyId": 328,
+      "date": "2026-10-10",
+      "description": "1 Termo Con Sensor, 2 Cargadores Completos iPhone\n (Pata argentina)",
+      "total": 19.87,
+      "profit": 9.9,
+      "customer": "Jaz",
+      "phone": "+54 9 351 393 8562",
+      "channel": "WhatsApp"
+    },
+    {
+      "legacyId": 329,
+      "date": "2026-10-10",
+      "description": "2 Mnke Bars 6k puff",
+      "total": 9.94,
+      "profit": 8.04,
+      "customer": "Rami",
+      "phone": "+54 9 351 563 3778",
+      "channel": "WhatsApp"
+    },
+    {
+      "legacyId": 330,
+      "date": "2026-10-10",
+      "description": "3 Vasos cafeteros Stanley 500ml, 3 Body splash replica, 5 fundas silicona,",
+      "total": 72.04,
+      "profit": 24.17,
+      "customer": "Tony",
+      "phone": "+54 9 351 864 4258",
+      "channel": "WhatsApp"
+    },
+    {
+      "legacyId": 331,
+      "date": "2026-10-10",
+      "description": "1 Elfbar Ice King 40k puff",
+      "total": 15.52,
+      "profit": 4.81,
+      "customer": "Santino Valotto",
+      "phone": "+54 9 351 622-4582",
+      "channel": "WhatsApp"
+    },
+    {
+      "legacyId": 332,
+      "date": "2026-10-10",
+      "description": "1 French Avenue Liquid Brun 100ml",
+      "total": 49.68,
+      "profit": 12.68,
+      "customer": "Benja Guillen",
+      "phone": "+54 9 351 513-8114",
+      "channel": "WhatsApp"
     }
   ],
   "customers": [
@@ -4149,10 +4199,10 @@
     {
       "name": "Benja Guillen",
       "phone": "+54 9 351 513-8114",
-      "purchases": 1,
-      "spent": 38.0,
+      "purchases": 2,
+      "spent": 87.68,
       "firstPurchase": "2026-09-23",
-      "lastPurchase": "2026-09-23"
+      "lastPurchase": "2026-10-10"
     },
     {
       "name": "Leo Reyna",
@@ -4229,10 +4279,10 @@
     {
       "name": "Santino Valotto",
       "phone": "+54 9 351 622-4582",
-      "purchases": 1,
-      "spent": 15.47,
+      "purchases": 2,
+      "spent": 30.990000000000002,
       "firstPurchase": "2026-09-29",
-      "lastPurchase": "2026-09-29"
+      "lastPurchase": "2026-10-10"
     },
     {
       "name": "Francisco Zingone",
@@ -4286,7 +4336,7 @@
       "name": "Fabi",
       "phone": "+54 9 351 213-1970",
       "purchases": 2,
-      "spent": 31.24,
+      "spent": 31.240000000000002,
       "firstPurchase": "2026-09-30",
       "lastPurchase": "2026-10-04"
     },
@@ -4481,6 +4531,30 @@
       "spent": 495.0,
       "firstPurchase": "2026-10-09",
       "lastPurchase": "2026-10-09"
+    },
+    {
+      "name": "Jaz",
+      "phone": "+54 9 351 393 8562",
+      "purchases": 1,
+      "spent": 19.87,
+      "firstPurchase": "2026-10-10",
+      "lastPurchase": "2026-10-10"
+    },
+    {
+      "name": "Rami",
+      "phone": "+54 9 351 563 3778",
+      "purchases": 1,
+      "spent": 9.94,
+      "firstPurchase": "2026-10-10",
+      "lastPurchase": "2026-10-10"
+    },
+    {
+      "name": "Tony",
+      "phone": "+54 9 351 864 4258",
+      "purchases": 1,
+      "spent": 72.04,
+      "firstPurchase": "2026-10-10",
+      "lastPurchase": "2026-10-10"
     }
   ],
   "ads": [
@@ -4488,7 +4562,7 @@
       "sourceRow": 1,
       "date": "2026-08-15",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4496,7 +4570,7 @@
       "sourceRow": 2,
       "date": "2026-08-16",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4504,7 +4578,7 @@
       "sourceRow": 3,
       "date": "2026-08-17",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4512,7 +4586,7 @@
       "sourceRow": 4,
       "date": "2026-08-18",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4520,7 +4594,7 @@
       "sourceRow": 5,
       "date": "2026-08-19",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4528,7 +4602,7 @@
       "sourceRow": 6,
       "date": "2026-08-20",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4536,7 +4610,7 @@
       "sourceRow": 7,
       "date": "2026-08-21",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4544,7 +4618,7 @@
       "sourceRow": 8,
       "date": "2026-08-22",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4552,7 +4626,7 @@
       "sourceRow": 9,
       "date": "2026-08-23",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4560,7 +4634,7 @@
       "sourceRow": 10,
       "date": "2026-08-24",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4568,7 +4642,7 @@
       "sourceRow": 11,
       "date": "2026-08-25",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4576,7 +4650,7 @@
       "sourceRow": 12,
       "date": "2026-08-26",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4584,7 +4658,7 @@
       "sourceRow": 13,
       "date": "2026-08-27",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4592,7 +4666,7 @@
       "sourceRow": 14,
       "date": "2026-08-28",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4600,7 +4674,7 @@
       "sourceRow": 15,
       "date": "2026-08-29",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4608,7 +4682,7 @@
       "sourceRow": 16,
       "date": "2026-09-05",
       "platform": "Meta Ads",
-      "campaign": "Activación de cuenta de anuncios",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 17.08,
       "notes": null
     },
@@ -4616,7 +4690,7 @@
       "sourceRow": 17,
       "date": "2026-09-05",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4624,7 +4698,7 @@
       "sourceRow": 18,
       "date": "2026-09-06",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4632,7 +4706,7 @@
       "sourceRow": 19,
       "date": "2026-09-07",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4640,7 +4714,7 @@
       "sourceRow": 20,
       "date": "2026-09-08",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4648,7 +4722,7 @@
       "sourceRow": 21,
       "date": "2026-09-09",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4656,7 +4730,7 @@
       "sourceRow": 22,
       "date": "2026-09-10",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4664,7 +4738,7 @@
       "sourceRow": 23,
       "date": "2026-09-11",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4672,7 +4746,7 @@
       "sourceRow": 24,
       "date": "2026-09-12",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4680,7 +4754,7 @@
       "sourceRow": 25,
       "date": "2026-09-13",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4688,7 +4762,7 @@
       "sourceRow": 26,
       "date": "2026-09-14",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4696,7 +4770,7 @@
       "sourceRow": 27,
       "date": "2026-09-16",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 6.0,
       "notes": null
     },
@@ -4704,7 +4778,7 @@
       "sourceRow": 28,
       "date": "2026-09-17",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4712,7 +4786,7 @@
       "sourceRow": 29,
       "date": "2026-09-20",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4720,7 +4794,7 @@
       "sourceRow": 30,
       "date": "2026-09-21",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4728,7 +4802,7 @@
       "sourceRow": 31,
       "date": "2026-09-22",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4736,7 +4810,7 @@
       "sourceRow": 32,
       "date": "2026-09-23",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4744,7 +4818,7 @@
       "sourceRow": 33,
       "date": "2026-09-24",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4752,7 +4826,7 @@
       "sourceRow": 34,
       "date": "2026-09-25",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4760,7 +4834,7 @@
       "sourceRow": 35,
       "date": "2026-09-26",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4768,7 +4842,7 @@
       "sourceRow": 36,
       "date": "2026-09-27",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4776,7 +4850,7 @@
       "sourceRow": 37,
       "date": "2026-09-28",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4784,7 +4858,7 @@
       "sourceRow": 38,
       "date": "2026-09-29",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4792,7 +4866,7 @@
       "sourceRow": 39,
       "date": "2026-09-30",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4800,7 +4874,7 @@
       "sourceRow": 40,
       "date": "2026-10-01",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4808,7 +4882,7 @@
       "sourceRow": 41,
       "date": "2026-10-02",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4816,7 +4890,7 @@
       "sourceRow": 42,
       "date": "2026-10-03",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 10.0,
       "notes": null
     },
@@ -4824,7 +4898,7 @@
       "sourceRow": 43,
       "date": "2026-10-04",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 12.68,
       "notes": null
     },
@@ -4832,7 +4906,7 @@
       "sourceRow": 44,
       "date": "2026-10-05",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 12.68,
       "notes": null
     },
@@ -4840,7 +4914,7 @@
       "sourceRow": 45,
       "date": "2026-10-06",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 12.68,
       "notes": null
     },
@@ -4848,7 +4922,7 @@
       "sourceRow": 46,
       "date": "2026-10-07",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 12.68,
       "notes": null
     },
@@ -4856,7 +4930,7 @@
       "sourceRow": 47,
       "date": "2026-10-08",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 12.68,
       "notes": null
     },
@@ -4864,7 +4938,15 @@
       "sourceRow": 48,
       "date": "2026-10-09",
       "platform": "Meta Ads",
-      "campaign": "Campaña de venta de vapes - estilo folleto genérico",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
+      "amount": 12.68,
+      "notes": null
+    },
+    {
+      "sourceRow": 49,
+      "date": "2026-10-10",
+      "platform": "Meta Ads",
+      "campaign": "Campaña inicial propia de ventas - Multiples estilos",
       "amount": 12.68,
       "notes": null
     }
@@ -4938,89 +5020,89 @@
     {
       "sourceRow": 1,
       "counterparty": "Mateo Portillo",
+      "description": "49 Vasos quencher 1,2L",
       "principal": 423.23,
       "startDate": "2026-09-29",
       "dueDate": "2026-10-08",
       "paid": 187.53,
-      "balance": 235.7,
-      "notes": "49 Vasos quencher 1,2L",
+      "balance": 235.70000000000002,
       "currency": "USD"
     },
     {
       "sourceRow": 2,
       "counterparty": "Santiago Lopez",
+      "description": "100 Elfbar Ice King 40k puff",
       "principal": 1110.0,
       "startDate": "2026-09-30",
       "dueDate": "2026-10-10",
       "paid": 680.68,
-      "balance": 429.32,
-      "notes": "100 Elfbar Ice King 40k puff",
+      "balance": 429.32000000000005,
       "currency": "USD"
     },
     {
       "sourceRow": 3,
       "counterparty": "Bauti Restifo",
+      "description": "98 Termos con sensor de temperatura",
       "principal": 400.0,
       "startDate": "2026-10-02",
       "dueDate": "2026-10-12",
       "paid": 193.64,
       "balance": 206.36,
-      "notes": "98 Termos con sensor de temperatura",
       "currency": "USD"
     },
     {
       "sourceRow": 4,
       "counterparty": "Lucho",
+      "description": "Préstamo de Lucho",
       "principal": 626.56,
       "startDate": "2026-09-15",
       "dueDate": "2026-10-15",
       "paid": 0.0,
       "balance": 626.56,
-      "notes": "Préstamo de Lucho",
       "currency": "USD"
     },
     {
       "sourceRow": 5,
       "counterparty": "Bauti Restifo",
+      "description": "200 Elfbar EbCreate Bc Pro 40k puff",
       "principal": 1300.0,
       "startDate": "2026-10-11",
       "dueDate": "2026-10-21",
       "paid": 0.0,
       "balance": 1300.0,
-      "notes": "200 Elfbar EbCreate Bc Pro 40k puff",
       "currency": "USD"
     },
     {
       "sourceRow": 6,
       "counterparty": "Mateo Portillo",
+      "description": "100 Body Splash replica",
       "principal": 700.0,
       "startDate": "2026-10-11",
       "dueDate": "2026-10-21",
       "paid": 0.0,
       "balance": 700.0,
-      "notes": "100 Body Splash replica",
       "currency": "USD"
     },
     {
       "sourceRow": 7,
       "counterparty": "Nico Novarino",
+      "description": "150 Elfbar EbCreate Bc Pro 40k puff",
       "principal": 1005.0,
       "startDate": "2026-10-12",
       "dueDate": "2026-10-22",
       "paid": 154.7,
       "balance": 850.3,
-      "notes": "150 Elfbar EbCreate Bc Pro 40k puff",
       "currency": "USD"
     },
     {
       "sourceRow": 8,
       "counterparty": "Leonel Ceballos",
+      "description": "Capital propio de Leonel (perdido en estafa)",
       "principal": 4500.0,
       "startDate": "2026-05-20",
       "dueDate": "2026-10-20",
       "paid": 86.18,
       "balance": 4413.82,
-      "notes": "Capital propio de Leonel (perdido en estafa)",
       "currency": "USD"
     }
   ],

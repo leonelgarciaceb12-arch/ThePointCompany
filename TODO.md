@@ -1,7 +1,7 @@
 # The Point Company · Resultados del sistema
 
 - [x] Base persistente compartida: la aplicación usa la base de datos administrada y queda preparada para que los dos socios accedan desde sus teléfonos mediante la sesión del proyecto.
-- [x] Importación inicial: se cargaron los datos reales normalizados del Excel de Stock, Ventas, Clientes, Publicidad, Gastos, Préstamos y Objetivos sin rellenar faltantes con valores inventados.
+- [x] Importación inicial y actualización: se cargaron y reconciliaron los datos reales normalizados del Excel de Stock, Ventas, Clientes, Publicidad, Gastos, Préstamos y Objetivos sin rellenar faltantes con valores inventados; la última actualización dejó 332 ventas hasta el 10/10/2026 y 49 registros de publicidad.
 - [x] Inventario: alta, edición de stock/costo/mínimo, proveedor y alertas de bajo stock; los productos con historial se archivan para preservar trazabilidad.
 - [x] Ventas: venta desde inventario propio o manual; el inventario descuenta stock automáticamente, calcula costo/ganancia cuando el costo existe y marca «Costo pendiente» cuando falta.
 - [x] Clientes: compras, gasto, ganancia, última compra, días sin recompra y selección de cliente existente al cargar una venta.
@@ -28,5 +28,5 @@
 - [x] Clientes: cada cliente muestra días desde la última compra, estado de seguimiento y botón directo a WhatsApp cuando tiene teléfono; los teléfonos argentinos se convierten al formato internacional 549.
 - [x] Proyecciones: la sección proyecta matemáticamente para el mes siguiente facturación, ganancia bruta, resultado neto estimado, pedidos, unidades y ritmo diario, mostrando crecimiento esperado y supuestos.
 - [x] Cotización: DolarHoy permanece visible y destaca USDT como referencia recomendada, con valor USDT/ARS orientativo, fuente y hora, sin alterar históricos.
-- [x] Correcciones de inventario: AirPods Pro 2 Gen queda en 30 unidades con costo USD 8, Funda Silicona en 197 y BC Create con costo USD 6,66, sin duplicados.
-- [x] Experiencia: tema oscuro grafito no negro, gráficos y tablas encuadrados, carga/refetch controlados y manifest instalable en modo standalone con ícono propio.
+- [x] Correcciones de inventario y Excel vigente: AirPods Pro 2 Gen queda en 30 unidades con costo USD 8; el Excel más reciente fija Funda Silicona en 193 y BC Create con costo USD 6,66; se conservaron productos manuales adicionales para no borrar trazabilidad.
+- [x] Experiencia: tema oscuro grafito no negro, gráficos y tablas encuadrados, altura/ancho de gráficos contenidos para todos los períodos, carga/refetch controlados y manifest instalable en modo standalone con ícono propio.

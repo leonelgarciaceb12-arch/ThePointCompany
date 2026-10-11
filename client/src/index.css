@@ -32,3 +32,11 @@ body,.app-shell{background:var(--paper);color:var(--ink)}
 @media(max-width:420px){.projection-grid{grid-template-columns:1fr}.projection-card strong{font-size:21px}}
 
 .soft-status{background:#243438;color:#a5b9b3}
+
+/* Contención de gráficos: nunca crecer fuera del panel al cambiar el período */
+.main-grid > *, .three-grid > *, .chart-panel, .chart-wrap { min-width: 0; max-width: 100%; }
+.chart-panel { overflow: hidden; }
+.chart-wrap { width: 100%; min-width: 0; max-width: 100%; overflow: hidden; position: relative; }
+.chart-wrap .recharts-responsive-container { width: 100% !important; max-width: 100% !important; min-width: 0 !important; }
+.chart-wrap svg { display: block; max-width: 100%; }
+@media (max-width:760px) { .chart-wrap { height: 195px; } .chart-wrap .recharts-wrapper, .chart-wrap .recharts-surface { max-width: 100%; } }
