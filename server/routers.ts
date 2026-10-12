@@ -4,7 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import {
   adjustStock, createAd, createExpense, createLoan, createProduct, createReceivable, createSale,
   deleteAd, deleteCustomer, deleteExpense, deleteLoan, deleteObjective, deleteProduct, deleteReceivable, deleteSale,
-  getDashboard, getDollarRates, getProjections, listAds, listCustomers, listExpenses, listLoans, listObjectives, listProducts,
+  getDashboard, getDollarRates, getProjections, listAds, listCustomers, listExpenses, listLoans, listObjectives, listProductPerformance, listProducts,
   listReceivables, listSales, payLoan, payReceivable, updateAd, updateCustomer, updateExpense, updateLoan,
   updateObjective, updateProduct, updateReceivable, updateSale,
 } from "./db";
@@ -23,7 +23,7 @@ const saleItem = z.object({
 
 const productInput = z.object({ name: z.string().min(2), category: z.string().min(1), supplier: z.string().optional(), stock: z.number().int().nonnegative(), cost: z.number().nonnegative(), minStock: z.number().int().nonnegative().optional() });
 const expenseInput = z.object({ date: z.string(), category: z.string(), description: z.string().min(2), amount: z.number().nonnegative(), type: z.string().optional(), notes: z.string().optional() });
-const loanInput = z.object({ kind: z.enum(["loan", "payable_merch", "internal"]), counterparty: z.string().min(2), description: z.string().optional(), currency: z.string().default("USD"), interestRate: z.number().nonnegative().default(0), interestPeriod: z.enum(["monthly", "weekly"]).default("monthly"), principal: z.number().positive(), paid: z.number().nonnegative().default(0), dueDate: z.string().optional(), startDate: z.string().optional(), notes: z.string().optional() });
+const loanInput = z.object({ kind: z.enum(["loan", "payable_merch", "internal"]), counterparty: z.string().min(2), description: z.string().optional(), currency: z.string().default("USD"), interestRate: z.number().nonnegative().default(0), interestPeriod: z.enum(["monthly", "weekly"]).default("monthly"), principal: z.number().positive(), repaymentAmount: z.number().positive().optional(), installmentCount: z.number().int().positive().optional(), installmentAmount: z.number().positive().optional(), installmentPeriod: z.enum(["monthly", "weekly"]).default("weekly"), hasDueDate: z.boolean().default(true), paid: z.number().nonnegative().default(0), dueDate: z.string().optional(), startDate: z.string().optional(), notes: z.string().optional() });
 const receivableInput = z.object({ customerName: z.string().min(2), phone: z.string().optional(), description: z.string().optional(), principal: z.number().positive(), paid: z.number().nonnegative().default(0), dueDate: z.string().optional(), notes: z.string().optional() });
 const adInput = z.object({ date: z.string(), platform: z.string().min(1), campaign: z.string().min(2), amount: z.number().nonnegative(), notes: z.string().optional() });
 const objectiveInput = z.object({ month: z.string().min(2), targetOrders: z.number().int().nonnegative(), targetRevenue: z.number().nonnegative(), targetProfit: z.number().nonnegative(), targetNet: z.number().nonnegative(), notes: z.string().optional() });
@@ -42,6 +42,7 @@ export const appRouter = router({
     dashboard: protectedProcedure.input(z.object({ from: z.string().optional(), to: z.string().optional() }).optional()).query(({ input }) => getDashboard(input?.from, input?.to)),
     projections: protectedProcedure.input(z.object({ growthPercent: z.number().min(-50).max(200).optional() }).optional()).query(({ input }) => getProjections(input?.growthPercent ?? 15)),
     dollarRates: protectedProcedure.query(() => getDollarRates()),
+    productPerformance: protectedProcedure.query(() => listProductPerformance()),
     products: protectedProcedure.input(z.object({ search: z.string().optional(), category: z.string().optional() }).optional()).query(({ input }) => listProducts(input?.search, input?.category)),
     sales: protectedProcedure.input(z.object({ limit: z.number().int().positive().max(500).optional() }).optional()).query(({ input }) => listSales(input?.limit ?? 100)),
     customers: protectedProcedure.query(() => listCustomers()),

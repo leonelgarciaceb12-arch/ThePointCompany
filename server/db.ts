@@ -144,7 +144,7 @@ export async function getDashboard(from?: string, to?: string) {
   const expenseWhere = from && to ? and(gte(expenses.expenseDate, from), lt(expenses.expenseDate, to)) : undefined;
   const adsWhere = from && to ? and(gte(adCampaigns.adDate, from), lt(adCampaigns.adDate, to)) : undefined;
   const activeSalesWhere = salesWhere ? and(salesWhere, sql`${sales.status} <> 'cancelled'`) : sql`${sales.status} <> 'cancelled'`;
-  const [summary, units, inventory, lowStock, topProducts, topCustomers, recentSales, dueLoans, expensesTotal, adTotal, daily, channelRows, periodCustomerRows] = await Promise.all([
+  const [summary, units, inventory, lowStock, topProducts, topCustomers, recentSales, dueLoans, expensesTotal, adTotal, receivableBalance, daily, channelRows, periodCustomerRows] = await Promise.all([
     db.select({ revenue: sql<number>`coalesce(sum(${sales.total}),0)`, profit: sql<number>`coalesce(sum(case when ${sales.costKnown} = true then ${sales.profit} else 0 end),0)`, cogs: sql<number>`coalesce(sum(case when ${sales.costKnown} = true then ${sales.totalCost} else 0 end),0)`, orders: sql<number>`count(*)`, incomplete: sql<number>`coalesce(sum(case when ${sales.costKnown} = false then 1 else 0 end),0)` }).from(sales).where(activeSalesWhere),
     db.select({ units: sql<number>`coalesce(sum(${saleItems.quantity}),0)` }).from(saleItems).leftJoin(sales, eq(saleItems.saleId, sales.id)).where(activeSalesWhere),
     db.select({ value: sql<number>`coalesce(sum(${products.stock} * ${products.cost}),0)`, units: sql<number>`coalesce(sum(${products.stock}),0)` }).from(products).where(eq(products.active, true)),
@@ -155,6 +155,7 @@ export async function getDashboard(from?: string, to?: string) {
     db.select().from(loans).where(sql`${loans.balance} > 0`).orderBy(asc(loans.dueDate)).limit(8),
     db.select({ total: sql<number>`coalesce(sum(${expenses.amount}),0)` }).from(expenses).where(expenseWhere),
     db.select({ total: sql<number>`coalesce(sum(${adCampaigns.amount}),0)` }).from(adCampaigns).where(adsWhere),
+    db.select({ balance: sql<number>`coalesce(sum(${receivables.balance}),0)` }).from(receivables).where(sql`${receivables.balance} > 0`),
     db.select({ day: sales.saleDate, revenue: sql<number>`sum(${sales.total})`, profit: sql<number>`sum(case when ${sales.costKnown} = true then ${sales.profit} else 0 end)` }).from(sales).where(activeSalesWhere).groupBy(sales.saleDate).orderBy(asc(sales.saleDate)),
     db.select({ channel: sales.channel, revenue: sql<number>`coalesce(sum(${sales.total}),0)`, orders: sql<number>`count(*)` }).from(sales).where(activeSalesWhere).groupBy(sales.channel).orderBy(desc(sql`sum(${sales.total})`)).limit(8),
     db.select({ customerId: sales.customerId, purchases: sql<number>`count(*)` }).from(sales).where(and(activeSalesWhere, sql`${sales.customerId} is not null`)).groupBy(sales.customerId),
@@ -188,7 +189,9 @@ export async function getDashboard(from?: string, to?: string) {
     activeCustomers,
     repeatCustomers,
   };
-  return { summary: { ...summary[0], units: unitsSold }, inventory: inventory[0], lowStock, topProducts, topCustomers, recentSales, dueLoans: dueLoans.map(presentDebt), expenses: expensesTotal[0], ads: adTotal[0], daily, advanced };
+  const cashCollected = Math.max(0, revenue - Number(receivableBalance[0]?.balance ?? 0));
+  const cashOut = expenseTotal + adSpend;
+  return { summary: { ...summary[0], units: unitsSold }, inventory: inventory[0], lowStock, topProducts, topCustomers, recentSales, dueLoans: dueLoans.map(presentDebt), expenses: expensesTotal[0], ads: adTotal[0], cashFlow: { collected: cashCollected, outflow: cashOut, net: cashCollected - cashOut, receivables: Number(receivableBalance[0]?.balance ?? 0), note: "Cobrado estimado: facturación menos saldos abiertos de clientes." }, daily, advanced };
 }
 
 export async function listProducts(search?: string, category?: string) {
@@ -200,6 +203,7 @@ export async function listProducts(search?: string, category?: string) {
   return db.select().from(products).where(and(...filters)).orderBy(asc(products.category), asc(products.name));
 }
 
+export async function listProductPerformance() { const db = await getDb(); if (!db) return []; await ensureSeeded(); return db.select({ productId: saleItems.productId, name: products.name, category: products.category, stock: products.stock, cost: products.cost, units: sql<number>`coalesce(sum(${saleItems.quantity}),0)`, revenue: sql<number>`coalesce(sum(${saleItems.total}),0)`, profit: sql<number>`coalesce(sum(${saleItems.profit}),0)`, lastSale: sql<string>`max(${sales.saleDate})` }).from(saleItems).innerJoin(sales, eq(saleItems.saleId, sales.id)).leftJoin(products, eq(saleItems.productId, products.id)).where(sql`${sales.status} <> 'cancelled' and ${saleItems.productId} is not null`).groupBy(saleItems.productId, products.name, products.category, products.stock, products.cost).orderBy(desc(sql`sum(${saleItems.quantity})`)).limit(100); }
 export async function listSales(limit = 30) { const db = await getDb(); if (!db) return []; await ensureSeeded(); return db.select().from(sales).where(sql`${sales.status} <> 'cancelled'`).orderBy(desc(sales.saleDate), desc(sales.id)).limit(limit); }
 export async function listCustomers() { const db = await getDb(); if (!db) return []; await ensureSeeded(); return db.select().from(customers).orderBy(desc(customers.spent)); }
 export async function listExpenses() { const db = await getDb(); if (!db) return []; await ensureSeeded(); return db.select().from(expenses).orderBy(desc(expenses.expenseDate), desc(expenses.id)).limit(100); }
@@ -364,17 +368,18 @@ export async function createExpense(input: { date: string; category: string; des
   return Number(result[0].insertId);
 }
 
-export async function createLoan(input: { kind: "loan" | "payable_merch" | "internal"; counterparty: string; description?: string; currency?: string; interestRate?: number; interestPeriod?: "monthly" | "weekly"; principal: number; dueDate?: string; startDate?: string; notes?: string; userId?: number }) {
+export async function createLoan(input: { kind: "loan" | "payable_merch" | "internal"; counterparty: string; description?: string; currency?: string; interestRate?: number; interestPeriod?: "monthly" | "weekly"; principal: number; repaymentAmount?: number; installmentCount?: number; installmentAmount?: number; installmentPeriod?: "monthly" | "weekly"; hasDueDate?: boolean; dueDate?: string; startDate?: string; notes?: string; userId?: number }) {
   const db = await getDb(); if (!db) throw new Error("Database is not available");
-  const result = await db.insert(loans).values({ kind: input.kind, counterparty: input.counterparty, description: input.description, currency: input.currency || "USD", interestRate: toMoney(input.interestRate ?? 0), interestPeriod: input.interestPeriod || "monthly", principal: toMoney(input.principal), balance: toMoney(input.principal), paid: "0.00", dueDate: input.dueDate, startDate: input.startDate, status: debtStatus(input.principal, 0, input.principal, input.dueDate), notes: input.notes, createdBy: input.userId, updatedBy: input.userId });
+  const repayment = input.kind === "payable_merch" ? input.principal : Number(input.repaymentAmount ?? input.principal); const hasDueDate = input.hasDueDate ?? true; const installments = input.installmentCount && input.installmentCount > 0 ? input.installmentCount : null; const installmentAmount = installments ? Number(input.installmentAmount ?? repayment / installments) : null;
+  const result = await db.insert(loans).values({ kind: input.kind, counterparty: input.counterparty, description: input.description, currency: input.currency || "USD", interestRate: toMoney(input.interestRate ?? 0), interestPeriod: input.interestPeriod || "monthly", principal: toMoney(input.principal), repaymentAmount: toMoney(repayment), installmentCount: installments, installmentAmount: installmentAmount === null ? null : toMoney(installmentAmount), installmentPeriod: input.installmentPeriod || "weekly", hasDueDate, balance: toMoney(repayment), paid: "0.00", dueDate: hasDueDate ? input.dueDate : null, startDate: input.startDate, status: debtStatus(repayment, 0, repayment, hasDueDate ? input.dueDate : undefined), notes: input.notes, createdBy: input.userId, updatedBy: input.userId });
   return Number(result[0].insertId);
 }
 
 export async function payLoan(id: number, amount: number, userId?: number) {
   const db = await getDb(); if (!db) throw new Error("Database is not available");
   const row = (await db.select().from(loans).where(eq(loans.id, id)).limit(1))[0]; if (!row) throw new Error("Deuda no encontrada");
-  const paid = Math.min(Number(row.principal), Number(row.paid) + amount); const balance = Math.max(0, Number(row.principal) - paid);
-  await db.update(loans).set({ paid: toMoney(paid), balance: toMoney(balance), status: debtStatus(row.principal, paid, balance, row.dueDate), updatedBy: userId }).where(eq(loans.id, id));
+  const totalDue = Number(row.repaymentAmount ?? row.principal); const paid = Math.min(totalDue, Number(row.paid) + amount); const balance = Math.max(0, totalDue - paid);
+  await db.update(loans).set({ paid: toMoney(paid), balance: toMoney(balance), status: debtStatus(totalDue, paid, balance, row.dueDate), updatedBy: userId }).where(eq(loans.id, id));
   return { balance };
 }
 
@@ -405,10 +410,10 @@ export async function deleteExpense(id: number) {
   return { id };
 }
 
-export async function updateLoan(id: number, input: { kind: "loan" | "payable_merch" | "internal"; counterparty: string; description?: string; currency?: string; interestRate?: number; interestPeriod?: "monthly" | "weekly"; principal: number; paid: number; dueDate?: string; startDate?: string; notes?: string; userId?: number }) {
+export async function updateLoan(id: number, input: { kind: "loan" | "payable_merch" | "internal"; counterparty: string; description?: string; currency?: string; interestRate?: number; interestPeriod?: "monthly" | "weekly"; principal: number; repaymentAmount?: number; installmentCount?: number; installmentAmount?: number; installmentPeriod?: "monthly" | "weekly"; hasDueDate?: boolean; paid: number; dueDate?: string; startDate?: string; notes?: string; userId?: number }) {
   const db = await getDb(); if (!db) throw new Error("Database is not available");
-  const paid = Math.min(input.principal, Math.max(0, input.paid)); const balance = Math.max(0, input.principal - paid);
-  await db.update(loans).set({ kind: input.kind, counterparty: input.counterparty, description: input.description || null, currency: input.currency || "USD", interestRate: toMoney(input.interestRate ?? 0), interestPeriod: input.interestPeriod || "monthly", principal: toMoney(input.principal), paid: toMoney(paid), balance: toMoney(balance), startDate: input.startDate || null, dueDate: input.dueDate || null, status: debtStatus(input.principal, paid, balance, input.dueDate), notes: input.notes || null, updatedBy: input.userId }).where(eq(loans.id, id));
+  const repayment = input.kind === "payable_merch" ? input.principal : Number(input.repaymentAmount ?? input.principal); const paid = Math.min(repayment, Math.max(0, input.paid)); const balance = Math.max(0, repayment - paid); const installments = input.installmentCount && input.installmentCount > 0 ? input.installmentCount : null;
+  await db.update(loans).set({ kind: input.kind, counterparty: input.counterparty, description: input.description || null, currency: input.currency || "USD", interestRate: toMoney(input.interestRate ?? 0), interestPeriod: input.interestPeriod || "monthly", principal: toMoney(input.principal), repaymentAmount: toMoney(repayment), installmentCount: installments, installmentAmount: installments ? toMoney(input.installmentAmount ?? repayment / installments) : null, installmentPeriod: input.installmentPeriod || "weekly", hasDueDate: input.hasDueDate ?? true, paid: toMoney(paid), balance: toMoney(balance), startDate: input.startDate || null, dueDate: (input.hasDueDate ?? true) ? input.dueDate || null : null, status: debtStatus(repayment, paid, balance, input.dueDate), notes: input.notes || null, updatedBy: input.userId }).where(eq(loans.id, id));
   return { id, balance };
 }
 
