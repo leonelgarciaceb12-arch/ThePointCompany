@@ -32,8 +32,29 @@ function debtStatus(principal: unknown, paid: unknown, balance: unknown, dueDate
   return settled > 0 ? "partial" : "open";
 }
 
+function completedInterestPeriods(startDate: unknown, interestPeriod: unknown) {
+  const start = String(startDate ?? "").slice(0, 10);
+  if (!start) return 0;
+  const startAt = new Date(`${start}T00:00:00Z`);
+  if (Number.isNaN(startAt.getTime())) return 0;
+  const now = new Date();
+  if (interestPeriod === "weekly") return Math.max(0, Math.floor((Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) - startAt.getTime()) / (7 * 86400000)));
+  const months = (now.getUTCFullYear() - startAt.getUTCFullYear()) * 12 + now.getUTCMonth() - startAt.getUTCMonth();
+  return Math.max(0, months - (now.getUTCDate() < startAt.getUTCDate() ? 1 : 0));
+}
+
+function effectiveLoanAmounts(row: { kind?: unknown; hasDueDate?: unknown; startDate?: unknown; interestRate?: unknown; interestPeriod?: unknown; principal: unknown; repaymentAmount?: unknown; paid: unknown }) {
+  const base = Number(row.repaymentAmount ?? row.principal);
+  const capitalizes = row.kind === "loan" && row.hasDueDate === false && Number(row.interestRate ?? 0) > 0;
+  const periods = capitalizes ? completedInterestPeriods(row.startDate, row.interestPeriod) : 0;
+  const totalDue = capitalizes ? base * Math.pow(1 + Number(row.interestRate) / 100, periods) : base;
+  const paid = Number(row.paid ?? 0);
+  return { totalDue, paid, balance: Math.max(0, totalDue - paid), periods, capitalizes };
+}
+
 function presentDebt<T extends { principal: unknown; paid: unknown; balance: unknown; dueDate?: unknown }>(row: T) {
-  return { ...row, status: debtStatus(row.principal, row.paid, row.balance, row.dueDate) };
+  const amounts = effectiveLoanAmounts(row as T & { kind?: unknown; hasDueDate?: unknown; startDate?: unknown; interestRate?: unknown; interestPeriod?: unknown; repaymentAmount?: unknown });
+  return { ...row, repaymentAmount: amounts.totalDue.toFixed(2), balance: amounts.balance.toFixed(2), status: debtStatus(amounts.totalDue, amounts.paid, amounts.balance, row.dueDate), interestPeriods: amounts.periods, interestCapitalized: amounts.capitalizes };
 }
 
 export async function getDb() {
@@ -378,7 +399,7 @@ export async function createLoan(input: { kind: "loan" | "payable_merch" | "inte
 export async function payLoan(id: number, amount: number, userId?: number) {
   const db = await getDb(); if (!db) throw new Error("Database is not available");
   const row = (await db.select().from(loans).where(eq(loans.id, id)).limit(1))[0]; if (!row) throw new Error("Deuda no encontrada");
-  const totalDue = Number(row.repaymentAmount ?? row.principal); const paid = Math.min(totalDue, Number(row.paid) + amount); const balance = Math.max(0, totalDue - paid);
+  const totalDue = effectiveLoanAmounts(row).totalDue; const paid = Math.min(totalDue, Number(row.paid) + amount); const balance = Math.max(0, totalDue - paid);
   await db.update(loans).set({ paid: toMoney(paid), balance: toMoney(balance), status: debtStatus(totalDue, paid, balance, row.dueDate), updatedBy: userId }).where(eq(loans.id, id));
   return { balance };
 }
@@ -412,8 +433,8 @@ export async function deleteExpense(id: number) {
 
 export async function updateLoan(id: number, input: { kind: "loan" | "payable_merch" | "internal"; counterparty: string; description?: string; currency?: string; interestRate?: number; interestPeriod?: "monthly" | "weekly"; principal: number; repaymentAmount?: number; installmentCount?: number; installmentAmount?: number; installmentPeriod?: "monthly" | "weekly"; hasDueDate?: boolean; paid: number; dueDate?: string; startDate?: string; notes?: string; userId?: number }) {
   const db = await getDb(); if (!db) throw new Error("Database is not available");
-  const repayment = input.kind === "payable_merch" ? input.principal : Number(input.repaymentAmount ?? input.principal); const paid = Math.min(repayment, Math.max(0, input.paid)); const balance = Math.max(0, repayment - paid); const installments = input.installmentCount && input.installmentCount > 0 ? input.installmentCount : null;
-  await db.update(loans).set({ kind: input.kind, counterparty: input.counterparty, description: input.description || null, currency: input.currency || "USD", interestRate: toMoney(input.interestRate ?? 0), interestPeriod: input.interestPeriod || "monthly", principal: toMoney(input.principal), repaymentAmount: toMoney(repayment), installmentCount: installments, installmentAmount: installments ? toMoney(input.installmentAmount ?? repayment / installments) : null, installmentPeriod: input.installmentPeriod || "weekly", hasDueDate: input.hasDueDate ?? true, paid: toMoney(paid), balance: toMoney(balance), startDate: input.startDate || null, dueDate: (input.hasDueDate ?? true) ? input.dueDate || null : null, status: debtStatus(repayment, paid, balance, input.dueDate), notes: input.notes || null, updatedBy: input.userId }).where(eq(loans.id, id));
+  const repayment = input.kind === "payable_merch" ? input.principal : Number(input.repaymentAmount ?? input.principal); const hasDueDate = input.hasDueDate ?? true; const capitalized = effectiveLoanAmounts({ kind: input.kind, hasDueDate, startDate: input.startDate, interestRate: input.interestRate ?? 0, interestPeriod: input.interestPeriod || "monthly", principal: input.principal, repaymentAmount: repayment, paid: input.paid }); const paid = Math.min(capitalized.totalDue, Math.max(0, input.paid)); const balance = Math.max(0, capitalized.totalDue - paid); const installments = input.installmentCount && input.installmentCount > 0 ? input.installmentCount : null;
+  await db.update(loans).set({ kind: input.kind, counterparty: input.counterparty, description: input.description || null, currency: input.currency || "USD", interestRate: toMoney(input.interestRate ?? 0), interestPeriod: input.interestPeriod || "monthly", principal: toMoney(input.principal), repaymentAmount: toMoney(repayment), installmentCount: installments, installmentAmount: installments ? toMoney(input.installmentAmount ?? repayment / installments) : null, installmentPeriod: input.installmentPeriod || "weekly", hasDueDate, paid: toMoney(paid), balance: toMoney(balance), startDate: input.startDate || null, dueDate: hasDueDate ? input.dueDate || null : null, status: debtStatus(capitalized.totalDue, paid, balance, hasDueDate ? input.dueDate : undefined), notes: input.notes || null, updatedBy: input.userId }).where(eq(loans.id, id));
   return { id, balance };
 }
 

@@ -37,3 +37,4 @@
 - [x] Finanzas: el resumen muestra Caja neta estimada como entradas cobradas menos gastos y publicidad, además de saldos por pagar y por cobrar.
 - [x] Inventario: se agregó Rendimiento de productos con unidades vendidas, facturación, ganancia, margen y stock; no se agregó una sección de Compras/Reposición.
 - [x] Préstamos avanzados: los compromisos distinguen mercadería a pagar de préstamo financiero; el préstamo permite monto prestado, monto total a devolver, tasa por período mensual/semanal, cuotas opcionales, monto y frecuencia de cuota, vencimiento opcional y pagos parciales.
+- [x] Capitalización de préstamos: si un préstamo financiero tiene tasa mensual o semanal y no tiene vencimiento, cada período completo aumenta automáticamente el monto total a devolver mediante interés compuesto; si tiene vencimiento, el monto a devolver queda fijo. Los pagos usan el saldo capitalizado vigente.
