@@ -111,3 +111,8 @@ Esta iteración conserva la arquitectura React/Express/tRPC/Drizzle y prioriza q
 - `client/public/manus-routes.json`: rutas SPA completas y sincronizadas.
 
 Los cambios de datos se ejecutan de forma idempotente y no convierten costos faltantes en ganancias reales. La referencia USDT es informativa, no una integración de cobro ni asesoramiento financiero.
+
+## Iteración de formularios y opciones reutilizables
+- El frontend carga una consulta completa de inventario separada del filtro visual para que los formularios de venta y las sugerencias siempre dispongan de todos los productos activos.
+- Los campos repetibles usan `datalist` y listas derivadas de la base compartida: categorías, clientes, canales, tipos/categorías de gastos, acreedores/proveedores, localidades, plataformas, campañas y meses. Las sugerencias aceleran la carga, pero no bloquean valores nuevos.
+- Las listas se recalculan después de una mutación junto con el resto de las consultas, manteniendo intactos los registros existentes y el mismo flujo de persistencia tRPC/MySQL.
