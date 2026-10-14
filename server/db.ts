@@ -116,6 +116,33 @@ function toMoney(value: unknown) {
   return Number.isFinite(n) ? n.toFixed(2) : "0.00";
 }
 
+function normalizeIdentity(value: unknown) { return String(value ?? "").trim().toLocaleLowerCase("es-AR"); }
+function normalizePhone(value: unknown) { return String(value ?? "").replace(/\D/g, ""); }
+const historicalUnknownCustomer = "periodo antes del seguimiento de clientes";
+async function syncCustomersFromSales(db: any) {
+  const allCustomers = await db.select().from(customers);
+  const allSales = await db.select().from(sales).where(sql`${sales.customerName} is not null`);
+  const touched = new Set<number>();
+  for (const sale of allSales) {
+    const name = String(sale.customerName || "").trim();
+    if (!name || normalizeIdentity(name).startsWith(historicalUnknownCustomer)) continue;
+    const phoneKey = normalizePhone(sale.customerPhone);
+    const nameKey = normalizeIdentity(name);
+    let customer = phoneKey ? allCustomers.find((item: any) => normalizePhone(item.phone) === phoneKey) : undefined;
+    customer ||= allCustomers.find((item: any) => normalizeIdentity(item.name) === nameKey);
+    if (!customer) {
+      const created = await db.insert(customers).values({ name, phone: sale.customerPhone || null, purchases: 0, spent: "0.00", profit: "0.00", firstPurchase: null, lastPurchase: null, createdAt: new Date(), updatedAt: new Date() });
+      customer = { id: Number(created[0].insertId), name, phone: sale.customerPhone || null };
+      allCustomers.push(customer);
+    } else if (!customer.phone && sale.customerPhone) {
+      await db.update(customers).set({ phone: sale.customerPhone, updatedAt: new Date() }).where(eq(customers.id, customer.id));
+      customer.phone = sale.customerPhone;
+    }
+    touched.add(Number(customer.id));
+    if (sale.customerId !== customer.id) await db.update(sales).set({ customerId: customer.id }).where(eq(sales.id, sale.id));
+  }
+  for (const customerId of touched) await refreshCustomerStats(db, customerId);
+}
 export async function ensureSeeded() {
   if (seedPromise) return seedPromise;
   seedPromise = (async () => {
@@ -153,6 +180,7 @@ export async function ensureSeeded() {
     if ((await count(expenses)) === 0 && raw.expenses.length) await db.insert(expenses).values(raw.expenses.map(e => ({ expenseDate: parseSeedDate(e.date as string) || "2026-01-01", category: String(e.category || "General"), description: String(e.description || "Gasto"), amount: toMoney(e.amount), type: String(e.type || "Operativo"), notes: e.notes ? String(e.notes) : null, createdAt: now, updatedAt: now })));
     if ((await count(loans)) === 0 && raw.loans.length) await db.insert(loans).values(raw.loans.map(l => ({ kind: "loan" as const, counterparty: String(l.counterparty), description: l.notes ? String(l.notes) : null, currency: String(l.currency || "USD"), principal: toMoney(l.principal), paid: toMoney(l.paid), balance: toMoney(l.balance), startDate: parseSeedDate(l.startDate as string), dueDate: parseSeedDate(l.dueDate as string), status: Number(l.balance || 0) <= 0 ? "paid" as const : "open" as const, notes: l.notes ? String(l.notes) : null, createdAt: now, updatedAt: now })));
     if ((await count(objectives)) === 0 && raw.objectives.length) await db.insert(objectives).values(raw.objectives.map(o => ({ month: String(o.month), targetOrders: Number(o.targetOrders || 0), targetRevenue: toMoney(o.targetRevenue), targetProfit: toMoney(o.targetProfit), targetNet: toMoney(o.targetNet), createdAt: now, updatedAt: now })));
+    await syncCustomersFromSales(db);
     console.log(`[Database] Seed reconciliation complete: ${raw.products.length} products, ${raw.sales.length} historical sales.`);
   })().catch(error => { seedPromise = null; console.error("[Database] Seed failed:", error); throw error; });
   return seedPromise;
@@ -359,7 +387,27 @@ export async function createSale(input: { date: string; channel?: string; custom
     const paidAmount = input.paymentStatus === "partial" ? Math.max(0, Math.min(total, Number(input.paidAmount ?? 0))) : total;
     const balance = Number((total - paidAmount).toFixed(2));
     if (balance > 0 && !input.customerName?.trim()) throw new Error("Para registrar un pago parcial necesitás indicar el cliente que queda como deudor");
-    const inserted = await tx.insert(sales).values({ saleDate: input.date, customerId: input.customerId, customerName: input.customerName, customerPhone: input.customerPhone, channel: input.channel || "WhatsApp", total: toMoney(total), totalCost: toMoney(totalCost), profit: toMoney(profit), margin: costKnown && total ? toMoney(profit / total * 100) : "0.00", costKnown, notes: input.notes, createdBy: input.userId, updatedBy: input.userId });
+    let resolvedCustomerId = input.customerId;
+    let resolvedCustomerName = input.customerName?.trim() || undefined;
+    let resolvedCustomerPhone = input.customerPhone?.trim() || undefined;
+    if (resolvedCustomerId || resolvedCustomerName || resolvedCustomerPhone) {
+      const customerRows = await tx.select().from(customers);
+      let customer = resolvedCustomerId ? customerRows.find((item: any) => item.id === resolvedCustomerId) : undefined;
+      const phoneKey = normalizePhone(resolvedCustomerPhone);
+      const nameKey = normalizeIdentity(resolvedCustomerName);
+      customer ||= phoneKey ? customerRows.find((item: any) => normalizePhone(item.phone) === phoneKey) : undefined;
+      customer ||= nameKey ? customerRows.find((item: any) => normalizeIdentity(item.name) === nameKey) : undefined;
+      if (!customer && resolvedCustomerName) {
+        const created = await tx.insert(customers).values({ name: resolvedCustomerName, phone: resolvedCustomerPhone || null, purchases: 0, spent: "0.00", profit: "0.00", firstPurchase: null, lastPurchase: null, createdBy: input.userId, updatedBy: input.userId });
+        resolvedCustomerId = Number(created[0].insertId);
+      } else if (customer) {
+        resolvedCustomerId = customer.id;
+        resolvedCustomerName ||= customer.name;
+        resolvedCustomerPhone ||= customer.phone || undefined;
+        if ((resolvedCustomerName && resolvedCustomerName !== customer.name) || (resolvedCustomerPhone && resolvedCustomerPhone !== customer.phone)) await tx.update(customers).set({ name: resolvedCustomerName, phone: resolvedCustomerPhone || customer.phone || null, updatedBy: input.userId }).where(eq(customers.id, customer.id));
+      }
+    }
+    const inserted = await tx.insert(sales).values({ saleDate: input.date, customerId: resolvedCustomerId, customerName: resolvedCustomerName, customerPhone: resolvedCustomerPhone, channel: input.channel || "WhatsApp", total: toMoney(total), totalCost: toMoney(totalCost), profit: toMoney(profit), margin: costKnown && total ? toMoney(profit / total * 100) : "0.00", costKnown, notes: input.notes, createdBy: input.userId, updatedBy: input.userId });
     const saleId = Number(inserted[0].insertId);
     for (const p of prepared) {
       const { item, cost, itemCostKnown, product } = p;
@@ -369,14 +417,10 @@ export async function createSale(input: { date: string; channel?: string; custom
         await tx.insert(stockMovements).values({ productId: product.id, type: "sale", quantity: -item.quantity, unitCost: toMoney(cost), referenceId: saleId, createdBy: input.userId, updatedBy: input.userId });
       }
     }
-    if (input.customerName) {
-      const existing = input.customerId ? (await tx.select().from(customers).where(eq(customers.id, input.customerId)).limit(1))[0] : undefined;
-      if (existing) await tx.update(customers).set({ purchases: existing.purchases + 1, spent: toMoney(Number(existing.spent) + total), profit: toMoney(Number(existing.profit) + profit), lastPurchase: input.date, updatedBy: input.userId }).where(eq(customers.id, existing.id));
-      else await tx.insert(customers).values({ name: input.customerName, phone: input.customerPhone, purchases: 1, spent: toMoney(total), profit: toMoney(profit), firstPurchase: input.date, lastPurchase: input.date, createdBy: input.userId, updatedBy: input.userId });
-    }
+    if (resolvedCustomerId) await refreshCustomerStats(tx, resolvedCustomerId);
     let receivableId: number | undefined;
     if (balance > 0) {
-      const receivable = await tx.insert(receivables).values({ customerName: input.customerName!.trim(), phone: input.customerPhone, description: `Saldo pendiente de venta #${saleId}`, principal: toMoney(total), paid: toMoney(paidAmount), balance: toMoney(balance), dueDate: input.date, status: debtStatus(total, paidAmount, balance, input.date), notes: "Creado automáticamente al registrar una venta con pago parcial", createdBy: input.userId, updatedBy: input.userId });
+      const receivable = await tx.insert(receivables).values({ customerName: resolvedCustomerName!.trim(), phone: resolvedCustomerPhone, description: `Saldo pendiente de venta #${saleId}`, principal: toMoney(total), paid: toMoney(paidAmount), balance: toMoney(balance), dueDate: input.date, status: debtStatus(total, paidAmount, balance, input.date), notes: "Creado automáticamente al registrar una venta con pago parcial", createdBy: input.userId, updatedBy: input.userId });
       receivableId = Number(receivable[0].insertId);
     }
     return { saleId, total, totalCost, profit, costKnown, paidAmount, balance, receivableId };

@@ -121,3 +121,9 @@ Los cambios de datos se ejecutan de forma idempotente y no convierten costos fal
 - El formulario de ventas expone la fecha como un campo editable con valor inicial en el día actual, permitiendo registrar ventas históricas sin cambiar la validación del backend.
 - Clientes y productos se filtran en el navegador a medida que se escribe; las coincidencias exactas desde sugerencias quedan vinculadas al registro existente. Al seleccionar un cliente se copian automáticamente nombre y teléfono guardados.
 - Se conserva el modo de venta manual para mercadería externa y el selector completo del inventario, de modo que la búsqueda acelera la carga sin bloquear nuevos datos.
+
+## Importación y operación comercial ampliada
+- La fuente histórica se limita a la hoja de Ventas del Excel; se conserva el rango mayo-octubre ya reconciliado por legacyId y se excluyen las demás hojas porque están desactualizadas.
+- La base mantiene una única identidad de cliente por coincidencia exacta de teléfono normalizado o nombre normalizado; cada venta nueva resuelve o crea el cliente dentro de la misma transacción y refresca sus métricas.
+- Los precios en ARS son una capa de captura: el backend recibe y guarda el total en USD convertido en frontend mediante USDT vivo, conservando el modelo financiero en USD.
+- La navegación suma una vista Gráficos basada en las series reales del dashboard, con contención responsive para móvil.

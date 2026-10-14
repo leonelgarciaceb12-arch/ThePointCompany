@@ -1,8 +1,20 @@
 import { useEffect, useMemo, useState } from "react";
-import { Bar, BarChart } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 import {
   ArrowDownRight,
   ArrowUpRight,
+  BarChart3,
   Bell,
   Boxes,
   ChevronRight,
@@ -12,7 +24,7 @@ import {
   FilePlus2,
   Gauge,
   LayoutDashboard,
-  LineChart,
+  LineChart as LineChartIcon,
   Megaphone,
   Menu,
   Package,
@@ -128,6 +140,7 @@ function SuggestedInput({
 
 const nav = [
   { id: "dashboard", label: "Resumen", icon: LayoutDashboard },
+  { id: "charts", label: "Gráficos", icon: BarChart3 },
   { id: "sales", label: "Ventas", icon: ShoppingCart },
   { id: "inventory", label: "Inventario", icon: Boxes },
   { id: "customers", label: "Clientes", icon: Users },
@@ -338,6 +351,8 @@ function SaleForm({
     description: string;
     unitPrice: string;
     unitCost: string;
+    priceCurrency: "USD" | "ARS";
+    priceArs: string;
   };
   const emptyLine = (): SaleLine => ({
     productId: "",
@@ -345,6 +360,8 @@ function SaleForm({
     description: "",
     unitPrice: "",
     unitCost: "",
+    priceCurrency: "USD",
+    priceArs: "",
   });
   const [lines, setLines] = useState<SaleLine[]>([emptyLine()]);
   const [saleDate, setSaleDate] = useState(today);
@@ -360,6 +377,11 @@ function SaleForm({
     "paid"
   );
   const [paidAmount, setPaidAmount] = useState("");
+  const rates = trpc.business.dollarRates.useQuery(undefined, {
+    refetchInterval: 300000,
+    staleTime: 240000,
+  });
+  const usdtRate = Number(rates.data?.usdt?.price || 0);
   const createSale = trpc.business.createSale.useMutation({
     onSuccess: r => {
       toast.success(
@@ -377,7 +399,12 @@ function SaleForm({
     const selected = products.find(p => String(p.id) === line.productId);
     const fromInventory = Boolean(selected);
     const quantity = Math.max(0, Number(line.quantity || 0));
-    const unitPrice = Math.max(0, Number(line.unitPrice || 0));
+    const unitPrice =
+      line.priceCurrency === "ARS"
+        ? usdtRate > 0
+          ? Math.max(0, Number(line.priceArs || 0)) / usdtRate
+          : 0
+        : Math.max(0, Number(line.unitPrice || 0));
     const unitCost = fromInventory
       ? Number(selected.cost || 0)
       : Number(line.unitCost || 0);
@@ -450,6 +477,14 @@ function SaleForm({
           e.preventDefault();
           if (!lines.length || prepared.some(item => item.quantity < 1))
             return toast.error("Cada línea debe tener una cantidad válida");
+          if (
+            prepared.some(
+              item => item.line.priceCurrency === "ARS" && usdtRate <= 0
+            )
+          )
+            return toast.error(
+              "No hay cotización USDT disponible para convertir el precio en pesos"
+            );
           if (
             prepared.some(
               item => !item.selected && !item.line.description.trim()
@@ -601,19 +636,51 @@ function SaleForm({
                     />
                   </label>
                   <label>
-                    Precio unitario
+                    Moneda del precio
+                    <select
+                      value={line.priceCurrency}
+                      onChange={e =>
+                        updateLine(index, {
+                          priceCurrency: e.target.value as "USD" | "ARS",
+                        })
+                      }
+                    >
+                      <option value="USD">USD</option>
+                      <option value="ARS">Pesos argentinos</option>
+                    </select>
+                  </label>
+                  <label>
+                    Precio unitario ({line.priceCurrency})
                     <input
                       type="number"
                       min="0"
                       step="0.01"
-                      value={line.unitPrice}
-                      onChange={e =>
-                        updateLine(index, { unitPrice: e.target.value })
+                      value={
+                        line.priceCurrency === "ARS"
+                          ? line.priceArs
+                          : line.unitPrice
                       }
-                      placeholder="0.00"
+                      onChange={e =>
+                        updateLine(
+                          index,
+                          line.priceCurrency === "ARS"
+                            ? { priceArs: e.target.value }
+                            : { unitPrice: e.target.value }
+                        )
+                      }
+                      placeholder={
+                        line.priceCurrency === "ARS" ? "Ej. 15000" : "0.00"
+                      }
                     />
                   </label>
                 </div>
+                {line.priceCurrency === "ARS" && (
+                  <small className="conversion-note">
+                    {usdtRate > 0
+                      ? `Conversión automática: ${money(prepared[index].unitPrice)} por unidad · USDT ${money(usdtRate, "ARS")}`
+                      : "Cotización USDT no disponible; actualizá la pantalla antes de guardar."}
+                  </small>
+                )}
                 {!fromInventory && (
                   <label>
                     Costo unitario opcional
@@ -2280,7 +2347,7 @@ export default function Home() {
                       ? `${Number(data.advanced.stockCoverageDays).toFixed(0)} días de cobertura`
                       : "Sin ventas suficientes"
                   }
-                  icon={LineChart}
+                  icon={LineChartIcon}
                 />
               </div>
               <div className="main-grid">
@@ -2419,6 +2486,7 @@ export default function Home() {
               </div>
             </>
           )}
+          {active === "charts" && <ChartsView data={data} period={period} />}
           {active === "sales" && (
             <SalesView
               sales={sales.data ?? []}
@@ -2562,6 +2630,234 @@ export default function Home() {
   );
 }
 
+function ChartsView({ data, period }: { data: any; period: string }) {
+  const daily = (data?.daily ?? []).slice(-31).map((row: any) => ({
+    ...row,
+    label: dateLabel(row.day),
+    revenue: Number(row.revenue || 0),
+    profit: Number(row.profit || 0),
+  }));
+  const channels = (data?.advanced?.channels ?? []).map((row: any) => ({
+    ...row,
+    revenue: Number(row.revenue || 0),
+    orders: Number(row.orders || 0),
+  }));
+  const products = (data?.topProducts ?? []).map((row: any) => ({
+    ...row,
+    shortName: String(row.name || "Producto").slice(0, 18),
+    units: Number(row.units || 0),
+  }));
+  const formatTooltip = (value: any) => money(value);
+  return (
+    <>
+      <div className="view-intro">
+        <div>
+          <span className="eyebrow">lectura cuantitativa · datos reales</span>
+          <h2>Gráficos del negocio</h2>
+          <p className="muted">
+            Facturación, ganancia, rotación y canales para detectar dónde crecer
+            y qué corregir.
+          </p>
+        </div>
+        <span className="period-pill">
+          Período: {period === "all" ? "Todo el historial" : period}
+        </span>
+      </div>
+      <div className="advanced-grid chart-kpis">
+        <MetricCard
+          label="Facturación"
+          value={money(data?.summary?.revenue)}
+          helper="ventas del período"
+          icon={CircleDollarSign}
+        />
+        <MetricCard
+          label="Ganancia bruta"
+          value={money(data?.summary?.profit)}
+          helper={`${Number(data?.advanced?.grossMargin || 0).toFixed(1)}% margen`}
+          tone="green"
+          icon={TrendingUp}
+          featured
+        />
+        <MetricCard
+          label="Ganancia neta"
+          value={money(data?.advanced?.netProfit)}
+          helper="bruta − Ads − gastos"
+          tone={Number(data?.advanced?.netProfit || 0) >= 0 ? "green" : "red"}
+          icon={Gauge}
+          featured
+        />
+        <MetricCard
+          label="Unidades vendidas"
+          value={number(data?.summary?.units)}
+          helper="cantidad registrada"
+          tone="sand"
+          icon={Package}
+        />
+      </div>
+      <div className="main-grid charts-layout">
+        <section className="panel chart-panel">
+          <SectionHeader
+            eyebrow="ritmo de ventas"
+            title="Facturación y ganancia por día"
+          />
+          <div className="chart-legend">
+            <span>
+              <i className="legend-dot revenue" />
+              Facturación
+            </span>
+            <span>
+              <i className="legend-dot profit" />
+              Ganancia
+            </span>
+          </div>
+          <div className="chart-wrap">
+            {daily.length ? (
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  data={daily}
+                  margin={{ top: 8, right: 8, left: -20, bottom: 0 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis
+                    dataKey="label"
+                    tick={{ fontSize: 9 }}
+                    interval="preserveStartEnd"
+                  />
+                  <YAxis tick={{ fontSize: 9 }} />
+                  <Tooltip formatter={formatTooltip} />
+                  <Legend wrapperStyle={{ display: "none" }} />
+                  <Line
+                    type="monotone"
+                    dataKey="revenue"
+                    name="Facturación"
+                    stroke="#4fd1c5"
+                    strokeWidth={2}
+                    dot={false}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="profit"
+                    name="Ganancia"
+                    stroke="#9bc27d"
+                    strokeWidth={2}
+                    dot={false}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="empty-chart">No hay ventas en este período.</div>
+            )}
+          </div>
+        </section>
+        <section className="panel chart-panel">
+          <SectionHeader
+            eyebrow="mix comercial"
+            title="Facturación por canal"
+          />
+          <div className="chart-wrap">
+            {channels.length ? (
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={channels}
+                  margin={{ top: 8, right: 8, left: -20, bottom: 0 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="channel" tick={{ fontSize: 9 }} />
+                  <YAxis tick={{ fontSize: 9 }} />
+                  <Tooltip formatter={formatTooltip} />
+                  <Bar
+                    dataKey="revenue"
+                    name="Facturación"
+                    fill="#4fd1c5"
+                    radius={[5, 5, 0, 0]}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="empty-chart">No hay canales registrados.</div>
+            )}
+          </div>
+        </section>
+      </div>
+      <div className="main-grid charts-layout">
+        <section className="panel chart-panel">
+          <SectionHeader eyebrow="rotación" title="Unidades por producto" />
+          <div className="chart-wrap">
+            {products.length ? (
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={products}
+                  layout="vertical"
+                  margin={{ top: 8, right: 8, left: 40, bottom: 0 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis type="number" tick={{ fontSize: 9 }} />
+                  <YAxis
+                    type="category"
+                    dataKey="shortName"
+                    width={90}
+                    tick={{ fontSize: 9 }}
+                  />
+                  <Tooltip
+                    formatter={(value: any) => `${number(value)} unidades`}
+                  />
+                  <Bar
+                    dataKey="units"
+                    name="Unidades"
+                    fill="#d9ae70"
+                    radius={[0, 5, 5, 0]}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="empty-chart">
+                Todavía no hay productos vinculados.
+              </div>
+            )}
+          </div>
+        </section>
+        <section className="panel insight-panel">
+          <SectionHeader
+            eyebrow="lecturas complementarias"
+            title="Qué mirar ahora"
+          />
+          <div className="insight-list">
+            <div>
+              <span>Mejor día</span>
+              <strong>
+                {data?.advanced?.bestDay
+                  ? `${dateLabel(data.advanced.bestDay.day)} · ${money(data.advanced.bestDay.revenue)}`
+                  : "—"}
+              </strong>
+            </div>
+            <div>
+              <span>Canal principal</span>
+              <strong>{data?.advanced?.topChannel?.channel || "—"}</strong>
+            </div>
+            <div>
+              <span>Recompra</span>
+              <strong>
+                {Number(data?.advanced?.repeatRate || 0).toFixed(1)}%
+              </strong>
+            </div>
+            <div>
+              <span>Cobertura de stock</span>
+              <strong>
+                {data?.advanced?.stockCoverageDays
+                  ? `${Number(data.advanced.stockCoverageDays).toFixed(0)} días`
+                  : "Sin base suficiente"}
+              </strong>
+            </div>
+          </div>
+          <p className="muted chart-note">
+            Usá estas señales para decidir qué productos reponer, qué canal
+            sostener y dónde ajustar el seguimiento comercial.
+          </p>
+        </section>
+      </div>
+    </>
+  );
+}
 function ProjectionsView() {
   const [growth, setGrowth] = useState(15);
   const projections = trpc.business.projections.useQuery(
