@@ -1967,7 +1967,7 @@ export default function Home() {
     undefined,
     queryOptions
   );
-  const sales = trpc.business.sales.useQuery({ limit: 150 }, queryOptions);
+  const sales = trpc.business.sales.useQuery({ limit: 500 }, queryOptions);
   const customers = trpc.business.customers.useQuery(undefined, queryOptions);
   const expenses = trpc.business.expenses.useQuery(undefined, queryOptions);
   const loans = trpc.business.loans.useQuery(undefined, queryOptions);
