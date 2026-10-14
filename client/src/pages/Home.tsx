@@ -347,6 +347,11 @@ function SaleForm({
     unitCost: "",
   });
   const [lines, setLines] = useState<SaleLine[]>([emptyLine()]);
+  const [saleDate, setSaleDate] = useState(today);
+  const [productSearch, setProductSearch] = useState<Record<number, string>>(
+    {}
+  );
+  const [customerSearch, setCustomerSearch] = useState("");
   const [customerId, setCustomerId] = useState("");
   const [customerName, setCustomerName] = useState("");
   const [phone, setPhone] = useState("");
@@ -378,6 +383,25 @@ function SaleForm({
       : Number(line.unitCost || 0);
     return { line, selected, fromInventory, quantity, unitPrice, unitCost };
   });
+  const filteredCustomers = customers.filter(customer =>
+    `${customer.name} ${customer.phone || ""}`
+      .toLocaleLowerCase("es-AR")
+      .includes(customerSearch.trim().toLocaleLowerCase("es-AR"))
+  );
+  const visibleProducts = (index: number) => {
+    const query = (productSearch[index] || "")
+      .trim()
+      .toLocaleLowerCase("es-AR");
+    const selectedId = lines[index]?.productId;
+    return products.filter(product => {
+      const matchesQuery =
+        !query ||
+        `${product.name} ${product.category || ""}`
+          .toLocaleLowerCase("es-AR")
+          .includes(query);
+      return matchesQuery || String(product.id) === selectedId;
+    });
+  };
   const total = prepared.reduce(
     (sum, item) => sum + item.quantity * item.unitPrice,
     0
@@ -404,6 +428,19 @@ function SaleForm({
       description: product ? product.name : "",
       unitCost: product ? String(product.cost) : "",
     });
+    setProductSearch(current => ({
+      ...current,
+      [index]: product?.name || "",
+    }));
+  };
+  const selectCustomer = (id: string) => {
+    const customer = customers.find(item => String(item.id) === id);
+    setCustomerId(id);
+    if (customer) {
+      setCustomerName(customer.name);
+      setPhone(customer.phone || "");
+      setCustomerSearch(customer.name);
+    }
   };
   return (
     <Modal title="Cargar venta" onClose={onClose} wide>
@@ -424,7 +461,7 @@ function SaleForm({
           if (paymentStatus === "partial" && !customerName.trim())
             return toast.error("Indicá el cliente que queda como deudor");
           createSale.mutate({
-            date: today,
+            date: saleDate,
             channel,
             customerId: customerId ? Number(customerId) : undefined,
             customerName: customerName || undefined,
@@ -445,6 +482,23 @@ function SaleForm({
           });
         }}
       >
+        <div className="form-grid">
+          <label>
+            Fecha de la venta
+            <input
+              type="date"
+              value={saleDate}
+              onChange={e => setSaleDate(e.target.value)}
+              required
+            />
+          </label>
+          <div className="data-note">
+            <strong>Fecha histórica permitida</strong>
+            <small>
+              Podés cargar ventas de cualquier día, no solamente de hoy.
+            </small>
+          </div>
+        </div>
         <div className="sale-source-note">
           <strong>Productos de la venta</strong>
           <small>
@@ -475,7 +529,36 @@ function SaleForm({
                   )}
                 </div>
                 <label>
-                  Producto del inventario{" "}
+                  Buscar producto del inventario{" "}
+                  <span className="muted">
+                    (podés escribir nombre o categoría)
+                  </span>
+                  <input
+                    value={productSearch[index] || ""}
+                    onChange={e => {
+                      const value = e.target.value;
+                      setProductSearch(current => ({
+                        ...current,
+                        [index]: value,
+                      }));
+                      const product = products.find(
+                        item =>
+                          item.name.trim().toLocaleLowerCase("es-AR") ===
+                          value.trim().toLocaleLowerCase("es-AR")
+                      );
+                      if (product) selectProduct(index, String(product.id));
+                    }}
+                    list={`sale-products-${index}`}
+                    placeholder="Ej. AirPods, perfumes, JBL..."
+                  />
+                  <datalist id={`sale-products-${index}`}>
+                    {products.map(product => (
+                      <option key={product.id} value={product.name} />
+                    ))}
+                  </datalist>
+                </label>
+                <label>
+                  Producto seleccionado{" "}
                   <span className="muted">
                     (opcional · opciones del inventario)
                   </span>
@@ -484,7 +567,7 @@ function SaleForm({
                     onChange={e => selectProduct(index, e.target.value)}
                   >
                     <option value="">Venta manual / mercadería externa</option>
-                    {products.map(p => (
+                    {visibleProducts(index).map(p => (
                       <option key={p.id} value={p.id}>
                         {p.name} · {p.stock} disponibles · costo {money(p.cost)}
                       </option>
@@ -567,23 +650,44 @@ function SaleForm({
         </button>
         <div className="form-grid">
           <label>
+            Buscar cliente existente
+            <input
+              value={customerSearch}
+              onChange={e => {
+                const value = e.target.value;
+                setCustomerSearch(value);
+                const normalized = value.trim().toLocaleLowerCase("es-AR");
+                const customer = customers.find(item => {
+                  const name = item.name.trim().toLocaleLowerCase("es-AR");
+                  const phoneValue = String(item.phone || "")
+                    .trim()
+                    .toLocaleLowerCase("es-AR");
+                  return (
+                    normalized === name ||
+                    (phoneValue && normalized === phoneValue)
+                  );
+                });
+                if (customer) selectCustomer(String(customer.id));
+              }}
+              list="sale-customers"
+              placeholder="Nombre o teléfono"
+            />
+            <datalist id="sale-customers">
+              {customers.map(customer => (
+                <option key={customer.id} value={customer.name} />
+              ))}
+            </datalist>
+          </label>
+          <label>
             Cliente existente
             <select
               value={customerId}
-              onChange={e => {
-                const id = e.target.value;
-                setCustomerId(id);
-                const c = customers.find(x => String(x.id) === id);
-                if (c) {
-                  setCustomerName(c.name);
-                  setPhone(c.phone || "");
-                }
-              }}
+              onChange={e => selectCustomer(e.target.value)}
             >
               <option value="">Sin vincular / nuevo</option>
-              {customers.map(c => (
+              {filteredCustomers.map(c => (
                 <option key={c.id} value={c.id}>
-                  {c.name} · {c.purchases} compras
+                  {c.name} · {c.phone || "sin teléfono"} · {c.purchases} compras
                 </option>
               ))}
             </select>
@@ -591,7 +695,11 @@ function SaleForm({
           <SuggestedInput
             label="Nombre / WhatsApp"
             value={customerName}
-            onChange={setCustomerName}
+            onChange={value => {
+              setCustomerName(value);
+              const linked = customers.find(x => String(x.id) === customerId);
+              if (linked && linked.name !== value) setCustomerId("");
+            }}
             options={customerNameOptions}
             listId="sale-customer-names"
             placeholder="Nombre"

@@ -116,3 +116,8 @@ Los cambios de datos se ejecutan de forma idempotente y no convierten costos fal
 - El frontend carga una consulta completa de inventario separada del filtro visual para que los formularios de venta y las sugerencias siempre dispongan de todos los productos activos.
 - Los campos repetibles usan `datalist` y listas derivadas de la base compartida: categorías, clientes, canales, tipos/categorías de gastos, acreedores/proveedores, localidades, plataformas, campañas y meses. Las sugerencias aceleran la carga, pero no bloquean valores nuevos.
 - Las listas se recalculan después de una mutación junto con el resto de las consultas, manteniendo intactos los registros existentes y el mismo flujo de persistencia tRPC/MySQL.
+
+## Iteración de carga rápida de ventas
+- El formulario de ventas expone la fecha como un campo editable con valor inicial en el día actual, permitiendo registrar ventas históricas sin cambiar la validación del backend.
+- Clientes y productos se filtran en el navegador a medida que se escribe; las coincidencias exactas desde sugerencias quedan vinculadas al registro existente. Al seleccionar un cliente se copian automáticamente nombre y teléfono guardados.
+- Se conserva el modo de venta manual para mercadería externa y el selector completo del inventario, de modo que la búsqueda acelera la carga sin bloquear nuevos datos.
