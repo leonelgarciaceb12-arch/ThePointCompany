@@ -1967,7 +1967,7 @@ export default function Home() {
     undefined,
     queryOptions
   );
-  const sales = trpc.business.sales.useQuery({ limit: 500 }, queryOptions);
+  const sales = trpc.business.sales.useQuery(undefined, queryOptions);
   const customers = trpc.business.customers.useQuery(undefined, queryOptions);
   const expenses = trpc.business.expenses.useQuery(undefined, queryOptions);
   const loans = trpc.business.loans.useQuery(undefined, queryOptions);
@@ -3008,6 +3008,13 @@ function SalesView({
   onEdit: (item: any) => void;
   onDone: () => void;
 }) {
+  const [page, setPage] = useState(1);
+  const pageSize = 50;
+  const pageCount = Math.max(1, Math.ceil(sales.length / pageSize));
+  useEffect(() => {
+    if (page > pageCount) setPage(pageCount);
+  }, [page, pageCount]);
+  const visibleSales = sales.slice((page - 1) * pageSize, page * pageSize);
   const remove = trpc.business.deleteSale.useMutation({
     onSuccess: () => {
       toast.success("Venta eliminada y stock reconciliado");
@@ -3045,7 +3052,7 @@ function SalesView({
               </tr>
             </thead>
             <tbody>
-              {sales.map(s => (
+              {visibleSales.map(s => (
                 <tr key={s.id}>
                   <td>{dateLabel(s.saleDate)}</td>
                   <td>
@@ -3079,6 +3086,31 @@ function SalesView({
               ))}
             </tbody>
           </table>
+        </div>
+        <div className="pagination-bar">
+          <span>
+            Mostrando {sales.length ? (page - 1) * pageSize + 1 : 0}–
+            {Math.min(page * pageSize, sales.length)} de {sales.length} ventas
+          </span>
+          <div className="pagination-actions">
+            <button
+              className="button secondary"
+              disabled={page <= 1}
+              onClick={() => setPage(value => Math.max(1, value - 1))}
+            >
+              Anterior
+            </button>
+            <strong>
+              Página {page} de {pageCount}
+            </strong>
+            <button
+              className="button secondary"
+              disabled={page >= pageCount}
+              onClick={() => setPage(value => Math.min(pageCount, value + 1))}
+            >
+              Siguiente
+            </button>
+          </div>
         </div>
       </div>
     </>

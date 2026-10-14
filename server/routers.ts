@@ -157,7 +157,7 @@ export const appRouter = router({
           .object({ limit: z.number().int().positive().max(500).optional() })
           .optional()
       )
-      .query(({ input }) => listSales(input?.limit ?? 500)),
+      .query(({ input }) => listSales(input?.limit)),
     customers: protectedProcedure.query(() => listCustomers()),
     expenses: protectedProcedure.query(() => listExpenses()),
     loans: protectedProcedure.query(() => listLoans()),
