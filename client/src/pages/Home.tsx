@@ -1937,7 +1937,7 @@ export default function Home() {
   const [category, setCategory] = useState("Todas");
   const [period, setPeriod] = useState<
     "today" | "7d" | "30d" | "month" | "quarter" | "all"
-  >("30d");
+  >("month");
   const range = useMemo(() => {
     if (period === "all") return { from: undefined, to: undefined };
     const end = new Date();
@@ -2413,34 +2413,6 @@ export default function Home() {
               <div className="three-grid">
                 <section className="panel">
                   <SectionHeader
-                    eyebrow="rentabilidad"
-                    title="Canales que aportan"
-                    action="Publicidad"
-                    onAction={() => setActive("ads")}
-                  />
-                  <div className="mini-bars">
-                    {(data?.advanced?.channels ?? [])
-                      .slice(0, 5)
-                      .map((p: any, i: number) => (
-                        <div className="bar-row" key={`${p.channel}-${i}`}>
-                          <div>
-                            <span>{p.channel || "Sin canal"}</span>
-                            <small>{number(p.orders)} pedidos</small>
-                          </div>
-                          <div className="bar-track">
-                            <span
-                              style={{
-                                width: `${Math.min(100, Math.max(8, (Number(p.revenue || 0) / Math.max(1, Number(data?.summary?.revenue || 1))) * 100))}%`,
-                              }}
-                            />
-                          </div>
-                          <b>{money(p.revenue)}</b>
-                        </div>
-                      ))}
-                  </div>
-                </section>
-                <section className="panel">
-                  <SectionHeader
                     eyebrow="clientes"
                     title="Quién más aporta"
                     action="Ver clientes"
@@ -2749,35 +2721,6 @@ function ChartsView({ data, period }: { data: any; period: string }) {
             )}
           </div>
         </section>
-        <section className="panel chart-panel">
-          <SectionHeader
-            eyebrow="mix comercial"
-            title="Facturación por canal"
-          />
-          <div className="chart-wrap">
-            {channels.length ? (
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={channels}
-                  margin={{ top: 8, right: 8, left: -20, bottom: 0 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="channel" tick={{ fontSize: 9 }} />
-                  <YAxis tick={{ fontSize: 9 }} />
-                  <Tooltip formatter={formatTooltip} />
-                  <Bar
-                    dataKey="revenue"
-                    name="Facturación"
-                    fill="#4fd1c5"
-                    radius={[5, 5, 0, 0]}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            ) : (
-              <div className="empty-chart">No hay canales registrados.</div>
-            )}
-          </div>
-        </section>
       </div>
       <div className="main-grid charts-layout">
         <section className="panel chart-panel">
@@ -2831,10 +2774,6 @@ function ChartsView({ data, period }: { data: any; period: string }) {
               </strong>
             </div>
             <div>
-              <span>Canal principal</span>
-              <strong>{data?.advanced?.topChannel?.channel || "—"}</strong>
-            </div>
-            <div>
               <span>Recompra</span>
               <strong>
                 {Number(data?.advanced?.repeatRate || 0).toFixed(1)}%
@@ -2850,8 +2789,8 @@ function ChartsView({ data, period }: { data: any; period: string }) {
             </div>
           </div>
           <p className="muted chart-note">
-            Usá estas señales para decidir qué productos reponer, qué canal
-            sostener y dónde ajustar el seguimiento comercial.
+            Usá estas señales para decidir qué productos reponer y dónde ajustar
+            el seguimiento comercial.
           </p>
         </section>
       </div>
