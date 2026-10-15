@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, gte, lt, sql } from "drizzle-orm";
+import { and, asc, desc, eq, gte, inArray, lt, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -756,7 +756,29 @@ export async function listSales(limit?: number) {
     .from(sales)
     .where(sql`${sales.status} <> 'cancelled'`)
     .orderBy(desc(sales.saleDate), desc(sales.id));
-  return limit ? query.limit(limit) : query;
+  const rows = await (limit ? query.limit(limit) : query);
+  if (!rows.length) return rows;
+  const itemRows = await db
+    .select({ saleId: saleItems.saleId, description: saleItems.description })
+    .from(saleItems)
+    .where(
+      inArray(
+        saleItems.saleId,
+        rows.map(row => row.id)
+      )
+    )
+    .orderBy(asc(saleItems.id));
+  const descriptions = new Map<number, string[]>();
+  for (const item of itemRows) {
+    const values = descriptions.get(item.saleId) ?? [];
+    if (item.description && !values.includes(item.description))
+      values.push(item.description);
+    descriptions.set(item.saleId, values);
+  }
+  return rows.map(row => ({
+    ...row,
+    notes: row.notes || descriptions.get(row.id)?.join(" · ") || null,
+  }));
 }
 export async function listCustomers() {
   const db = await getDb();
