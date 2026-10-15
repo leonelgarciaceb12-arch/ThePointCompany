@@ -759,7 +759,11 @@ export async function listSales(limit?: number) {
   const rows = await (limit ? query.limit(limit) : query);
   if (!rows.length) return rows;
   const itemRows = await db
-    .select({ saleId: saleItems.saleId, description: saleItems.description })
+    .select({
+      saleId: saleItems.saleId,
+      description: saleItems.description,
+      quantity: saleItems.quantity,
+    })
     .from(saleItems)
     .where(
       inArray(
@@ -771,13 +775,18 @@ export async function listSales(limit?: number) {
   const descriptions = new Map<number, string[]>();
   for (const item of itemRows) {
     const values = descriptions.get(item.saleId) ?? [];
-    if (item.description && !values.includes(item.description))
-      values.push(item.description);
+    const label = `${item.quantity || 1} ${item.description}`.trim();
+    if (label && !values.includes(label)) values.push(label);
     descriptions.set(item.saleId, values);
   }
   return rows.map(row => ({
     ...row,
-    notes: row.notes || descriptions.get(row.id)?.join(" · ") || null,
+    // Las ventas históricas conservan el texto original del Excel.
+    // Las ventas actuales se reconstruyen desde cantidad + producto.
+    notes:
+      row.legacyId == null
+        ? descriptions.get(row.id)?.join(" · ") || row.notes || null
+        : row.notes || descriptions.get(row.id)?.join(" · ") || null,
   }));
 }
 export async function listCustomers() {
@@ -1288,7 +1297,7 @@ export async function createSale(input: {
       notes:
         input.notes ||
         prepared
-          .map(p => p.item.description)
+          .map(p => `${p.item.quantity || 1} ${p.item.description}`.trim())
           .filter(Boolean)
           .join(" · "),
       createdBy: input.userId,

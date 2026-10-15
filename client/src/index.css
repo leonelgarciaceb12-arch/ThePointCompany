@@ -60,3 +60,11 @@ body,.app-shell{background:var(--paper);color:var(--ink)}
 .table-panel th { padding: 10px 14px; }
 .table-panel td small { margin-top: 2px; }
 .table-panel td strong { line-height: 1.25; }
+
+/* Ventas: tabla compacta, sin columna de origen/canal */
+.table-panel table { min-width: 620px; }
+.table-panel th { padding: 8px 10px; font-size: 8px; }
+.table-panel td { padding: 6px 10px; font-size: 10px; }
+.table-panel td strong { font-size: 10px; }
+.table-panel td small { font-size: 9px; margin-top: 1px; }
+@media(max-width:760px) { .table-panel table { min-width: 620px; } }

@@ -2984,7 +2984,6 @@ function SalesView({
                 <th>Fecha</th>
                 <th>Descripción</th>
                 <th>Cliente</th>
-                <th>Canal</th>
                 <th>Facturación</th>
                 <th>Ganancia</th>
                 <th>Margen</th>
@@ -3001,9 +3000,6 @@ function SalesView({
                   <td>
                     <strong>{s.customerName || "Venta sin cliente"}</strong>
                     <small>{s.customerPhone || "Dato pendiente"}</small>
-                  </td>
-                  <td>
-                    <span className="soft-tag">{s.channel || "—"}</span>
                   </td>
                   <td>{money(s.total)}</td>
                   <td className="positive">
