@@ -240,19 +240,17 @@ async function syncCustomersFromSales(db: any) {
       (item: any) => normalizeIdentity(item.name) === nameKey
     );
     if (!customer) {
-      const created = await db
-        .insert(customers)
-        .values({
-          name,
-          phone: sale.customerPhone || null,
-          purchases: 0,
-          spent: "0.00",
-          profit: "0.00",
-          firstPurchase: null,
-          lastPurchase: null,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        });
+      const created = await db.insert(customers).values({
+        name,
+        phone: sale.customerPhone || null,
+        purchases: 0,
+        spent: "0.00",
+        profit: "0.00",
+        firstPurchase: null,
+        lastPurchase: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
       customer = {
         id: Number(created[0].insertId),
         name,
@@ -296,38 +294,34 @@ export async function ensureSeeded() {
           ?.count ?? 0
       );
     if ((await count(products)) === 0 && raw.products.length) {
-      await db
-        .insert(products)
-        .values(
-          raw.products.map(p => ({
-            legacyId: Number(p.legacyId) || null,
-            name: String(p.name),
-            category: String(p.category || "Sin categoría"),
-            supplier: String(p.supplier || "Propio"),
-            stock: Number(p.stock || 0),
-            cost: toMoney(p.cost),
-            minStock: Number(p.minStock || 3),
-            createdAt: now,
-            updatedAt: now,
-          }))
-        );
+      await db.insert(products).values(
+        raw.products.map(p => ({
+          legacyId: Number(p.legacyId) || null,
+          name: String(p.name),
+          category: String(p.category || "Sin categoría"),
+          supplier: String(p.supplier || "Propio"),
+          stock: Number(p.stock || 0),
+          cost: toMoney(p.cost),
+          minStock: Number(p.minStock || 3),
+          createdAt: now,
+          updatedAt: now,
+        }))
+      );
     }
     if ((await count(customers)) === 0 && raw.customers.length) {
-      await db
-        .insert(customers)
-        .values(
-          raw.customers.map(c => ({
-            name: String(c.name),
-            phone: c.phone ? String(c.phone) : null,
-            purchases: Number(c.purchases || 0),
-            spent: toMoney(c.spent),
-            profit: "0.00",
-            firstPurchase: parseSeedDate(c.firstPurchase as string),
-            lastPurchase: parseSeedDate(c.lastPurchase as string),
-            createdAt: now,
-            updatedAt: now,
-          }))
-        );
+      await db.insert(customers).values(
+        raw.customers.map(c => ({
+          name: String(c.name),
+          phone: c.phone ? String(c.phone) : null,
+          purchases: Number(c.purchases || 0),
+          spent: toMoney(c.spent),
+          profit: "0.00",
+          firstPurchase: parseSeedDate(c.firstPurchase as string),
+          lastPurchase: parseSeedDate(c.lastPurchase as string),
+          createdAt: now,
+          updatedAt: now,
+        }))
+      );
     }
     const customerRows = await db
       .select({ id: customers.id, name: customers.name })
@@ -350,24 +344,22 @@ export async function ensureSeeded() {
       let saleId: number;
       if (existing) saleId = existing.id;
       else {
-        const inserted = await db
-          .insert(sales)
-          .values({
-            legacyId,
-            saleDate: parseSeedDate(s.date as string) || "2026-01-01",
-            customerId: s.customer
-              ? (customerMap.get(String(s.customer)) ?? null)
-              : null,
-            customerName: s.customer ? String(s.customer) : null,
-            customerPhone: s.phone ? String(s.phone) : null,
-            channel: String(s.channel || "WhatsApp"),
-            total: toMoney(total),
-            totalCost: toMoney(cost),
-            profit: toMoney(profit),
-            margin: total ? toMoney((profit / total) * 100) : "0.00",
-            createdAt: now,
-            updatedAt: now,
-          });
+        const inserted = await db.insert(sales).values({
+          legacyId,
+          saleDate: parseSeedDate(s.date as string) || "2026-01-01",
+          customerId: s.customer
+            ? (customerMap.get(String(s.customer)) ?? null)
+            : null,
+          customerName: s.customer ? String(s.customer) : null,
+          customerPhone: s.phone ? String(s.phone) : null,
+          channel: String(s.channel || "WhatsApp"),
+          total: toMoney(total),
+          totalCost: toMoney(cost),
+          profit: toMoney(profit),
+          margin: total ? toMoney((profit / total) * 100) : "0.00",
+          createdAt: now,
+          updatedAt: now,
+        });
         saleId = Number(inserted[0].insertId);
       }
       const itemExists = (
@@ -377,37 +369,38 @@ export async function ensureSeeded() {
           .where(eq(saleItems.saleId, saleId))
           .limit(1)
       )[0];
-      if (!itemExists)
+      if (s.description)
         await db
-          .insert(saleItems)
-          .values({
-            saleId,
-            description: String(s.description),
-            quantity: 1,
-            unitPrice: toMoney(total),
-            unitCost: toMoney(cost),
-            total: toMoney(total),
-            costTotal: toMoney(cost),
-            profit: toMoney(profit),
-            fromInventory: false,
-            createdAt: now,
-            updatedAt: now,
-          });
+          .update(sales)
+          .set({ notes: String(s.description) })
+          .where(and(eq(sales.id, saleId), sql`${sales.notes} is null`));
+      if (!itemExists)
+        await db.insert(saleItems).values({
+          saleId,
+          description: String(s.description),
+          quantity: 1,
+          unitPrice: toMoney(total),
+          unitCost: toMoney(cost),
+          total: toMoney(total),
+          costTotal: toMoney(cost),
+          profit: toMoney(profit),
+          fromInventory: false,
+          createdAt: now,
+          updatedAt: now,
+        });
     }
     if ((await count(adCampaigns)) === 0 && raw.ads.length)
-      await db
-        .insert(adCampaigns)
-        .values(
-          raw.ads.map(a => ({
-            adDate: parseSeedDate(a.date as string) || "2026-01-01",
-            platform: String(a.platform || "Meta Ads"),
-            campaign: "Campaña inicial propia de ventas - Multiples estilos",
-            amount: toMoney(a.amount),
-            notes: a.notes ? String(a.notes) : null,
-            createdAt: now,
-            updatedAt: now,
-          }))
-        );
+      await db.insert(adCampaigns).values(
+        raw.ads.map(a => ({
+          adDate: parseSeedDate(a.date as string) || "2026-01-01",
+          platform: String(a.platform || "Meta Ads"),
+          campaign: "Campaña inicial propia de ventas - Multiples estilos",
+          amount: toMoney(a.amount),
+          notes: a.notes ? String(a.notes) : null,
+          createdAt: now,
+          updatedAt: now,
+        }))
+      );
     await db
       .update(adCampaigns)
       .set({ campaign: "Campaña inicial propia de ventas - Multiples estilos" })
@@ -415,57 +408,49 @@ export async function ensureSeeded() {
         sql`${adCampaigns.campaign} like '%estilo folleto%' or ${adCampaigns.campaign} like '%Campaña de venta de vapes%'`
       );
     if ((await count(expenses)) === 0 && raw.expenses.length)
-      await db
-        .insert(expenses)
-        .values(
-          raw.expenses.map(e => ({
-            expenseDate: parseSeedDate(e.date as string) || "2026-01-01",
-            category: String(e.category || "General"),
-            description: String(e.description || "Gasto"),
-            amount: toMoney(e.amount),
-            type: String(e.type || "Operativo"),
-            notes: e.notes ? String(e.notes) : null,
-            createdAt: now,
-            updatedAt: now,
-          }))
-        );
+      await db.insert(expenses).values(
+        raw.expenses.map(e => ({
+          expenseDate: parseSeedDate(e.date as string) || "2026-01-01",
+          category: String(e.category || "General"),
+          description: String(e.description || "Gasto"),
+          amount: toMoney(e.amount),
+          type: String(e.type || "Operativo"),
+          notes: e.notes ? String(e.notes) : null,
+          createdAt: now,
+          updatedAt: now,
+        }))
+      );
     if ((await count(loans)) === 0 && raw.loans.length)
-      await db
-        .insert(loans)
-        .values(
-          raw.loans.map(l => ({
-            kind: "loan" as const,
-            counterparty: String(l.counterparty),
-            description: l.notes ? String(l.notes) : null,
-            currency: String(l.currency || "USD"),
-            principal: toMoney(l.principal),
-            paid: toMoney(l.paid),
-            balance: toMoney(l.balance),
-            startDate: parseSeedDate(l.startDate as string),
-            dueDate: parseSeedDate(l.dueDate as string),
-            status:
-              Number(l.balance || 0) <= 0
-                ? ("paid" as const)
-                : ("open" as const),
-            notes: l.notes ? String(l.notes) : null,
-            createdAt: now,
-            updatedAt: now,
-          }))
-        );
+      await db.insert(loans).values(
+        raw.loans.map(l => ({
+          kind: "loan" as const,
+          counterparty: String(l.counterparty),
+          description: l.notes ? String(l.notes) : null,
+          currency: String(l.currency || "USD"),
+          principal: toMoney(l.principal),
+          paid: toMoney(l.paid),
+          balance: toMoney(l.balance),
+          startDate: parseSeedDate(l.startDate as string),
+          dueDate: parseSeedDate(l.dueDate as string),
+          status:
+            Number(l.balance || 0) <= 0 ? ("paid" as const) : ("open" as const),
+          notes: l.notes ? String(l.notes) : null,
+          createdAt: now,
+          updatedAt: now,
+        }))
+      );
     if ((await count(objectives)) === 0 && raw.objectives.length)
-      await db
-        .insert(objectives)
-        .values(
-          raw.objectives.map(o => ({
-            month: String(o.month),
-            targetOrders: Number(o.targetOrders || 0),
-            targetRevenue: toMoney(o.targetRevenue),
-            targetProfit: toMoney(o.targetProfit),
-            targetNet: toMoney(o.targetNet),
-            createdAt: now,
-            updatedAt: now,
-          }))
-        );
+      await db.insert(objectives).values(
+        raw.objectives.map(o => ({
+          month: String(o.month),
+          targetOrders: Number(o.targetOrders || 0),
+          targetRevenue: toMoney(o.targetRevenue),
+          targetProfit: toMoney(o.targetProfit),
+          targetNet: toMoney(o.targetNet),
+          createdAt: now,
+          updatedAt: now,
+        }))
+      );
     await syncCustomersFromSales(db);
     console.log(
       `[Database] Seed reconciliation complete: ${raw.products.length} products, ${raw.sales.length} historical sales.`
@@ -835,18 +820,16 @@ export async function createProduct(input: {
 }) {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
-  const result = await db
-    .insert(products)
-    .values({
-      name: input.name,
-      category: input.category,
-      supplier: input.supplier || "Propio",
-      stock: input.stock,
-      cost: toMoney(input.cost),
-      minStock: input.minStock ?? 3,
-      createdBy: input.userId,
-      updatedBy: input.userId,
-    });
+  const result = await db.insert(products).values({
+    name: input.name,
+    category: input.category,
+    supplier: input.supplier || "Propio",
+    stock: input.stock,
+    cost: toMoney(input.cost),
+    minStock: input.minStock ?? 3,
+    createdBy: input.userId,
+    updatedBy: input.userId,
+  });
   return Number(result[0].insertId);
 }
 
@@ -882,17 +865,15 @@ export async function updateProduct(
       })
       .where(eq(products.id, id));
     if (current.stock !== input.stock)
-      await tx
-        .insert(stockMovements)
-        .values({
-          productId: id,
-          type: "adjustment",
-          quantity: input.stock - current.stock,
-          unitCost: toMoney(input.cost),
-          notes: "Ajuste desde edición del producto",
-          createdBy: input.userId,
-          updatedBy: input.userId,
-        });
+      await tx.insert(stockMovements).values({
+        productId: id,
+        type: "adjustment",
+        quantity: input.stock - current.stock,
+        unitCost: toMoney(input.cost),
+        notes: "Ajuste desde edición del producto",
+        createdBy: input.userId,
+        updatedBy: input.userId,
+      });
     return { id };
   });
 }
@@ -1141,17 +1122,15 @@ export async function adjustStock(input: {
         updatedBy: input.userId,
       })
       .where(eq(products.id, input.productId));
-    await tx
-      .insert(stockMovements)
-      .values({
-        productId: input.productId,
-        type: input.type,
-        quantity: input.quantity,
-        unitCost: toMoney(input.unitCost ?? Number(product.cost)),
-        notes: input.notes,
-        createdBy: input.userId,
-        updatedBy: input.userId,
-      });
+    await tx.insert(stockMovements).values({
+      productId: input.productId,
+      type: input.type,
+      quantity: input.quantity,
+      unitCost: toMoney(input.unitCost ?? Number(product.cost)),
+      notes: input.notes,
+      createdBy: input.userId,
+      updatedBy: input.userId,
+    });
     return { stock: next };
   });
 }
@@ -1243,19 +1222,17 @@ export async function createSale(input: {
           )
         : undefined;
       if (!customer && resolvedCustomerName) {
-        const created = await tx
-          .insert(customers)
-          .values({
-            name: resolvedCustomerName,
-            phone: resolvedCustomerPhone || null,
-            purchases: 0,
-            spent: "0.00",
-            profit: "0.00",
-            firstPurchase: null,
-            lastPurchase: null,
-            createdBy: input.userId,
-            updatedBy: input.userId,
-          });
+        const created = await tx.insert(customers).values({
+          name: resolvedCustomerName,
+          phone: resolvedCustomerPhone || null,
+          purchases: 0,
+          spent: "0.00",
+          profit: "0.00",
+          firstPurchase: null,
+          lastPurchase: null,
+          createdBy: input.userId,
+          updatedBy: input.userId,
+        });
         resolvedCustomerId = Number(created[0].insertId);
       } else if (customer) {
         resolvedCustomerId = customer.id;
@@ -1275,46 +1252,47 @@ export async function createSale(input: {
             .where(eq(customers.id, customer.id));
       }
     }
-    const inserted = await tx
-      .insert(sales)
-      .values({
-        saleDate: input.date,
-        customerId: resolvedCustomerId,
-        customerName: resolvedCustomerName,
-        customerPhone: resolvedCustomerPhone,
-        channel: input.channel || "WhatsApp",
-        total: toMoney(total),
-        totalCost: toMoney(totalCost),
-        profit: toMoney(profit),
-        margin: costKnown && total ? toMoney((profit / total) * 100) : "0.00",
-        costKnown,
-        notes: input.notes,
-        createdBy: input.userId,
-        updatedBy: input.userId,
-      });
+    const inserted = await tx.insert(sales).values({
+      saleDate: input.date,
+      customerId: resolvedCustomerId,
+      customerName: resolvedCustomerName,
+      customerPhone: resolvedCustomerPhone,
+      channel: input.channel || "WhatsApp",
+      total: toMoney(total),
+      totalCost: toMoney(totalCost),
+      profit: toMoney(profit),
+      margin: costKnown && total ? toMoney((profit / total) * 100) : "0.00",
+      costKnown,
+      notes:
+        input.notes ||
+        prepared
+          .map(p => p.item.description)
+          .filter(Boolean)
+          .join(" · "),
+      createdBy: input.userId,
+      updatedBy: input.userId,
+    });
     const saleId = Number(inserted[0].insertId);
     for (const p of prepared) {
       const { item, cost, itemCostKnown, product } = p;
-      await tx
-        .insert(saleItems)
-        .values({
-          saleId,
-          productId: product?.id,
-          description: item.description,
-          quantity: item.quantity,
-          unitPrice: toMoney(item.unitPrice),
-          unitCost: toMoney(cost),
-          total: toMoney(item.unitPrice * item.quantity),
-          costTotal: toMoney(cost * item.quantity),
-          profit: itemCostKnown
-            ? toMoney((item.unitPrice - cost) * item.quantity)
-            : "0.00",
-          costKnown: itemCostKnown,
-          fromInventory: item.fromInventory,
-          supplier: item.supplier,
-          createdBy: input.userId,
-          updatedBy: input.userId,
-        });
+      await tx.insert(saleItems).values({
+        saleId,
+        productId: product?.id,
+        description: item.description,
+        quantity: item.quantity,
+        unitPrice: toMoney(item.unitPrice),
+        unitCost: toMoney(cost),
+        total: toMoney(item.unitPrice * item.quantity),
+        costTotal: toMoney(cost * item.quantity),
+        profit: itemCostKnown
+          ? toMoney((item.unitPrice - cost) * item.quantity)
+          : "0.00",
+        costKnown: itemCostKnown,
+        fromInventory: item.fromInventory,
+        supplier: item.supplier,
+        createdBy: input.userId,
+        updatedBy: input.userId,
+      });
       if (product && item.fromInventory) {
         await tx
           .update(products)
@@ -1323,38 +1301,33 @@ export async function createSale(input: {
             updatedBy: input.userId,
           })
           .where(eq(products.id, product.id));
-        await tx
-          .insert(stockMovements)
-          .values({
-            productId: product.id,
-            type: "sale",
-            quantity: -item.quantity,
-            unitCost: toMoney(cost),
-            referenceId: saleId,
-            createdBy: input.userId,
-            updatedBy: input.userId,
-          });
+        await tx.insert(stockMovements).values({
+          productId: product.id,
+          type: "sale",
+          quantity: -item.quantity,
+          unitCost: toMoney(cost),
+          referenceId: saleId,
+          createdBy: input.userId,
+          updatedBy: input.userId,
+        });
       }
     }
     if (resolvedCustomerId) await refreshCustomerStats(tx, resolvedCustomerId);
     let receivableId: number | undefined;
     if (balance > 0) {
-      const receivable = await tx
-        .insert(receivables)
-        .values({
-          customerName: resolvedCustomerName!.trim(),
-          phone: resolvedCustomerPhone,
-          description: `Saldo pendiente de venta #${saleId}`,
-          principal: toMoney(total),
-          paid: toMoney(paidAmount),
-          balance: toMoney(balance),
-          dueDate: input.date,
-          status: debtStatus(total, paidAmount, balance, input.date),
-          notes:
-            "Creado automáticamente al registrar una venta con pago parcial",
-          createdBy: input.userId,
-          updatedBy: input.userId,
-        });
+      const receivable = await tx.insert(receivables).values({
+        customerName: resolvedCustomerName!.trim(),
+        phone: resolvedCustomerPhone,
+        description: `Saldo pendiente de venta #${saleId}`,
+        principal: toMoney(total),
+        paid: toMoney(paidAmount),
+        balance: toMoney(balance),
+        dueDate: input.date,
+        status: debtStatus(total, paidAmount, balance, input.date),
+        notes: "Creado automáticamente al registrar una venta con pago parcial",
+        createdBy: input.userId,
+        updatedBy: input.userId,
+      });
       receivableId = Number(receivable[0].insertId);
     }
     return {
@@ -1383,20 +1356,18 @@ export async function createExpense(input: {
 }) {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
-  const result = await db
-    .insert(expenses)
-    .values({
-      expenseDate: input.date,
-      category: input.category,
-      description: input.description,
-      amount: toMoney(input.amount),
-      type: input.type || "Operativo",
-      platform: input.platform,
-      campaign: input.campaign,
-      notes: input.notes,
-      createdBy: input.userId,
-      updatedBy: input.userId,
-    });
+  const result = await db.insert(expenses).values({
+    expenseDate: input.date,
+    category: input.category,
+    description: input.description,
+    amount: toMoney(input.amount),
+    type: input.type || "Operativo",
+    platform: input.platform,
+    campaign: input.campaign,
+    notes: input.notes,
+    createdBy: input.userId,
+    updatedBy: input.userId,
+  });
   return Number(result[0].insertId);
 }
 
@@ -1432,36 +1403,34 @@ export async function createLoan(input: {
   const installmentAmount = installments
     ? Number(input.installmentAmount ?? repayment / installments)
     : null;
-  const result = await db
-    .insert(loans)
-    .values({
-      kind: input.kind,
-      counterparty: input.counterparty,
-      description: input.description,
-      currency: input.currency || "USD",
-      interestRate: toMoney(input.interestRate ?? 0),
-      interestPeriod: input.interestPeriod || "monthly",
-      principal: toMoney(input.principal),
-      repaymentAmount: toMoney(repayment),
-      installmentCount: installments,
-      installmentAmount:
-        installmentAmount === null ? null : toMoney(installmentAmount),
-      installmentPeriod: input.installmentPeriod || "weekly",
-      hasDueDate,
-      balance: toMoney(repayment),
-      paid: "0.00",
-      dueDate: hasDueDate ? input.dueDate : null,
-      startDate: input.startDate,
-      status: debtStatus(
-        repayment,
-        0,
-        repayment,
-        hasDueDate ? input.dueDate : undefined
-      ),
-      notes: input.notes,
-      createdBy: input.userId,
-      updatedBy: input.userId,
-    });
+  const result = await db.insert(loans).values({
+    kind: input.kind,
+    counterparty: input.counterparty,
+    description: input.description,
+    currency: input.currency || "USD",
+    interestRate: toMoney(input.interestRate ?? 0),
+    interestPeriod: input.interestPeriod || "monthly",
+    principal: toMoney(input.principal),
+    repaymentAmount: toMoney(repayment),
+    installmentCount: installments,
+    installmentAmount:
+      installmentAmount === null ? null : toMoney(installmentAmount),
+    installmentPeriod: input.installmentPeriod || "weekly",
+    hasDueDate,
+    balance: toMoney(repayment),
+    paid: "0.00",
+    dueDate: hasDueDate ? input.dueDate : null,
+    startDate: input.startDate,
+    status: debtStatus(
+      repayment,
+      0,
+      repayment,
+      hasDueDate ? input.dueDate : undefined
+    ),
+    notes: input.notes,
+    createdBy: input.userId,
+    updatedBy: input.userId,
+  });
   return Number(result[0].insertId);
 }
 
@@ -1498,21 +1467,19 @@ export async function createReceivable(input: {
 }) {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
-  const result = await db
-    .insert(receivables)
-    .values({
-      customerName: input.customerName,
-      phone: input.phone,
-      description: input.description,
-      principal: toMoney(input.principal),
-      balance: toMoney(input.principal),
-      paid: "0.00",
-      dueDate: input.dueDate,
-      status: debtStatus(input.principal, 0, input.principal, input.dueDate),
-      notes: input.notes,
-      createdBy: input.userId,
-      updatedBy: input.userId,
-    });
+  const result = await db.insert(receivables).values({
+    customerName: input.customerName,
+    phone: input.phone,
+    description: input.description,
+    principal: toMoney(input.principal),
+    balance: toMoney(input.principal),
+    paid: "0.00",
+    dueDate: input.dueDate,
+    status: debtStatus(input.principal, 0, input.principal, input.dueDate),
+    notes: input.notes,
+    createdBy: input.userId,
+    updatedBy: input.userId,
+  });
   return Number(result[0].insertId);
 }
 
@@ -1717,19 +1684,17 @@ export async function createAd(input: {
 }) {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
-  const result = await db
-    .insert(adCampaigns)
-    .values({
-      adDate: input.date,
-      platform: input.platform,
-      campaign: input.campaign,
-      amount: toMoney(input.amount),
-      conversations: input.conversations ?? 0,
-      results: input.results ?? 0,
-      notes: input.notes,
-      createdBy: input.userId,
-      updatedBy: input.userId,
-    });
+  const result = await db.insert(adCampaigns).values({
+    adDate: input.date,
+    platform: input.platform,
+    campaign: input.campaign,
+    amount: toMoney(input.amount),
+    conversations: input.conversations ?? 0,
+    results: input.results ?? 0,
+    notes: input.notes,
+    createdBy: input.userId,
+    updatedBy: input.userId,
+  });
   return Number(result[0].insertId);
 }
 

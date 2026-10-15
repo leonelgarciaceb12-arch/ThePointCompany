@@ -875,7 +875,7 @@ function SaleEditForm({
     sale.costKnown === false ? "" : String(sale.totalCost ?? "")
   );
   const [costKnown, setCostKnown] = useState(sale.costKnown !== false);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(sale.notes || "");
   const update = trpc.business.updateSale.useMutation({
     onSuccess: () => {
       toast.success("Venta actualizada");
@@ -3043,6 +3043,7 @@ function SalesView({
             <thead>
               <tr>
                 <th>Fecha</th>
+                <th>Descripción</th>
                 <th>Cliente</th>
                 <th>Canal</th>
                 <th>Facturación</th>
@@ -3055,6 +3056,9 @@ function SalesView({
               {visibleSales.map(s => (
                 <tr key={s.id}>
                   <td>{dateLabel(s.saleDate)}</td>
+                  <td>
+                    <strong>{s.notes || "Sin descripción"}</strong>
+                  </td>
                   <td>
                     <strong>{s.customerName || "Venta sin cliente"}</strong>
                     <small>{s.customerPhone || "Dato pendiente"}</small>
