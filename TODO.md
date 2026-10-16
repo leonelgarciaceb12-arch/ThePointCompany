@@ -45,3 +45,4 @@
 - [x] Precio de venta en pesos argentinos: cada línea puede cargarse en USD o ARS y, al elegir ARS, se convierte automáticamente a USD usando la cotización USDT en vivo, bloqueando el guardado si no hay cotización.
 - [x] Sección Gráficos: incluye evolución diaria de facturación y ganancia, facturación por canal, unidades por producto y lecturas complementarias de mejor día, canal principal, recompra y cobertura de stock.
 - [x] Ventas históricas desde mayo verificadas contra ThePointCompany.xlsx: 332 registros desde el 06/05/2026 hasta el 10/10/2026; se evitó duplicar el Excel y no se importaron sus hojas desactualizadas de stock, gastos, publicidad, préstamos u objetivos.
+- [x] Período “Hoy” y fecha predeterminada de ventas calculados con la zona horaria de Argentina (America/Argentina/Buenos_Aires), incluyendo el día local completo y sin desfase UTC.

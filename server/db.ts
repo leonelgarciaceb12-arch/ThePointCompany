@@ -36,6 +36,23 @@ let lastUsdtRate: {
   fetchedAt: string;
 } | null = null;
 
+const ARGENTINA_TIME_ZONE = "America/Argentina/Buenos_Aires";
+const dateKeyInTimeZone = (date = new Date()) => {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: ARGENTINA_TIME_ZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
+  return `${values.year}-${values.month}-${values.day}`;
+};
+const shiftDateKey = (dateKey: string, days: number) => {
+  const date = new Date(`${dateKey}T12:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+};
+
 function debtStatus(
   principal: unknown,
   paid: unknown,
@@ -50,7 +67,7 @@ function debtStatus(
   )
     return "paid";
   const due = dueDate ? String(dueDate).slice(0, 10) : "";
-  if (due && due < new Date().toISOString().slice(0, 10)) return "overdue";
+  if (due && due < dateKeyInTimeZone()) return "overdue";
   return settled > 0 ? "partial" : "open";
 }
 
@@ -1807,13 +1824,9 @@ export async function getProjections(growthPercent = 15) {
   const db = await getDb();
   if (!db) return null;
   await ensureSeeded();
-  const now = new Date();
-  const end = new Date(now);
-  end.setDate(end.getDate() + 1);
-  const start = new Date(now);
-  start.setDate(start.getDate() - 30);
-  const from = start.toISOString().slice(0, 10);
-  const to = end.toISOString().slice(0, 10);
+  const todayKey = dateKeyInTimeZone();
+  const from = shiftDateKey(todayKey, -30);
+  const to = shiftDateKey(todayKey, 1);
   const paidWhere = and(
     gte(sales.saleDate, from),
     lt(sales.saleDate, to),
@@ -1858,12 +1871,15 @@ export async function getProjections(growthPercent = 15) {
   const adSpend = Number(adRows[0]?.total ?? 0);
   const activeDays = Math.max(1, Number(daysWithSales[0]?.days ?? 0));
   const growth = Math.max(-50, Math.min(200, Number(growthPercent) || 0)) / 100;
-  const nextMonthStart = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  const currentDate = new Date(`${todayKey}T12:00:00Z`);
+  const nextMonthStart = new Date(
+    Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth() + 1, 1)
+  );
   const nextMonthDays = new Date(
-    now.getFullYear(),
-    now.getMonth() + 2,
+    Date.UTC(currentDate.getUTCFullYear(),
+    currentDate.getUTCMonth() + 2,
     0
-  ).getDate();
+  )).getDate();
   const daily = {
     revenue: revenue / activeDays,
     profit: profit / activeDays,
@@ -1875,10 +1891,7 @@ export async function getProjections(growthPercent = 15) {
   return {
     period: {
       from,
-      to:
-        from === to
-          ? to
-          : new Date(now.getTime() - 86400000).toISOString().slice(0, 10),
+      to: todayKey,
       activeDays,
     },
     targetMonth: nextMonthStart.toLocaleDateString("es-AR", {

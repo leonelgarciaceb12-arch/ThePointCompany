@@ -50,6 +50,22 @@ import { trpc } from "@/lib/trpc";
 const money = (value: unknown, currency = "USD") =>
   `${currency === "USD" ? "US$" : "$"}${Number(value ?? 0).toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 const number = (value: unknown) => Number(value ?? 0).toLocaleString("es-AR");
+const ARGENTINA_TIME_ZONE = "America/Argentina/Buenos_Aires";
+const dateKeyInArgentina = (date = new Date()) => {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: ARGENTINA_TIME_ZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
+  return `${values.year}-${values.month}-${values.day}`;
+};
+const shiftDateKey = (dateKey: string, days: number) => {
+  const date = new Date(`${dateKey}T12:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+};
 const dateInput = (value?: unknown) =>
   value ? String(value).slice(0, 10) : "";
 const dateLabel = (value?: unknown) => {
@@ -90,7 +106,7 @@ function DebtStatusTag({ item }: { item: any }) {
     </span>
   );
 }
-const today = new Date().toISOString().slice(0, 10);
+const today = dateKeyInArgentina();
 const confirmDelete = (label: string) =>
   window.confirm(
     `¿Eliminar ${label}? Esta acción no se puede deshacer. Las ventas con historial pueden afectar métricas y stock.`
@@ -1940,17 +1956,16 @@ export default function Home() {
   >("month");
   const range = useMemo(() => {
     if (period === "all") return { from: undefined, to: undefined };
-    const end = new Date();
-    end.setDate(end.getDate() + 1);
-    const start = new Date();
-    if (period === "today") start.setDate(start.getDate());
-    else if (period === "7d") start.setDate(start.getDate() - 6);
-    else if (period === "month") start.setDate(1);
-    else if (period === "quarter") start.setDate(start.getDate() - 89);
-    else start.setDate(start.getDate() - 29);
+    const currentDay = dateKeyInArgentina();
+    const end = shiftDateKey(currentDay, 1);
+    let start = currentDay;
+    if (period === "7d") start = shiftDateKey(currentDay, -6);
+    else if (period === "month") start = `${currentDay.slice(0, 8)}01`;
+    else if (period === "quarter") start = shiftDateKey(currentDay, -89);
+    else if (period === "30d") start = shiftDateKey(currentDay, -29);
     return {
-      from: start.toISOString().slice(0, 10),
-      to: end.toISOString().slice(0, 10),
+      from: start,
+      to: end,
     };
   }, [period]);
   const queryOptions = { staleTime: 120000, refetchOnWindowFocus: false };
