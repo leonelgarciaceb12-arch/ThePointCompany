@@ -44,7 +44,6 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { toast } from "sonner";
-import { startLogin } from "@/const";
 import { trpc } from "@/lib/trpc";
 
 const money = (value: unknown, currency = "USD") =>
@@ -2203,14 +2202,6 @@ export default function Home() {
               <Bell size={18} />
               {overdueCount > 0 && <b>{overdueCount}</b>}
             </button>
-            {!auth.data && (
-              <button
-                className="button secondary login"
-                onClick={() => startLogin()}
-              >
-                Ingresar
-              </button>
-            )}
             <button
               className="button primary desktop-action"
               onClick={() =>

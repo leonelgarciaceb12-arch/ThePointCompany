@@ -42,6 +42,7 @@ import {
 } from "./db";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
+import { clearSharedSession, createSharedSession, passwordMatches, setSharedSession } from "./_core/sharedAuth";
 
 const saleItem = z.object({
   productId: z.number().int().positive().optional(),
@@ -116,9 +117,17 @@ export const appRouter = router({
   system: systemRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
+    sharedLogin: publicProcedure
+      .input(z.object({ password: z.string().min(1) }))
+      .mutation(async ({ input, ctx }) => {
+        if (!passwordMatches(input.password)) throw new Error("Contraseña incorrecta");
+        setSharedSession(ctx.res, await createSharedSession());
+        return { success: true } as const;
+      }),
     logout: publicProcedure.mutation(({ ctx }) => {
       const cookieOptions = getSessionCookieOptions(ctx.req);
       ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
+      clearSharedSession(ctx.res);
       return { success: true } as const;
     }),
   }),
