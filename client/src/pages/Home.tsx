@@ -2500,7 +2500,6 @@ export default function Home() {
               expenses={expenses.data ?? []}
               loans={loans.data ?? []}
               receivables={receivables.data ?? []}
-              cashFlow={data?.cashFlow}
               onAddExpense={() => open("expense")}
               onAddLoan={() => open("loan")}
               onAddReceivable={() => open("receivable")}
@@ -3333,7 +3332,6 @@ function FinanceView({
   expenses,
   loans,
   receivables,
-  cashFlow,
   onAddExpense,
   onAddLoan,
   onAddReceivable,
@@ -3343,7 +3341,6 @@ function FinanceView({
   expenses: any[];
   loans: any[];
   receivables: any[];
-  cashFlow?: any;
   onAddExpense: () => void;
   onAddLoan: () => void;
   onAddReceivable: () => void;
@@ -3423,11 +3420,6 @@ function FinanceView({
         </div>
       </div>
       <div className="finance-cards">
-        <div className="finance-stat cash-flow-main">
-          <span>Caja neta estimada</span>
-          <strong>{money(cashFlow?.net)}</strong>
-          <small>Entradas cobradas menos gastos y publicidad</small>
-        </div>
         <div className="finance-stat">
           <span>Por pagar</span>
           <strong>{money(outstanding)}</strong>

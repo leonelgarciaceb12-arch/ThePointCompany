@@ -687,11 +687,6 @@ export async function getDashboard(from?: string, to?: string) {
     activeCustomers,
     repeatCustomers,
   };
-  const cashCollected = Math.max(
-    0,
-    revenue - Number(receivableBalance[0]?.balance ?? 0)
-  );
-  const cashOut = expenseTotal + adSpend;
   return {
     summary: { ...summary[0], units: unitsSold },
     inventory: inventory[0],
@@ -702,13 +697,6 @@ export async function getDashboard(from?: string, to?: string) {
     dueLoans: dueLoans.map(presentDebt),
     expenses: expensesTotal[0],
     ads: adTotal[0],
-    cashFlow: {
-      collected: cashCollected,
-      outflow: cashOut,
-      net: cashCollected - cashOut,
-      receivables: Number(receivableBalance[0]?.balance ?? 0),
-      note: "Cobrado estimado: facturación menos saldos abiertos de clientes.",
-    },
     daily,
     advanced,
   };
