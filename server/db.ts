@@ -409,18 +409,40 @@ export async function ensureSeeded() {
           updatedAt: now,
         });
     }
-    if ((await count(adCampaigns)) === 0 && raw.ads.length)
-      await db.insert(adCampaigns).values(
-        raw.ads.map(a => ({
-          adDate: parseSeedDate(a.date as string) || "2026-01-01",
-          platform: String(a.platform || "Meta Ads"),
+    // Reconcile the historical Ads ledger on every startup. This is intentionally
+    // idempotent: it restores deleted seed rows without duplicating rows that are
+    // already present in the shared production database.
+    for (const a of raw.ads) {
+      const adDate = parseSeedDate(a.date as string) || "2026-01-01";
+      const platform = String(a.platform || "Meta Ads");
+      const amount = toMoney(a.amount);
+      const existing = (await db
+        .select({ id: adCampaigns.id })
+        .from(adCampaigns)
+        .where(and(
+          eq(adCampaigns.adDate, adDate),
+          eq(adCampaigns.platform, platform),
+          eq(adCampaigns.amount, amount),
+        ))
+        .limit(1))[0];
+      if (existing) {
+        await db.update(adCampaigns).set({
           campaign: "Campaña inicial propia de ventas - Multiples estilos",
-          amount: toMoney(a.amount),
+          notes: a.notes ? String(a.notes) : null,
+          updatedAt: now,
+        }).where(eq(adCampaigns.id, existing.id));
+      } else {
+        await db.insert(adCampaigns).values({
+          adDate,
+          platform,
+          campaign: "Campaña inicial propia de ventas - Multiples estilos",
+          amount,
           notes: a.notes ? String(a.notes) : null,
           createdAt: now,
           updatedAt: now,
-        }))
-      );
+        });
+      }
+    }
     await db
       .update(adCampaigns)
       .set({ campaign: "Campaña inicial propia de ventas - Multiples estilos" })
