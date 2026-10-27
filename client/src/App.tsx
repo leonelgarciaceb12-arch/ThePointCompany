@@ -5,6 +5,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import Editor from "./pages/Editor";
 import { useState } from "react";
 import { ArrowRight, LockKeyhole } from "lucide-react";
 import { toast } from "sonner";
@@ -53,6 +54,7 @@ function Router() {
     <Switch>
       <Route path={"/"} component={SharedAccess} />
       <Route path={"/acceso"} component={SharedAccess} />
+      <Route path={"/editor"} component={Editor} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

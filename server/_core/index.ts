@@ -5,7 +5,10 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { publicPlatformScript } from "./publicConfig";
 import { appRouter } from "../routers";
+import { createDailyBackup, isAuthorizedBackupTask } from "../backup";
+import { registerEditorRoutes } from "../editor";
 import { createContext } from "./context";
+import { sdk } from "./sdk";
 import { serveStatic, setupVite } from "./vite";
 
 async function startServer() {
@@ -18,6 +21,20 @@ async function startServer() {
   app.get("/api/platform/config.js", (_req, res) => {
     res.set("Cache-Control", "no-store").type("application/javascript").send(publicPlatformScript());
   });
+  app.post("/api/scheduled/daily-backup", async (req, res) => {
+    try {
+      const user = await sdk.authenticateRequest(req);
+      if (!user.isCron || !(await isAuthorizedBackupTask(user.taskUid))) {
+        return res.status(403).json({ error: "Scheduled backup is not authorized" });
+      }
+      const result = await createDailyBackup(user.taskUid);
+      return res.json({ ok: true, ...result });
+    } catch (error) {
+      console.error("[Backup] daily backup failed", error);
+      return res.status(500).json({ error: error instanceof Error ? error.message : "Backup failed" });
+    }
+  });
+  registerEditorRoutes(app);
   registerOAuthRoutes(app);
   // tRPC API
   app.use(

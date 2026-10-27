@@ -199,6 +199,41 @@ export const metaAdInsights = mysqlTable("meta_ad_insights", {
   adIdx: index("meta_ad_insights_ad_idx").on(table.adId),
 }));
 
+export const backupSchedules = mysqlTable("backup_schedules", {
+  id: int("id").primaryKey(),
+  taskUid: varchar("taskUid", { length: 160 }).notNull().unique(),
+  name: varchar("name", { length: 180 }).notNull(),
+  cronExpression: varchar("cronExpression", { length: 80 }).notNull(),
+  timezone: varchar("timezone", { length: 80 }).notNull().default("America/Argentina/Buenos_Aires"),
+  enabled: boolean("enabled").notNull().default(true),
+  lastRunAt: timestamp("lastRunAt"),
+  ...audit,
+});
+
+export const backupSnapshots = mysqlTable("backup_snapshots", {
+  id: int("id").autoincrement().primaryKey(),
+  backupDate: date("backupDate", { mode: "string" }).notNull().unique(),
+  storageKey: varchar("storageKey", { length: 255 }).notNull(),
+  storageUrl: varchar("storageUrl", { length: 255 }).notNull(),
+  checksum: varchar("checksum", { length: 128 }).notNull(),
+  rowCount: int("rowCount").notNull().default(0),
+  status: mysqlEnum("status", ["completed", "failed"]).notNull().default("completed"),
+  error: text("error"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export const editorProposals = mysqlTable("editor_proposals", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 180 }).notNull(),
+  filePath: varchar("filePath", { length: 255 }).notNull(),
+  patch: text("patch").notNull(),
+  status: mysqlEnum("status", ["proposed", "approved", "rejected", "applied"]).notNull().default("proposed"),
+  submittedBy: varchar("submittedBy", { length: 180 }).notNull().default("Editor restringido"),
+  reviewNote: text("reviewNote"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
 export const objectives = mysqlTable("objectives", {
   id: int("id").autoincrement().primaryKey(),
   month: varchar("month", { length: 40 }).notNull(),

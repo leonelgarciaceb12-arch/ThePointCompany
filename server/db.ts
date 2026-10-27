@@ -5,9 +5,13 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import {
   adCampaigns,
+  backupSchedules,
+  backupSnapshots,
   customers,
+  editorProposals,
   expenses,
   loans,
+  metaAdInsights,
   objectives,
   products,
   receivables,
@@ -827,6 +831,76 @@ export async function listAds() {
     .orderBy(desc(adCampaigns.adDate), desc(adCampaigns.id))
     .limit(100);
 }
+
+export async function getAdsSpendHistory() {
+  const db = await getDb();
+  if (!db) return { manual: [], meta: [] };
+  await ensureSeeded();
+  const monthKey = sql<string>`date_format(${adCampaigns.adDate}, '%Y-%m')`;
+  const manual = await db
+    .select({
+      month: monthKey,
+      spend: sql<number>`coalesce(sum(${adCampaigns.amount}), 0)`,
+      entries: sql<number>`count(*)`,
+    })
+    .from(adCampaigns)
+    .groupBy(monthKey)
+    .orderBy(monthKey);
+  const meta = await db
+    .select({
+      dateStart: metaAdInsights.dateStart,
+      dateStop: metaAdInsights.dateStop,
+      spend: metaAdInsights.spend,
+      impressions: metaAdInsights.impressions,
+      reach: metaAdInsights.reach,
+      conversations: metaAdInsights.messagingConversations,
+      syncedAt: metaAdInsights.syncedAt,
+    })
+    .from(metaAdInsights)
+    .where(eq(metaAdInsights.level, "account"))
+    .orderBy(desc(metaAdInsights.dateStop), desc(metaAdInsights.syncedAt));
+  return {
+    manual: manual.map(row => ({
+      month: String(row.month),
+      spend: Number(row.spend || 0),
+      entries: Number(row.entries || 0),
+    })),
+    meta: meta.map(row => ({
+      dateStart: row.dateStart,
+      dateStop: row.dateStop,
+      spend: Number(row.spend || 0),
+      impressions: Number(row.impressions || 0),
+      reach: Number(row.reach || 0),
+      conversations: Number(row.conversations || 0),
+      syncedAt: row.syncedAt?.toISOString?.() || String(row.syncedAt || ""),
+    })),
+  };
+}
+
+export async function listEditorProposals() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(editorProposals).orderBy(desc(editorProposals.createdAt)).limit(50);
+}
+
+export async function createEditorProposal(input: {
+  title: string;
+  filePath: string;
+  patch: string;
+  submittedBy?: string;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  const result = await db.insert(editorProposals).values({
+    title: input.title,
+    filePath: input.filePath,
+    patch: input.patch,
+    submittedBy: input.submittedBy || "Editor restringido",
+    status: "proposed",
+  });
+  return Number(result[0].insertId);
+}
+
 export async function listObjectives() {
   const db = await getDb();
   if (!db) return [];

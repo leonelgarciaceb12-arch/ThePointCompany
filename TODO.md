@@ -48,3 +48,8 @@
 - [x] Período “Hoy” y fecha predeterminada de ventas calculados con la zona horaria de Argentina (America/Argentina/Buenos_Aires), incluyendo el día local completo y sin desfase UTC.
 
 - [ ] Meta Ads conectado en modo lectura: la interfaz ya tiene sincronización por cuenta/campaña/anuncio y almacenamiento separado; falta validar un Meta Marketing API access token real porque el valor actual devuelve `Invalid OAuth access token - Cannot parse access token`.
+
+- [x] Meta Ads conectado en modo lectura: el token válido sincroniza por cuenta/campaña/anuncio y guarda insights separados de la publicidad manual.
+- [ ] Editor restringido en `/editor`: contraseña separada, allowlist de archivos, propuestas de patch, sin secretos, base de datos, terminal ni publicación automática.
+- [ ] Backup diario completo del negocio a las 23:59 ART, guardado en almacenamiento durable y registrado con checksum.
+- [ ] Panel de Publicidad con gasto histórico mensual separado de las lecturas sincronizadas de Meta Ads.

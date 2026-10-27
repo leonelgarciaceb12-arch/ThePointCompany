@@ -43,6 +43,13 @@
       "when": 1792898449462,
       "tag": "0005_thankful_sunspot",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1793071916043,
+      "tag": "0006_chilly_silver_fox",
+      "breakpoints": true
     }
   ]
 }

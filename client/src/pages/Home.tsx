@@ -1990,6 +1990,7 @@ export default function Home() {
     queryOptions
   );
   const ads = trpc.business.ads.useQuery(undefined, queryOptions);
+  const adsSpendHistory = trpc.business.adsSpendHistory.useQuery(undefined, queryOptions);
   const metaAds = trpc.business.metaAds.useQuery(undefined, queryOptions);
   const objectives = trpc.business.objectives.useQuery(undefined, queryOptions);
   const auth = trpc.auth.me.useQuery(undefined, queryOptions);
@@ -2003,6 +2004,7 @@ export default function Home() {
     loans.refetch();
     receivables.refetch();
     ads.refetch();
+    adsSpendHistory.refetch();
     metaAds.refetch();
     objectives.refetch();
     setModal(null);
@@ -2512,6 +2514,7 @@ export default function Home() {
           {active === "ads" && (
             <AdsView
               ads={ads.data ?? []}
+              adsSpendHistory={adsSpendHistory.data}
               metaAds={metaAds.data}
               onAdd={() => open("ad")}
               onEdit={item => open("ad", item)}
@@ -3599,12 +3602,14 @@ function FinanceView({
 }
 function AdsView({
   ads,
+  adsSpendHistory,
   metaAds,
   onAdd,
   onEdit,
   onDone,
 }: {
   ads: any[];
+  adsSpendHistory?: { manual: any[]; meta: any[] };
   metaAds?: any;
   onAdd: () => void;
   onEdit: (item: any) => void;
@@ -3631,6 +3636,12 @@ function AdsView({
   const conversations = Number(account?.messagingConversations || 0);
   const costPerResult = conversations > 0 ? spend / conversations : null;
   const metaRows = latest?.ads ?? [];
+  const historyRows = (adsSpendHistory?.manual ?? []).map((row: any) => ({
+    month: row.month,
+    label: new Date(`${row.month}-01T12:00:00`).toLocaleDateString("es-AR", { month: "short", year: "2-digit" }),
+    manualSpend: Number(row.spend || 0),
+  }));
+  const historicalTotal = historyRows.reduce((total: number, row: any) => total + row.manualSpend, 0);
   return (
     <>
       <div className="view-intro">
@@ -3687,6 +3698,36 @@ function AdsView({
           <small>{account ? "Amount spent ÷ conversaciones" : "Sin datos"}</small>
         </div>
       </div>
+      <section className="panel chart-panel">
+        <div className="section-header compact-header">
+          <div>
+            <span className="eyebrow">histórico de inversión</span>
+            <h3>Gasto histórico en Ads</h3>
+          </div>
+          <small className="muted">Registros manuales consolidados por mes</small>
+        </div>
+        <div className="mini-kpis chart-kpis">
+          <div><span>Total histórico</span><strong>{money(historicalTotal, "USD")}</strong></div>
+          <div><span>Meses registrados</span><strong>{number(historyRows.length)}</strong></div>
+          <div><span>Último mes</span><strong>{historyRows.length ? money(historyRows[historyRows.length - 1].manualSpend, "USD") : "N/A"}</strong></div>
+        </div>
+        <div className="chart-wrap" style={{ height: 250 }}>
+          {historyRows.length ? (
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={historyRows} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                <XAxis dataKey="label" tick={{ fontSize: 11 }} />
+                <YAxis tick={{ fontSize: 11 }} tickFormatter={value => `$${Number(value).toLocaleString("es-AR")}`} />
+                <Tooltip formatter={(value: number) => money(value, "USD")} labelFormatter={label => `Mes: ${label}`} />
+                <Bar dataKey="manualSpend" name="Gasto Ads" fill="#7ed8ce" radius={[5, 5, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="empty-cell">Todavía no hay gasto histórico cargado.</div>
+          )}
+        </div>
+        <p className="chart-note">El histórico manual se mantiene separado de las lecturas de Meta para no duplicar importes. El gasto sincronizado aparece arriba en los rangos de 7 y 30 días.</p>
+      </section>
       <section className="panel table-panel">
         <div className="section-header compact-header">
           <div>
