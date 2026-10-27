@@ -911,10 +911,10 @@ export async function listLoans() {
     eq(loans.description, "Mentoria 1:1 por 3 meses"),
   ));
   const userSettled = [
-    { counterparty: "Lautaro Mires", description: "57 Battery Pack 10.000 mAh", principal: "357.57" },
-    { counterparty: "Bautista Restifo", description: "100 Termitos c/sensor de temperatura", principal: "400.00" },
-    { counterparty: "Mateo Portillo", description: "50 Vasos quencher Stanley", principal: "400.00" },
-    { counterparty: "Mateo Portillo", description: "100 Body Splash Victoria's Secret (réplica)", principal: "700.00" },
+    { counterparty: "Lautaro Mires", description: "57 Battery Pack 10.000 mAh", principal: "357.57", startDate: "2026-10-12", dueDate: "2026-10-22" },
+    { counterparty: "Bautista Restifo", description: "100 Termitos c/sensor de temperatura", principal: "400.00", startDate: "2026-10-02", dueDate: "2026-10-12" },
+    { counterparty: "Mateo Portillo", description: "50 Vasos quencher Stanley", principal: "400.00", startDate: "2026-10-02", dueDate: "2026-10-12" },
+    { counterparty: "Mateo Portillo", description: "100 Body Splash Victoria's Secret (réplica)", principal: "700.00", startDate: "2026-10-09", dueDate: "2026-10-19" },
   ];
   for (const item of userSettled) {
     const existing = (await db.select({ id: loans.id }).from(loans).where(and(
@@ -930,9 +930,11 @@ export async function listLoans() {
       interestPeriod: "monthly",
       principal: item.principal,
       repaymentAmount: item.principal,
-      hasDueDate: false,
+      hasDueDate: true,
       paid: item.principal,
       balance: "0.00",
+      startDate: item.startDate,
+      dueDate: item.dueDate,
       status: "paid",
       notes: "Compromiso informado como saldado por el usuario el 27/10/2026.",
     });
