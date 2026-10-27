@@ -2479,6 +2479,7 @@ export default function Home() {
           {active === "ads" && (
             <AdsView
               adsSpendHistory={adsSpendHistory.data}
+              ads={ads.data ?? []}
               onAdd={() => open("expense")}
             />
           )}
@@ -3583,12 +3584,23 @@ function FinanceView({
 }
 function AdsView({
   adsSpendHistory,
+  ads,
   onAdd,
 }: {
   adsSpendHistory?: { manual: any[]; daily: any[] };
+  ads?: any[];
   onAdd: () => void;
 }) {
-  const dailyRows = (adsSpendHistory?.daily ?? []).map((row: any) => ({
+  const fallbackDaily = Object.values((ads ?? []).reduce((acc: Record<string, any>, row: any) => {
+    const key = String(row.adDate || "").slice(0, 10);
+    if (!key) return acc;
+    acc[key] ||= { date: key, spend: 0, entries: 0 };
+    acc[key].spend += Number(row.amount || 0);
+    acc[key].entries += 1;
+    return acc;
+  }, {})).sort((a: any, b: any) => String(a.date).localeCompare(String(b.date)));
+  const sourceDaily = (adsSpendHistory?.daily?.length ? adsSpendHistory.daily : fallbackDaily);
+  const dailyRows = sourceDaily.map((row: any) => ({
     ...row,
     label: dateLabel(row.date),
     spend: Number(row.spend || 0),
@@ -3611,8 +3623,8 @@ function AdsView({
       </div>
       <div className="data-note page-note">
         <div>
-          <strong>Meta Ads desconectado por decisión operativa</strong>
-          <small>Este panel conserva únicamente los gastos que cargues manualmente desde Finanzas con categoría o tipo Publicidad.</small>
+          <strong>Histórico de inversión cargado</strong>
+          <small>Incluye los registros manuales recuperados del seguimiento y las nuevas cargas que agregues desde el sistema.</small>
         </div>
       </div>
       <div className="finance-cards">
@@ -3621,7 +3633,7 @@ function AdsView({
         <div className="finance-stat"><span>Últimos 7 días</span><strong>{money(lastSeven)}</strong><small>Ritmo de inversión reciente</small></div>
       </div>
       <section className="panel chart-panel">
-        <div className="section-header compact-header"><div><span className="eyebrow">ritmo de inversión</span><h3>Gasto diario en Ads</h3></div><small className="muted">Sólo registros manuales</small></div>
+        <div className="section-header compact-header"><div><span className="eyebrow">ritmo de inversión</span><h3>Gasto diario en Ads</h3></div><small className="muted">Registros cargados</small></div>
         <div className="chart-wrap" style={{ height: 280 }}>
           {dailyRows.length ? (
             <ResponsiveContainer width="100%" height="100%">
@@ -3629,8 +3641,8 @@ function AdsView({
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="label" tick={{ fontSize: 10 }} interval="preserveStartEnd" />
                 <YAxis tick={{ fontSize: 11 }} tickFormatter={value => `$${Number(value).toLocaleString("es-AR")}`} />
-                <Tooltip formatter={(value: number) => [money(value), "Gasto manual"]} labelFormatter={label => `Día: ${label}`} />
-                <Bar dataKey="spend" name="Gasto manual" fill="#7ed8ce" radius={[5, 5, 0, 0]} />
+                <Tooltip formatter={(value: number) => [money(value), "Gasto Ads"]} labelFormatter={label => `Día: ${label}`} />
+                <Bar dataKey="spend" name="Gasto Ads" fill="#7ed8ce" radius={[5, 5, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           ) : <div className="empty-cell">Todavía no hay gastos de Ads manuales cargados.</div>}
@@ -3639,7 +3651,7 @@ function AdsView({
       <section className="panel table-panel">
         <SectionHeader eyebrow="detalle diario" title="Gastos manuales registrados" action="Cargar gasto" onAction={onAdd} />
         <div className="table-scroll"><table><thead><tr><th>Fecha</th><th>Importe</th><th>Registros</th></tr></thead><tbody>
-          {dailyRows.length ? dailyRows.slice().reverse().map((row: any) => <tr key={row.date}><td>{dateLabel(row.date)}</td><td><strong>{money(row.spend)}</strong></td><td>{row.entries}</td></tr>) : <tr><td colSpan={3} className="empty-cell">Sin gastos manuales todavía.</td></tr>}
+          {dailyRows.length ? dailyRows.slice().reverse().map((row: any) => <tr key={row.date}><td>{dateLabel(row.date)}</td><td><strong>{money(row.spend)}</strong></td><td>{row.entries}</td></tr>) : <tr><td colSpan={3} className="empty-cell">Sin gastos de Ads registrados todavía.</td></tr>}
         </tbody></table></div>
       </section>
     </>

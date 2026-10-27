@@ -904,28 +904,36 @@ export async function listLoans() {
       notes: "Compromiso saldado reconstruido desde el registro histórico del negocio.",
     });
   }
-  const paidMentorship = (await db
-    .select()
-    .from(loans)
-    .where(and(eq(loans.counterparty, "Mateo Portillo"), eq(loans.description, "Mentoria 1:1 por 3 meses")))
-    .limit(1))[0];
-  if (!paidMentorship) {
-    await db.insert(loans).values({
+  // La mentoría fue un gasto/inversión, no una deuda del negocio: retirarla
+  // del historial de compromisos aunque una versión anterior la haya creado.
+  await db.delete(loans).where(and(
+    eq(loans.counterparty, "Mateo Portillo"),
+    eq(loans.description, "Mentoria 1:1 por 3 meses"),
+  ));
+  const userSettled = [
+    { counterparty: "Lautaro Mires", description: "57 Battery Pack 10.000 mAh", principal: "357.57" },
+    { counterparty: "Bautista Restifo", description: "100 Termitos c/sensor de temperatura", principal: "400.00" },
+    { counterparty: "Mateo Portillo", description: "50 Vasos quencher Stanley", principal: "400.00" },
+  ];
+  for (const item of userSettled) {
+    const existing = (await db.select({ id: loans.id }).from(loans).where(and(
+      eq(loans.counterparty, item.counterparty),
+      eq(loans.description, item.description),
+    )).limit(1))[0];
+    if (!existing) await db.insert(loans).values({
       kind: "payable_merch",
-      counterparty: "Mateo Portillo",
-      description: "Mentoria 1:1 por 3 meses",
+      counterparty: item.counterparty,
+      description: item.description,
       currency: "USD",
       interestRate: "0.00",
       interestPeriod: "monthly",
-      principal: "500.00",
-      repaymentAmount: "500.00",
-      hasDueDate: true,
-      paid: "500.00",
+      principal: item.principal,
+      repaymentAmount: item.principal,
+      hasDueDate: false,
+      paid: item.principal,
       balance: "0.00",
-      startDate: "2026-09-29",
-      dueDate: "2026-10-09",
       status: "paid",
-      notes: "Compromiso saldado reconstruido desde una versión histórica del seguimiento.",
+      notes: "Compromiso informado como saldado por el usuario el 27/10/2026.",
     });
   }
   const rows = await db.select().from(loans).orderBy(asc(loans.dueDate));
