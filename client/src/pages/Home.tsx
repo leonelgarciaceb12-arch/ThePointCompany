@@ -20,6 +20,7 @@ import {
   CircleDollarSign,
   CreditCard,
   Download,
+  FileCode2,
   FilePlus2,
   Gauge,
   LayoutDashboard,
@@ -1120,6 +1121,7 @@ function ExpenseForm({
   onClose: () => void;
   onDone: () => void;
 }) {
+  const isEditing = Boolean(expense?.id);
   const [date, setDate] = useState(dateInput(expense?.expenseDate) || today);
   const [category, setCategory] = useState(expense?.category || "Operativo");
   const [description, setDescription] = useState(expense?.description || "");
@@ -1142,7 +1144,7 @@ function ExpenseForm({
   });
   return (
     <Modal
-      title={expense ? "Editar gasto" : "Registrar gasto"}
+      title={isEditing ? "Editar gasto" : "Registrar gasto"}
       onClose={onClose}
     >
       <form
@@ -1157,7 +1159,7 @@ function ExpenseForm({
             type,
             notes: notes || undefined,
           };
-          expense
+          isEditing
             ? update.mutate({ id: expense.id, ...input })
             : create.mutate(input);
         }}
@@ -1962,7 +1964,6 @@ export default function Home() {
   );
   const ads = trpc.business.ads.useQuery(undefined, queryOptions);
   const adsSpendHistory = trpc.business.adsSpendHistory.useQuery(undefined, queryOptions);
-  const metaAds = trpc.business.metaAds.useQuery(undefined, queryOptions);
   const auth = trpc.auth.me.useQuery(undefined, queryOptions);
   const refresh = () => {
     dash.refetch();
@@ -1975,7 +1976,6 @@ export default function Home() {
     receivables.refetch();
     ads.refetch();
     adsSpendHistory.refetch();
-    metaAds.refetch();
     setModal(null);
   };
   const data = dash.data;
@@ -2121,6 +2121,10 @@ export default function Home() {
             <FilePlus2 size={18} />
             <span>Nuevo gasto</span>
           </button>
+          <button className="nav-item" onClick={() => { window.location.href = "/editor"; }}>
+            <FileCode2 size={18} />
+            <span>Editor colaborativo</span>
+          </button>
           <div className="user-chip">
             <div className="avatar">{auth.data?.name?.slice(0, 1) || "T"}</div>
             <div>
@@ -2177,7 +2181,7 @@ export default function Home() {
                     : active === "finance"
                       ? "expense"
                       : active === "ads"
-                        ? "ad"
+                        ? "expense"
                         : "sale"
                 )
               }
@@ -2188,7 +2192,7 @@ export default function Home() {
                 : active === "finance"
                   ? "Gasto"
                   : active === "ads"
-                    ? "Publicidad"
+                    ? "Gasto Ads"
                     : "Cargar venta"}
             </button>
           </div>
@@ -2213,10 +2217,10 @@ export default function Home() {
                   onChange={e => setPeriod(e.target.value as typeof period)}
                 >
                   <option value="today">Día corriente</option>
-                  <option value="7d">Últimos 7 días</option>
+                  <option value="7d">Semana · últimos 7 días</option>
                   <option value="30d">Últimos 30 días</option>
-                  <option value="month">Este mes</option>
-                  <option value="quarter">Último trimestre · 90 días</option>
+                  <option value="month">Mes · corriente</option>
+                  <option value="quarter">Trimestre · últimos 90 días</option>
                   <option value="all">Todo el historial</option>
                 </select>
               </div>
@@ -2467,12 +2471,8 @@ export default function Home() {
           )}
           {active === "ads" && (
             <AdsView
-              ads={ads.data ?? []}
               adsSpendHistory={adsSpendHistory.data}
-              metaAds={metaAds.data}
-              onAdd={() => open("ad")}
-              onEdit={item => open("ad", item)}
-              onDone={refresh}
+              onAdd={() => open("expense")}
             />
           )}
           {active === "projections" && <ProjectionsView />}
@@ -2554,12 +2554,23 @@ export default function Home() {
 }
 
 function ChartsView({ data, period, embedded = false }: { data: any; period: string; embedded?: boolean }) {
-  const daily = (data?.daily ?? []).slice(-31).map((row: any) => ({
+  const rawDaily = (data?.daily ?? []).map((row: any) => ({
     ...row,
     label: dateLabel(row.day),
     revenue: Number(row.revenue || 0),
     profit: Number(row.profit || 0),
   }));
+  const daily = (period === "quarter" || period === "all"
+    ? Object.values(rawDaily.reduce((groups: Record<string, any>, row: any) => {
+        const key = String(row.day || "").slice(0, 7);
+        const current = groups[key] || { day: `${key}-01`, label: key, revenue: 0, profit: 0 };
+        current.revenue += row.revenue;
+        current.profit += row.profit;
+        groups[key] = current;
+        return groups;
+      }, {}))
+    : rawDaily
+  ).slice(period === "quarter" || period === "all" ? -12 : -31);
   const channels = (data?.advanced?.channels ?? []).map((row: any) => ({
     ...row,
     revenue: Number(row.revenue || 0),
@@ -3294,7 +3305,9 @@ function FinanceView({
   onEdit: (kind: string, item?: any) => void;
   onDone: () => void;
 }) {
-  const outstanding = loans.reduce((a, l) => a + Number(l.balance || 0), 0);
+  const activeLoans = loans.filter(l => Number(l.balance || 0) > 0);
+  const settledLoans = loans.filter(l => Number(l.balance || 0) <= 0 || l.status === "paid");
+  const outstanding = activeLoans.reduce((a, l) => a + Number(l.balance || 0), 0);
   const receivableTotal = receivables.reduce(
     (a, r) => a + Number(r.balance || 0),
     0
@@ -3370,7 +3383,7 @@ function FinanceView({
         <div className="finance-stat">
           <span>Por pagar</span>
           <strong>{money(outstanding)}</strong>
-          <small>{loans.length} compromisos abiertos o históricos</small>
+          <small>{activeLoans.length} compromisos abiertos</small>
         </div>
         <div className="finance-stat danger-stat">
           <span>Por cobrar</span>
@@ -3446,7 +3459,7 @@ function FinanceView({
                 </tr>
               </thead>
               <tbody>
-                {loans.map(l => (
+                {activeLoans.map(l => (
                   <tr key={l.id}>
                     <td>
                       <strong>{l.counterparty}</strong>
@@ -3485,6 +3498,26 @@ function FinanceView({
           </div>
         </section>
       </div>
+      <section className="panel table-panel">
+        <SectionHeader eyebrow="historial financiero" title="Compromisos saldados" />
+        <p className="muted">Registro separado de obligaciones ya canceladas: conserva descripción, monto inicial y fechas aunque el saldo actual sea cero.</p>
+        <div className="table-scroll">
+          <table>
+            <thead><tr><th>Acreedor</th><th>Descripción</th><th>Monto inicial</th><th>Inicio</th><th>Cancelado</th></tr></thead>
+            <tbody>
+              {settledLoans.length ? settledLoans.map(l => (
+                <tr key={`settled-${l.id}`}>
+                  <td><strong>{l.counterparty}</strong></td>
+                  <td>{l.description || l.notes || l.kind}</td>
+                  <td>{money(l.principal, l.currency)}</td>
+                  <td>{dateLabel(l.startDate)}</td>
+                  <td>{dateLabel(l.updatedAt || l.dueDate)} · {money(l.paid, l.currency)}</td>
+                </tr>
+              )) : <tr><td colSpan={5} className="empty-cell">Todavía no hay compromisos saldados registrados.</td></tr>}
+            </tbody>
+          </table>
+        </div>
+      </section>
       <section className="panel table-panel receivables-panel">
         <SectionHeader
           eyebrow="cobros pendientes"
@@ -3542,274 +3575,66 @@ function FinanceView({
   );
 }
 function AdsView({
-  ads,
   adsSpendHistory,
-  metaAds,
   onAdd,
-  onEdit,
-  onDone,
 }: {
-  ads: any[];
-  adsSpendHistory?: { manual: any[]; meta: any[] };
-  metaAds?: any;
+  adsSpendHistory?: { manual: any[]; daily: any[] };
   onAdd: () => void;
-  onEdit: (item: any) => void;
-  onDone: () => void;
 }) {
-  const remove = trpc.business.deleteAd.useMutation({
-    onSuccess: () => {
-      toast.success("Registro publicitario eliminado");
-      onDone();
-    },
-    onError: e => {
-      const message = e.message || "Error desconocido";
-      toast.error(
-        /expir|invalid|token|oauth|permission/i.test(message)
-          ? "Meta Ads rechazó el acceso: el token expiró o perdió permisos. Hay que reemplazarlo por uno nuevo."
-          : `No se pudo sincronizar Meta Ads: ${message}`
-      );
-    },
-  });
-  const syncMeta = trpc.business.syncMetaAds.useMutation({
-    onSuccess: result => {
-      toast.success(`Meta Ads sincronizado · ${result.rowCount} lecturas actualizadas`);
-      onDone();
-    },
-    onError: e => toast.error(e.message),
-  });
-  const total = ads.reduce((a, x) => a + Number(x.amount || 0), 0);
-  const latest = metaAds?.ranges?.find((range: any) => range.days === 7);
-  const account = latest?.account;
-  const spend = Number(account?.spend || 0);
-  const conversations = Number(account?.messagingConversations || 0);
-  const costPerResult = conversations > 0 ? spend / conversations : null;
-  const metaRows = latest?.ads ?? [];
-  const manualHistoryRows = (adsSpendHistory?.manual ?? []).map((row: any) => ({
-    key: `manual-${row.month}`,
-    label: new Date(`${row.month}-01T12:00:00`).toLocaleDateString("es-AR", { month: "short", year: "2-digit" }),
-    manualSpend: Number(row.spend || 0),
-    syncedSpend: 0,
-    source: "manual",
+  const dailyRows = (adsSpendHistory?.daily ?? []).map((row: any) => ({
+    ...row,
+    label: dateLabel(row.date),
+    spend: Number(row.spend || 0),
   }));
-  const metaHistoryRows = (adsSpendHistory?.meta ?? []).map((row: any) => {
-    const start = String(row.dateStart || "");
-    const stop = String(row.dateStop || "");
-    const days = start && stop
-      ? Math.round((new Date(`${stop}T12:00:00`).getTime() - new Date(`${start}T12:00:00`).getTime()) / 86400000) + 1
-      : 0;
-    return {
-      key: `meta-${start}-${stop}`,
-      label: `Meta Ads · ${days > 0 ? `${days} días` : "rango sincronizado"}${stop ? ` · hasta ${dateLabel(stop)}` : ""}`,
-      manualSpend: 0,
-      syncedSpend: Number(row.spend || 0),
-      days,
-      dateStop: stop,
-      source: "meta",
-    };
-  });
-  const historyRows = [...manualHistoryRows, ...metaHistoryRows];
-  const historicalManualTotal = manualHistoryRows.reduce((total: number, row: any) => total + row.manualSpend, 0);
-  const latestMetaHistory = metaHistoryRows
-    .slice()
-    .sort((a: any, b: any) => {
-      const dateOrder = String(b.dateStop).localeCompare(String(a.dateStop));
-      return dateOrder || b.days - a.days;
-    })[0];
+  const total = dailyRows.reduce((sum: number, row: any) => sum + row.spend, 0);
+  const currentMonth = dateKeyInArgentina().slice(0, 7);
+  const monthTotal = dailyRows
+    .filter(row => String(row.date).startsWith(currentMonth))
+    .reduce((sum: number, row: any) => sum + row.spend, 0);
+  const lastSeven = dailyRows.slice(-7).reduce((sum: number, row: any) => sum + row.spend, 0);
   return (
     <>
       <div className="view-intro">
         <div>
-          <span className="eyebrow">adquisición y rendimiento</span>
+          <span className="eyebrow">control manual de inversión</span>
           <h2>Publicidad</h2>
-          <p className="muted">
-            Registrá únicamente el gasto verificado. Las conversiones no se
-            inventan ni se cargan a mano.
-          </p>
+          <p className="muted">Cargá cada gasto real y revisá el ritmo diario sin depender de una sincronización externa.</p>
         </div>
-        <button className="button primary" onClick={onAdd}>
-          <Plus size={17} /> Publicidad
-        </button>
+        <button className="button primary" onClick={onAdd}><Plus size={17} /> Cargar gasto</button>
       </div>
       <div className="data-note page-note">
         <div>
-          <strong>
-            {account
-              ? "Meta Ads sincronizado · cuenta RD ADS"
-              : metaAds?.connected
-                ? "Credencial Meta Ads cargada · validación pendiente"
-              : "Meta Ads sin credencial configurada"}
-          </strong>
-          <small>
-            {latest?.syncedAt
-              ? `Última sincronización: ${new Date(latest.syncedAt).toLocaleString("es-AR")}. Rango: ${latest.dateStart} a ${latest.dateStop}.`
-              : "Sin datos sincronizados todavía. La sincronización es de solo lectura y no modifica campañas."}
-          </small>
+          <strong>Meta Ads desconectado por decisión operativa</strong>
+          <small>Este panel conserva únicamente los gastos que cargues manualmente desde Finanzas con categoría o tipo Publicidad.</small>
         </div>
-        <button
-          className="button secondary"
-          onClick={() => syncMeta.mutate()}
-          disabled={syncMeta.isPending || !metaAds?.connected}
-        >
-          <RefreshCw size={16} className={syncMeta.isPending ? "spin" : ""} />
-          {syncMeta.isPending ? "Sincronizando…" : "Sincronizar ahora"}
-        </button>
       </div>
       <div className="finance-cards">
-        <div className="finance-stat">
-          <span>Amount spent · últimos 7 días</span>
-          <strong>{account ? money(spend, metaAds.currency) : "N/A"}</strong>
-          <small>Meta Ads · dato sincronizado</small>
-        </div>
-        <div className="finance-stat">
-          <span>Messaging conversations started</span>
-          <strong>{account ? number(conversations) : "N/A"}</strong>
-          <small>Ventana de atribución de Meta</small>
-        </div>
-        <div className="finance-stat">
-          <span>Cost per result</span>
-          <strong>{costPerResult == null ? "N/A" : money(costPerResult, metaAds.currency)}</strong>
-          <small>{account ? "Amount spent ÷ conversaciones" : "Sin datos"}</small>
-        </div>
+        <div className="finance-stat"><span>Ads acumulado</span><strong>{money(total)}</strong><small>Registros manuales</small></div>
+        <div className="finance-stat"><span>Este mes</span><strong>{money(monthTotal)}</strong><small>Gasto manual del mes corriente</small></div>
+        <div className="finance-stat"><span>Últimos 7 días</span><strong>{money(lastSeven)}</strong><small>Ritmo de inversión reciente</small></div>
       </div>
       <section className="panel chart-panel">
-        <div className="section-header compact-header">
-          <div>
-            <span className="eyebrow">histórico de inversión</span>
-            <h3>Gasto histórico en Ads</h3>
-          </div>
-          <small className="muted">Manual + Meta Ads sincronizado por rango</small>
-        </div>
-        <div className="mini-kpis chart-kpis">
-          <div><span>Manual acumulado</span><strong>{money(historicalManualTotal, "USD")}</strong></div>
-          <div><span>Meta sincronizado</span><strong>{latestMetaHistory ? money(latestMetaHistory.syncedSpend, "USD") : "N/A"}</strong></div>
-          <div><span>Registros / rangos</span><strong>{number(historyRows.length)}</strong></div>
-        </div>
-        <div className="chart-wrap" style={{ height: 250 }}>
-          {historyRows.length ? (
+        <div className="section-header compact-header"><div><span className="eyebrow">ritmo de inversión</span><h3>Gasto diario en Ads</h3></div><small className="muted">Sólo registros manuales</small></div>
+        <div className="chart-wrap" style={{ height: 280 }}>
+          {dailyRows.length ? (
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={historyRows} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
+              <BarChart data={dailyRows.slice(-31)} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="label" tick={{ fontSize: 11 }} />
+                <XAxis dataKey="label" tick={{ fontSize: 10 }} interval="preserveStartEnd" />
                 <YAxis tick={{ fontSize: 11 }} tickFormatter={value => `$${Number(value).toLocaleString("es-AR")}`} />
-                <Tooltip
-                  formatter={(value: number, name: string) => [money(value, "USD"), name]}
-                  labelFormatter={label => `Registro: ${label}`}
-                />
-                <Legend />
-                <Bar dataKey="manualSpend" name="Cargado manualmente" fill="#7ed8ce" radius={[5, 5, 0, 0]} />
-                <Bar dataKey="syncedSpend" name="Sincronizado Meta Ads" fill="#8aa8ff" radius={[5, 5, 0, 0]} />
+                <Tooltip formatter={(value: number) => [money(value), "Gasto manual"]} labelFormatter={label => `Día: ${label}`} />
+                <Bar dataKey="spend" name="Gasto manual" fill="#7ed8ce" radius={[5, 5, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
-          ) : (
-            <div className="empty-cell">Todavía no hay gasto histórico cargado.</div>
-          )}
+          ) : <div className="empty-cell">Todavía no hay gastos de Ads manuales cargados.</div>}
         </div>
-        <p className="chart-note">Las barras verdes son cargas manuales agrupadas por mes. Las azules son lecturas de Meta Ads con su rango original; no se suman entre sí porque los rangos de 7 y 30 días se superponen.</p>
       </section>
       <section className="panel table-panel">
-        <div className="section-header compact-header">
-          <div>
-            <span className="eyebrow">lectura por creativo</span>
-            <h3>Meta Ads · últimos 7 días</h3>
-          </div>
-          <small className="muted">No se suman Reach entre anuncios.</small>
-        </div>
-        <div className="table-scroll">
-          <table>
-            <thead>
-              <tr>
-                <th>Anuncio</th>
-                <th>Amount spent</th>
-                <th>Messaging conversations started</th>
-                <th>Cost per result</th>
-                <th>Reach</th>
-                <th>Link clicks</th>
-                <th>CTR</th>
-              </tr>
-            </thead>
-            <tbody>
-              {metaRows.length ? (
-                metaRows.map((row: any) => {
-                  const rowSpend = Number(row.spend || 0);
-                  const rowConversations = Number(row.messagingConversations || 0);
-                  return (
-                    <tr key={`${row.adId}-${row.dateStart}-${row.dateStop}`}>
-                      <td>
-                        <strong>{row.adName}</strong>
-                        <small className="table-subline">{row.campaignName}</small>
-                      </td>
-                      <td>{money(rowSpend, metaAds.currency)}</td>
-                      <td>{number(rowConversations)}</td>
-                      <td>
-                        {rowConversations > 0
-                          ? money(rowSpend / rowConversations, metaAds.currency)
-                          : "N/A"}
-                      </td>
-                      <td>{number(row.reach)}</td>
-                      <td>{number(row.linkClicks)}</td>
-                      <td>{Number(row.ctr || 0).toFixed(2)}%</td>
-                    </tr>
-                  );
-                })
-              ) : (
-                <tr>
-                  <td colSpan={7} className="empty-cell">
-                    Sin insights sincronizados todavía.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+        <SectionHeader eyebrow="detalle diario" title="Gastos manuales registrados" action="Cargar gasto" onAction={onAdd} />
+        <div className="table-scroll"><table><thead><tr><th>Fecha</th><th>Importe</th><th>Registros</th></tr></thead><tbody>
+          {dailyRows.length ? dailyRows.slice().reverse().map((row: any) => <tr key={row.date}><td>{dateLabel(row.date)}</td><td><strong>{money(row.spend)}</strong></td><td>{row.entries}</td></tr>) : <tr><td colSpan={3} className="empty-cell">Sin gastos manuales todavía.</td></tr>}
+        </tbody></table></div>
       </section>
-      <div className="data-note page-note">
-        <div>
-          <strong>Registro manual conservado</strong>
-          <small>
-            Estos movimientos históricos siguen separados de Meta Ads para no duplicar gasto ni alterar la Ganancia neta sin conciliación de fechas.
-          </small>
-        </div>
-      </div>
-      <div className="panel table-panel">
-        <div className="table-scroll">
-          <table>
-            <thead>
-              <tr>
-                <th>Fecha</th>
-                <th>Campaña</th>
-                <th>Plataforma</th>
-                <th>Gasto</th>
-                <th>Conversiones</th>
-                <th>Resultados</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {ads.map(a => (
-                <tr key={a.id}>
-                  <td>{dateLabel(a.adDate)}</td>
-                  <td>
-                    <strong>{a.campaign}</strong>
-                  </td>
-                  <td>
-                    <span className="soft-tag">{a.platform}</span>
-                  </td>
-                  <td>{money(a.amount)}</td>
-                  <td>N/A</td>
-                  <td>N/A</td>
-                  <td>
-                    <RowActions
-                      onEdit={() => onEdit(a)}
-                      onDelete={() => remove.mutate({ id: a.id })}
-                      deleteLabel={`la campaña ${a.campaign}`}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
     </>
   );
 }

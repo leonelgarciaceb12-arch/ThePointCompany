@@ -11,7 +11,6 @@ import {
   editorProposals,
   expenses,
   loans,
-  metaAdInsights,
   objectives,
   products,
   receivables,
@@ -492,10 +491,19 @@ export async function getDashboard(from?: string, to?: string) {
     from && to
       ? and(gte(sales.saleDate, from), lt(sales.saleDate, to))
       : undefined;
+  const publicAdWhere = sql`(
+    lower(coalesce(${expenses.category}, '')) like '%publicidad%'
+    or lower(coalesce(${expenses.type}, '')) like '%publicidad%'
+    or lower(coalesce(${expenses.platform}, '')) like '%meta ads%'
+  )`;
   const expenseWhere =
     from && to
-      ? and(gte(expenses.expenseDate, from), lt(expenses.expenseDate, to))
-      : undefined;
+      ? and(gte(expenses.expenseDate, from), lt(expenses.expenseDate, to), sql`not ${publicAdWhere}`)
+      : sql`not ${publicAdWhere}`;
+  const manualAdsWhere =
+    from && to
+      ? and(gte(expenses.expenseDate, from), lt(expenses.expenseDate, to), publicAdWhere)
+      : publicAdWhere;
   const adsWhere =
     from && to
       ? and(gte(adCampaigns.adDate, from), lt(adCampaigns.adDate, to))
@@ -514,6 +522,7 @@ export async function getDashboard(from?: string, to?: string) {
     dueLoans,
     expensesTotal,
     adTotal,
+    manualAdsTotal,
     receivableBalance,
     daily,
     channelRows,
@@ -602,6 +611,10 @@ export async function getDashboard(from?: string, to?: string) {
       .from(adCampaigns)
       .where(adsWhere),
     db
+      .select({ total: sql<number>`coalesce(sum(${expenses.amount}),0)` })
+      .from(expenses)
+      .where(manualAdsWhere),
+    db
       .select({ balance: sql<number>`coalesce(sum(${receivables.balance}),0)` })
       .from(receivables)
       .where(sql`${receivables.balance} > 0`),
@@ -638,7 +651,7 @@ export async function getDashboard(from?: string, to?: string) {
   const revenue = Number(summary[0]?.revenue ?? 0);
   const grossProfit = Number(summary[0]?.profit ?? 0);
   const expenseTotal = Number(expensesTotal[0]?.total ?? 0);
-  const adSpend = Number(adTotal[0]?.total ?? 0);
+  const adSpend = Number(adTotal[0]?.total ?? 0) + Number(manualAdsTotal[0]?.total ?? 0);
   const unitsSold = Number(units[0]?.units ?? 0);
   const currentStock = Number(inventory[0]?.units ?? 0);
   const activeCustomers = periodCustomerRows.length;
@@ -838,6 +851,30 @@ export async function listLoans() {
   const db = await getDb();
   if (!db) return [];
   await ensureSeeded();
+  const historicalSettled = (await db
+    .select()
+    .from(loans)
+    .where(and(eq(loans.counterparty, "Santiago Lopez"), eq(loans.description, "100 Elfbar Ice King 40k puff")))
+    .limit(1))[0];
+  if (!historicalSettled) {
+    await db.insert(loans).values({
+      kind: "payable_merch",
+      counterparty: "Santiago Lopez",
+      description: "100 Elfbar Ice King 40k puff",
+      currency: "USD",
+      interestRate: "0.00",
+      interestPeriod: "monthly",
+      principal: "1110.00",
+      repaymentAmount: "1110.00",
+      hasDueDate: true,
+      paid: "1110.00",
+      balance: "0.00",
+      startDate: "2026-09-30",
+      dueDate: "2026-10-10",
+      status: "paid",
+      notes: "Compromiso saldado reconstruido desde el registro histórico del negocio.",
+    });
+  }
   const rows = await db.select().from(loans).orderBy(asc(loans.dueDate));
   return rows.map(presentDebt);
 }
@@ -854,7 +891,7 @@ export async function listAds() {
 
 export async function getAdsSpendHistory() {
   const db = await getDb();
-  if (!db) return { manual: [], meta: [] };
+  if (!db) return { manual: [], daily: [] };
   await ensureSeeded();
   const monthKey = sql<string>`date_format(${adCampaigns.adDate}, '%Y-%m')`;
   const campaignManual = await db
@@ -875,7 +912,19 @@ export async function getAdsSpendHistory() {
       amount: expenses.amount,
     })
     .from(expenses);
+  const campaignEntries = await db
+    .select({ date: adCampaigns.adDate, amount: adCampaigns.amount })
+    .from(adCampaigns);
   const manualByMonth = new Map<string, { spend: number; entries: number }>();
+  const manualByDay = new Map<string, { spend: number; entries: number }>();
+  const addDaily = (date: unknown, amount: unknown) => {
+    const key = String(date).slice(0, 10);
+    const current = manualByDay.get(key) || { spend: 0, entries: 0 };
+    current.spend += Number(amount || 0);
+    current.entries += 1;
+    manualByDay.set(key, current);
+  };
+  for (const row of campaignEntries) addDaily(row.date, row.amount);
   for (const row of campaignManual) {
     const key = String(row.month);
     manualByMonth.set(key, {
@@ -891,34 +940,18 @@ export async function getAdsSpendHistory() {
     current.spend += Number(row.amount || 0);
     current.entries += 1;
     manualByMonth.set(key, current);
+    addDaily(row.date, row.amount);
   }
-  const meta = await db
-    .select({
-      dateStart: metaAdInsights.dateStart,
-      dateStop: metaAdInsights.dateStop,
-      spend: metaAdInsights.spend,
-      impressions: metaAdInsights.impressions,
-      reach: metaAdInsights.reach,
-      conversations: metaAdInsights.messagingConversations,
-      syncedAt: metaAdInsights.syncedAt,
-    })
-    .from(metaAdInsights)
-    .where(eq(metaAdInsights.level, "account"))
-    .orderBy(desc(metaAdInsights.dateStop), desc(metaAdInsights.syncedAt));
   return {
     manual: [...manualByMonth.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([month, row]) => ({
       month,
       spend: row.spend,
       entries: row.entries,
     })),
-    meta: meta.map(row => ({
-      dateStart: row.dateStart,
-      dateStop: row.dateStop,
-      spend: Number(row.spend || 0),
-      impressions: Number(row.impressions || 0),
-      reach: Number(row.reach || 0),
-      conversations: Number(row.conversations || 0),
-      syncedAt: row.syncedAt?.toISOString?.() || String(row.syncedAt || ""),
+    daily: [...manualByDay.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([date, row]) => ({
+      date,
+      spend: row.spend,
+      entries: row.entries,
     })),
   };
 }

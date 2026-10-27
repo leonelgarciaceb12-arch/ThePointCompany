@@ -11,11 +11,12 @@ import {
 
 export const EDITOR_ALLOWED_PATHS = [
   "client/src/pages/Home.tsx",
+  "client/src/pages/Editor.tsx",
   "client/src/App.tsx",
   "client/src/index.css",
   "server/db.ts",
-  "server/metaAds.ts",
   "server/routers.ts",
+  "server/backup.ts",
   "README.md",
   "plan.md",
 ];

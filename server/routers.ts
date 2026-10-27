@@ -44,7 +44,6 @@ import {
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { clearSharedSession, createSharedSession, passwordMatches, setSharedSession } from "./_core/sharedAuth";
-import { getMetaAdsSnapshot, syncMetaAds } from "./metaAds";
 
 const saleItem = z.object({
   productId: z.number().int().positive().optional(),
@@ -174,8 +173,6 @@ export const appRouter = router({
     loans: protectedProcedure.query(() => listLoans()),
     ads: protectedProcedure.query(() => listAds()),
     adsSpendHistory: protectedProcedure.query(() => getAdsSpendHistory()),
-    metaAds: protectedProcedure.query(() => getMetaAdsSnapshot()),
-    syncMetaAds: protectedProcedure.mutation(() => syncMetaAds()),
     objectives: protectedProcedure.query(() => listObjectives()),
     receivables: protectedProcedure.query(() => listReceivables()),
     createProduct: protectedProcedure
