@@ -3636,12 +3636,37 @@ function AdsView({
   const conversations = Number(account?.messagingConversations || 0);
   const costPerResult = conversations > 0 ? spend / conversations : null;
   const metaRows = latest?.ads ?? [];
-  const historyRows = (adsSpendHistory?.manual ?? []).map((row: any) => ({
-    month: row.month,
+  const manualHistoryRows = (adsSpendHistory?.manual ?? []).map((row: any) => ({
+    key: `manual-${row.month}`,
     label: new Date(`${row.month}-01T12:00:00`).toLocaleDateString("es-AR", { month: "short", year: "2-digit" }),
     manualSpend: Number(row.spend || 0),
+    syncedSpend: 0,
+    source: "manual",
   }));
-  const historicalTotal = historyRows.reduce((total: number, row: any) => total + row.manualSpend, 0);
+  const metaHistoryRows = (adsSpendHistory?.meta ?? []).map((row: any) => {
+    const start = String(row.dateStart || "");
+    const stop = String(row.dateStop || "");
+    const days = start && stop
+      ? Math.round((new Date(`${stop}T12:00:00`).getTime() - new Date(`${start}T12:00:00`).getTime()) / 86400000) + 1
+      : 0;
+    return {
+      key: `meta-${start}-${stop}`,
+      label: `Meta Ads · ${days > 0 ? `${days} días` : "rango sincronizado"}${stop ? ` · hasta ${dateLabel(stop)}` : ""}`,
+      manualSpend: 0,
+      syncedSpend: Number(row.spend || 0),
+      days,
+      dateStop: stop,
+      source: "meta",
+    };
+  });
+  const historyRows = [...manualHistoryRows, ...metaHistoryRows];
+  const historicalManualTotal = manualHistoryRows.reduce((total: number, row: any) => total + row.manualSpend, 0);
+  const latestMetaHistory = metaHistoryRows
+    .slice()
+    .sort((a: any, b: any) => {
+      const dateOrder = String(b.dateStop).localeCompare(String(a.dateStop));
+      return dateOrder || b.days - a.days;
+    })[0];
   return (
     <>
       <div className="view-intro">
@@ -3704,12 +3729,12 @@ function AdsView({
             <span className="eyebrow">histórico de inversión</span>
             <h3>Gasto histórico en Ads</h3>
           </div>
-          <small className="muted">Registros manuales consolidados por mes</small>
+          <small className="muted">Manual + Meta Ads sincronizado por rango</small>
         </div>
         <div className="mini-kpis chart-kpis">
-          <div><span>Total histórico</span><strong>{money(historicalTotal, "USD")}</strong></div>
-          <div><span>Meses registrados</span><strong>{number(historyRows.length)}</strong></div>
-          <div><span>Último mes</span><strong>{historyRows.length ? money(historyRows[historyRows.length - 1].manualSpend, "USD") : "N/A"}</strong></div>
+          <div><span>Manual acumulado</span><strong>{money(historicalManualTotal, "USD")}</strong></div>
+          <div><span>Meta sincronizado</span><strong>{latestMetaHistory ? money(latestMetaHistory.syncedSpend, "USD") : "N/A"}</strong></div>
+          <div><span>Registros / rangos</span><strong>{number(historyRows.length)}</strong></div>
         </div>
         <div className="chart-wrap" style={{ height: 250 }}>
           {historyRows.length ? (
@@ -3718,15 +3743,20 @@ function AdsView({
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="label" tick={{ fontSize: 11 }} />
                 <YAxis tick={{ fontSize: 11 }} tickFormatter={value => `$${Number(value).toLocaleString("es-AR")}`} />
-                <Tooltip formatter={(value: number) => money(value, "USD")} labelFormatter={label => `Mes: ${label}`} />
-                <Bar dataKey="manualSpend" name="Gasto Ads" fill="#7ed8ce" radius={[5, 5, 0, 0]} />
+                <Tooltip
+                  formatter={(value: number, name: string) => [money(value, "USD"), name]}
+                  labelFormatter={label => `Registro: ${label}`}
+                />
+                <Legend />
+                <Bar dataKey="manualSpend" name="Cargado manualmente" fill="#7ed8ce" radius={[5, 5, 0, 0]} />
+                <Bar dataKey="syncedSpend" name="Sincronizado Meta Ads" fill="#8aa8ff" radius={[5, 5, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           ) : (
             <div className="empty-cell">Todavía no hay gasto histórico cargado.</div>
           )}
         </div>
-        <p className="chart-note">El histórico manual se mantiene separado de las lecturas de Meta para no duplicar importes. El gasto sincronizado aparece arriba en los rangos de 7 y 30 días.</p>
+        <p className="chart-note">Las barras verdes son cargas manuales agrupadas por mes. Las azules son lecturas de Meta Ads con su rango original; no se suman entre sí porque los rangos de 7 y 30 días se superponen.</p>
       </section>
       <section className="panel table-panel">
         <div className="section-header compact-header">
