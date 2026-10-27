@@ -1,4 +1,4 @@
-import { boolean, date, decimal, index, int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { boolean, date, decimal, index, int, mysqlEnum, mysqlTable, text, timestamp, uniqueIndex, varchar } from "drizzle-orm/mysql-core";
 
 export const users = mysqlTable("users", {
   id: int("id").autoincrement().primaryKey(),
@@ -154,6 +154,50 @@ export const adCampaigns = mysqlTable("ad_campaigns", {
   notes: text("notes"),
   ...audit,
 }, table => ({ dateIdx: index("ad_campaigns_date_idx").on(table.adDate) }));
+
+export const metaAdInsights = mysqlTable("meta_ad_insights", {
+  id: int("id").autoincrement().primaryKey(),
+  accountId: varchar("accountId", { length: 64 }).notNull(),
+  currency: varchar("currency", { length: 12 }).notNull().default("USD"),
+  dateStart: date("dateStart", { mode: "string" }).notNull(),
+  dateStop: date("dateStop", { mode: "string" }).notNull(),
+  level: varchar("level", { length: 16 }).notNull().default("ad"),
+  campaignId: varchar("campaignId", { length: 80 }).notNull(),
+  campaignName: varchar("campaignName", { length: 180 }).notNull(),
+  adsetId: varchar("adsetId", { length: 80 }),
+  adsetName: varchar("adsetName", { length: 180 }),
+  adId: varchar("adId", { length: 80 }).notNull(),
+  adName: varchar("adName", { length: 180 }).notNull(),
+  impressions: int("impressions").notNull().default(0),
+  reach: int("reach").notNull().default(0),
+  frequency: decimal("frequency", { precision: 10, scale: 4 }).notNull().default("0"),
+  clicksAll: int("clicksAll").notNull().default(0),
+  linkClicks: int("linkClicks").notNull().default(0),
+  spend: decimal("spend", { precision: 12, scale: 2 }).notNull().default("0"),
+  ctr: decimal("ctr", { precision: 10, scale: 4 }).notNull().default("0"),
+  inlineLinkClickCtr: decimal("inlineLinkClickCtr", { precision: 10, scale: 4 }).notNull().default("0"),
+  cpc: decimal("cpc", { precision: 12, scale: 4 }).notNull().default("0"),
+  costPerLinkClick: decimal("costPerLinkClick", { precision: 12, scale: 4 }).notNull().default("0"),
+  cpm: decimal("cpm", { precision: 12, scale: 4 }).notNull().default("0"),
+  messagingConversations: int("messagingConversations").notNull().default(0),
+  messagingReplies: int("messagingReplies").notNull().default(0),
+  messagingConnections: int("messagingConnections").notNull().default(0),
+  messagingFirstReplies: int("messagingFirstReplies").notNull().default(0),
+  messagingDepth2: int("messagingDepth2").notNull().default(0),
+  messagingDepth3: int("messagingDepth3").notNull().default(0),
+  videoViews: int("videoViews").notNull().default(0),
+  syncedAt: timestamp("syncedAt").defaultNow().notNull(),
+}, table => ({
+  uniqueInsight: uniqueIndex("meta_ad_insights_unique_idx").on(
+    table.accountId,
+    table.level,
+    table.adId,
+    table.dateStart,
+    table.dateStop
+  ),
+  dateIdx: index("meta_ad_insights_date_idx").on(table.dateStart, table.dateStop),
+  adIdx: index("meta_ad_insights_ad_idx").on(table.adId),
+}));
 
 export const objectives = mysqlTable("objectives", {
   id: int("id").autoincrement().primaryKey(),

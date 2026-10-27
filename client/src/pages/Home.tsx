@@ -1990,6 +1990,7 @@ export default function Home() {
     queryOptions
   );
   const ads = trpc.business.ads.useQuery(undefined, queryOptions);
+  const metaAds = trpc.business.metaAds.useQuery(undefined, queryOptions);
   const objectives = trpc.business.objectives.useQuery(undefined, queryOptions);
   const auth = trpc.auth.me.useQuery(undefined, queryOptions);
   const refresh = () => {
@@ -2002,6 +2003,7 @@ export default function Home() {
     loans.refetch();
     receivables.refetch();
     ads.refetch();
+    metaAds.refetch();
     objectives.refetch();
     setModal(null);
   };
@@ -2510,6 +2512,7 @@ export default function Home() {
           {active === "ads" && (
             <AdsView
               ads={ads.data ?? []}
+              metaAds={metaAds.data}
               onAdd={() => open("ad")}
               onEdit={item => open("ad", item)}
               onDone={refresh}
@@ -3596,11 +3599,13 @@ function FinanceView({
 }
 function AdsView({
   ads,
+  metaAds,
   onAdd,
   onEdit,
   onDone,
 }: {
   ads: any[];
+  metaAds?: any;
   onAdd: () => void;
   onEdit: (item: any) => void;
   onDone: () => void;
@@ -3612,7 +3617,20 @@ function AdsView({
     },
     onError: e => toast.error(e.message),
   });
+  const syncMeta = trpc.business.syncMetaAds.useMutation({
+    onSuccess: result => {
+      toast.success(`Meta Ads sincronizado · ${result.rowCount} lecturas actualizadas`);
+      onDone();
+    },
+    onError: e => toast.error(e.message),
+  });
   const total = ads.reduce((a, x) => a + Number(x.amount || 0), 0);
+  const latest = metaAds?.ranges?.find((range: any) => range.days === 7);
+  const account = latest?.account;
+  const spend = Number(account?.spend || 0);
+  const conversations = Number(account?.messagingConversations || 0);
+  const costPerResult = conversations > 0 ? spend / conversations : null;
+  const metaRows = latest?.ads ?? [];
   return (
     <>
       <div className="view-intro">
@@ -3629,28 +3647,108 @@ function AdsView({
         </button>
       </div>
       <div className="data-note page-note">
-        <strong>Meta Ads no está sincronizado todavía</strong>
-        <small>
-          El conector disponible necesita reautorización. Hasta entonces, el
-          sistema mostrará gasto real registrado y conversiones como “No
-          disponible”.
-        </small>
+        <div>
+          <strong>
+            {account
+              ? "Meta Ads sincronizado · cuenta RD ADS"
+              : metaAds?.connected
+                ? "Credencial Meta Ads cargada · validación pendiente"
+              : "Meta Ads sin credencial configurada"}
+          </strong>
+          <small>
+            {latest?.syncedAt
+              ? `Última sincronización: ${new Date(latest.syncedAt).toLocaleString("es-AR")}. Rango: ${latest.dateStart} a ${latest.dateStop}.`
+              : "Sin datos sincronizados todavía. La sincronización es de solo lectura y no modifica campañas."}
+          </small>
+        </div>
+        <button
+          className="button secondary"
+          onClick={() => syncMeta.mutate()}
+          disabled={syncMeta.isPending || !metaAds?.connected}
+        >
+          <RefreshCw size={16} className={syncMeta.isPending ? "spin" : ""} />
+          {syncMeta.isPending ? "Sincronizando…" : "Sincronizar ahora"}
+        </button>
       </div>
       <div className="finance-cards">
         <div className="finance-stat">
-          <span>Inversión registrada</span>
-          <strong>{money(total)}</strong>
-          <small>{ads.length} movimientos</small>
+          <span>Amount spent · últimos 7 días</span>
+          <strong>{account ? money(spend, metaAds.currency) : "N/A"}</strong>
+          <small>Meta Ads · dato sincronizado</small>
         </div>
         <div className="finance-stat">
-          <span>Conversiones</span>
-          <strong>N/A</strong>
-          <small>No disponible sin sincronización</small>
+          <span>Messaging conversations started</span>
+          <strong>{account ? number(conversations) : "N/A"}</strong>
+          <small>Ventana de atribución de Meta</small>
         </div>
         <div className="finance-stat">
-          <span>Resultados atribuidos</span>
-          <strong>N/A</strong>
-          <small>No disponible sin sincronización</small>
+          <span>Cost per result</span>
+          <strong>{costPerResult == null ? "N/A" : money(costPerResult, metaAds.currency)}</strong>
+          <small>{account ? "Amount spent ÷ conversaciones" : "Sin datos"}</small>
+        </div>
+      </div>
+      <section className="panel table-panel">
+        <div className="section-header compact-header">
+          <div>
+            <span className="eyebrow">lectura por creativo</span>
+            <h3>Meta Ads · últimos 7 días</h3>
+          </div>
+          <small className="muted">No se suman Reach entre anuncios.</small>
+        </div>
+        <div className="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Anuncio</th>
+                <th>Amount spent</th>
+                <th>Messaging conversations started</th>
+                <th>Cost per result</th>
+                <th>Reach</th>
+                <th>Link clicks</th>
+                <th>CTR</th>
+              </tr>
+            </thead>
+            <tbody>
+              {metaRows.length ? (
+                metaRows.map((row: any) => {
+                  const rowSpend = Number(row.spend || 0);
+                  const rowConversations = Number(row.messagingConversations || 0);
+                  return (
+                    <tr key={`${row.adId}-${row.dateStart}-${row.dateStop}`}>
+                      <td>
+                        <strong>{row.adName}</strong>
+                        <small className="table-subline">{row.campaignName}</small>
+                      </td>
+                      <td>{money(rowSpend, metaAds.currency)}</td>
+                      <td>{number(rowConversations)}</td>
+                      <td>
+                        {rowConversations > 0
+                          ? money(rowSpend / rowConversations, metaAds.currency)
+                          : "N/A"}
+                      </td>
+                      <td>{number(row.reach)}</td>
+                      <td>{number(row.linkClicks)}</td>
+                      <td>{Number(row.ctr || 0).toFixed(2)}%</td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan={7} className="empty-cell">
+                    Sin insights sincronizados todavía.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <div className="data-note page-note">
+        <div>
+          <strong>Registro manual conservado</strong>
+          <small>
+            Estos movimientos históricos siguen separados de Meta Ads para no duplicar gasto ni alterar la Ganancia neta sin conciliación de fechas.
+          </small>
         </div>
       </div>
       <div className="panel table-panel">

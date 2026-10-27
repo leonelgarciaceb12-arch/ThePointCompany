@@ -127,3 +127,8 @@ Los cambios de datos se ejecutan de forma idempotente y no convierten costos fal
 - La base mantiene una única identidad de cliente por coincidencia exacta de teléfono normalizado o nombre normalizado; cada venta nueva resuelve o crea el cliente dentro de la misma transacción y refresca sus métricas.
 - Los precios en ARS son una capa de captura: el backend recibe y guarda el total en USD convertido en frontend mediante USDT vivo, conservando el modelo financiero en USD.
 - La navegación suma una vista Gráficos basada en las series reales del dashboard, con contención responsive para móvil.
+
+
+## Integración Meta Ads · modo lectura
+
+La sección Publicidad incorpora una capa separada para Meta Ads. El servidor consulta la cuenta RD ADS `1118607737611268` mediante Graph API, guarda insights por rango de 7 y 30 días y conserva niveles de cuenta, campaña y anuncio para no sumar Reach de forma incorrecta. El botón “Sincronizar ahora” no crea, edita, pausa ni modifica campañas: sólo actualiza gasto, impresiones, Reach, Link clicks, CTR, conversaciones iniciadas y costo por resultado. Los movimientos manuales permanecen separados y no se mezclan automáticamente con Ganancia neta hasta conciliar fechas y moneda. La credencial vive como secreto del proyecto; un access token inválido debe reemplazarse antes de la primera sincronización real.

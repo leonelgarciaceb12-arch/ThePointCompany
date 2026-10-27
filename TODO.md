@@ -46,3 +46,5 @@
 - [x] Sección Gráficos: incluye evolución diaria de facturación y ganancia, facturación por canal, unidades por producto y lecturas complementarias de mejor día, canal principal, recompra y cobertura de stock.
 - [x] Ventas históricas desde mayo verificadas contra ThePointCompany.xlsx: 332 registros desde el 06/05/2026 hasta el 10/10/2026; se evitó duplicar el Excel y no se importaron sus hojas desactualizadas de stock, gastos, publicidad, préstamos u objetivos.
 - [x] Período “Hoy” y fecha predeterminada de ventas calculados con la zona horaria de Argentina (America/Argentina/Buenos_Aires), incluyendo el día local completo y sin desfase UTC.
+
+- [ ] Meta Ads conectado en modo lectura: la interfaz ya tiene sincronización por cuenta/campaña/anuncio y almacenamiento separado; falta validar un Meta Marketing API access token real porque el valor actual devuelve `Invalid OAuth access token - Cannot parse access token`.

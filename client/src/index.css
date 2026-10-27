@@ -70,3 +70,6 @@ body,.app-shell{background:var(--paper);color:var(--ink)}
 .table-panel td strong { font-size: 10px; }
 .table-panel td small { font-size: 9px; margin-top: 1px; }
 @media(max-width:760px) { .table-panel table { min-width: 620px; } }
+
+.meta-sync-note{display:flex;align-items:center;justify-content:space-between;gap:14px}.meta-sync-note>div{display:grid;gap:3px}.compact-header{margin-bottom:10px}.table-subline{display:block;color:var(--muted);font-size:9px;margin-top:2px}.empty-cell{text-align:center;color:var(--muted);padding:20px!important}.spin{animation:point-spin .9s linear infinite}@keyframes point-spin{to{transform:rotate(360deg)}}
+@media(max-width:600px){.meta-sync-note{align-items:flex-start;flex-direction:column}.meta-sync-note .button{width:100%;justify-content:center}}
