@@ -914,6 +914,7 @@ export async function listLoans() {
     { counterparty: "Lautaro Mires", description: "57 Battery Pack 10.000 mAh", principal: "357.57" },
     { counterparty: "Bautista Restifo", description: "100 Termitos c/sensor de temperatura", principal: "400.00" },
     { counterparty: "Mateo Portillo", description: "50 Vasos quencher Stanley", principal: "400.00" },
+    { counterparty: "Mateo Portillo", description: "100 Body Splash Victoria's Secret (réplica)", principal: "700.00" },
   ];
   for (const item of userSettled) {
     const existing = (await db.select({ id: loans.id }).from(loans).where(and(
