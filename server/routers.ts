@@ -235,6 +235,8 @@ export const appRouter = router({
           costKnown: z.boolean().optional(),
           description: z.string().optional(),
           notes: z.string().optional(),
+          status: z.enum(["paid", "pending"]).optional(),
+          items: z.array(saleItem).optional(),
         })
       )
       .mutation(({ input, ctx }) =>

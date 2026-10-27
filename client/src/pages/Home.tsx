@@ -14,7 +14,6 @@ import {
 import {
   ArrowDownRight,
   ArrowUpRight,
-  BarChart3,
   Bell,
   Boxes,
   ChevronRight,
@@ -35,7 +34,6 @@ import {
   Settings2,
   ShoppingCart,
   Sparkles,
-  Target,
   Trash2,
   Users,
   Wallet,
@@ -155,13 +153,11 @@ function SuggestedInput({
 
 const nav = [
   { id: "dashboard", label: "Resumen", icon: LayoutDashboard },
-  { id: "charts", label: "Gráficos", icon: BarChart3 },
   { id: "sales", label: "Ventas", icon: ShoppingCart },
   { id: "inventory", label: "Inventario", icon: Boxes },
   { id: "customers", label: "Clientes", icon: Users },
   { id: "finance", label: "Finanzas", icon: Wallet },
   { id: "ads", label: "Publicidad", icon: Megaphone },
-  { id: "objectives", label: "Objetivos", icon: Target },
   { id: "projections", label: "Proyecciones", icon: TrendingUp },
 ];
 
@@ -865,6 +861,7 @@ function SaleForm({
 }
 function SaleEditForm({
   sale,
+  products,
   customers,
   customerNameOptions,
   channelOptions,
@@ -872,38 +869,68 @@ function SaleEditForm({
   onDone,
 }: {
   sale: any;
+  products: any[];
   customers: any[];
   customerNameOptions: string[];
   channelOptions: string[];
   onClose: () => void;
   onDone: () => void;
 }) {
+  type EditableSaleItem = {
+    productId: string;
+    description: string;
+    quantity: string;
+    unitPrice: string;
+    unitCost: string;
+    fromInventory: boolean;
+  };
+  const initialItems = Array.isArray(sale.items) && sale.items.length
+    ? sale.items.map((item: any) => ({
+        productId: item.productId ? String(item.productId) : "",
+        description: item.description || "",
+        quantity: String(item.quantity || 1),
+        unitPrice: String(item.unitPrice ?? 0),
+        unitCost: String(item.unitCost ?? 0),
+        fromInventory: Boolean(item.fromInventory),
+      }))
+    : [{
+        productId: "",
+        description: sale.notes || "Venta manual",
+        quantity: "1",
+        unitPrice: String(sale.total ?? 0),
+        unitCost: String(sale.totalCost ?? 0),
+        fromInventory: false,
+      }];
+  const [items, setItems] = useState<EditableSaleItem[]>(initialItems);
   const [date, setDate] = useState(dateInput(sale.saleDate));
-  const [customerId, setCustomerId] = useState(
-    sale.customerId ? String(sale.customerId) : ""
-  );
+  const [customerId, setCustomerId] = useState(sale.customerId ? String(sale.customerId) : "");
   const [customerName, setCustomerName] = useState(sale.customerName || "");
   const [phone, setPhone] = useState(sale.customerPhone || "");
   const [channel, setChannel] = useState(sale.channel || "WhatsApp");
-  const [total, setTotal] = useState(String(sale.total ?? ""));
-  const [totalCost, setTotalCost] = useState(
-    sale.costKnown === false ? "" : String(sale.totalCost ?? "")
-  );
+  const [status, setStatus] = useState(sale.status === "paid" ? "paid" : "pending");
   const [costKnown, setCostKnown] = useState(sale.costKnown !== false);
   const [description, setDescription] = useState(sale.notes || "");
   const update = trpc.business.updateSale.useMutation({
     onSuccess: () => {
-      toast.success("Venta actualizada");
+      toast.success("Venta actualizada completa");
       onDone();
     },
     onError: e => toast.error(e.message),
   });
+  const updateItem = (index: number, patch: Record<string, unknown>) =>
+    setItems(current => current.map((item, i) => i === index ? { ...item, ...patch } : item));
+  const computedTotal = items.reduce((sum, item) => sum + Number(item.quantity || 0) * Number(item.unitPrice || 0), 0);
+  const computedCost = items.reduce((sum, item) => sum + Number(item.quantity || 0) * Number(item.unitCost || 0), 0);
   return (
-    <Modal title="Editar venta" onClose={onClose}>
+    <Modal title="Editar venta completa" onClose={onClose} wide>
       <form
         className="form-stack"
         onSubmit={e => {
           e.preventDefault();
+          if (!items.length || items.some(item => Number(item.quantity) < 1 || !item.description.trim())) {
+            toast.error("Cada ítem necesita descripción y cantidad válida");
+            return;
+          }
           update.mutate({
             id: sale.id,
             date,
@@ -911,114 +938,58 @@ function SaleEditForm({
             customerName: customerName || undefined,
             customerPhone: phone || undefined,
             channel,
-            total: Number(total),
-            totalCost: Number(totalCost || 0),
+            status: status as "paid" | "pending",
+            total: computedTotal,
+            totalCost: computedCost,
             costKnown,
             description: description || undefined,
+            items: items.map(item => ({
+              productId: item.productId ? Number(item.productId) : undefined,
+              description: item.description.trim(),
+              quantity: Number(item.quantity),
+              unitPrice: Number(item.unitPrice || 0),
+              unitCost: costKnown ? Number(item.unitCost || 0) : 0,
+              fromInventory: Boolean(item.fromInventory && item.productId),
+            })),
           });
         }}
       >
         <div className="form-grid">
-          <label>
-            Fecha
-            <input
-              type="date"
-              value={date}
-              onChange={e => setDate(e.target.value)}
-            />
-          </label>
-          <label>
-            Canal
-            <select value={channel} onChange={e => setChannel(e.target.value)}>
-              {channelOptions.map(option => (
-                <option key={option}>{option}</option>
-              ))}
-            </select>
-          </label>
+          <label>Fecha<input type="date" value={date} onChange={e => setDate(e.target.value)} /></label>
+          <label>Canal<select value={channel} onChange={e => setChannel(e.target.value)}>{channelOptions.map(option => <option key={option}>{option}</option>)}</select></label>
+          <label>Estado de pago<select value={status} onChange={e => setStatus(e.target.value)}><option value="paid">Pago todo</option><option value="pending">A pagar / deudor</option></select></label>
         </div>
+        <div className="sale-source-note"><strong>Ítems editables</strong><small>Podés cambiar producto, descripción, cantidad, precio y costo. Si cambiás un producto del inventario, el stock se recalcula.</small></div>
+        <div className="sale-lines">
+          {items.map((item, index) => (
+            <div className="sale-line" key={index}>
+              <div className="sale-line-head"><strong>Ítem {index + 1}</strong>{items.length > 1 && <button type="button" className="text-button danger-text" onClick={() => setItems(current => current.filter((_, i) => i !== index))}><Trash2 size={13} /> Quitar</button>}</div>
+              <label>Producto del inventario<select value={item.productId} onChange={e => {
+                const value = e.target.value;
+                const product = products.find(p => String(p.id) === value);
+                updateItem(index, { productId: value, fromInventory: Boolean(product), description: product?.name || item.description, unitCost: product ? String(product.cost) : item.unitCost });
+              }}><option value="">Venta manual / externa</option>{products.map(product => <option key={product.id} value={product.id}>{product.name} · stock {product.stock}</option>)}</select></label>
+              <div className="form-grid">
+                <label>Descripción<input value={item.description} onChange={e => updateItem(index, { description: e.target.value })} /></label>
+                <label>Cantidad<input type="number" min="1" step="1" value={item.quantity} onChange={e => updateItem(index, { quantity: e.target.value })} /></label>
+              </div>
+              <div className="form-grid">
+                <label>Precio unitario USD<input type="number" min="0" step="0.01" value={item.unitPrice} onChange={e => updateItem(index, { unitPrice: e.target.value })} /></label>
+                <label>Costo unitario USD<input type="number" min="0" step="0.01" value={item.unitCost} disabled={!costKnown} onChange={e => updateItem(index, { unitCost: e.target.value })} /></label>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button type="button" className="button secondary" onClick={() => setItems(current => [...current, { productId: "", description: "", quantity: "1", unitPrice: "", unitCost: "", fromInventory: false }])}><Plus size={15} /> Agregar ítem</button>
+        <div className="mini-kpis"><div><span>Total recalculado</span><strong>{money(computedTotal)}</strong></div><div><span>Costo total</span><strong>{costKnown ? money(computedCost) : "Pendiente"}</strong></div><div><span>Ganancia</span><strong>{costKnown ? money(computedTotal - computedCost) : "Pendiente"}</strong></div></div>
+        <label className="check-line"><input type="checkbox" checked={costKnown} onChange={e => setCostKnown(e.target.checked)} /> Confirmo que los costos están cargados</label>
+        <label>Nota / descripción general<input value={description} onChange={e => setDescription(e.target.value)} placeholder="Descripción opcional" /></label>
         <div className="form-grid">
-          <label>
-            Facturación
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              value={total}
-              onChange={e => setTotal(e.target.value)}
-            />
-          </label>
-          <label>
-            Costo total
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              value={totalCost}
-              disabled={!costKnown}
-              onChange={e => setTotalCost(e.target.value)}
-              placeholder={costKnown ? "0.00" : "Pendiente"}
-            />
-          </label>
+          <label>Cliente<select value={customerId} onChange={e => { const id = e.target.value; setCustomerId(id); const c = customers.find(x => String(x.id) === id); if (c) { setCustomerName(c.name); setPhone(c.phone || ""); } }}><option value="">Sin vincular</option>{customers.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
+          <SuggestedInput label="Nombre / WhatsApp" value={customerName} onChange={setCustomerName} options={customerNameOptions} listId="sale-edit-customer-names" />
         </div>
-        <label className="check-line">
-          <input
-            type="checkbox"
-            checked={costKnown}
-            onChange={e => setCostKnown(e.target.checked)}
-          />{" "}
-          Confirmo que el costo está cargado
-        </label>
-        <label>
-          Detalle
-          <input
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-            placeholder="Descripción opcional"
-          />
-        </label>
-        <div className="form-grid">
-          <label>
-            Cliente
-            <select
-              value={customerId}
-              onChange={e => {
-                const id = e.target.value;
-                setCustomerId(id);
-                const c = customers.find(x => String(x.id) === id);
-                if (c) {
-                  setCustomerName(c.name);
-                  setPhone(c.phone || "");
-                }
-              }}
-            >
-              {!customerId && <option value="">Sin vincular</option>}
-              {customers.map(c => (
-                <option key={c.id} value={c.id}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <SuggestedInput
-            label="Nombre / WhatsApp"
-            value={customerName}
-            onChange={setCustomerName}
-            options={customerNameOptions}
-            listId="sale-edit-customer-names"
-          />
-        </div>
-        <label>
-          Teléfono
-          <input value={phone} onChange={e => setPhone(e.target.value)} />
-        </label>
-        <div className="modal-actions">
-          <button type="button" className="button secondary" onClick={onClose}>
-            Cancelar
-          </button>
-          <button className="button primary" disabled={update.isPending}>
-            {update.isPending ? "Guardando..." : "Guardar cambios"}
-          </button>
-        </div>
+        <label>Teléfono<input value={phone} onChange={e => setPhone(e.target.value)} /></label>
+        <div className="modal-actions"><button type="button" className="button secondary" onClick={onClose}>Cancelar</button><button className="button primary" disabled={update.isPending}>{update.isPending ? "Guardando…" : "Guardar cambios completos"}</button></div>
       </form>
     </Modal>
   );
@@ -1992,7 +1963,6 @@ export default function Home() {
   const ads = trpc.business.ads.useQuery(undefined, queryOptions);
   const adsSpendHistory = trpc.business.adsSpendHistory.useQuery(undefined, queryOptions);
   const metaAds = trpc.business.metaAds.useQuery(undefined, queryOptions);
-  const objectives = trpc.business.objectives.useQuery(undefined, queryOptions);
   const auth = trpc.auth.me.useQuery(undefined, queryOptions);
   const refresh = () => {
     dash.refetch();
@@ -2006,7 +1976,6 @@ export default function Home() {
     ads.refetch();
     adsSpendHistory.refetch();
     metaAds.refetch();
-    objectives.refetch();
     setModal(null);
   };
   const data = dash.data;
@@ -2016,7 +1985,6 @@ export default function Home() {
   const expenseRows = expenses.data ?? [];
   const loanRows = loans.data ?? [];
   const adRows = ads.data ?? [];
-  const objectiveRows = objectives.data ?? [];
   const categoryOptions = useMemo(
     () => uniqueOptions(inventoryRows.map(p => p.category)),
     [allProducts.data]
@@ -2087,10 +2055,6 @@ export default function Home() {
       ]),
     [ads.data]
   );
-  const monthOptions = useMemo(
-    () => uniqueOptions(objectiveRows.map(o => o.month)),
-    [objectives.data]
-  );
   const pageTitle = nav.find(n => n.id === active)?.label || "Resumen";
   const overdue = (loans.data ?? []).filter(
     l => debtState(l).className === "danger"
@@ -2107,8 +2071,6 @@ export default function Home() {
     (a: number, x: any) => a + Number(x.balance || 0),
     0
   );
-  const currentObjective =
-    objectives.data?.find(o => o.month === "Octubre") || objectives.data?.[0];
   const open = (kind: string, item?: any) => setModal({ kind, data: item });
   return (
     <div className="app-shell">
@@ -2450,25 +2412,17 @@ export default function Home() {
                   </div>
                 </section>
                 <section className="panel focus-panel">
-                  <span className="eyebrow">objetivo visible</span>
-                  <h3>
-                    {currentObjective
-                      ? `Objetivo ${currentObjective.month}`
-                      : "Ventas que se convierten en caja"}
-                  </h3>
-                  <p>
-                    {currentObjective
-                      ? `Meta: ${money(currentObjective.targetRevenue)} de facturación y ${number(currentObjective.targetOrders)} pedidos. La ganancia neta actual es ${money(data?.advanced?.netProfit ?? data?.advanced?.netEstimated)}.`
-                      : "Registrar la venta completa, descontar el stock y mirar la ganancia real."}
-                  </p>
+                  <span className="eyebrow">acción prioritaria</span>
+                  <h3>Ventas que se convierten en caja</h3>
+                  <p>Registrá la venta completa, descontá el stock y mirá la ganancia real.</p>
                   <button className="button dark" onClick={() => open("sale")}>
                     <Plus size={16} /> Cargar una venta
                   </button>
                 </section>
               </div>
+              <ChartsView data={data} period={period} embedded />
             </>
           )}
-          {active === "charts" && <ChartsView data={data} period={period} />}
           {active === "sales" && (
             <SalesView
               sales={sales.data ?? []}
@@ -2521,13 +2475,6 @@ export default function Home() {
               onDone={refresh}
             />
           )}
-          {active === "objectives" && (
-            <ObjectivesView
-              objectives={objectives.data ?? []}
-              onEdit={item => open("objective", item)}
-              onDone={refresh}
-            />
-          )}
           {active === "projections" && <ProjectionsView />}
         </div>
       </main>
@@ -2544,6 +2491,7 @@ export default function Home() {
       {modal?.kind === "saleEdit" && (
         <SaleEditForm
           sale={modal.data}
+          products={inventoryRows}
           customers={customerRows}
           customerNameOptions={customerNameOptions}
           channelOptions={channelOptions}
@@ -2601,19 +2549,11 @@ export default function Home() {
           onDone={refresh}
         />
       )}
-      {modal?.kind === "objective" && (
-        <ObjectiveForm
-          objective={modal.data}
-          monthOptions={monthOptions}
-          onClose={() => setModal(null)}
-          onDone={refresh}
-        />
-      )}
     </div>
   );
 }
 
-function ChartsView({ data, period }: { data: any; period: string }) {
+function ChartsView({ data, period, embedded = false }: { data: any; period: string; embedded?: boolean }) {
   const daily = (data?.daily ?? []).slice(-31).map((row: any) => ({
     ...row,
     label: dateLabel(row.day),
@@ -2633,7 +2573,7 @@ function ChartsView({ data, period }: { data: any; period: string }) {
   const formatTooltip = (value: any) => money(value);
   return (
     <>
-      <div className="view-intro">
+      {!embedded && <div className="view-intro">
         <div>
           <span className="eyebrow">lectura cuantitativa · datos reales</span>
           <h2>Gráficos del negocio</h2>
@@ -2645,8 +2585,8 @@ function ChartsView({ data, period }: { data: any; period: string }) {
         <span className="period-pill">
           Período: {period === "all" ? "Todo el historial" : period}
         </span>
-      </div>
-      <div className="advanced-grid chart-kpis">
+      </div>}
+      {!embedded && <div className="advanced-grid chart-kpis">
         <MetricCard
           label="Facturación"
           value={money(data?.summary?.revenue)}
@@ -2676,7 +2616,8 @@ function ChartsView({ data, period }: { data: any; period: string }) {
           tone="sand"
           icon={Package}
         />
-      </div>
+      </div>}
+      {embedded && <div className="section-header compact-header"><div><span className="eyebrow">lectura cuantitativa · período seleccionado</span><h3>Gráficos del negocio</h3></div><span className="period-pill">{period === "all" ? "Todo el historial" : period}</span></div>}
       <div className="main-grid charts-layout">
         <section className="panel chart-panel">
           <SectionHeader
@@ -3620,7 +3561,14 @@ function AdsView({
       toast.success("Registro publicitario eliminado");
       onDone();
     },
-    onError: e => toast.error(e.message),
+    onError: e => {
+      const message = e.message || "Error desconocido";
+      toast.error(
+        /expir|invalid|token|oauth|permission/i.test(message)
+          ? "Meta Ads rechazó el acceso: el token expiró o perdió permisos. Hay que reemplazarlo por uno nuevo."
+          : `No se pudo sincronizar Meta Ads: ${message}`
+      );
+    },
   });
   const syncMeta = trpc.business.syncMetaAds.useMutation({
     onSuccess: result => {

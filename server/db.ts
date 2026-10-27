@@ -770,8 +770,14 @@ export async function listSales(limit?: number) {
   const itemRows = await db
     .select({
       saleId: saleItems.saleId,
+      id: saleItems.id,
+      productId: saleItems.productId,
       description: saleItems.description,
       quantity: saleItems.quantity,
+      unitPrice: saleItems.unitPrice,
+      unitCost: saleItems.unitCost,
+      fromInventory: saleItems.fromInventory,
+      costKnown: saleItems.costKnown,
     })
     .from(saleItems)
     .where(
@@ -782,11 +788,15 @@ export async function listSales(limit?: number) {
     )
     .orderBy(asc(saleItems.id));
   const descriptions = new Map<number, string[]>();
+  const itemsBySale = new Map<number, typeof itemRows>();
   for (const item of itemRows) {
     const values = descriptions.get(item.saleId) ?? [];
     const label = `${item.quantity || 1} ${item.description}`.trim();
     if (label && !values.includes(label)) values.push(label);
     descriptions.set(item.saleId, values);
+    const items = itemsBySale.get(item.saleId) ?? [];
+    items.push(item);
+    itemsBySale.set(item.saleId, items);
   }
   return rows.map(row => ({
     ...row,
@@ -796,6 +806,16 @@ export async function listSales(limit?: number) {
       row.legacyId == null
         ? descriptions.get(row.id)?.join(" · ") || row.notes || null
         : row.notes || descriptions.get(row.id)?.join(" · ") || null,
+    items: (itemsBySale.get(row.id) ?? []).map(item => ({
+      id: item.id,
+      productId: item.productId,
+      description: item.description,
+      quantity: item.quantity,
+      unitPrice: Number(item.unitPrice || 0),
+      unitCost: Number(item.unitCost || 0),
+      fromInventory: Boolean(item.fromInventory),
+      costKnown: Boolean(item.costKnown),
+    })),
   }));
 }
 export async function listCustomers() {
@@ -837,7 +857,7 @@ export async function getAdsSpendHistory() {
   if (!db) return { manual: [], meta: [] };
   await ensureSeeded();
   const monthKey = sql<string>`date_format(${adCampaigns.adDate}, '%Y-%m')`;
-  const manual = await db
+  const campaignManual = await db
     .select({
       month: monthKey,
       spend: sql<number>`coalesce(sum(${adCampaigns.amount}), 0)`,
@@ -846,6 +866,32 @@ export async function getAdsSpendHistory() {
     .from(adCampaigns)
     .groupBy(monthKey)
     .orderBy(monthKey);
+  const expenseManual = await db
+    .select({
+      date: expenses.expenseDate,
+      category: expenses.category,
+      type: expenses.type,
+      platform: expenses.platform,
+      amount: expenses.amount,
+    })
+    .from(expenses);
+  const manualByMonth = new Map<string, { spend: number; entries: number }>();
+  for (const row of campaignManual) {
+    const key = String(row.month);
+    manualByMonth.set(key, {
+      spend: Number(row.spend || 0),
+      entries: Number(row.entries || 0),
+    });
+  }
+  for (const row of expenseManual) {
+    const searchable = `${row.category || ""} ${row.type || ""} ${row.platform || ""}`.toLocaleLowerCase("es-AR");
+    if (!searchable.includes("publicidad") && !searchable.includes("meta ads")) continue;
+    const key = String(row.date).slice(0, 7);
+    const current = manualByMonth.get(key) || { spend: 0, entries: 0 };
+    current.spend += Number(row.amount || 0);
+    current.entries += 1;
+    manualByMonth.set(key, current);
+  }
   const meta = await db
     .select({
       dateStart: metaAdInsights.dateStart,
@@ -860,10 +906,10 @@ export async function getAdsSpendHistory() {
     .where(eq(metaAdInsights.level, "account"))
     .orderBy(desc(metaAdInsights.dateStop), desc(metaAdInsights.syncedAt));
   return {
-    manual: manual.map(row => ({
-      month: String(row.month),
-      spend: Number(row.spend || 0),
-      entries: Number(row.entries || 0),
+    manual: [...manualByMonth.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([month, row]) => ({
+      month,
+      spend: row.spend,
+      entries: row.entries,
     })),
     meta: meta.map(row => ({
       dateStart: row.dateStart,
@@ -1055,63 +1101,117 @@ export async function updateSale(
     costKnown?: boolean;
     description?: string;
     notes?: string;
+    status?: "paid" | "pending";
+    items?: Array<{
+      productId?: number;
+      description: string;
+      quantity: number;
+      unitPrice: number;
+      unitCost?: number;
+      fromInventory?: boolean;
+      supplier?: string;
+    }>;
     userId?: number;
   }
 ) {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
   return db.transaction(async tx => {
-    const current = (
-      await tx.select().from(sales).where(eq(sales.id, id)).limit(1)
-    )[0];
+    const current = (await tx.select().from(sales).where(eq(sales.id, id)).limit(1))[0];
     if (!current) throw new Error("Venta no encontrada");
     const oldCustomerId = current.customerId;
     const costKnown = input.costKnown !== false;
-    const profit = costKnown ? input.total - input.totalCost : 0;
-    const storedCost = costKnown ? input.totalCost : 0;
-    await tx
-      .update(sales)
-      .set({
-        saleDate: input.date,
-        customerId: input.customerId ?? null,
-        customerName: input.customerName || null,
-        customerPhone: input.customerPhone || null,
-        channel: input.channel || "WhatsApp",
-        total: toMoney(input.total),
-        totalCost: toMoney(storedCost),
-        profit: toMoney(profit),
-        margin:
-          costKnown && input.total
-            ? toMoney((profit / input.total) * 100)
-            : "0.00",
-        costKnown,
-        notes: input.notes,
-        updatedBy: input.userId,
-      })
-      .where(eq(sales.id, id));
-    const item = (
-      await tx
-        .select()
-        .from(saleItems)
-        .where(eq(saleItems.saleId, id))
-        .orderBy(asc(saleItems.id))
-        .limit(1)
-    )[0];
-    if (item) {
-      const quantity = Math.max(1, item.quantity);
-      await tx
-        .update(saleItems)
-        .set({
+    const replacementItems = input.items?.length
+      ? input.items.map(item => ({
+          ...item,
+          quantity: Math.max(1, Math.trunc(item.quantity)),
+          unitPrice: Math.max(0, item.unitPrice),
+          unitCost: Math.max(0, item.unitCost ?? 0),
+          fromInventory: Boolean(item.fromInventory && item.productId),
+        }))
+      : null;
+    let finalTotal = input.total;
+    let finalCost = costKnown ? input.totalCost : 0;
+    if (replacementItems) {
+      const oldItems = await tx.select().from(saleItems).where(eq(saleItems.saleId, id));
+      for (const item of oldItems) {
+        if (!item.fromInventory || !item.productId) continue;
+        await tx.update(products)
+          .set({ stock: sql`${products.stock} + ${item.quantity}`, updatedBy: input.userId })
+          .where(eq(products.id, item.productId));
+      }
+      await tx.delete(stockMovements).where(and(eq(stockMovements.referenceId, id), eq(stockMovements.type, "sale")));
+      await tx.delete(saleItems).where(eq(saleItems.saleId, id));
+      finalTotal = replacementItems.reduce((sum, item) => sum + item.quantity * item.unitPrice, 0);
+      finalCost = replacementItems.reduce((sum, item) => sum + item.quantity * item.unitCost, 0);
+      for (const item of replacementItems) {
+        if (item.fromInventory && item.productId) {
+          const product = (await tx.select().from(products).where(eq(products.id, item.productId)).limit(1))[0];
+          if (!product) throw new Error(`Producto ${item.productId} no encontrado`);
+          if (product.stock < item.quantity) throw new Error(`Stock insuficiente para ${product.name}`);
+          await tx.update(products)
+            .set({ stock: product.stock - item.quantity, updatedBy: input.userId })
+            .where(eq(products.id, product.id));
+          await tx.insert(stockMovements).values({
+            productId: product.id,
+            type: "sale",
+            quantity: -item.quantity,
+            unitCost: toMoney(item.unitCost),
+            referenceId: id,
+            notes: "Venta editada",
+            createdBy: input.userId,
+            updatedBy: input.userId,
+          });
+        }
+        await tx.insert(saleItems).values({
+          saleId: id,
+          productId: item.productId ?? null,
+          description: item.description,
+          quantity: item.quantity,
+          unitPrice: toMoney(item.unitPrice),
+          unitCost: toMoney(item.unitCost),
+          total: toMoney(item.quantity * item.unitPrice),
+          costTotal: toMoney(item.quantity * item.unitCost),
+          profit: toMoney(item.quantity * (item.unitPrice - item.unitCost)),
+          costKnown,
+          fromInventory: item.fromInventory,
+          supplier: item.supplier || null,
+          createdBy: input.userId,
+          updatedBy: input.userId,
+        });
+      }
+    }
+    const profit = costKnown ? finalTotal - finalCost : 0;
+    await tx.update(sales).set({
+      saleDate: input.date,
+      customerId: input.customerId ?? null,
+      customerName: input.customerName || null,
+      customerPhone: input.customerPhone || null,
+      channel: input.channel || "WhatsApp",
+      total: toMoney(finalTotal),
+      totalCost: toMoney(finalCost),
+      profit: toMoney(profit),
+      margin: costKnown && finalTotal ? toMoney((profit / finalTotal) * 100) : "0.00",
+      costKnown,
+      status: input.status || current.status,
+      notes: input.notes,
+      updatedBy: input.userId,
+    }).where(eq(sales.id, id));
+    if (!replacementItems) {
+      const item = (await tx.select().from(saleItems).where(eq(saleItems.saleId, id)).orderBy(asc(saleItems.id)).limit(1))[0];
+      if (item) {
+        const quantity = Math.max(1, item.quantity);
+        await tx.update(saleItems).set({
           description: input.description || item.description,
-          unitPrice: toMoney(input.total / quantity),
-          unitCost: toMoney(costKnown ? storedCost / quantity : 0),
-          total: toMoney(input.total),
-          costTotal: toMoney(storedCost),
+          unitPrice: toMoney(finalTotal / quantity),
+          unitCost: toMoney(costKnown ? finalCost / quantity : 0),
+          total: toMoney(finalTotal),
+          costTotal: toMoney(finalCost),
           profit: toMoney(profit),
           costKnown,
           updatedBy: input.userId,
-        })
-        .where(eq(saleItems.id, item.id));
+        }).where(eq(saleItems.id, item.id));
+      }
     }
     await refreshCustomerStats(tx, oldCustomerId);
     await refreshCustomerStats(tx, input.customerId);
