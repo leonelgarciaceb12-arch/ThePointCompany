@@ -18,7 +18,7 @@ async function requestJson<T>(input: RequestInfo, init?: RequestInit): Promise<T
   return body as T;
 }
 
-export default function Editor() {
+export default function Editor({ onBack }: { onBack?: () => void } = {}) {
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const [password, setPassword] = useState("");
   const [files, setFiles] = useState<string[]>([]);
@@ -109,7 +109,10 @@ export default function Editor() {
     <main className="editor-screen editor-workspace">
       <header className="editor-header">
         <div><div className="editor-brand"><span className="editor-mark"><FileCode2 size={19} /></span><span>THE POINT EDITOR</span></div><h1>Propuestas de código</h1></div>
-        <button className="button secondary" onClick={logout}><LogOut size={16} /> Salir</button>
+        <div className="view-actions">
+          {onBack && <button className="button secondary" onClick={onBack}>Volver al tablero</button>}
+          <button className="button secondary" onClick={logout}><LogOut size={16} /> Salir</button>
+        </div>
       </header>
       <div className="editor-grid">
         <section className="editor-card">

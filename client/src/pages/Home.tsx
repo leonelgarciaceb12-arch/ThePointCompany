@@ -903,6 +903,7 @@ function SaleEditForm({
         fromInventory: false,
       }];
   const [items, setItems] = useState<EditableSaleItem[]>(initialItems);
+  const [editProductSearch, setEditProductSearch] = useState<Record<number, string>>({});
   const [date, setDate] = useState(dateInput(sale.saleDate));
   const [customerId, setCustomerId] = useState(sale.customerId ? String(sale.customerId) : "");
   const [customerName, setCustomerName] = useState(sale.customerName || "");
@@ -920,6 +921,11 @@ function SaleEditForm({
   });
   const updateItem = (index: number, patch: Record<string, unknown>) =>
     setItems(current => current.map((item, i) => i === index ? { ...item, ...patch } : item));
+  const visibleEditProducts = (index: number) => {
+    const query = (editProductSearch[index] || "").trim().toLocaleLowerCase("es-AR");
+    const selectedId = items[index]?.productId;
+    return products.filter(product => !query || `${product.name} ${product.category || ""}`.toLocaleLowerCase("es-AR").includes(query) || String(product.id) === selectedId);
+  };
   const computedTotal = items.reduce((sum, item) => sum + Number(item.quantity || 0) * Number(item.unitPrice || 0), 0);
   const computedCost = items.reduce((sum, item) => sum + Number(item.quantity || 0) * Number(item.unitCost || 0), 0);
   return (
@@ -965,11 +971,12 @@ function SaleEditForm({
           {items.map((item, index) => (
             <div className="sale-line" key={index}>
               <div className="sale-line-head"><strong>Ítem {index + 1}</strong>{items.length > 1 && <button type="button" className="text-button danger-text" onClick={() => setItems(current => current.filter((_, i) => i !== index))}><Trash2 size={13} /> Quitar</button>}</div>
+              <label>Buscar producto del inventario<input value={editProductSearch[index] || ""} onChange={e => setEditProductSearch(current => ({ ...current, [index]: e.target.value }))} list={`edit-sale-products-${index}`} placeholder="Escribí nombre o categoría" /><datalist id={`edit-sale-products-${index}`}>{products.map(product => <option key={product.id} value={product.name} />)}</datalist></label>
               <label>Producto del inventario<select value={item.productId} onChange={e => {
                 const value = e.target.value;
                 const product = products.find(p => String(p.id) === value);
                 updateItem(index, { productId: value, fromInventory: Boolean(product), description: product?.name || item.description, unitCost: product ? String(product.cost) : item.unitCost });
-              }}><option value="">Venta manual / externa</option>{products.map(product => <option key={product.id} value={product.id}>{product.name} · stock {product.stock}</option>)}</select></label>
+              }}><option value="">Venta manual / externa</option>{visibleEditProducts(index).map(product => <option key={product.id} value={product.id}>{product.name} · stock {product.stock}</option>)}</select></label>
               <div className="form-grid">
                 <label>Descripción<input value={item.description} onChange={e => updateItem(index, { description: e.target.value })} /></label>
                 <label>Cantidad<input type="number" min="1" step="1" value={item.quantity} onChange={e => updateItem(index, { quantity: e.target.value })} /></label>
@@ -2121,7 +2128,7 @@ export default function Home() {
             <FilePlus2 size={18} />
             <span>Nuevo gasto</span>
           </button>
-          <button className="nav-item" onClick={() => { window.location.href = "/editor"; }}>
+          <button className="nav-item" onClick={() => { window.location.href = "/?modo=editor"; }}>
             <FileCode2 size={18} />
             <span>Editor colaborativo</span>
           </button>

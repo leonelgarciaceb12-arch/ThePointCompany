@@ -856,7 +856,14 @@ export async function listLoans() {
     .from(loans)
     .where(and(eq(loans.counterparty, "Santiago Lopez"), eq(loans.description, "100 Elfbar Ice King 40k puff")))
     .limit(1))[0];
-  if (!historicalSettled) {
+  if (historicalSettled && Number(historicalSettled.balance || 0) > 0) {
+    await db.update(loans).set({
+      paid: historicalSettled.principal,
+      balance: "0.00",
+      status: "paid",
+      notes: "Compromiso saldado reconstruido desde el registro histórico del negocio.",
+    }).where(eq(loans.id, historicalSettled.id));
+  } else if (!historicalSettled) {
     await db.insert(loans).values({
       kind: "payable_merch",
       counterparty: "Santiago Lopez",
@@ -873,6 +880,30 @@ export async function listLoans() {
       dueDate: "2026-10-10",
       status: "paid",
       notes: "Compromiso saldado reconstruido desde el registro histórico del negocio.",
+    });
+  }
+  const paidMentorship = (await db
+    .select()
+    .from(loans)
+    .where(and(eq(loans.counterparty, "Mateo Portillo"), eq(loans.description, "Mentoria 1:1 por 3 meses")))
+    .limit(1))[0];
+  if (!paidMentorship) {
+    await db.insert(loans).values({
+      kind: "payable_merch",
+      counterparty: "Mateo Portillo",
+      description: "Mentoria 1:1 por 3 meses",
+      currency: "USD",
+      interestRate: "0.00",
+      interestPeriod: "monthly",
+      principal: "500.00",
+      repaymentAmount: "500.00",
+      hasDueDate: true,
+      paid: "500.00",
+      balance: "0.00",
+      startDate: "2026-09-29",
+      dueDate: "2026-10-09",
+      status: "paid",
+      notes: "Compromiso saldado reconstruido desde una versión histórica del seguimiento.",
     });
   }
   const rows = await db.select().from(loans).orderBy(asc(loans.dueDate));

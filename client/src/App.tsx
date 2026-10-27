@@ -6,13 +6,14 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Editor from "./pages/Editor";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, LockKeyhole } from "lucide-react";
 import { toast } from "sonner";
 import { trpc } from "./lib/trpc";
 
 function SharedAccess() {
   const [password, setPassword] = useState("");
+  const [editorMode, setEditorMode] = useState(() => new URLSearchParams(window.location.search).get("modo") === "editor");
   const auth = trpc.auth.me.useQuery(undefined, { retry: false, staleTime: 0 });
   const utils = trpc.useUtils();
   const login = trpc.auth.sharedLogin.useMutation({
@@ -22,8 +23,14 @@ function SharedAccess() {
     },
     onError: error => toast.error(error.message || "No se pudo validar la contraseña"),
   });
+  useEffect(() => {
+    const onPopState = () => setEditorMode(new URLSearchParams(window.location.search).get("modo") === "editor");
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
 
   if (auth.isLoading) return <div className="access-screen"><div className="access-card"><span className="access-kicker">THE POINT COMPANY</span><p>Verificando acceso…</p></div></div>;
+  if (auth.data && editorMode) return <Editor onBack={() => { window.history.pushState({}, "", "/"); setEditorMode(false); }} />;
   if (auth.data) return <Home />;
 
   return (
@@ -54,7 +61,7 @@ function Router() {
     <Switch>
       <Route path={"/"} component={SharedAccess} />
       <Route path={"/acceso"} component={SharedAccess} />
-      <Route path={"/editor"} component={Editor} />
+      <Route path={"/editor"} component={() => <Editor />} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
