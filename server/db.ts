@@ -863,11 +863,27 @@ export async function listExpenses() {
   const db = await getDb();
   if (!db) return [];
   await ensureSeeded();
-  return db
+  const rows = await db
     .select()
     .from(expenses)
     .orderBy(desc(expenses.expenseDate), desc(expenses.id))
     .limit(100);
+  for (const row of rows) {
+    const searchable = `${row.category || ""} ${row.type || ""} ${row.description || ""} ${row.platform || ""}`.toLocaleLowerCase("es-AR");
+    if (searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("publicista") || searchable.includes("rdads")) {
+      if (row.category !== "Publicidad" || row.type !== "Publicitario" || row.description !== "Publicidad") {
+        await db.update(expenses).set({
+          category: "Publicidad",
+          type: "Publicitario",
+          description: "Publicidad",
+        }).where(eq(expenses.id, row.id));
+        row.category = "Publicidad";
+        row.type = "Publicitario";
+        row.description = "Publicidad";
+      }
+    }
+  }
+  return rows;
 }
 export async function listLoans() {
   const db = await getDb();
@@ -1663,12 +1679,14 @@ export async function createExpense(input: {
 }) {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
+  const searchable = `${input.category} ${input.type || ""} ${input.description}`.toLocaleLowerCase("es-AR");
+  const isAdvertising = searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("publicista") || searchable.includes("rdads");
   const result = await db.insert(expenses).values({
     expenseDate: input.date,
-    category: input.category,
-    description: input.description,
+    category: isAdvertising ? "Publicidad" : input.category,
+    description: isAdvertising ? "Publicidad" : input.description,
     amount: toMoney(input.amount),
-    type: input.type || "Operativo",
+    type: isAdvertising ? "Publicitario" : input.type || "Operativo",
     platform: input.platform,
     campaign: input.campaign,
     notes: input.notes,
@@ -1829,14 +1847,16 @@ export async function updateExpense(
 ) {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
+  const searchable = `${input.category} ${input.type || ""} ${input.description}`.toLocaleLowerCase("es-AR");
+  const isAdvertising = searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("publicista") || searchable.includes("rdads");
   await db
     .update(expenses)
     .set({
       expenseDate: input.date,
-      category: input.category,
-      description: input.description,
+      category: isAdvertising ? "Publicidad" : input.category,
+      description: isAdvertising ? "Publicidad" : input.description,
       amount: toMoney(input.amount),
-      type: input.type || "Operativo",
+      type: isAdvertising ? "Publicitario" : input.type || "Operativo",
       notes: input.notes || null,
       updatedBy: input.userId,
     })
