@@ -866,8 +866,7 @@ export async function listExpenses() {
   const rows = await db
     .select()
     .from(expenses)
-    .orderBy(desc(expenses.expenseDate), desc(expenses.id))
-    .limit(100);
+    .orderBy(desc(expenses.expenseDate), desc(expenses.id));
   for (const row of rows) {
     const searchable = `${row.category || ""} ${row.type || ""} ${row.description || ""} ${row.platform || ""}`.toLocaleLowerCase("es-AR");
     if (searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("publicista") || searchable.includes("rdads")) {

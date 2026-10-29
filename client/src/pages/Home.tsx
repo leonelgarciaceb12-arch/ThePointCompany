@@ -1975,7 +1975,11 @@ export default function Home() {
   );
   const sales = trpc.business.sales.useQuery(undefined, queryOptions);
   const customers = trpc.business.customers.useQuery(undefined, queryOptions);
-  const expenses = trpc.business.expenses.useQuery(undefined, queryOptions);
+  const expenses = trpc.business.expenses.useQuery(undefined, {
+    ...queryOptions,
+    staleTime: 0,
+    refetchOnWindowFocus: true,
+  });
   const loans = trpc.business.loans.useQuery(undefined, queryOptions);
   const receivables = trpc.business.receivables.useQuery(
     undefined,
