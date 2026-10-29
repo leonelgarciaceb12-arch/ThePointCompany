@@ -2496,6 +2496,8 @@ export default function Home() {
             <AdsView
               adsSpendHistory={adsSpendHistory.data}
               ads={ads.data ?? []}
+              expenses={expenseRows}
+              onEditExpense={(item: any) => open("expense", item)}
               onAdd={() => open("expense", { isAdvertising: true })}
             />
           )}
@@ -3601,10 +3603,14 @@ function FinanceView({
 function AdsView({
   adsSpendHistory,
   ads,
+  expenses,
+  onEditExpense,
   onAdd,
 }: {
   adsSpendHistory?: { manual: any[]; daily: any[] };
   ads?: any[];
+  expenses?: any[];
+  onEditExpense: (item: any) => void;
   onAdd: () => void;
 }) {
   const fallbackDaily = Object.values((ads ?? []).reduce((acc: Record<string, any>, row: any) => {
@@ -3616,7 +3622,17 @@ function AdsView({
     return acc;
   }, {})).sort((a: any, b: any) => String(a.date).localeCompare(String(b.date)));
   const sourceDaily = (adsSpendHistory?.daily?.length ? adsSpendHistory.daily : fallbackDaily);
-  const dailyRows = sourceDaily.map((row: any) => ({
+  const advertisingExpenses = (expenses ?? []).filter((row: any) => row.category === "Publicidad" || row.type === "Publicitario");
+  const directDaily = Object.values(advertisingExpenses.reduce((acc: Record<string, any>, row: any) => {
+    const key = String(row.expenseDate || "").slice(0, 10);
+    if (!key) return acc;
+    acc[key] ||= { date: key, spend: 0, entries: 0 };
+    acc[key].spend += Number(row.amount || 0);
+    acc[key].entries += 1;
+    return acc;
+  }, {}));
+  const mergedDaily = directDaily.length ? directDaily : sourceDaily;
+  const dailyRows = mergedDaily.map((row: any) => ({
     ...row,
     label: dateLabel(row.date),
     spend: Number(row.spend || 0),
@@ -3666,8 +3682,8 @@ function AdsView({
       </section>
       <section className="panel table-panel">
         <SectionHeader eyebrow="detalle diario" title="Gastos manuales registrados" action="Cargar gasto" onAction={onAdd} />
-        <div className="table-scroll"><table><thead><tr><th>Fecha</th><th>Importe</th><th>Registros</th></tr></thead><tbody>
-          {dailyRows.length ? dailyRows.slice().reverse().map((row: any) => <tr key={row.date}><td>{dateLabel(row.date)}</td><td><strong>{money(row.spend)}</strong></td><td>{row.entries}</td></tr>) : <tr><td colSpan={3} className="empty-cell">Sin gastos de Ads registrados todavía.</td></tr>}
+        <div className="table-scroll"><table><thead><tr><th>Fecha</th><th>Importe</th><th>Registros</th><th></th></tr></thead><tbody>
+          {advertisingExpenses.length ? advertisingExpenses.slice().sort((a: any, b: any) => String(b.expenseDate).localeCompare(String(a.expenseDate))).map((row: any) => <tr key={row.id}><td>{dateLabel(row.expenseDate)}</td><td><strong>{money(row.amount)}</strong></td><td><span className="soft-tag">Publicitario</span></td><td><button className="icon-button small-icon" title="Editar" onClick={() => onEditExpense(row)}><Pencil size={14} /></button></td></tr>) : <tr><td colSpan={4} className="empty-cell">Sin gastos de Ads registrados todavía.</td></tr>}
         </tbody></table></div>
       </section>
     </>
