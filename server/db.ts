@@ -868,6 +868,17 @@ export async function listExpenses() {
     .from(expenses)
     .orderBy(desc(expenses.expenseDate), desc(expenses.id));
   for (const row of rows) {
+    if (row.id === 120001 && Number(row.amount || 0) === 280) {
+      await db.update(expenses).set({
+        category: "Publicista",
+        description: "Asesoría y gestión de publicidad",
+        type: "Operativo",
+      }).where(eq(expenses.id, row.id));
+      row.category = "Publicista";
+      row.description = "Asesoría y gestión de publicidad";
+      row.type = "Operativo";
+      continue;
+    }
     const searchable = `${row.category || ""} ${row.type || ""} ${row.description || ""} ${row.platform || ""}`.toLocaleLowerCase("es-AR");
     const isPublicistFee = String(row.category || "").toLocaleLowerCase("es-AR").includes("publicista");
     if (!isPublicistFee && (searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("rdads"))) {
@@ -985,6 +996,7 @@ export async function getAdsSpendHistory() {
     .orderBy(monthKey);
   const expenseManual = await db
     .select({
+      id: expenses.id,
       date: expenses.expenseDate,
       category: expenses.category,
       type: expenses.type,
@@ -1013,6 +1025,7 @@ export async function getAdsSpendHistory() {
     });
   }
   for (const row of expenseManual) {
+    if (row.id === 120001 && Number(row.amount || 0) === 280) continue;
     const searchable = `${row.category || ""} ${row.type || ""} ${row.platform || ""}`.toLocaleLowerCase("es-AR");
     if (!searchable.includes("publicidad") && !searchable.includes("meta ads")) continue;
     const key = String(row.date).slice(0, 7);
