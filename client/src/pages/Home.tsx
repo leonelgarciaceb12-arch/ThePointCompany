@@ -3631,7 +3631,16 @@ function AdsView({
     acc[key].entries += 1;
     return acc;
   }, {}));
-  const mergedDaily = directDaily.length ? directDaily : sourceDaily;
+  const mergedByDay = new Map<string, any>();
+  for (const row of sourceDaily) {
+    const key = String(row.date).slice(0, 10);
+    mergedByDay.set(key, { ...row, date: key, spend: Number(row.spend || 0), entries: Number(row.entries || 0) });
+  }
+  for (const row of directDaily as any[]) {
+    const key = String(row.date).slice(0, 10);
+    if (!mergedByDay.has(key)) mergedByDay.set(key, row);
+  }
+  const mergedDaily = [...mergedByDay.values()].sort((a, b) => String(a.date).localeCompare(String(b.date)));
   const dailyRows = mergedDaily.map((row: any) => ({
     ...row,
     label: dateLabel(row.date),

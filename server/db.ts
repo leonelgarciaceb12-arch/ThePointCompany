@@ -869,7 +869,8 @@ export async function listExpenses() {
     .orderBy(desc(expenses.expenseDate), desc(expenses.id));
   for (const row of rows) {
     const searchable = `${row.category || ""} ${row.type || ""} ${row.description || ""} ${row.platform || ""}`.toLocaleLowerCase("es-AR");
-    if (searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("publicista") || searchable.includes("rdads")) {
+    const isPublicistFee = String(row.category || "").toLocaleLowerCase("es-AR").includes("publicista");
+    if (!isPublicistFee && (searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("rdads"))) {
       if (row.category !== "Publicidad" || row.type !== "Publicitario" || row.description !== "Publicidad") {
         await db.update(expenses).set({
           category: "Publicidad",
@@ -1679,7 +1680,7 @@ export async function createExpense(input: {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
   const searchable = `${input.category} ${input.type || ""} ${input.description}`.toLocaleLowerCase("es-AR");
-  const isAdvertising = searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("publicista") || searchable.includes("rdads");
+  const isAdvertising = !input.category.toLocaleLowerCase("es-AR").includes("publicista") && (searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("rdads"));
   const result = await db.insert(expenses).values({
     expenseDate: input.date,
     category: isAdvertising ? "Publicidad" : input.category,
@@ -1847,7 +1848,7 @@ export async function updateExpense(
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
   const searchable = `${input.category} ${input.type || ""} ${input.description}`.toLocaleLowerCase("es-AR");
-  const isAdvertising = searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("publicista") || searchable.includes("rdads");
+  const isAdvertising = !input.category.toLocaleLowerCase("es-AR").includes("publicista") && (searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("rdads"));
   await db
     .update(expenses)
     .set({
