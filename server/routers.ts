@@ -3,6 +3,7 @@ import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { systemRouter } from "./_core/systemRouter";
 import {
   adjustStock,
+  applyLoanInterest,
   createAd,
   createExpense,
   createLoan,
@@ -77,7 +78,8 @@ const loanInput = z.object({
   description: z.string().optional(),
   currency: z.string().default("USD"),
   interestRate: z.number().nonnegative().default(0),
-  interestPeriod: z.enum(["monthly", "weekly"]).default("monthly"),
+  interestUnit: z.enum(["percent", "usd"]).default("percent"),
+  interestPeriod: z.enum(["daily", "monthly", "weekly"]).default("monthly"),
   principal: z.number().positive(),
   repaymentAmount: z.number().positive().optional(),
   installmentCount: z.number().int().positive().optional(),
@@ -299,6 +301,9 @@ export const appRouter = router({
       .mutation(({ input, ctx }) =>
         payLoan(input.id, input.amount, ctx.user.id)
       ),
+    applyLoanInterest: protectedProcedure
+      .input(z.object({ id: z.number().int().positive() }))
+      .mutation(({ input, ctx }) => applyLoanInterest(input.id, ctx.user.id)),
     createReceivable: protectedProcedure
       .input(receivableInput.omit({ paid: true }))
       .mutation(({ input, ctx }) =>

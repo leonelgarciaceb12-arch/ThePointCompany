@@ -1267,6 +1267,9 @@ function LoanForm({
   const [interestRate, setInterestRate] = useState(
     String(loan?.interestRate ?? 0)
   );
+  const [interestUnit, setInterestUnit] = useState(
+    loan?.interestUnit || "percent"
+  );
   const [interestPeriod, setInterestPeriod] = useState(
     loan?.interestPeriod || "monthly"
   );
@@ -1316,8 +1319,9 @@ function LoanForm({
             kind: kind as "loan" | "payable_merch" | "internal",
             counterparty,
             description: description || undefined,
-            interestRate: isLoan ? Number(interestRate) : 0,
-            interestPeriod: interestPeriod as "monthly" | "weekly",
+            interestRate: Number(interestRate),
+            interestUnit: interestUnit as "percent" | "usd",
+            interestPeriod: interestPeriod as "daily" | "monthly" | "weekly",
             principal: Number(principal),
             repaymentAmount: isLoan
               ? Number(repayment || principal)
@@ -1394,11 +1398,11 @@ function LoanForm({
             />
           </label>
         </div>
-        {isLoan && (
+        {(kind === "loan" || kind === "payable_merch") && (
           <>
             <div className="form-grid">
               <label>
-                Tasa por período (%)
+                Interés por período
                 <input
                   type="number"
                   min="0"
@@ -1409,11 +1413,22 @@ function LoanForm({
                 />
               </label>
               <label>
-                La tasa aplica cada
+                Unidad
+                <select
+                  value={interestUnit}
+                  onChange={e => setInterestUnit(e.target.value)}
+                >
+                  <option value="percent">%</option>
+                  <option value="usd">USD</option>
+                </select>
+              </label>
+              <label>
+                Frecuencia
                 <select
                   value={interestPeriod}
                   onChange={e => setInterestPeriod(e.target.value)}
                 >
+                  <option value="daily">Diario</option>
                   <option value="monthly">Mes</option>
                   <option value="weekly">Semana</option>
                 </select>
@@ -3347,6 +3362,13 @@ function FinanceView({
     },
     onError: e => toast.error(e.message),
   });
+  const applyInterest = trpc.business.applyLoanInterest.useMutation({
+    onSuccess: result => {
+      toast.success(`Interés aplicado: ${money(result.interest)}`);
+      onDone();
+    },
+    onError: e => toast.error(e.message),
+  });
   const payReceivable = trpc.business.payReceivable.useMutation({
     onSuccess: () => {
       toast.success("Cobro registrado");
@@ -3492,8 +3514,8 @@ function FinanceView({
                       <strong>{l.counterparty}</strong>
                       <small>
                         {l.description || l.notes || l.kind}
-                        {l.kind === "loan" &&
-                          ` · ${Number(l.interestRate || 0).toFixed(2)}% ${l.interestPeriod === "weekly" ? "semanal" : "mensual"}${l.hasDueDate === false ? " · capitaliza" : " · fijo"}`}
+                        {(l.kind === "loan" || l.kind === "payable_merch") && Number(l.interestRate || 0) > 0 &&
+                          ` · ${l.interestUnit === "usd" ? "USD" : "%"} ${Number(l.interestRate || 0).toFixed(2)} ${l.interestPeriod === "weekly" ? "semanal" : l.interestPeriod === "daily" ? "diario" : "mensual"}`}
                       </small>
                     </td>
                     <td>{dateLabel(l.dueDate)}</td>
@@ -3508,6 +3530,14 @@ function FinanceView({
                           onClick={() => requestPayment(l, "loan")}
                         >
                           Pagar
+                        </button>
+                      )}
+                      {Number(l.interestRate || 0) > 0 && Number(l.balance || 0) > 0 && (
+                        <button
+                          className="text-button pay-button"
+                          onClick={() => applyInterest.mutate({ id: l.id })}
+                        >
+                          Aplicar interés
                         </button>
                       )}
                     </td>

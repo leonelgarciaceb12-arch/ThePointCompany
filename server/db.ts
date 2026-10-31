@@ -80,6 +80,15 @@ function completedInterestPeriods(startDate: unknown, interestPeriod: unknown) {
   const startAt = new Date(`${start}T00:00:00Z`);
   if (Number.isNaN(startAt.getTime())) return 0;
   const now = new Date();
+  if (interestPeriod === "daily")
+    return Math.max(
+      0,
+      Math.floor(
+        (Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) -
+          startAt.getTime()) /
+          86400000
+      )
+    );
   if (interestPeriod === "weekly")
     return Math.max(
       0,
@@ -104,6 +113,7 @@ function effectiveLoanAmounts(row: {
   hasDueDate?: unknown;
   startDate?: unknown;
   interestRate?: unknown;
+  interestUnit?: unknown;
   interestPeriod?: unknown;
   principal: unknown;
   repaymentAmount?: unknown;
@@ -111,14 +121,17 @@ function effectiveLoanAmounts(row: {
 }) {
   const base = Number(row.repaymentAmount ?? row.principal);
   const capitalizes =
-    row.kind === "loan" &&
+    (row.kind === "loan" || row.kind === "payable_merch") &&
     row.hasDueDate === false &&
     Number(row.interestRate ?? 0) > 0;
   const periods = capitalizes
     ? completedInterestPeriods(row.startDate, row.interestPeriod)
     : 0;
+  const rate = Number(row.interestRate ?? 0);
   const totalDue = capitalizes
-    ? base * Math.pow(1 + Number(row.interestRate) / 100, periods)
+    ? row.interestUnit === "usd"
+      ? base + rate * periods
+      : base * Math.pow(1 + rate / 100, periods)
     : base;
   const paid = Number(row.paid ?? 0);
   return {
@@ -144,6 +157,7 @@ function presentDebt<
       hasDueDate?: unknown;
       startDate?: unknown;
       interestRate?: unknown;
+      interestUnit?: unknown;
       interestPeriod?: unknown;
       repaymentAmount?: unknown;
     }
@@ -1715,7 +1729,8 @@ export async function createLoan(input: {
   description?: string;
   currency?: string;
   interestRate?: number;
-  interestPeriod?: "monthly" | "weekly";
+  interestUnit?: "percent" | "usd";
+  interestPeriod?: "daily" | "monthly" | "weekly";
   principal: number;
   repaymentAmount?: number;
   installmentCount?: number;
@@ -1747,6 +1762,7 @@ export async function createLoan(input: {
     description: input.description,
     currency: input.currency || "USD",
     interestRate: toMoney(input.interestRate ?? 0),
+    interestUnit: input.interestUnit || "percent",
     interestPeriod: input.interestPeriod || "monthly",
     principal: toMoney(input.principal),
     repaymentAmount: toMoney(repayment),
@@ -1792,6 +1808,39 @@ export async function payLoan(id: number, amount: number, userId?: number) {
     })
     .where(eq(loans.id, id));
   return { balance };
+}
+
+export async function applyLoanInterest(id: number, userId?: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  return db.transaction(async tx => {
+    const row = (await tx.select().from(loans).where(eq(loans.id, id)).limit(1))[0];
+    if (!row) throw new Error("Compromiso no encontrado");
+    const balance = Number(row.balance || 0);
+    const rate = Number(row.interestRate || 0);
+    if (balance <= 0) throw new Error("El compromiso ya está saldado");
+    if (rate <= 0) throw new Error("Este compromiso no tiene una tasa de interés configurada");
+    const interest = row.interestUnit === "usd" ? rate : balance * rate / 100;
+    const nextBalance = Number((balance + interest).toFixed(2));
+    const nextRepayment = Number(row.repaymentAmount || row.principal || 0) + interest;
+    await tx.update(loans).set({
+      repaymentAmount: toMoney(nextRepayment),
+      balance: toMoney(nextBalance),
+      status: debtStatus(nextRepayment, Number(row.paid), nextBalance, row.dueDate),
+      updatedBy: userId,
+    }).where(eq(loans.id, id));
+    await tx.insert(expenses).values({
+      expenseDate: dateKeyInTimeZone(),
+      category: "Intereses de deuda",
+      description: `Interés de compromiso · ${row.counterparty}`,
+      amount: toMoney(interest),
+      type: "Operativo",
+      notes: `Aplicado a la deuda #${id} (${row.interestUnit === "usd" ? "USD" : "%"} ${row.interestRate} ${row.interestPeriod})`,
+      createdBy: userId,
+      updatedBy: userId,
+    });
+    return { id, interest, balance: nextBalance };
+  });
 }
 
 export async function createReceivable(input: {
@@ -1892,7 +1941,8 @@ export async function updateLoan(
     description?: string;
     currency?: string;
     interestRate?: number;
-    interestPeriod?: "monthly" | "weekly";
+    interestUnit?: "percent" | "usd";
+    interestPeriod?: "daily" | "monthly" | "weekly";
     principal: number;
     repaymentAmount?: number;
     installmentCount?: number;
@@ -1918,6 +1968,7 @@ export async function updateLoan(
     hasDueDate,
     startDate: input.startDate,
     interestRate: input.interestRate ?? 0,
+    interestUnit: input.interestUnit || "percent",
     interestPeriod: input.interestPeriod || "monthly",
     principal: input.principal,
     repaymentAmount: repayment,
@@ -1937,6 +1988,7 @@ export async function updateLoan(
       description: input.description || null,
       currency: input.currency || "USD",
       interestRate: toMoney(input.interestRate ?? 0),
+      interestUnit: input.interestUnit || "percent",
       interestPeriod: input.interestPeriod || "monthly",
       principal: toMoney(input.principal),
       repaymentAmount: toMoney(repayment),
