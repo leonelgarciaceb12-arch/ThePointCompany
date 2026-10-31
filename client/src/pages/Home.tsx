@@ -3356,8 +3356,12 @@ function FinanceView({
   );
   const spent = expenses.reduce((a, e) => a + Number(e.amount || 0), 0);
   const pay = trpc.business.payLoan.useMutation({
-    onSuccess: () => {
-      toast.success("Pago registrado");
+    onSuccess: result => {
+      toast.success(
+        result.interestExpense > 0
+          ? `Pago registrado · ${money(result.interestExpense)} cargados como gasto de intereses`
+          : "Pago registrado"
+      );
       onDone();
     },
     onError: e => toast.error(e.message),

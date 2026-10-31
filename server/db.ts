@@ -1788,26 +1788,77 @@ export async function createLoan(input: {
   return Number(result[0].insertId);
 }
 
+async function recordLoanSettlementInterest(
+  tx: any,
+  row: any,
+  totalDue: number,
+  paid: number,
+  userId?: number
+) {
+  if (paid <= 0 || totalDue <= 0 || paid < totalDue - 0.005) {
+    return 0;
+  }
+  const existing = (
+    await tx
+      .select({ total: sql<number>`coalesce(sum(${expenses.amount}), 0)` })
+      .from(expenses)
+      .where(sql`(${expenses.notes} like ${`%compromiso #${row.id}%`} or ${expenses.notes} like ${`%deuda #${row.id}%`})`)
+  )[0];
+  const alreadyRecorded = Number(existing?.total ?? 0);
+  const hasInterest =
+    Number(row.interestRate ?? 0) > 0 || alreadyRecorded > 0;
+  if (!hasInterest) return 0;
+  const totalInterest = Math.max(
+    0,
+    Number((totalDue - Number(row.principal ?? 0)).toFixed(2))
+  );
+  const pendingInterest = Math.max(
+    0,
+    Number((totalInterest - alreadyRecorded).toFixed(2))
+  );
+  if (pendingInterest <= 0) return 0;
+  await tx.insert(expenses).values({
+    expenseDate: dateKeyInTimeZone(),
+    category: "Intereses de deuda",
+    description: `Interés de compromiso saldado · ${row.counterparty}`,
+    amount: toMoney(pendingInterest),
+    type: "Operativo",
+    notes: `Interés reconocido al saldar compromiso #${row.id}`,
+    createdBy: userId,
+    updatedBy: userId,
+  });
+  return pendingInterest;
+}
+
 export async function payLoan(id: number, amount: number, userId?: number) {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
-  const row = (
-    await db.select().from(loans).where(eq(loans.id, id)).limit(1)
-  )[0];
-  if (!row) throw new Error("Deuda no encontrada");
-  const totalDue = effectiveLoanAmounts(row).totalDue;
-  const paid = Math.min(totalDue, Number(row.paid) + amount);
-  const balance = Math.max(0, totalDue - paid);
-  await db
-    .update(loans)
-    .set({
-      paid: toMoney(paid),
-      balance: toMoney(balance),
-      status: debtStatus(totalDue, paid, balance, row.dueDate),
-      updatedBy: userId,
-    })
-    .where(eq(loans.id, id));
-  return { balance };
+  return db.transaction(async tx => {
+    const row = (
+      await tx.select().from(loans).where(eq(loans.id, id)).limit(1)
+    )[0];
+    if (!row) throw new Error("Deuda no encontrada");
+    const totalDue = effectiveLoanAmounts(row).totalDue;
+    const paid = Math.min(totalDue, Number(row.paid) + amount);
+    const balance = Math.max(0, totalDue - paid);
+    await tx
+      .update(loans)
+      .set({
+        paid: toMoney(paid),
+        balance: toMoney(balance),
+        status: debtStatus(totalDue, paid, balance, row.dueDate),
+        updatedBy: userId,
+      })
+      .where(eq(loans.id, id));
+    const interestExpense = await recordLoanSettlementInterest(
+      tx,
+      row,
+      totalDue,
+      paid,
+      userId
+    );
+    return { balance, interestExpense };
+  });
 }
 
 export async function applyLoanInterest(id: number, userId?: number) {
@@ -1958,61 +2009,74 @@ export async function updateLoan(
 ) {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
-  const repayment =
-    input.kind === "payable_merch"
-      ? input.principal
-      : Number(input.repaymentAmount ?? input.principal);
-  const hasDueDate = input.hasDueDate ?? true;
-  const capitalized = effectiveLoanAmounts({
-    kind: input.kind,
-    hasDueDate,
-    startDate: input.startDate,
-    interestRate: input.interestRate ?? 0,
-    interestUnit: input.interestUnit || "percent",
-    interestPeriod: input.interestPeriod || "monthly",
-    principal: input.principal,
-    repaymentAmount: repayment,
-    paid: input.paid,
-  });
-  const paid = Math.min(capitalized.totalDue, Math.max(0, input.paid));
-  const balance = Math.max(0, capitalized.totalDue - paid);
-  const installments =
-    input.installmentCount && input.installmentCount > 0
-      ? input.installmentCount
-      : null;
-  await db
-    .update(loans)
-    .set({
+  return db.transaction(async tx => {
+    const previous = (
+      await tx.select().from(loans).where(eq(loans.id, id)).limit(1)
+    )[0];
+    if (!previous) throw new Error("Compromiso no encontrado");
+    const repayment =
+      input.kind === "payable_merch"
+        ? input.principal
+        : Number(input.repaymentAmount ?? input.principal);
+    const hasDueDate = input.hasDueDate ?? true;
+    const capitalized = effectiveLoanAmounts({
       kind: input.kind,
-      counterparty: input.counterparty,
-      description: input.description || null,
-      currency: input.currency || "USD",
-      interestRate: toMoney(input.interestRate ?? 0),
+      hasDueDate,
+      startDate: input.startDate,
+      interestRate: input.interestRate ?? 0,
       interestUnit: input.interestUnit || "percent",
       interestPeriod: input.interestPeriod || "monthly",
-      principal: toMoney(input.principal),
-      repaymentAmount: toMoney(repayment),
-      installmentCount: installments,
-      installmentAmount: installments
-        ? toMoney(input.installmentAmount ?? repayment / installments)
-        : null,
-      installmentPeriod: input.installmentPeriod || "weekly",
-      hasDueDate,
-      paid: toMoney(paid),
-      balance: toMoney(balance),
-      startDate: input.startDate || null,
-      dueDate: hasDueDate ? input.dueDate || null : null,
-      status: debtStatus(
-        capitalized.totalDue,
-        paid,
-        balance,
-        hasDueDate ? input.dueDate : undefined
-      ),
-      notes: input.notes || null,
-      updatedBy: input.userId,
-    })
-    .where(eq(loans.id, id));
-  return { id, balance };
+      principal: input.principal,
+      repaymentAmount: repayment,
+      paid: input.paid,
+    });
+    const paid = Math.min(capitalized.totalDue, Math.max(0, input.paid));
+    const balance = Math.max(0, capitalized.totalDue - paid);
+    const installments =
+      input.installmentCount && input.installmentCount > 0
+        ? input.installmentCount
+        : null;
+    await tx
+      .update(loans)
+      .set({
+        kind: input.kind,
+        counterparty: input.counterparty,
+        description: input.description || null,
+        currency: input.currency || "USD",
+        interestRate: toMoney(input.interestRate ?? 0),
+        interestUnit: input.interestUnit || "percent",
+        interestPeriod: input.interestPeriod || "monthly",
+        principal: toMoney(input.principal),
+        repaymentAmount: toMoney(repayment),
+        installmentCount: installments,
+        installmentAmount: installments
+          ? toMoney(input.installmentAmount ?? repayment / installments)
+          : null,
+        installmentPeriod: input.installmentPeriod || "weekly",
+        hasDueDate,
+        paid: toMoney(paid),
+        balance: toMoney(balance),
+        startDate: input.startDate || null,
+        dueDate: hasDueDate ? input.dueDate || null : null,
+        status: debtStatus(
+          capitalized.totalDue,
+          paid,
+          balance,
+          hasDueDate ? input.dueDate : undefined
+        ),
+        notes: input.notes || null,
+        updatedBy: input.userId,
+      })
+      .where(eq(loans.id, id));
+    const interestExpense = await recordLoanSettlementInterest(
+      tx,
+      { ...previous, id, principal: input.principal, interestRate: input.interestRate ?? 0 },
+      capitalized.totalDue,
+      paid,
+      input.userId
+    );
+    return { id, balance, interestExpense };
+  });
 }
 
 export async function deleteLoan(id: number) {
