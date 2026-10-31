@@ -20,7 +20,6 @@ import {
   CircleDollarSign,
   CreditCard,
   Download,
-  FileCode2,
   FilePlus2,
   Gauge,
   LayoutDashboard,
@@ -2158,10 +2157,6 @@ export default function Home() {
           <button className="nav-item" onClick={() => open("expense")}>
             <FilePlus2 size={18} />
             <span>Nuevo gasto</span>
-          </button>
-          <button className="nav-item" onClick={() => { window.location.href = "/?modo=editor"; }}>
-            <FileCode2 size={18} />
-            <span>Editor colaborativo</span>
           </button>
           <div className="user-chip">
             <div className="avatar">{auth.data?.name?.slice(0, 1) || "T"}</div>
