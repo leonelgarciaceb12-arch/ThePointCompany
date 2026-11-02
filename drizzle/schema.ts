@@ -115,6 +115,7 @@ export const loans = mysqlTable("loans", {
   interestRate: decimal("interestRate", { precision: 8, scale: 2 }).notNull().default("0"),
   interestUnit: varchar("interestUnit", { length: 16 }).notNull().default("percent"),
   interestPeriod: mysqlEnum("interestPeriod", ["daily", "monthly", "weekly"]).notNull().default("monthly"),
+  interestStartDate: date("interestStartDate", { mode: "string" }),
   principal: decimal("principal", { precision: 12, scale: 2 }).notNull().default("0"),
   repaymentAmount: decimal("repaymentAmount", { precision: 12, scale: 2 }),
   installmentCount: int("installmentCount"),

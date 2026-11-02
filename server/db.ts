@@ -74,8 +74,13 @@ function debtStatus(
   return settled > 0 ? "partial" : "open";
 }
 
-function completedInterestPeriods(startDate: unknown, interestPeriod: unknown) {
-  const start = String(startDate ?? "").slice(0, 10);
+function completedInterestPeriods(
+  startDate: unknown,
+  interestPeriod: unknown,
+  interestStartDate?: unknown
+) {
+  const configuredStart = String(interestStartDate ?? "").slice(0, 10);
+  const start = configuredStart || String(startDate ?? "").slice(0, 10);
   if (!start) return 0;
   const startAt = new Date(`${start}T00:00:00Z`);
   if (Number.isNaN(startAt.getTime())) return 0;
@@ -115,6 +120,7 @@ function effectiveLoanAmounts(row: {
   interestRate?: unknown;
   interestUnit?: unknown;
   interestPeriod?: unknown;
+  interestStartDate?: unknown;
   principal: unknown;
   repaymentAmount?: unknown;
   paid: unknown;
@@ -122,10 +128,14 @@ function effectiveLoanAmounts(row: {
   const base = Number(row.repaymentAmount ?? row.principal);
   const capitalizes =
     (row.kind === "loan" || row.kind === "payable_merch") &&
-    row.hasDueDate === false &&
+    (row.hasDueDate === false || Boolean(row.interestStartDate)) &&
     Number(row.interestRate ?? 0) > 0;
   const periods = capitalizes
-    ? completedInterestPeriods(row.startDate, row.interestPeriod)
+    ? completedInterestPeriods(
+        row.startDate,
+        row.interestPeriod,
+        row.interestStartDate
+      )
     : 0;
   const rate = Number(row.interestRate ?? 0);
   const totalDue = capitalizes
@@ -159,6 +169,7 @@ function presentDebt<
       interestRate?: unknown;
       interestUnit?: unknown;
       interestPeriod?: unknown;
+      interestStartDate?: unknown;
       repaymentAmount?: unknown;
     }
   );
@@ -1731,6 +1742,7 @@ export async function createLoan(input: {
   interestRate?: number;
   interestUnit?: "percent" | "usd";
   interestPeriod?: "daily" | "monthly" | "weekly";
+  interestStartDate?: string;
   principal: number;
   repaymentAmount?: number;
   installmentCount?: number;
@@ -1764,6 +1776,7 @@ export async function createLoan(input: {
     interestRate: toMoney(input.interestRate ?? 0),
     interestUnit: input.interestUnit || "percent",
     interestPeriod: input.interestPeriod || "monthly",
+    interestStartDate: input.interestStartDate || null,
     principal: toMoney(input.principal),
     repaymentAmount: toMoney(repayment),
     installmentCount: installments,
@@ -1994,6 +2007,7 @@ export async function updateLoan(
     interestRate?: number;
     interestUnit?: "percent" | "usd";
     interestPeriod?: "daily" | "monthly" | "weekly";
+    interestStartDate?: string;
     principal: number;
     repaymentAmount?: number;
     installmentCount?: number;
@@ -2026,6 +2040,7 @@ export async function updateLoan(
       interestRate: input.interestRate ?? 0,
       interestUnit: input.interestUnit || "percent",
       interestPeriod: input.interestPeriod || "monthly",
+      interestStartDate: input.interestStartDate,
       principal: input.principal,
       repaymentAmount: repayment,
       paid: input.paid,
@@ -2046,6 +2061,7 @@ export async function updateLoan(
         interestRate: toMoney(input.interestRate ?? 0),
         interestUnit: input.interestUnit || "percent",
         interestPeriod: input.interestPeriod || "monthly",
+        interestStartDate: input.interestStartDate || null,
         principal: toMoney(input.principal),
         repaymentAmount: toMoney(repayment),
         installmentCount: installments,

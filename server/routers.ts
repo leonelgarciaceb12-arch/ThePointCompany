@@ -80,6 +80,7 @@ const loanInput = z.object({
   interestRate: z.number().nonnegative().default(0),
   interestUnit: z.enum(["percent", "usd"]).default("percent"),
   interestPeriod: z.enum(["daily", "monthly", "weekly"]).default("monthly"),
+  interestStartDate: z.string().optional(),
   principal: z.number().positive(),
   repaymentAmount: z.number().positive().optional(),
   installmentCount: z.number().int().positive().optional(),

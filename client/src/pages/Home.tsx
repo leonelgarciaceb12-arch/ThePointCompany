@@ -1272,6 +1272,9 @@ function LoanForm({
   const [interestPeriod, setInterestPeriod] = useState(
     loan?.interestPeriod || "monthly"
   );
+  const [interestStartDate, setInterestStartDate] = useState(
+    dateInput(loan?.interestStartDate)
+  );
   const [installmentCount, setInstallmentCount] = useState(
     String(loan?.installmentCount ?? "")
   );
@@ -1321,6 +1324,7 @@ function LoanForm({
             interestRate: Number(interestRate),
             interestUnit: interestUnit as "percent" | "usd",
             interestPeriod: interestPeriod as "daily" | "monthly" | "weekly",
+            interestStartDate: interestStartDate || undefined,
             principal: Number(principal),
             repaymentAmount: isLoan
               ? Number(repayment || principal)
@@ -1432,6 +1436,18 @@ function LoanForm({
                   <option value="weekly">Semana</option>
                 </select>
               </label>
+              <label>
+                Interés desde (opcional)
+                <input
+                  type="date"
+                  value={interestStartDate}
+                  onChange={e => setInterestStartDate(e.target.value)}
+                />
+                <small className="field-help">
+                  Permite iniciar la mora desde una fecha distinta al inicio
+                  de la deuda.
+                </small>
+              </label>
             </div>
             <div className="form-grid">
               <label>
@@ -1484,9 +1500,11 @@ function LoanForm({
             <div className="data-note">
               <strong>Regla clara</strong>
               <small>
-                Con vencimiento: el monto total a devolver queda fijo. Sin
-                vencimiento: cada período completo aumenta el monto a devolver
-                aplicando interés compuesto.
+                Con vencimiento y sin una fecha de interés, el monto total a
+                devolver queda fijo. Si completás “Interés desde”, el sistema
+                calcula la mora desde esa fecha, incluso después del
+                vencimiento. Sin vencimiento, cada período completo aumenta el
+                monto aplicando interés compuesto.
               </small>
             </div>
           </>
@@ -3514,7 +3532,7 @@ function FinanceView({
                       <small>
                         {l.description || l.notes || l.kind}
                         {(l.kind === "loan" || l.kind === "payable_merch") && Number(l.interestRate || 0) > 0 &&
-                          ` · ${l.interestUnit === "usd" ? "USD" : "%"} ${Number(l.interestRate || 0).toFixed(2)} ${l.interestPeriod === "weekly" ? "semanal" : l.interestPeriod === "daily" ? "diario" : "mensual"}`}
+                          ` · ${l.interestUnit === "usd" ? "USD" : "%"} ${Number(l.interestRate || 0).toFixed(2)} ${l.interestPeriod === "weekly" ? "semanal" : l.interestPeriod === "daily" ? "diario" : "mensual"}${l.interestStartDate ? ` desde ${dateLabel(l.interestStartDate)}` : ""}`}
                       </small>
                     </td>
                     <td>{dateLabel(l.dueDate)}</td>
