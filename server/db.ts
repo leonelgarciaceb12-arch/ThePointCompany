@@ -121,6 +121,7 @@ function effectiveLoanAmounts(row: {
   interestUnit?: unknown;
   interestPeriod?: unknown;
   interestStartDate?: unknown;
+  interestBase?: unknown;
   principal: unknown;
   repaymentAmount?: unknown;
   paid: unknown;
@@ -170,6 +171,7 @@ function presentDebt<
       interestUnit?: unknown;
       interestPeriod?: unknown;
       interestStartDate?: unknown;
+      interestBase?: unknown;
       repaymentAmount?: unknown;
     }
   );
@@ -1743,6 +1745,7 @@ export async function createLoan(input: {
   interestUnit?: "percent" | "usd";
   interestPeriod?: "daily" | "monthly" | "weekly";
   interestStartDate?: string;
+  interestBase?: "initial_principal" | "active_balance";
   principal: number;
   repaymentAmount?: number;
   installmentCount?: number;
@@ -1777,6 +1780,7 @@ export async function createLoan(input: {
     interestUnit: input.interestUnit || "percent",
     interestPeriod: input.interestPeriod || "monthly",
     interestStartDate: input.interestStartDate || null,
+    interestBase: input.interestBase || "initial_principal",
     principal: toMoney(input.principal),
     repaymentAmount: toMoney(repayment),
     installmentCount: installments,
@@ -1884,7 +1888,11 @@ export async function applyLoanInterest(id: number, userId?: number) {
     const rate = Number(row.interestRate || 0);
     if (balance <= 0) throw new Error("El compromiso ya está saldado");
     if (rate <= 0) throw new Error("Este compromiso no tiene una tasa de interés configurada");
-    const interest = row.interestUnit === "usd" ? rate : balance * rate / 100;
+    const interestBase =
+      row.interestUnit === "percent" && row.interestBase === "initial_principal"
+        ? Number(row.principal || 0)
+        : balance;
+    const interest = row.interestUnit === "usd" ? rate : interestBase * rate / 100;
     const nextBalance = Number((balance + interest).toFixed(2));
     const nextRepayment = Number(row.repaymentAmount || row.principal || 0) + interest;
     await tx.update(loans).set({
@@ -1899,7 +1907,7 @@ export async function applyLoanInterest(id: number, userId?: number) {
       description: `Interés de compromiso · ${row.counterparty}`,
       amount: toMoney(interest),
       type: "Operativo",
-      notes: `Aplicado a la deuda #${id} (${row.interestUnit === "usd" ? "USD" : "%"} ${row.interestRate} ${row.interestPeriod})`,
+      notes: `Aplicado a la deuda #${id} (${row.interestUnit === "usd" ? "USD" : "%"} ${row.interestRate} ${row.interestPeriod}; base: ${row.interestUnit === "percent" && row.interestBase === "initial_principal" ? "inicial" : "saldo activo"})`,
       createdBy: userId,
       updatedBy: userId,
     });
@@ -2008,6 +2016,7 @@ export async function updateLoan(
     interestUnit?: "percent" | "usd";
     interestPeriod?: "daily" | "monthly" | "weekly";
     interestStartDate?: string;
+    interestBase?: "initial_principal" | "active_balance";
     principal: number;
     repaymentAmount?: number;
     installmentCount?: number;
@@ -2041,6 +2050,7 @@ export async function updateLoan(
       interestUnit: input.interestUnit || "percent",
       interestPeriod: input.interestPeriod || "monthly",
       interestStartDate: input.interestStartDate,
+      interestBase: input.interestBase || "initial_principal",
       principal: input.principal,
       repaymentAmount: repayment,
       paid: input.paid,
@@ -2062,6 +2072,7 @@ export async function updateLoan(
         interestUnit: input.interestUnit || "percent",
         interestPeriod: input.interestPeriod || "monthly",
         interestStartDate: input.interestStartDate || null,
+        interestBase: input.interestBase || "initial_principal",
         principal: toMoney(input.principal),
         repaymentAmount: toMoney(repayment),
         installmentCount: installments,

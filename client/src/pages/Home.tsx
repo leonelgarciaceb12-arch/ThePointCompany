@@ -1275,6 +1275,9 @@ function LoanForm({
   const [interestStartDate, setInterestStartDate] = useState(
     dateInput(loan?.interestStartDate)
   );
+  const [interestBase, setInterestBase] = useState(
+    loan?.interestBase || "initial_principal"
+  );
   const [installmentCount, setInstallmentCount] = useState(
     String(loan?.installmentCount ?? "")
   );
@@ -1325,6 +1328,7 @@ function LoanForm({
             interestUnit: interestUnit as "percent" | "usd",
             interestPeriod: interestPeriod as "daily" | "monthly" | "weekly",
             interestStartDate: interestStartDate || undefined,
+            interestBase: interestBase as "initial_principal" | "active_balance",
             principal: Number(principal),
             repaymentAmount: isLoan
               ? Number(repayment || principal)
@@ -1448,6 +1452,22 @@ function LoanForm({
                   de la deuda.
                 </small>
               </label>
+              {interestUnit === "percent" && (
+                <label>
+                  Base del porcentaje
+                  <select
+                    value={interestBase}
+                    onChange={e => setInterestBase(e.target.value)}
+                  >
+                    <option value="initial_principal">Base inicial de la deuda</option>
+                    <option value="active_balance">Saldo activo actualizado</option>
+                  </select>
+                  <small className="field-help">
+                    Elegí si cada aplicación usa el principal original o el
+                    saldo pendiente del momento.
+                  </small>
+                </label>
+              )}
             </div>
             <div className="form-grid">
               <label>
@@ -3532,7 +3552,7 @@ function FinanceView({
                       <small>
                         {l.description || l.notes || l.kind}
                         {(l.kind === "loan" || l.kind === "payable_merch") && Number(l.interestRate || 0) > 0 &&
-                          ` · ${l.interestUnit === "usd" ? "USD" : "%"} ${Number(l.interestRate || 0).toFixed(2)} ${l.interestPeriod === "weekly" ? "semanal" : l.interestPeriod === "daily" ? "diario" : "mensual"}${l.interestStartDate ? ` desde ${dateLabel(l.interestStartDate)}` : ""}`}
+                          ` · ${l.interestUnit === "usd" ? "USD" : "%"} ${Number(l.interestRate || 0).toFixed(2)} ${l.interestPeriod === "weekly" ? "semanal" : l.interestPeriod === "daily" ? "diario" : "mensual"}${l.interestUnit === "percent" ? ` · ${l.interestBase === "active_balance" ? "saldo activo" : "base inicial"}` : ""}${l.interestStartDate ? ` desde ${dateLabel(l.interestStartDate)}` : ""}`}
                       </small>
                     </td>
                     <td>{dateLabel(l.dueDate)}</td>

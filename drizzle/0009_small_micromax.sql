@@ -1,0 +1,1 @@
+ALTER TABLE `loans` ADD `interestBase` varchar(24) DEFAULT 'initial_principal' NOT NULL;
