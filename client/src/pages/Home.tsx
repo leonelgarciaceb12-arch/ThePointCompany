@@ -3266,7 +3266,15 @@ function FinanceView({
     (a, r) => a + Number(r.balance || 0),
     0
   );
-  const spent = expenses.reduce((a, e) => a + Number(e.amount || 0), 0);
+  const normalExpenses = expenses.filter((expense: any) => {
+    const category = String(expense.category || "").toLocaleLowerCase("es-AR");
+    if (category.includes("publicista")) return true;
+    const searchable = `${category} ${expense.type || ""} ${expense.platform || ""} ${expense.campaign || ""}`.toLocaleLowerCase("es-AR");
+    return !["publicidad", "publicitario", "meta ads", "rdads"].some(term =>
+      searchable.includes(term)
+    );
+  });
+  const spent = normalExpenses.reduce((a, e) => a + Number(e.amount || 0), 0);
   const pay = trpc.business.payLoan.useMutation({
     onSuccess: result => {
       toast.success(
@@ -3358,7 +3366,7 @@ function FinanceView({
         <div className="finance-stat">
           <span>Gastos cargados</span>
           <strong>{money(spent)}</strong>
-          <small>Incluye operación y mentorías</small>
+          <small>Meta Ads se muestra aparte y se descuenta del neto.</small>
         </div>
       </div>
       <div className="finance-grid">
@@ -3381,7 +3389,7 @@ function FinanceView({
                 </tr>
               </thead>
               <tbody>
-                {expenses.map(e => (
+                {normalExpenses.map(e => (
                   <tr key={e.id}>
                     <td>{dateLabel(e.expenseDate)}</td>
                     <td>

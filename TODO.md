@@ -50,6 +50,7 @@
 - [x] Meta Ads: sincronización y formulario de campañas desactivados en la interfaz; las tablas históricas se retienen para no borrar datos ni afectar copias de seguridad.
 
 - [x] Historial manual de Ads: los gastos existentes siguen sumando a finanzas; las cargas nuevas se guardan desde Publicidad como gastos manuales.
+- [x] Finanzas separa los gastos de publicidad del listado y subtotal normales; las cargas de Ads se muestran en Publicidad y se descuentan junto con los gastos no publicitarios para calcular la ganancia neta.
 - [ ] Editor restringido en `/editor`: contraseña separada, allowlist de archivos, propuestas de patch, sin secretos, base de datos, terminal ni publicación automática.
 - [ ] Backup diario completo del negocio a las 23:59 ART, guardado en almacenamiento durable y registrado con checksum.
 - [x] Panel de Publicidad con gasto diario y vistas por día/semana/mes/trimestre; el historial completo se resume por mes para mantener el gráfico legible.
