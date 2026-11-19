@@ -5,8 +5,8 @@
 - [x] Inventario: alta, edición de stock/costo/mínimo, proveedor y alertas de bajo stock; los productos con historial se archivan para preservar trazabilidad.
 - [x] Ventas: venta desde inventario propio o manual; el inventario descuenta stock automáticamente, calcula costo/ganancia cuando el costo existe y marca «Costo pendiente» cuando falta.
 - [x] Clientes: compras, gasto, ganancia, última compra, días sin recompra y selección de cliente existente al cargar una venta.
-- [x] Dashboard: filtro de período, facturación, ganancia, margen, ticket promedio, unidades/pedidos, gastos, Meta Ads, deuda, rotación, bajo stock, clientes de mayor aporte y objetivo visible.
-- [x] Gastos y publicidad: alta, edición y eliminación; la interfaz conserva el gasto verificado y muestra conversiones/resultados solo cuando exista sincronización real.
+- [x] Dashboard: filtro de período, facturación, ganancia, margen, ticket promedio, unidades/pedidos, gastos, publicidad manual, deuda, rotación, bajo stock, clientes de mayor aporte y objetivo visible.
+- [x] Gastos y publicidad: las nuevas cargas de Ads se registran como gastos manuales con categoría Publicidad; no requieren sincronización externa.
 - [x] Deudores y préstamos: existen cuentas por cobrar separadas de préstamos/mercadería a pagar, con monto, pagos parciales, saldo, vencimiento, estado y formularios de alta/cobro.
 - [x] Objetivos: objetivos mensuales importados, visibles, editables y eliminables desde la interfaz.
 - [x] Acceso móvil: navegación, tablas con scroll y formularios responsive; auditoría básica con usuario y timestamps en registros.
@@ -20,11 +20,11 @@
 - [x] Ventas con doble origen: el formulario permite descripción manual y selección opcional de inventario; al guardar copia descripción, cantidad, precio, costo unitario, costo total y ganancia en la línea de venta, y el inventario solo se usa para descontar stock.
 
 - [x] Pagos de ventas: al registrar una venta se puede elegir “Pago todo” o “No pago todo”; el monto cobrado se guarda y el saldo restante crea automáticamente una cuenta en Deudores vinculada al cliente.
-- [x] Publicidad sin datos inventados: se quitó la carga manual de conversiones/resultados; mientras Meta Ads no esté sincronizado, la interfaz muestra N/A y conserva únicamente el gasto verificado.
+- [x] Publicidad sin datos inventados: se desactivó la sincronización y no se muestran conversiones ni resultados de Meta; el histórico de gasto existente se conserva.
 - [x] Correcciones operativas: Funda Silicona (varios modelos) queda en 197 unidades, Elfbar Ebcreate Bc Pro 40k puff queda con costo unitario USD 6,66 y se registró Francisco Rover con deuda de USD 186,33.
 
 - [x] Deudores: Francisco Rover queda con USD 186,33 y vencimiento 10/10/2026; Elias refleja USD 53,51 pagados y USD 70,09 pendientes con vencimiento 17/10/2026, sin duplicar cuentas. Préstamos y deudores calculan y muestran estados abierto, pago parcial, vencido o pagado.
-- [x] Publicidad: todos los registros existentes muestran `Campaña inicial propia de ventas - Multiples estilos`, sin “estilo folleto” ni fecha en la descripción; la limpieza histórica es idempotente para frases heredadas y no agrega conversiones/resultados no sincronizados.
+- [x] Publicidad: la vista no expone campañas ni cambia sus nombres al iniciar; los registros históricos de inversión permanecen almacenados y se muestran agregados por día.
 - [x] Clientes: cada cliente muestra días desde la última compra, estado de seguimiento y botón directo a WhatsApp cuando tiene teléfono; los teléfonos argentinos se convierten al formato internacional 549.
 - [x] Proyecciones: la sección proyecta matemáticamente para el mes siguiente facturación, ganancia bruta, resultado neto estimado, pedidos, unidades y ritmo diario, mostrando crecimiento esperado y supuestos.
 - [x] Cotización: DolarHoy permanece visible y destaca USDT como referencia recomendada, con valor USDT/ARS orientativo, fuente y hora, sin alterar históricos.
@@ -38,7 +38,7 @@
 - [x] Inventario: se agregó Rendimiento de productos con unidades vendidas, facturación, ganancia, margen y stock; no se agregó una sección de Compras/Reposición.
 - [x] Préstamos avanzados: los compromisos distinguen mercadería a pagar de préstamo financiero; el préstamo permite monto prestado, monto total a devolver, tasa por período mensual/semanal, cuotas opcionales, monto y frecuencia de cuota, vencimiento opcional y pagos parciales.
 - [x] Capitalización de préstamos: si un préstamo financiero tiene tasa mensual o semanal y no tiene vencimiento, cada período completo aumenta automáticamente el monto total a devolver mediante interés compuesto; si tiene vencimiento, el monto a devolver queda fijo. Los pagos usan el saldo capitalizado vigente.
-- [x] Formularios con opciones reutilizables: categorías de inventario y gastos, clientes en ventas y deudores, canales, acreedores/proveedores, localidades, plataformas y campañas de publicidad y meses de objetivos muestran valores ya registrados mediante sugerencias; se pueden seguir escribiendo valores nuevos y no se modifican datos existentes.
+- [x] Formularios con opciones reutilizables: categorías de inventario y gastos, clientes en ventas y deudores, canales, acreedores/proveedores, localidades y meses de objetivos muestran valores ya registrados mediante sugerencias; se pueden seguir escribiendo valores nuevos y no se modifican datos existentes.
 - [x] Carga de ventas optimizada: permite elegir cualquier fecha, buscar clientes por nombre o teléfono, completar automáticamente el teléfono guardado al seleccionar un cliente, buscar productos por nombre o categoría en cada línea y seleccionar automáticamente una coincidencia exacta; mantiene la carga manual y los valores sugeridos existentes.
 - [x] Clientes reconciliados desde ventas: toda venta histórica con nombre o teléfono válido queda vinculada a un cliente existente o crea uno nuevo; las ventas futuras detectan clientes por nombre o teléfono y actualizan compras, gasto y ganancia.
 - [x] Nuevos pedidos registrados: Patricia Rizzo, cargador completo a US$9,31; Facundo Heinecke, 25 Elfbar Ice King a US$11,15 cada uno; se descontó el inventario y se guardó la ganancia.
@@ -47,9 +47,11 @@
 - [x] Ventas históricas desde mayo verificadas contra ThePointCompany.xlsx: 332 registros desde el 06/05/2026 hasta el 10/10/2026; se evitó duplicar el Excel y no se importaron sus hojas desactualizadas de stock, gastos, publicidad, préstamos u objetivos.
 - [x] Período “Hoy” y fecha predeterminada de ventas calculados con la zona horaria de Argentina (America/Argentina/Buenos_Aires), incluyendo el día local completo y sin desfase UTC.
 
-- [ ] Meta Ads conectado en modo lectura: la interfaz ya tiene sincronización por cuenta/campaña/anuncio y almacenamiento separado; falta validar un Meta Marketing API access token real porque el valor actual devuelve `Invalid OAuth access token - Cannot parse access token`.
+- [x] Meta Ads: sincronización y formulario de campañas desactivados en la interfaz; las tablas históricas se retienen para no borrar datos ni afectar copias de seguridad.
 
-- [x] Meta Ads conectado en modo lectura: el token válido sincroniza por cuenta/campaña/anuncio y guarda insights separados de la publicidad manual.
+- [x] Historial manual de Ads: los gastos existentes siguen sumando a finanzas; las cargas nuevas se guardan desde Publicidad como gastos manuales.
+- [x] Finanzas separa los gastos de publicidad del listado y subtotal normales; las cargas de Ads se muestran en Publicidad y se descuentan junto con los gastos no publicitarios para calcular la ganancia neta.
 - [ ] Editor restringido en `/editor`: contraseña separada, allowlist de archivos, propuestas de patch, sin secretos, base de datos, terminal ni publicación automática.
 - [ ] Backup diario completo del negocio a las 23:59 ART, guardado en almacenamiento durable y registrado con checksum.
-- [ ] Panel de Publicidad con gasto histórico mensual separado de las lecturas sincronizadas de Meta Ads.
+- [x] Panel de Publicidad con gasto diario y vistas por día/semana/mes/trimestre; el historial completo se resume por mes para mantener el gráfico legible.
+- [x] Cargas de 25/10 y 26/10 verificadas en el sistema a US$15 por día; no se duplicaron.

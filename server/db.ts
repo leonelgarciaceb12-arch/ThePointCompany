@@ -452,13 +452,7 @@ export async function ensureSeeded() {
           eq(adCampaigns.amount, amount),
         ))
         .limit(1))[0];
-      if (existing) {
-        await db.update(adCampaigns).set({
-          campaign: "Campaña inicial propia de ventas - Multiples estilos",
-          notes: a.notes ? String(a.notes) : null,
-          updatedAt: now,
-        }).where(eq(adCampaigns.id, existing.id));
-      } else {
+      if (!existing) {
         await db.insert(adCampaigns).values({
           adDate,
           platform,
@@ -470,12 +464,6 @@ export async function ensureSeeded() {
         });
       }
     }
-    await db
-      .update(adCampaigns)
-      .set({ campaign: "Campaña inicial propia de ventas - Multiples estilos" })
-      .where(
-        sql`${adCampaigns.campaign} like '%estilo folleto%' or ${adCampaigns.campaign} like '%Campaña de venta de vapes%'`
-      );
     if ((await count(expenses)) === 0 && raw.expenses.length)
       await db.insert(expenses).values(
         raw.expenses.map(e => ({
@@ -762,7 +750,7 @@ export async function getDashboard(from?: string, to?: string) {
     recentSales,
     dueLoans: dueLoans.map(presentDebt),
     expenses: expensesTotal[0],
-    ads: adTotal[0],
+    ads: { total: adSpend },
     daily,
     advanced,
   };
@@ -958,12 +946,6 @@ export async function listLoans() {
       notes: "Compromiso saldado reconstruido desde el registro histórico del negocio.",
     });
   }
-  // La mentoría fue un gasto/inversión, no una deuda del negocio: retirarla
-  // del historial de compromisos aunque una versión anterior la haya creado.
-  await db.delete(loans).where(and(
-    eq(loans.counterparty, "Mateo Portillo"),
-    eq(loans.description, "Mentoria 1:1 por 3 meses"),
-  ));
   const userSettled = [
     { counterparty: "Lautaro Mires", description: "57 Battery Pack 10.000 mAh", principal: "357.57", startDate: "2026-10-12", dueDate: "2026-10-22" },
     { counterparty: "Bautista Restifo", description: "100 Termitos c/sensor de temperatura", principal: "400.00", startDate: "2026-10-02", dueDate: "2026-10-12" },

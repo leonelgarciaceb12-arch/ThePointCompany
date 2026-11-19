@@ -160,6 +160,17 @@ const nav = [
   { id: "ads", label: "Publicidad", icon: Megaphone },
   { id: "projections", label: "Proyecciones", icon: TrendingUp },
 ];
+const periodOptions = [
+  { value: "today", label: "Día corriente" },
+  { value: "7d", label: "Semana · últimos 7 días" },
+  { value: "30d", label: "Últimos 30 días" },
+  { value: "month", label: "Mes · corriente" },
+  { value: "quarter", label: "Trimestre · últimos 90 días" },
+  { value: "all", label: "Todo el historial" },
+] as const;
+type PeriodKey = (typeof periodOptions)[number]["value"];
+const periodLabel = (period: string) =>
+  periodOptions.find(option => option.value === period)?.label || period;
 
 function MetricCard({
   label,
@@ -1764,105 +1775,6 @@ function CustomerForm({
     </Modal>
   );
 }
-function AdForm({
-  ad,
-  platformOptions,
-  campaignOptions,
-  onClose,
-  onDone,
-}: {
-  ad?: any;
-  platformOptions: string[];
-  campaignOptions: string[];
-  onClose: () => void;
-  onDone: () => void;
-}) {
-  const [date, setDate] = useState(dateInput(ad?.adDate) || today);
-  const [platform, setPlatform] = useState(ad?.platform || "Meta Ads");
-  const [campaign, setCampaign] = useState(
-    ad?.campaign || "Campaña inicial propia de ventas - Multiples estilos"
-  );
-  const [amount, setAmount] = useState(String(ad?.amount ?? ""));
-  const create = trpc.business.createAd.useMutation({
-    onSuccess: () => {
-      toast.success("Registro publicitario guardado");
-      onDone();
-    },
-    onError: e => toast.error(e.message),
-  });
-  const update = trpc.business.updateAd.useMutation({
-    onSuccess: () => {
-      toast.success("Publicidad actualizada");
-      onDone();
-    },
-    onError: e => toast.error(e.message),
-  });
-  return (
-    <Modal
-      title={ad ? "Editar publicidad" : "Registrar publicidad"}
-      onClose={onClose}
-    >
-      <form
-        className="form-stack"
-        onSubmit={e => {
-          e.preventDefault();
-          const input = { date, platform, campaign, amount: Number(amount) };
-          ad ? update.mutate({ id: ad.id, ...input }) : create.mutate(input);
-        }}
-      >
-        <div className="form-grid">
-          <label>
-            Fecha
-            <input
-              type="date"
-              value={date}
-              onChange={e => setDate(e.target.value)}
-            />
-          </label>
-          <SuggestedInput
-            label="Plataforma"
-            value={platform}
-            onChange={setPlatform}
-            options={platformOptions}
-            listId="ad-platforms"
-          />
-        </div>
-        <SuggestedInput
-          label="Campaña"
-          value={campaign}
-          onChange={setCampaign}
-          options={campaignOptions}
-          listId="ad-campaigns"
-        />
-        <label>
-          Gasto verificado
-          <input
-            type="number"
-            min="0"
-            step="0.01"
-            value={amount}
-            onChange={e => setAmount(e.target.value)}
-          />
-        </label>
-        <div className="data-note">
-          <strong>Conversiones no cargadas manualmente</strong>
-          <small>
-            Se mostrarán únicamente cuando exista una sincronización real con
-            Meta Ads.
-          </small>
-        </div>
-        <div className="modal-actions">
-          <button type="button" className="button secondary" onClick={onClose}>
-            Cancelar
-          </button>
-          <button className="button primary">
-            {ad ? "Guardar cambios" : "Registrar"}
-          </button>
-        </div>
-      </form>
-    </Modal>
-  );
-}
 function ObjectiveForm({
   objective,
   monthOptions,
@@ -1994,9 +1906,7 @@ export default function Home() {
   const [modal, setModal] = useState<{ kind: string; data?: any } | null>(null);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Todas");
-  const [period, setPeriod] = useState<
-    "today" | "7d" | "30d" | "month" | "quarter" | "all"
-  >("month");
+  const [period, setPeriod] = useState<PeriodKey>("month");
   const range = useMemo(() => {
     if (period === "all") return { from: undefined, to: undefined };
     const currentDay = dateKeyInArgentina();
@@ -2059,7 +1969,6 @@ export default function Home() {
   const customerRows = customers.data ?? [];
   const expenseRows = expenses.data ?? [];
   const loanRows = loans.data ?? [];
-  const adRows = ads.data ?? [];
   const categoryOptions = useMemo(
     () => uniqueOptions(inventoryRows.map(p => p.category)),
     [allProducts.data]
@@ -2117,18 +2026,6 @@ export default function Home() {
   const localityOptions = useMemo(
     () => uniqueOptions(customerRows.map(c => c.locality)),
     [customers.data]
-  );
-  const platformOptions = useMemo(
-    () => uniqueOptions(["Meta Ads", ...adRows.map(a => a.platform)]),
-    [ads.data]
-  );
-  const campaignOptions = useMemo(
-    () =>
-      uniqueOptions([
-        "Campaña inicial propia de ventas - Multiples estilos",
-        ...adRows.map(a => a.campaign),
-      ]),
-    [ads.data]
   );
   const pageTitle = nav.find(n => n.id === active)?.label || "Resumen";
   const overdue = (loans.data ?? []).filter(
@@ -2246,15 +2143,9 @@ export default function Home() {
             <button
               className="button primary desktop-action"
               onClick={() =>
-                open(
-                  active === "inventory"
-                    ? "product"
-                    : active === "finance"
-                      ? "expense"
-                      : active === "ads"
-                        ? "expense"
-                        : "sale"
-                )
+                active === "ads"
+                  ? open("expense", { isAdvertising: true })
+                  : open(active === "inventory" ? "product" : active === "finance" ? "expense" : "sale")
               }
             >
               <Plus size={17} />
@@ -2287,12 +2178,9 @@ export default function Home() {
                   value={period}
                   onChange={e => setPeriod(e.target.value as typeof period)}
                 >
-                  <option value="today">Día corriente</option>
-                  <option value="7d">Semana · últimos 7 días</option>
-                  <option value="30d">Últimos 30 días</option>
-                  <option value="month">Mes · corriente</option>
-                  <option value="quarter">Trimestre · últimos 90 días</option>
-                  <option value="all">Todo el historial</option>
+                  {periodOptions.map(option => (
+                    <option key={option.value} value={option.value}>{option.label}</option>
+                  ))}
                 </select>
               </div>
               <div className="metrics-grid">
@@ -2346,7 +2234,7 @@ export default function Home() {
                   <strong>{money(data?.expenses?.total)}</strong>
                 </div>
                 <div>
-                  <span>Meta Ads</span>
+                  <span>Publicidad</span>
                   <strong>{money(data?.ads?.total)}</strong>
                 </div>
                 <div>
@@ -2545,8 +2433,8 @@ export default function Home() {
               adsSpendHistory={adsSpendHistory.data}
               ads={ads.data ?? []}
               expenses={expenseRows}
-              onEditAd={(item: any) => open("ad", item)}
-              onEditExpense={(item: any) => open("expense", item)}
+              period={period}
+              setPeriod={setPeriod}
               onAdd={() => open("expense", { isAdvertising: true })}
             />
           )}
@@ -2615,15 +2503,6 @@ export default function Home() {
           onDone={refresh}
         />
       )}
-      {modal?.kind === "ad" && (
-        <AdForm
-          ad={modal.data}
-          platformOptions={platformOptions}
-          campaignOptions={campaignOptions}
-          onClose={() => setModal(null)}
-          onDone={refresh}
-        />
-      )}
     </div>
   );
 }
@@ -2669,7 +2548,7 @@ function ChartsView({ data, period, embedded = false }: { data: any; period: str
           </p>
         </div>
         <span className="period-pill">
-          Período: {period === "all" ? "Todo el historial" : period}
+          Período: {periodLabel(period)}
         </span>
       </div>}
       {!embedded && <div className="advanced-grid chart-kpis">
@@ -2703,12 +2582,12 @@ function ChartsView({ data, period, embedded = false }: { data: any; period: str
           icon={Package}
         />
       </div>}
-      {embedded && <div className="section-header compact-header"><div><span className="eyebrow">lectura cuantitativa · período seleccionado</span><h3>Gráficos del negocio</h3></div><span className="period-pill">{period === "all" ? "Todo el historial" : period}</span></div>}
+      {embedded && <div className="section-header compact-header"><div><span className="eyebrow">lectura cuantitativa · período seleccionado</span><h3>Gráficos del negocio</h3></div><span className="period-pill">{periodLabel(period)}</span></div>}
       <div className="main-grid charts-layout">
         <section className="panel chart-panel">
           <SectionHeader
             eyebrow="ritmo de ventas"
-            title="Facturación y ganancia por día"
+            title={period === "quarter" || period === "all" ? "Facturación y ganancia por mes" : "Facturación y ganancia por día"}
           />
           <div className="chart-legend">
             <span>
@@ -3387,7 +3266,15 @@ function FinanceView({
     (a, r) => a + Number(r.balance || 0),
     0
   );
-  const spent = expenses.reduce((a, e) => a + Number(e.amount || 0), 0);
+  const normalExpenses = expenses.filter((expense: any) => {
+    const category = String(expense.category || "").toLocaleLowerCase("es-AR");
+    if (category.includes("publicista")) return true;
+    const searchable = `${category} ${expense.type || ""} ${expense.platform || ""} ${expense.campaign || ""}`.toLocaleLowerCase("es-AR");
+    return !["publicidad", "publicitario", "meta ads", "rdads"].some(term =>
+      searchable.includes(term)
+    );
+  });
+  const spent = normalExpenses.reduce((a, e) => a + Number(e.amount || 0), 0);
   const pay = trpc.business.payLoan.useMutation({
     onSuccess: result => {
       toast.success(
@@ -3479,7 +3366,7 @@ function FinanceView({
         <div className="finance-stat">
           <span>Gastos cargados</span>
           <strong>{money(spent)}</strong>
-          <small>Incluye operación y mentorías</small>
+          <small>Meta Ads se muestra aparte y se descuenta del neto.</small>
         </div>
       </div>
       <div className="finance-grid">
@@ -3502,7 +3389,7 @@ function FinanceView({
                 </tr>
               </thead>
               <tbody>
-                {expenses.map(e => (
+                {normalExpenses.map(e => (
                   <tr key={e.id}>
                     <td>{dateLabel(e.expenseDate)}</td>
                     <td>
@@ -3594,10 +3481,10 @@ function FinanceView({
       </div>
       <section className="panel table-panel">
         <SectionHeader eyebrow="historial financiero" title="Compromisos saldados" />
-        <p className="muted">Registro separado de obligaciones ya canceladas: conserva descripción, monto inicial y fechas aunque el saldo actual sea cero.</p>
+        <p className="muted">Registro separado de obligaciones canceladas, con descripción, monto inicial, fecha de inicio y vencimiento pactado. La fecha de pago no se infiere a partir de la última edición.</p>
         <div className="table-scroll">
           <table>
-            <thead><tr><th>Acreedor</th><th>Descripción</th><th>Monto inicial</th><th>Inicio</th><th>Cancelado</th></tr></thead>
+            <thead><tr><th>Acreedor</th><th>Descripción</th><th>Monto inicial</th><th>Inicio</th><th>Vencimiento pactado</th><th>Estado</th></tr></thead>
             <tbody>
               {settledLoans.length ? settledLoans.map(l => (
                 <tr key={`settled-${l.id}`}>
@@ -3605,9 +3492,10 @@ function FinanceView({
                   <td>{l.description || l.notes || l.kind}</td>
                   <td>{money(l.principal, l.currency)}</td>
                   <td>{dateLabel(l.startDate)}</td>
-                  <td>{dateLabel(l.updatedAt || l.dueDate)} · {money(l.paid, l.currency)}</td>
+                  <td>{dateLabel(l.dueDate)}</td>
+                  <td><span className="status-tag ok">Saldado</span><small>{money(l.paid, l.currency)} cancelados</small></td>
                 </tr>
-              )) : <tr><td colSpan={5} className="empty-cell">Todavía no hay compromisos saldados registrados.</td></tr>}
+              )) : <tr><td colSpan={6} className="empty-cell">Todavía no hay compromisos saldados registrados.</td></tr>}
             </tbody>
           </table>
         </div>
@@ -3672,91 +3560,133 @@ function AdsView({
   adsSpendHistory,
   ads,
   expenses,
-  onEditAd,
-  onEditExpense,
+  period,
+  setPeriod,
   onAdd,
 }: {
   adsSpendHistory?: { manual: any[]; daily: any[] };
   ads?: any[];
   expenses?: any[];
-  onEditAd: (item: any) => void;
-  onEditExpense: (item: any) => void;
+  period: PeriodKey;
+  setPeriod: (value: PeriodKey) => void;
   onAdd: () => void;
 }) {
-  const fallbackDaily = Object.values((ads ?? []).reduce((acc: Record<string, any>, row: any) => {
-    const key = String(row.adDate || "").slice(0, 10);
-    if (!key) return acc;
-    acc[key] ||= { date: key, spend: 0, entries: 0 };
-    acc[key].spend += Number(row.amount || 0);
-    acc[key].entries += 1;
-    return acc;
-  }, {})).sort((a: any, b: any) => String(a.date).localeCompare(String(b.date)));
-  const sourceDaily = (adsSpendHistory?.daily?.length ? adsSpendHistory.daily : fallbackDaily);
-  const advertisingExpenses = (expenses ?? []).filter((row: any) => row.category === "Publicidad" || row.type === "Publicitario");
-  const manualEntries = [
-    ...(ads ?? []).map((row: any) => ({ ...row, entryKind: "ad" })),
-    ...advertisingExpenses.map((row: any) => ({ ...row, entryKind: "expense", adDate: row.expenseDate })),
-  ].sort((a: any, b: any) => String(b.adDate || "").localeCompare(String(a.adDate || "")) || Number(b.id || 0) - Number(a.id || 0));
-  const directDaily = Object.values(advertisingExpenses.reduce((acc: Record<string, any>, row: any) => {
-    const key = String(row.expenseDate || "").slice(0, 10);
-    if (!key) return acc;
-    acc[key] ||= { date: key, spend: 0, entries: 0 };
-    acc[key].spend += Number(row.amount || 0);
-    acc[key].entries += 1;
-    return acc;
-  }, {}));
-  const mergedByDay = new Map<string, any>();
-  for (const row of sourceDaily) {
-    const key = String(row.date).slice(0, 10);
-    mergedByDay.set(key, { ...row, date: key, spend: Number(row.spend || 0), entries: Number(row.entries || 0) });
+  const fallbackByDay = new Map<string, { date: string; spend: number; entries: number }>();
+  const addFallback = (dateValue: unknown, amountValue: unknown) => {
+    const date = String(dateValue || "").slice(0, 10);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return;
+    const row = fallbackByDay.get(date) || { date, spend: 0, entries: 0 };
+    row.spend += Number(amountValue || 0);
+    row.entries += 1;
+    fallbackByDay.set(date, row);
+  };
+  for (const row of ads ?? []) addFallback(row.adDate, row.amount);
+  for (const row of expenses ?? []) {
+    if (row.category === "Publicidad" || row.type === "Publicitario")
+      addFallback(row.expenseDate, row.amount);
   }
-  for (const row of directDaily as any[]) {
-    const key = String(row.date).slice(0, 10);
-    if (!mergedByDay.has(key)) mergedByDay.set(key, row);
+  const sourceDaily = adsSpendHistory?.daily?.length
+    ? adsSpendHistory.daily
+    : [...fallbackByDay.values()];
+  const allDaily = sourceDaily
+    .map((row: any) => ({
+      date: String(row.date || "").slice(0, 10),
+      spend: Number(row.spend || 0),
+      entries: Number(row.entries || 0),
+    }))
+    .filter((row: any) => /^\d{4}-\d{2}-\d{2}$/.test(row.date))
+    .sort((a: any, b: any) => a.date.localeCompare(b.date));
+  const currentDay = dateKeyInArgentina();
+  const currentMonth = currentDay.slice(0, 7);
+  let from = currentDay;
+  if (period === "7d") from = shiftDateKey(currentDay, -6);
+  else if (period === "30d") from = shiftDateKey(currentDay, -29);
+  else if (period === "month") from = `${currentMonth}-01`;
+  else if (period === "quarter") from = shiftDateKey(currentDay, -89);
+  else if (period === "all") from = allDaily[0]?.date || currentDay;
+  const selectedDaily = allDaily.filter(row => row.date >= from && row.date <= currentDay);
+  const selectedTotal = selectedDaily.reduce((sum, row) => sum + row.spend, 0);
+  const total = allDaily.reduce((sum, row) => sum + row.spend, 0);
+  const monthTotal = allDaily
+    .filter(row => row.date.startsWith(currentMonth))
+    .reduce((sum, row) => sum + row.spend, 0);
+  const spendByDay = new Map(selectedDaily.map(row => [row.date, row]));
+  let chartRows: { date: string; label: string; spend: number }[] = [];
+  if (period === "quarter") {
+    const byWeek = new Map<string, number>();
+    for (const row of selectedDaily) {
+      const day = new Date(`${row.date}T12:00:00Z`).getUTCDay();
+      const weekStart = shiftDateKey(row.date, -((day + 6) % 7));
+      byWeek.set(weekStart, (byWeek.get(weekStart) || 0) + row.spend);
+    }
+    const firstDay = new Date(`${from}T12:00:00Z`).getUTCDay();
+    let cursor = shiftDateKey(from, -((firstDay + 6) % 7));
+    while (cursor <= currentDay) {
+      chartRows.push({ date: cursor, label: `Sem. ${dateLabel(cursor)}`, spend: byWeek.get(cursor) || 0 });
+      cursor = shiftDateKey(cursor, 7);
+    }
+  } else if (period === "all") {
+    const byMonth = new Map<string, number>();
+    for (const row of allDaily) {
+      const month = row.date.slice(0, 7);
+      byMonth.set(month, (byMonth.get(month) || 0) + row.spend);
+    }
+    chartRows = [...byMonth.entries()].slice(-12).map(([month, spend]) => ({
+      date: `${month}-01`,
+      label: new Date(`${month}-01T12:00:00Z`).toLocaleDateString("es-AR", { month: "short", year: "2-digit" }),
+      spend,
+    }));
+  } else {
+    for (let cursor = from; cursor <= currentDay; cursor = shiftDateKey(cursor, 1)) {
+      chartRows.push({
+        date: cursor,
+        label: dateLabel(cursor),
+        spend: spendByDay.get(cursor)?.spend || 0,
+      });
+    }
   }
-  const mergedDaily = [...mergedByDay.values()].sort((a, b) => String(a.date).localeCompare(String(b.date)));
-  const dailyRows = mergedDaily.map((row: any) => ({
-    ...row,
-    label: dateLabel(row.date),
-    spend: Number(row.spend || 0),
-  }));
-  const total = dailyRows.reduce((sum: number, row: any) => sum + row.spend, 0);
-  const currentMonth = dateKeyInArgentina().slice(0, 7);
-  const monthTotal = dailyRows
-    .filter(row => String(row.date).startsWith(currentMonth))
-    .reduce((sum: number, row: any) => sum + row.spend, 0);
-  const lastSeven = dailyRows.slice(-7).reduce((sum: number, row: any) => sum + row.spend, 0);
+  const chartNote = period === "quarter"
+    ? "Totales por semana para mantener legible el trimestre"
+    : period === "all"
+      ? "Totales por mes · últimos 12 meses"
+      : "Importe por día calendario";
+  const detailRows = [...allDaily].reverse();
   return (
     <>
       <div className="view-intro">
         <div>
           <span className="eyebrow">control manual de inversión</span>
           <h2>Publicidad</h2>
-          <p className="muted">Cargá cada gasto real y revisá el ritmo diario sin depender de una sincronización externa.</p>
+          <p className="muted">Cargá cada gasto real y revisá su evolución. Las cargas nuevas quedan en Gastos de Finanzas; no hay sincronización ni panel de campañas.</p>
         </div>
-        <button className="button primary" onClick={onAdd}><Plus size={17} /> Cargar gasto</button>
+        <div className="view-actions">
+          <select className="period-pill period-select" value={period} onChange={e => setPeriod(e.target.value as PeriodKey)} aria-label="Período de publicidad">
+            {periodOptions.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
+          </select>
+          <button className="button primary" onClick={onAdd}><Plus size={17} /> Cargar gasto</button>
+        </div>
       </div>
       <div className="data-note page-note">
         <div>
-          <strong>Histórico de inversión cargado</strong>
-          <small>Incluye los registros manuales recuperados del seguimiento y las nuevas cargas que agregues desde el sistema.</small>
+          <strong>Histórico de inversión conservado</strong>
+          <small>Se mantienen los registros ya cargados. La tabla muestra totales diarios; el histórico heredado queda en consulta y las nuevas cargas se consultan o editan desde Finanzas → Gastos.</small>
         </div>
       </div>
       <div className="finance-cards">
-        <div className="finance-stat"><span>Ads acumulado</span><strong>{money(total)}</strong><small>Registros manuales</small></div>
-        <div className="finance-stat"><span>Este mes</span><strong>{money(monthTotal)}</strong><small>Gasto manual del mes corriente</small></div>
-        <div className="finance-stat"><span>Últimos 7 días</span><strong>{money(lastSeven)}</strong><small>Ritmo de inversión reciente</small></div>
+        <div className="finance-stat"><span>Ads acumulado</span><strong>{money(total)}</strong><small>Todo el histórico</small></div>
+        <div className="finance-stat"><span>Este mes</span><strong>{money(monthTotal)}</strong><small>Mes calendario actual</small></div>
+        <div className="finance-stat"><span>Período seleccionado</span><strong>{money(selectedTotal)}</strong><small>{periodLabel(period)}</small></div>
       </div>
       <section className="panel chart-panel">
-        <div className="section-header compact-header"><div><span className="eyebrow">ritmo de inversión</span><h3>Gasto diario en Ads</h3></div><small className="muted">Registros cargados</small></div>
+        <div className="section-header compact-header"><div><span className="eyebrow">ritmo de inversión</span><h3>{period === "quarter" ? "Gasto semanal en Ads" : period === "all" ? "Gasto mensual en Ads" : "Gasto diario en Ads"}</h3></div><small className="muted">{chartNote}</small></div>
         <div className="chart-wrap" style={{ height: 280 }}>
-          {dailyRows.length ? (
+          {chartRows.length ? (
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={dailyRows.slice(-31)} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
+              <BarChart data={chartRows} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="label" tick={{ fontSize: 10 }} interval="preserveStartEnd" />
-                <YAxis tick={{ fontSize: 11 }} tickFormatter={value => `$${Number(value).toLocaleString("es-AR")}`} />
-                <Tooltip formatter={(value: number) => [money(value), "Gasto Ads"]} labelFormatter={label => `Día: ${label}`} />
+                <XAxis dataKey="label" tick={{ fontSize: 10 }} interval="preserveStartEnd" minTickGap={12} />
+                <YAxis width={55} tick={{ fontSize: 11 }} tickFormatter={value => `$${Number(value).toLocaleString("es-AR")}`} />
+                <Tooltip formatter={(value: number) => [money(value), "Gasto Ads"]} labelFormatter={label => `${period === "quarter" ? "Semana" : period === "all" ? "Mes" : "Día"}: ${label}`} />
                 <Bar dataKey="spend" name="Gasto Ads" fill="#7ed8ce" radius={[5, 5, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -3765,8 +3695,8 @@ function AdsView({
       </section>
       <section className="panel table-panel">
         <SectionHeader eyebrow="detalle diario" title="Gastos manuales registrados" action="Cargar gasto" onAction={onAdd} />
-        <div className="table-scroll"><table><thead><tr><th>Fecha</th><th>Importe</th><th>Registros</th><th></th></tr></thead><tbody>
-          {manualEntries.length ? manualEntries.map((row: any) => <tr key={`${row.entryKind}-${row.id}`}><td>{dateLabel(row.adDate)}</td><td><strong>{money(row.amount)}</strong></td><td><span className="soft-tag">Meta Ads</span></td><td><button className="icon-button small-icon" title="Editar" onClick={() => row.entryKind === "ad" ? onEditAd(row) : onEditExpense(row)}><Pencil size={14} /></button></td></tr>) : <tr><td colSpan={4} className="empty-cell">Sin gastos de Ads registrados todavía.</td></tr>}
+        <div className="table-scroll"><table><thead><tr><th>Fecha</th><th>Importe del día</th><th>Cargas</th></tr></thead><tbody>
+          {detailRows.length ? detailRows.map(row => <tr key={row.date}><td>{dateLabel(row.date)}</td><td><strong>{money(row.spend)}</strong></td><td>{row.entries} {row.entries === 1 ? "registro" : "registros"}</td></tr>) : <tr><td colSpan={3} className="empty-cell">Sin gastos de Ads registrados todavía.</td></tr>}
         </tbody></table></div>
       </section>
     </>
