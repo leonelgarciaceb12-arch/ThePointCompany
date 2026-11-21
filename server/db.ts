@@ -56,6 +56,24 @@ const shiftDateKey = (dateKey: string, days: number) => {
   return date.toISOString().slice(0, 10);
 };
 
+const advertisingExpenseWhere = sql`(
+  lower(coalesce(${expenses.category}, '')) like '%publicidad%'
+  or lower(coalesce(${expenses.category}, '')) like '%meta ads%'
+  or lower(coalesce(${expenses.type}, '')) like '%publicitario%'
+  or lower(coalesce(${expenses.type}, '')) like '%meta ads%'
+  or lower(coalesce(${expenses.platform}, '')) like '%meta ads%'
+  or lower(coalesce(${expenses.description}, '')) like '%meta ads%'
+) and lower(coalesce(${expenses.category}, '')) not like '%publicista%'
+`;
+
+async function normalizeAdvertisingExpenses(db: ReturnType<typeof drizzle>) {
+  await db.update(expenses).set({
+    category: "Publicidad",
+    type: "Meta Ads",
+    description: "Publicidad",
+  }).where(advertisingExpenseWhere);
+}
+
 function debtStatus(
   principal: unknown,
   paid: unknown,
@@ -524,15 +542,12 @@ export async function getDashboard(from?: string, to?: string) {
   const db = await getDb();
   if (!db) return null;
   await ensureSeeded();
+  await normalizeAdvertisingExpenses(db);
   const salesWhere =
     from && to
       ? and(gte(sales.saleDate, from), lt(sales.saleDate, to))
       : undefined;
-  const publicAdWhere = sql`(
-    lower(coalesce(${expenses.category}, '')) like '%publicidad%'
-    or lower(coalesce(${expenses.type}, '')) like '%publicidad%'
-    or lower(coalesce(${expenses.platform}, '')) like '%meta ads%'
-  )`;
+  const publicAdWhere = advertisingExpenseWhere;
   const expenseWhere =
     from && to
       ? and(gte(expenses.expenseDate, from), lt(expenses.expenseDate, to), sql`not ${publicAdWhere}`)
@@ -878,6 +893,7 @@ export async function listExpenses() {
   const db = await getDb();
   if (!db) return [];
   await ensureSeeded();
+  await normalizeAdvertisingExpenses(db);
   const rows = await db
     .select()
     .from(expenses)
@@ -893,20 +909,6 @@ export async function listExpenses() {
       row.description = "Asesoría y gestión de publicidad";
       row.type = "Operativo";
       continue;
-    }
-    const searchable = `${row.category || ""} ${row.type || ""} ${row.description || ""} ${row.platform || ""}`.toLocaleLowerCase("es-AR");
-    const isPublicistFee = String(row.category || "").toLocaleLowerCase("es-AR").includes("publicista");
-    if (!isPublicistFee && (searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("rdads"))) {
-      if (row.category !== "Publicidad" || row.type !== "Publicitario" || row.description !== "Publicidad") {
-        await db.update(expenses).set({
-          category: "Publicidad",
-          type: "Publicitario",
-          description: "Publicidad",
-        }).where(eq(expenses.id, row.id));
-        row.category = "Publicidad";
-        row.type = "Publicitario";
-        row.description = "Publicidad";
-      }
     }
   }
   return rows;
@@ -1036,7 +1038,10 @@ export async function getAdsSpendHistory() {
   for (const row of expenseManual) {
     if (row.id === 120001 && Number(row.amount || 0) === 280) continue;
     const searchable = `${row.category || ""} ${row.type || ""} ${row.platform || ""}`.toLocaleLowerCase("es-AR");
-    if (!searchable.includes("publicidad") && !searchable.includes("meta ads")) continue;
+    if (
+      searchable.includes("publicista") ||
+      (!searchable.includes("publicidad") && !searchable.includes("publicitario") && !searchable.includes("meta ads"))
+    ) continue;
     const key = String(row.date).slice(0, 7);
     const current = manualByMonth.get(key) || { spend: 0, entries: 0 };
     current.spend += Number(row.amount || 0);
@@ -1702,13 +1707,13 @@ export async function createExpense(input: {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
   const searchable = `${input.category} ${input.type || ""} ${input.description}`.toLocaleLowerCase("es-AR");
-  const isAdvertising = !input.category.toLocaleLowerCase("es-AR").includes("publicista") && (searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("rdads"));
+  const isAdvertising = !input.category.toLocaleLowerCase("es-AR").includes("publicista") && (searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("publicitario") || searchable.includes("rdads"));
   const result = await db.insert(expenses).values({
     expenseDate: input.date,
     category: isAdvertising ? "Publicidad" : input.category,
     description: isAdvertising ? "Publicidad" : input.description,
     amount: toMoney(input.amount),
-    type: isAdvertising ? "Publicitario" : input.type || "Operativo",
+    type: isAdvertising ? "Meta Ads" : input.type || "Operativo",
     platform: input.platform,
     campaign: input.campaign,
     notes: input.notes,
@@ -1964,7 +1969,7 @@ export async function updateExpense(
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
   const searchable = `${input.category} ${input.type || ""} ${input.description}`.toLocaleLowerCase("es-AR");
-  const isAdvertising = !input.category.toLocaleLowerCase("es-AR").includes("publicista") && (searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("rdads"));
+  const isAdvertising = !input.category.toLocaleLowerCase("es-AR").includes("publicista") && (searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("publicitario") || searchable.includes("rdads"));
   await db
     .update(expenses)
     .set({
@@ -1972,7 +1977,7 @@ export async function updateExpense(
       category: isAdvertising ? "Publicidad" : input.category,
       description: isAdvertising ? "Publicidad" : input.description,
       amount: toMoney(input.amount),
-      type: isAdvertising ? "Publicitario" : input.type || "Operativo",
+      type: isAdvertising ? "Meta Ads" : input.type || "Operativo",
       notes: input.notes || null,
       updatedBy: input.userId,
     })

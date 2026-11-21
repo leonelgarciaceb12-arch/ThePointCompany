@@ -1139,12 +1139,18 @@ function ExpenseForm({
   onDone: () => void;
 }) {
   const isEditing = Boolean(expense?.id);
-  const isAdvertising = Boolean(expense?.isAdvertising || expense?.category === "Publicidad" || expense?.type === "Publicitario");
+  const isAdvertising = Boolean(
+    expense?.isAdvertising ||
+      expense?.category === "Publicidad" ||
+      expense?.type === "Publicitario" ||
+      expense?.type === "Meta Ads" ||
+      expense?.platform === "Meta Ads"
+  );
   const [date, setDate] = useState(dateInput(expense?.expenseDate) || today);
   const [category, setCategory] = useState(isAdvertising ? "Publicidad" : expense?.category || "Operativo");
   const [description, setDescription] = useState(isAdvertising ? "Publicidad" : expense?.description || "");
   const [amount, setAmount] = useState(String(expense?.amount ?? ""));
-  const [type, setType] = useState(isAdvertising ? "Publicitario" : expense?.type || "Operativo");
+  const [type, setType] = useState(isAdvertising ? "Meta Ads" : expense?.type || "Operativo");
   const [notes, setNotes] = useState(expense?.notes || "");
   const create = trpc.business.createExpense.useMutation({
     onSuccess: () => {
@@ -1174,7 +1180,7 @@ function ExpenseForm({
             category: isAdvertising ? "Publicidad" : category,
             description: isAdvertising ? "Publicidad" : description,
             amount: Number(amount),
-            type: isAdvertising ? "Publicitario" : type,
+            type: isAdvertising ? "Meta Ads" : type,
             notes: notes || undefined,
           };
           isEditing
@@ -1194,7 +1200,7 @@ function ExpenseForm({
           <label>
             Tipo
             {isAdvertising ? (
-              <input value="Publicitario" disabled />
+              <input value="Meta Ads" disabled />
             ) : (
               <select value={type} onChange={e => setType(e.target.value)}>
                 {typeOptions.map(option => (
@@ -3393,8 +3399,8 @@ function FinanceView({
                   <tr key={e.id}>
                     <td>{dateLabel(e.expenseDate)}</td>
                     <td>
-                      <strong>{e.category === "Publicidad" || e.type === "Publicitario" ? "Publicidad" : e.description}</strong>
-                      {!(e.category === "Publicidad" || e.type === "Publicitario") && <small>{e.category}</small>}
+                      <strong>{e.category === "Publicidad" || e.type === "Publicitario" || e.type === "Meta Ads" ? "Publicidad" : e.description}</strong>
+                      {!(e.category === "Publicidad" || e.type === "Publicitario" || e.type === "Meta Ads") && <small>{e.category}</small>}
                     </td>
                     <td>
                       <span className="soft-tag">{e.type}</span>
