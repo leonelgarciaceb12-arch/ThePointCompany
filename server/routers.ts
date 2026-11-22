@@ -30,6 +30,7 @@ import {
   listProductPerformance,
   listProducts,
   listProductFlavors,
+  listAllProductFlavors,
   createProductFlavor,
   updateProductFlavor,
   archiveProductFlavor,
@@ -173,6 +174,7 @@ export const appRouter = router({
     productFlavors: protectedProcedure
       .input(z.object({ productId: z.number().int().positive() }))
       .query(({ input }) => listProductFlavors(input.productId)),
+    allProductFlavors: protectedProcedure.query(() => listAllProductFlavors()),
     createProductFlavor: protectedProcedure
       .input(z.object({ productId: z.number().int().positive(), name: z.string().min(1), stock: z.number().int().nonnegative(), minStock: z.number().int().nonnegative().optional(), notes: z.string().optional() }))
       .mutation(({ input, ctx }) => createProductFlavor({ ...input, userId: ctx.user.id })),

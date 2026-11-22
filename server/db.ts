@@ -1117,7 +1117,12 @@ export async function createProduct(input: {
   return Number(result[0].insertId);
 }
 
-const flavorCategories = new Set(["Vapes Descartables", "Esencias"]);
+const flavorCategories = new Set(["Vapes Descartables", "Vapers Descartables", "Esencias"]);
+const isFlavorCategory = (category: string) => flavorCategories.has(String(category || "").trim());
+async function syncProductFlavorStock(tx: any, productId: number, userId?: number) {
+  const rows = await tx.select({ total: sql<number>`coalesce(sum(${productFlavors.stock}), 0)` }).from(productFlavors).where(and(eq(productFlavors.productId, productId), eq(productFlavors.active, true)));
+  await tx.update(products).set({ stock: Number(rows[0]?.total || 0), updatedBy: userId }).where(eq(products.id, productId));
+}
 async function assertFlavorProduct(tx: any, productId: number) {
   const product = (await tx.select().from(products).where(eq(products.id, productId)).limit(1))[0];
   if (!product) throw new Error("Producto no encontrado");
@@ -1130,13 +1135,20 @@ export async function listProductFlavors(productId: number) {
   if (!db) return [];
   return db.select().from(productFlavors).where(eq(productFlavors.productId, productId)).orderBy(asc(productFlavors.name));
 }
+export async function listAllProductFlavors() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(productFlavors).where(eq(productFlavors.active, true)).orderBy(asc(productFlavors.name));
+}
 
 export async function createProductFlavor(input: { productId: number; name: string; stock: number; minStock?: number; notes?: string; userId?: number }) {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
   return db.transaction(async tx => {
     await assertFlavorProduct(tx, input.productId);
+    if (!input.name.trim()) throw new Error("El sabor necesita un nombre");
     const result = await tx.insert(productFlavors).values({ productId: input.productId, name: input.name.trim(), stock: input.stock, minStock: input.minStock ?? 0, notes: input.notes || null, createdBy: input.userId, updatedBy: input.userId });
+    await syncProductFlavorStock(tx, input.productId, input.userId);
     return Number(result[0].insertId);
   });
 }
@@ -1144,14 +1156,24 @@ export async function createProductFlavor(input: { productId: number; name: stri
 export async function updateProductFlavor(id: number, input: { name: string; stock: number; minStock?: number; notes?: string; active?: boolean; userId?: number }) {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
-  await db.update(productFlavors).set({ name: input.name.trim(), stock: input.stock, minStock: input.minStock ?? 0, notes: input.notes || null, active: input.active ?? true, updatedBy: input.userId }).where(eq(productFlavors.id, id));
+  await db.transaction(async tx => {
+    const current = (await tx.select().from(productFlavors).where(eq(productFlavors.id, id)).limit(1))[0];
+    if (!current) throw new Error("Sabor no encontrado");
+    await tx.update(productFlavors).set({ name: input.name.trim(), stock: input.stock, minStock: input.minStock ?? 0, notes: input.notes || null, active: input.active ?? true, updatedBy: input.userId }).where(eq(productFlavors.id, id));
+    await syncProductFlavorStock(tx, current.productId, input.userId);
+  });
   return { id };
 }
 
 export async function archiveProductFlavor(id: number, userId?: number) {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
-  await db.update(productFlavors).set({ active: false, updatedBy: userId }).where(eq(productFlavors.id, id));
+  await db.transaction(async tx => {
+    const current = (await tx.select().from(productFlavors).where(eq(productFlavors.id, id)).limit(1))[0];
+    if (!current) throw new Error("Sabor no encontrado");
+    await tx.update(productFlavors).set({ active: false, updatedBy: userId }).where(eq(productFlavors.id, id));
+    await syncProductFlavorStock(tx, current.productId, userId);
+  });
   return { id, archived: true };
 }
 
@@ -1180,13 +1202,13 @@ export async function updateProduct(
         name: input.name,
         category: input.category,
         supplier: input.supplier || "Propio",
-        stock: input.stock,
+        stock: isFlavorCategory(current.category) && (await tx.select({ id: productFlavors.id }).from(productFlavors).where(and(eq(productFlavors.productId, id), eq(productFlavors.active, true))).limit(1)).length ? current.stock : input.stock,
         cost: toMoney(input.cost),
         minStock: input.minStock ?? 3,
         updatedBy: input.userId,
       })
       .where(eq(products.id, id));
-    if (current.stock !== input.stock)
+    if (!(isFlavorCategory(current.category) && (await tx.select({ id: productFlavors.id }).from(productFlavors).where(and(eq(productFlavors.productId, id), eq(productFlavors.active, true))).limit(1)).length) && current.stock !== input.stock)
       await tx.insert(stockMovements).values({
         productId: id,
         type: "adjustment",
@@ -1303,9 +1325,12 @@ export async function updateSale(
       const oldItems = await tx.select().from(saleItems).where(eq(saleItems.saleId, id));
       for (const item of oldItems) {
         if (!item.fromInventory || !item.productId) continue;
-        await tx.update(products)
-          .set({ stock: sql`${products.stock} + ${item.quantity}`, updatedBy: input.userId })
-          .where(eq(products.id, item.productId));
+        if (item.flavorId) {
+          await tx.update(productFlavors).set({ stock: sql`${productFlavors.stock} + ${item.quantity}`, updatedBy: input.userId }).where(eq(productFlavors.id, item.flavorId));
+          await syncProductFlavorStock(tx, item.productId, input.userId);
+        } else {
+          await tx.update(products).set({ stock: sql`${products.stock} + ${item.quantity}`, updatedBy: input.userId }).where(eq(products.id, item.productId));
+        }
       }
       await tx.delete(stockMovements).where(and(eq(stockMovements.referenceId, id), eq(stockMovements.type, "sale")));
       await tx.delete(saleItems).where(eq(saleItems.saleId, id));
@@ -1315,10 +1340,19 @@ export async function updateSale(
         if (item.fromInventory && item.productId) {
           const product = (await tx.select().from(products).where(eq(products.id, item.productId)).limit(1))[0];
           if (!product) throw new Error(`Producto ${item.productId} no encontrado`);
-          if (product.stock < item.quantity) throw new Error(`Stock insuficiente para ${product.name}`);
-          await tx.update(products)
-            .set({ stock: product.stock - item.quantity, updatedBy: input.userId })
-            .where(eq(products.id, product.id));
+          const activeFlavors = isFlavorCategory(product.category)
+            ? await tx.select({ id: productFlavors.id }).from(productFlavors).where(and(eq(productFlavors.productId, product.id), eq(productFlavors.active, true)))
+            : [];
+          if (activeFlavors.length && !item.flavorId) throw new Error(`Seleccioná un sabor para ${product.name}`);
+          if (item.flavorId) {
+            const flavor = (await tx.select().from(productFlavors).where(and(eq(productFlavors.id, item.flavorId), eq(productFlavors.productId, product.id), eq(productFlavors.active, true))).limit(1))[0];
+            if (!flavor || flavor.stock < item.quantity) throw new Error(`Stock insuficiente para el sabor seleccionado de ${product.name}`);
+            await tx.update(productFlavors).set({ stock: sql`${productFlavors.stock} - ${item.quantity}`, updatedBy: input.userId }).where(eq(productFlavors.id, flavor.id));
+            await syncProductFlavorStock(tx, product.id, input.userId);
+          } else {
+            if (product.stock < item.quantity) throw new Error(`Stock insuficiente para ${product.name}`);
+            await tx.update(products).set({ stock: product.stock - item.quantity, updatedBy: input.userId }).where(eq(products.id, product.id));
+          }
           await tx.insert(stockMovements).values({
             productId: product.id,
             type: "sale",
@@ -1408,11 +1442,12 @@ export async function deleteSale(id: number, userId?: number) {
             .where(eq(products.id, item.productId))
             .limit(1)
         )[0];
-        if (product)
-          await tx
-            .update(products)
-            .set({ stock: product.stock + item.quantity, updatedBy: userId })
-            .where(eq(products.id, product.id));
+        if (product) {
+          if (item.flavorId) {
+            await tx.update(productFlavors).set({ stock: sql`${productFlavors.stock} + ${item.quantity}`, updatedBy: userId }).where(eq(productFlavors.id, item.flavorId));
+            await syncProductFlavorStock(tx, product.id, userId);
+          } else await tx.update(products).set({ stock: product.stock + item.quantity, updatedBy: userId }).where(eq(products.id, product.id));
+        }
       }
     await tx
       .delete(stockMovements)
@@ -1558,6 +1593,10 @@ export async function createSale(input: {
           .limit(1);
         product = rows[0];
         if (!product) throw new Error("Producto de inventario no encontrado");
+        const activeFlavors = isFlavorCategory(product.category)
+          ? await tx.select({ id: productFlavors.id }).from(productFlavors).where(and(eq(productFlavors.productId, product.id), eq(productFlavors.active, true)))
+          : [];
+        if (activeFlavors.length && !item.flavorId) throw new Error(`Seleccioná un sabor para ${product.name}`);
         if (item.flavorId) {
           if (!flavorCategories.has(product.category)) throw new Error("Ese producto no admite sabores");
           const flavor = (await tx.select().from(productFlavors).where(and(eq(productFlavors.id, item.flavorId), eq(productFlavors.productId, product.id))).limit(1))[0];
@@ -1663,6 +1702,7 @@ export async function createSale(input: {
       await tx.insert(saleItems).values({
         saleId,
         productId: product?.id,
+        flavorId: item.flavorId,
         description: item.description,
         quantity: item.quantity,
         unitPrice: toMoney(item.unitPrice),

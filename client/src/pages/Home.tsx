@@ -74,6 +74,7 @@ const dateLabel = (value?: unknown) => {
       })
     : "—";
 };
+const flavorCategory = (category?: unknown) => ["Vapes Descartables", "Vapers Descartables", "Esencias"].includes(String(category || ""));
 const whatsappUrl = (phone?: unknown, name?: unknown) => {
   let digits = String(phone ?? "").replace(/\D/g, "");
   if (!digits) return "";
@@ -369,6 +370,7 @@ function SaleForm({
 }) {
   type SaleLine = {
     productId: string;
+    flavorId: string;
     quantity: string;
     description: string;
     unitPrice: string;
@@ -378,6 +380,7 @@ function SaleForm({
   };
   const emptyLine = (): SaleLine => ({
     productId: "",
+    flavorId: "",
     quantity: "1",
     description: "",
     unitPrice: "",
@@ -404,6 +407,7 @@ function SaleForm({
     staleTime: 240000,
   });
   const usdtRate = Number(rates.data?.usdt?.price || 0);
+  const flavors = trpc.business.allProductFlavors.useQuery(undefined, { staleTime: 60000 });
   const createSale = trpc.business.createSale.useMutation({
     onSuccess: r => {
       toast.success(
@@ -430,7 +434,8 @@ function SaleForm({
     const unitCost = fromInventory
       ? Number(selected.cost || 0)
       : Number(line.unitCost || 0);
-    return { line, selected, fromInventory, quantity, unitPrice, unitCost };
+    const selectedFlavor = flavors.data?.find(f => String(f.id) === line.flavorId && f.productId === selected?.id);
+    return { line, selected, selectedFlavor, fromInventory, quantity, unitPrice, unitCost };
   });
   const filteredCustomers = customers.filter(customer =>
     `${customer.name} ${customer.phone || ""}`
@@ -474,6 +479,7 @@ function SaleForm({
     const product = products.find(p => String(p.id) === value);
     updateLine(index, {
       productId: value,
+      flavorId: "",
       description: product ? product.name : "",
       unitCost: product ? String(product.cost) : "",
     });
@@ -517,6 +523,8 @@ function SaleForm({
             );
           if (paymentStatus === "partial" && !customerName.trim())
             return toast.error("Indicá el cliente que queda como deudor");
+          if (prepared.some(item => item.selected && flavorCategory(item.selected.category) && (!item.selectedFlavor || item.quantity > Number(item.selectedFlavor.stock))))
+            return toast.error("Seleccioná un sabor válido y no superes su stock disponible");
           createSale.mutate({
             date: saleDate,
             channel,
@@ -527,6 +535,7 @@ function SaleForm({
             paidAmount: paid,
             items: prepared.map(item => ({
               productId: item.selected?.id,
+              flavorId: item.selectedFlavor?.id,
               description: item.line.description.trim() || item.selected.name,
               quantity: item.quantity,
               unitPrice: item.unitPrice,
@@ -645,6 +654,16 @@ function SaleForm({
                     }
                   />
                 </label>
+                {selected && flavorCategory(selected.category) && (
+                  <label>
+                    Sabor / variante
+                    <select value={line.flavorId} onChange={e => updateLine(index, { flavorId: e.target.value })}>
+                      <option value="">Seleccioná un sabor</option>
+                      {(flavors.data || []).filter(f => f.productId === selected.id).map(f => <option key={f.id} value={f.id}>{f.name} · {f.stock} disponibles</option>)}
+                    </select>
+                    {prepared[index].selectedFlavor && <small className="conversion-note">Stock disponible: {prepared[index].selectedFlavor.stock} unidades</small>}
+                  </label>
+                )}
                 <div className="form-grid">
                   <label>
                     Cantidad
@@ -889,6 +908,7 @@ function SaleEditForm({
 }) {
   type EditableSaleItem = {
     productId: string;
+    flavorId: string;
     description: string;
     quantity: string;
     unitPrice: string;
@@ -898,6 +918,7 @@ function SaleEditForm({
   const initialItems = Array.isArray(sale.items) && sale.items.length
     ? sale.items.map((item: any) => ({
         productId: item.productId ? String(item.productId) : "",
+        flavorId: item.flavorId ? String(item.flavorId) : "",
         description: item.description || "",
         quantity: String(item.quantity || 1),
         unitPrice: String(item.unitPrice ?? 0),
@@ -913,6 +934,7 @@ function SaleEditForm({
         fromInventory: false,
       }];
   const [items, setItems] = useState<EditableSaleItem[]>(initialItems);
+  const flavors = trpc.business.allProductFlavors.useQuery(undefined, { staleTime: 60000 });
   const [editProductSearch, setEditProductSearch] = useState<Record<number, string>>({});
   const [date, setDate] = useState(dateInput(sale.saleDate));
   const [customerId, setCustomerId] = useState(sale.customerId ? String(sale.customerId) : "");
@@ -962,6 +984,7 @@ function SaleEditForm({
             description: description || undefined,
             items: items.map(item => ({
               productId: item.productId ? Number(item.productId) : undefined,
+              flavorId: item.flavorId ? Number(item.flavorId) : undefined,
               description: item.description.trim(),
               quantity: Number(item.quantity),
               unitPrice: Number(item.unitPrice || 0),
@@ -985,8 +1008,9 @@ function SaleEditForm({
               <label>Producto del inventario<select value={item.productId} onChange={e => {
                 const value = e.target.value;
                 const product = products.find(p => String(p.id) === value);
-                updateItem(index, { productId: value, fromInventory: Boolean(product), description: product?.name || item.description, unitCost: product ? String(product.cost) : item.unitCost });
+                updateItem(index, { productId: value, flavorId: "", fromInventory: Boolean(product), description: product?.name || item.description, unitCost: product ? String(product.cost) : item.unitCost });
               }}><option value="">Venta manual / externa</option>{visibleEditProducts(index).map(product => <option key={product.id} value={product.id}>{product.name} · stock {product.stock}</option>)}</select></label>
+              {products.find(p => String(p.id) === item.productId) && flavorCategory(products.find(p => String(p.id) === item.productId)?.category) && <label>Sabor / variante<select value={item.flavorId} onChange={e => updateItem(index, { flavorId: e.target.value })}><option value="">Seleccioná un sabor</option>{(flavors.data || []).filter(f => f.productId === Number(item.productId)).map(f => <option key={f.id} value={f.id}>{f.name} · {f.stock} disponibles</option>)}</select></label>}
               <div className="form-grid">
                 <label>Descripción<input value={item.description} onChange={e => updateItem(index, { description: e.target.value })} /></label>
                 <label>Cantidad<input type="number" min="1" step="1" value={item.quantity} onChange={e => updateItem(index, { quantity: e.target.value })} /></label>
@@ -998,7 +1022,7 @@ function SaleEditForm({
             </div>
           ))}
         </div>
-        <button type="button" className="button secondary" onClick={() => setItems(current => [...current, { productId: "", description: "", quantity: "1", unitPrice: "", unitCost: "", fromInventory: false }])}><Plus size={15} /> Agregar ítem</button>
+        <button type="button" className="button secondary" onClick={() => setItems(current => [...current, { productId: "", flavorId: "", description: "", quantity: "1", unitPrice: "", unitCost: "", fromInventory: false }])}><Plus size={15} /> Agregar ítem</button>
         <div className="mini-kpis"><div><span>Total recalculado</span><strong>{money(computedTotal)}</strong></div><div><span>Costo total</span><strong>{costKnown ? money(computedCost) : "Pendiente"}</strong></div><div><span>Ganancia</span><strong>{costKnown ? money(computedTotal - computedCost) : "Pendiente"}</strong></div></div>
         <label className="check-line"><input type="checkbox" checked={costKnown} onChange={e => setCostKnown(e.target.checked)} /> Confirmo que los costos están cargados</label>
         <label>Nota / descripción general<input value={description} onChange={e => setDescription(e.target.value)} placeholder="Descripción opcional" /></label>
@@ -3003,6 +3027,10 @@ function InventoryView({
   onEdit: (item: any) => void;
   onDone: () => void;
 }) {
+  const flavors = trpc.business.allProductFlavors.useQuery(undefined, { staleTime: 0 });
+  const createFlavor = trpc.business.createProductFlavor.useMutation({ onSuccess: () => { flavors.refetch(); onDone(); toast.success("Sabor agregado"); }, onError: e => toast.error(e.message) });
+  const updateFlavor = trpc.business.updateProductFlavor.useMutation({ onSuccess: () => { flavors.refetch(); onDone(); toast.success("Sabor actualizado"); }, onError: e => toast.error(e.message) });
+  const archiveFlavor = trpc.business.archiveProductFlavor.useMutation({ onSuccess: () => { flavors.refetch(); onDone(); toast.success("Sabor archivado"); }, onError: e => toast.error(e.message) });
   const remove = trpc.business.deleteProduct.useMutation({
     onSuccess: r => {
       toast.success(
@@ -3072,6 +3100,15 @@ function InventoryView({
               </strong>
               <span>Valor {money(Number(p.stock) * Number(p.cost))}</span>
             </div>
+            {flavorCategory(p.category) && (
+              <div className="flavor-stock-panel">
+                <div className="flavor-panel-head"><strong>Sabores</strong><button className="text-button" onClick={() => { const name = prompt("Nombre del sabor"); if (!name?.trim()) return; const value = prompt("Stock disponible", "0"); createFlavor.mutate({ productId: p.id, name: name.trim(), stock: Math.max(0, Number(value || 0)) }); }}><Plus size={13} /> Agregar</button></div>
+                {(flavors.data || []).filter(f => f.productId === p.id).map(f => (
+                  <div className="flavor-row" key={f.id}><span>{f.name}</span><strong>{f.stock}</strong><button className="text-button" onClick={() => { const value = prompt(`Stock para ${f.name}`, String(f.stock)); if (value !== null) updateFlavor.mutate({ id: f.id, name: f.name, stock: Math.max(0, Number(value)), minStock: f.minStock, notes: f.notes || undefined, active: true }); }}><Pencil size={12} /></button><button className="text-button danger-text" onClick={() => { if (confirmDelete(`el sabor ${f.name}`)) archiveFlavor.mutate({ id: f.id }); }}><Trash2 size={12} /></button></div>
+                ))}
+                {!(flavors.data || []).some(f => f.productId === p.id) && <small className="muted">Sin sabores cargados; agregalos para vender por variante.</small>}
+              </div>
+            )}
             <div className="card-actions">
               <button className="text-button" onClick={() => onEdit(p)}>
                 <Pencil size={13} /> Editar
