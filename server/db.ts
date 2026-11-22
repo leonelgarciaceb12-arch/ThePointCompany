@@ -544,9 +544,11 @@ export async function getDashboard(from?: string, to?: string) {
       : undefined;
   const publicAdWhere = sql`(
     lower(coalesce(${expenses.category}, '')) like '%publicidad%'
-    or lower(coalesce(${expenses.type}, '')) like '%publicidad%'
+    or lower(coalesce(${expenses.type}, '')) like '%publicitario%'
+    or lower(coalesce(${expenses.type}, '')) like '%meta ads%'
     or lower(coalesce(${expenses.platform}, '')) like '%meta ads%'
-  )`;
+    or lower(coalesce(${expenses.description}, '')) like '%meta ads%'
+  ) and lower(coalesce(${expenses.category}, '')) not like '%publicista%'`;
   const expenseWhere =
     from && to
       ? and(gte(expenses.expenseDate, from), lt(expenses.expenseDate, to), sql`not ${publicAdWhere}`)
@@ -1010,6 +1012,8 @@ export async function getAdsSpendHistory() {
       category: expenses.category,
       type: expenses.type,
       platform: expenses.platform,
+      description: expenses.description,
+      campaign: expenses.campaign,
       amount: expenses.amount,
     })
     .from(expenses);
@@ -1034,9 +1038,8 @@ export async function getAdsSpendHistory() {
     });
   }
   for (const row of expenseManual) {
-    if (row.id === 120001 && Number(row.amount || 0) === 280) continue;
-    const searchable = `${row.category || ""} ${row.type || ""} ${row.platform || ""}`.toLocaleLowerCase("es-AR");
-    if (!searchable.includes("publicidad") && !searchable.includes("meta ads")) continue;
+    const searchable = `${row.category || ""} ${row.type || ""} ${row.platform || ""} ${row.description || ""} ${row.campaign || ""}`.toLocaleLowerCase("es-AR");
+    if (searchable.includes("publicista") || (!searchable.includes("publicidad") && !searchable.includes("publicitario") && !searchable.includes("meta ads"))) continue;
     const key = String(row.date).slice(0, 7);
     const current = manualByMonth.get(key) || { spend: 0, entries: 0 };
     current.spend += Number(row.amount || 0);

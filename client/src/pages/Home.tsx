@@ -2442,6 +2442,8 @@ export default function Home() {
               period={period}
               setPeriod={setPeriod}
               onAdd={() => open("expense", { isAdvertising: true })}
+              onEdit={item => open("expense", item)}
+              onDone={refresh}
             />
           )}
           {active === "projections" && <ProjectionsView />}
@@ -3569,6 +3571,8 @@ function AdsView({
   period,
   setPeriod,
   onAdd,
+  onEdit,
+  onDone,
 }: {
   adsSpendHistory?: { manual: any[]; daily: any[] };
   ads?: any[];
@@ -3576,7 +3580,13 @@ function AdsView({
   period: PeriodKey;
   setPeriod: (value: PeriodKey) => void;
   onAdd: () => void;
+  onEdit: (item: any) => void;
+  onDone: () => void;
 }) {
+  const removeExpense = trpc.business.deleteExpense.useMutation({
+    onSuccess: onDone,
+    onError: error => toast.error(error.message),
+  });
   const fallbackByDay = new Map<string, { date: string; spend: number; entries: number }>();
   const addFallback = (dateValue: unknown, amountValue: unknown) => {
     const date = String(dateValue || "").slice(0, 10);
@@ -3587,8 +3597,14 @@ function AdsView({
     fallbackByDay.set(date, row);
   };
   for (const row of ads ?? []) addFallback(row.adDate, row.amount);
-  for (const row of expenses ?? []) {
-    if (row.category === "Publicidad" || row.type === "Publicitario")
+  const advertisingExpenses = (expenses ?? []).filter((row: any) => {
+    const searchable = `${row.category || ""} ${row.type || ""} ${row.platform || ""} ${row.description || ""} ${row.campaign || ""}`.toLocaleLowerCase("es-AR");
+    return !searchable.includes("publicista") && (
+      searchable.includes("publicidad") || searchable.includes("publicitario") || searchable.includes("meta ads")
+    );
+  });
+  for (const row of advertisingExpenses) {
+    if (row.category === "Publicidad" || row.type === "Publicitario" || row.type === "Meta Ads")
       addFallback(row.expenseDate, row.amount);
   }
   const sourceDaily = adsSpendHistory?.daily?.length
@@ -3700,9 +3716,15 @@ function AdsView({
         </div>
       </section>
       <section className="panel table-panel">
-        <SectionHeader eyebrow="detalle diario" title="Gastos manuales registrados" action="Cargar gasto" onAction={onAdd} />
-        <div className="table-scroll"><table><thead><tr><th>Fecha</th><th>Importe del día</th><th>Cargas</th></tr></thead><tbody>
-          {detailRows.length ? detailRows.map(row => <tr key={row.date}><td>{dateLabel(row.date)}</td><td><strong>{money(row.spend)}</strong></td><td>{row.entries} {row.entries === 1 ? "registro" : "registros"}</td></tr>) : <tr><td colSpan={3} className="empty-cell">Sin gastos de Ads registrados todavía.</td></tr>}
+        <SectionHeader eyebrow="detalle editable" title="Gastos manuales registrados" action="Cargar gasto" onAction={onAdd} />
+        <div className="table-scroll"><table><thead><tr><th>Fecha</th><th>Detalle</th><th>Tipo</th><th>Monto</th><th></th></tr></thead><tbody>
+          {advertisingExpenses.length ? advertisingExpenses.sort((a: any, b: any) => String(b.expenseDate).localeCompare(String(a.expenseDate)) || Number(b.id) - Number(a.id)).map((row: any) => <tr key={row.id}>
+            <td>{dateLabel(row.expenseDate)}</td>
+            <td><strong>Publicidad</strong><small>{row.platform || row.campaign || "Meta Ads manual"}</small></td>
+            <td><span className="soft-tag">Meta Ads</span></td>
+            <td>{money(row.amount)}</td>
+            <td><RowActions onEdit={() => onEdit(row)} onDelete={() => removeExpense.mutate({ id: row.id })} deleteLabel={`el gasto del ${dateLabel(row.expenseDate)}`} /></td>
+          </tr>) : <tr><td colSpan={5} className="empty-cell">Sin gastos de Ads registrados todavía.</td></tr>}
         </tbody></table></div>
       </section>
     </>
