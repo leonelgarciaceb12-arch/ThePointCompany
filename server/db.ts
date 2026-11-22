@@ -995,16 +995,6 @@ export async function getAdsSpendHistory() {
   const db = await getDb();
   if (!db) return { manual: [], daily: [] };
   await ensureSeeded();
-  const monthKey = sql<string>`date_format(${adCampaigns.adDate}, '%Y-%m')`;
-  const campaignManual = await db
-    .select({
-      month: monthKey,
-      spend: sql<number>`coalesce(sum(${adCampaigns.amount}), 0)`,
-      entries: sql<number>`count(*)`,
-    })
-    .from(adCampaigns)
-    .groupBy(monthKey)
-    .orderBy(monthKey);
   const expenseManual = await db
     .select({
       id: expenses.id,
@@ -1029,13 +1019,13 @@ export async function getAdsSpendHistory() {
     current.entries += 1;
     manualByDay.set(key, current);
   };
-  for (const row of campaignEntries) addDaily(row.date, row.amount);
-  for (const row of campaignManual) {
-    const key = String(row.month);
-    manualByMonth.set(key, {
-      spend: Number(row.spend || 0),
-      entries: Number(row.entries || 0),
-    });
+  for (const row of campaignEntries) {
+    addDaily(row.date, row.amount);
+    const key = String(row.date).slice(0, 7);
+    const current = manualByMonth.get(key) || { spend: 0, entries: 0 };
+    current.spend += Number(row.amount || 0);
+    current.entries += 1;
+    manualByMonth.set(key, current);
   }
   for (const row of expenseManual) {
     const searchable = `${row.category || ""} ${row.type || ""} ${row.platform || ""} ${row.description || ""} ${row.campaign || ""}`.toLocaleLowerCase("es-AR");
