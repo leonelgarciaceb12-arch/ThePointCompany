@@ -33,6 +33,20 @@ export const products = mysqlTable("products", {
   ...audit,
 }, table => ({ nameIdx: index("products_name_idx").on(table.name), categoryIdx: index("products_category_idx").on(table.category) }));
 
+export const productFlavors = mysqlTable("product_flavors", {
+  id: int("id").autoincrement().primaryKey(),
+  productId: int("productId").notNull(),
+  name: varchar("name", { length: 160 }).notNull(),
+  stock: int("stock").notNull().default(0),
+  minStock: int("minStock").notNull().default(0),
+  notes: text("notes"),
+  active: boolean("active").notNull().default(true),
+  ...audit,
+}, table => ({
+  productIdx: index("product_flavors_product_idx").on(table.productId),
+  productNameIdx: uniqueIndex("product_flavors_product_name_idx").on(table.productId, table.name),
+}));
+
 export const customers = mysqlTable("customers", {
   id: int("id").autoincrement().primaryKey(),
   name: varchar("name", { length: 180 }).notNull(),
@@ -69,6 +83,7 @@ export const saleItems = mysqlTable("sale_items", {
   id: int("id").autoincrement().primaryKey(),
   saleId: int("saleId").notNull(),
   productId: int("productId"),
+  flavorId: int("flavorId"),
   description: text("description").notNull(),
   quantity: int("quantity").notNull().default(1),
   unitPrice: decimal("unitPrice", { precision: 12, scale: 2 }).notNull().default("0"),

@@ -11,6 +11,7 @@ import {
   metaAdInsights,
   objectives,
   products,
+  productFlavors,
   receivables,
   saleItems,
   sales,
@@ -61,7 +62,7 @@ export async function saveBackupSchedule(taskUid: string) {
     id: BACKUP_SCHEDULE_ID,
     taskUid,
     name: "Backup diario The Point Company",
-    cronExpression: "0 59 2 * * *",
+    cronExpression: "0 59 23 * * *",
     timezone: ARGENTINA_TIME_ZONE,
     enabled: true,
   }).onDuplicateKeyUpdate({
@@ -79,6 +80,7 @@ export async function createDailyBackup(taskUid?: string) {
   const backupDate = dateKeyInArgentina();
   const [
     productRows,
+    flavorRows,
     saleRows,
     saleItemRows,
     customerRows,
@@ -92,6 +94,7 @@ export async function createDailyBackup(taskUid?: string) {
     proposalRows,
   ] = await Promise.all([
     tableRows(db, products),
+    tableRows(db, productFlavors),
     tableRows(db, sales),
     tableRows(db, saleItems),
     tableRows(db, customers),
@@ -110,6 +113,7 @@ export async function createDailyBackup(taskUid?: string) {
     generatedAt: new Date().toISOString(),
     tables: {
       products: productRows,
+      productFlavors: flavorRows,
       sales: saleRows,
       saleItems: saleItemRows,
       customers: customerRows,

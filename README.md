@@ -6,6 +6,13 @@ React / Express / tRPC / Drizzle starter, adapted from the Sandbox web-db-user t
 - `pnpm build` / `pnpm start`: build and serve `dist/index.js` and `dist/public/`.
 - `pnpm db:migrate`: apply checked-in migrations. `pnpm db:push`: generate and apply new schema changes.
 - `pnpm check` / `pnpm test`: types and application tests.
+- `pnpm db:seed`: reconciliación inicial idempotente.
+- `pnpm db:backup` / `pnpm db:restore <archivo> --confirm`: backup y restauración JSON.
+- `pnpm db:normalize-meta-ads --dry-run`: previsualizar la normalización de publicidad; sin `--dry-run` la aplica.
+
+El código fuente público está en [github.com/leonelgarciaceb12-arch/ThePointCompany](https://github.com/leonelgarciaceb12-arch/ThePointCompany). Cualquiera puede verlo y clonarlo; para escribir directamente se necesita acceso de colaborador o trabajar mediante fork/pull request.
+
+Las variantes de inventario están disponibles únicamente para `Vapes Descartables` y `Esencias`. Los productos y ventas históricos sin sabor se conservan como están. La operación detallada está en `docs/OPERATIONS.md` y las variables locales en `.env.example`.
 
 Start with the Webdev skill's default-template guide. Platform login, storage, payments and service contracts live in its shared references; read the relevant capability before extending its helper.
 

@@ -29,6 +29,10 @@ import {
   listObjectives,
   listProductPerformance,
   listProducts,
+  listProductFlavors,
+  createProductFlavor,
+  updateProductFlavor,
+  archiveProductFlavor,
   listReceivables,
   listSales,
   payLoan,
@@ -48,6 +52,7 @@ import { clearSharedSession, createSharedSession, passwordMatches, setSharedSess
 
 const saleItem = z.object({
   productId: z.number().int().positive().optional(),
+  flavorId: z.number().int().positive().optional(),
   description: z.string().min(1),
   quantity: z.number().int().positive(),
   unitPrice: z.number().nonnegative(),
@@ -165,6 +170,18 @@ export const appRouter = router({
           .optional()
       )
       .query(({ input }) => listProducts(input?.search, input?.category)),
+    productFlavors: protectedProcedure
+      .input(z.object({ productId: z.number().int().positive() }))
+      .query(({ input }) => listProductFlavors(input.productId)),
+    createProductFlavor: protectedProcedure
+      .input(z.object({ productId: z.number().int().positive(), name: z.string().min(1), stock: z.number().int().nonnegative(), minStock: z.number().int().nonnegative().optional(), notes: z.string().optional() }))
+      .mutation(({ input, ctx }) => createProductFlavor({ ...input, userId: ctx.user.id })),
+    updateProductFlavor: protectedProcedure
+      .input(z.object({ id: z.number().int().positive(), name: z.string().min(1), stock: z.number().int().nonnegative(), minStock: z.number().int().nonnegative().optional(), notes: z.string().optional(), active: z.boolean().optional() }))
+      .mutation(({ input, ctx }) => updateProductFlavor(input.id, { ...input, userId: ctx.user.id })),
+    archiveProductFlavor: protectedProcedure
+      .input(z.object({ id: z.number().int().positive() }))
+      .mutation(({ input, ctx }) => archiveProductFlavor(input.id, ctx.user.id)),
     sales: protectedProcedure
       .input(
         z

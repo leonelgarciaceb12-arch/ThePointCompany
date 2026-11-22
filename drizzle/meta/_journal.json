@@ -71,6 +71,13 @@
       "when": 1793728018204,
       "tag": "0009_small_micromax",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1795316095896,
+      "tag": "0010_good_lizard",
+      "breakpoints": true
     }
   ]
 }

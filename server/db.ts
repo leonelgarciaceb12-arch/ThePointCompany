@@ -13,6 +13,7 @@ import {
   loans,
   objectives,
   products,
+  productFlavors,
   receivables,
   saleItems,
   sales,
@@ -21,6 +22,7 @@ import {
   users,
 } from "../drizzle/schema";
 import { ENV } from "./_core/env";
+import { classifyExpense } from "../shared/businessRules";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 let seedPromise: Promise<void> | null = null;
@@ -55,24 +57,6 @@ const shiftDateKey = (dateKey: string, days: number) => {
   date.setUTCDate(date.getUTCDate() + days);
   return date.toISOString().slice(0, 10);
 };
-
-const advertisingExpenseWhere = sql`(
-  lower(coalesce(${expenses.category}, '')) like '%publicidad%'
-  or lower(coalesce(${expenses.category}, '')) like '%meta ads%'
-  or lower(coalesce(${expenses.type}, '')) like '%publicitario%'
-  or lower(coalesce(${expenses.type}, '')) like '%meta ads%'
-  or lower(coalesce(${expenses.platform}, '')) like '%meta ads%'
-  or lower(coalesce(${expenses.description}, '')) like '%meta ads%'
-) and lower(coalesce(${expenses.category}, '')) not like '%publicista%'
-`;
-
-async function normalizeAdvertisingExpenses(db: ReturnType<typeof drizzle>) {
-  await db.update(expenses).set({
-    category: "Publicidad",
-    type: "Meta Ads",
-    description: "Publicidad",
-  }).where(advertisingExpenseWhere);
-}
 
 function debtStatus(
   principal: unknown,
@@ -470,7 +454,13 @@ export async function ensureSeeded() {
           eq(adCampaigns.amount, amount),
         ))
         .limit(1))[0];
-      if (!existing) {
+      if (existing) {
+        await db.update(adCampaigns).set({
+          campaign: "Campaña inicial propia de ventas - Multiples estilos",
+          notes: a.notes ? String(a.notes) : null,
+          updatedAt: now,
+        }).where(eq(adCampaigns.id, existing.id));
+      } else {
         await db.insert(adCampaigns).values({
           adDate,
           platform,
@@ -482,6 +472,12 @@ export async function ensureSeeded() {
         });
       }
     }
+    await db
+      .update(adCampaigns)
+      .set({ campaign: "Campaña inicial propia de ventas - Multiples estilos" })
+      .where(
+        sql`${adCampaigns.campaign} like '%estilo folleto%' or ${adCampaigns.campaign} like '%Campaña de venta de vapes%'`
+      );
     if ((await count(expenses)) === 0 && raw.expenses.length)
       await db.insert(expenses).values(
         raw.expenses.map(e => ({
@@ -542,12 +538,15 @@ export async function getDashboard(from?: string, to?: string) {
   const db = await getDb();
   if (!db) return null;
   await ensureSeeded();
-  await normalizeAdvertisingExpenses(db);
   const salesWhere =
     from && to
       ? and(gte(sales.saleDate, from), lt(sales.saleDate, to))
       : undefined;
-  const publicAdWhere = advertisingExpenseWhere;
+  const publicAdWhere = sql`(
+    lower(coalesce(${expenses.category}, '')) like '%publicidad%'
+    or lower(coalesce(${expenses.type}, '')) like '%publicidad%'
+    or lower(coalesce(${expenses.platform}, '')) like '%meta ads%'
+  )`;
   const expenseWhere =
     from && to
       ? and(gte(expenses.expenseDate, from), lt(expenses.expenseDate, to), sql`not ${publicAdWhere}`)
@@ -765,7 +764,7 @@ export async function getDashboard(from?: string, to?: string) {
     recentSales,
     dueLoans: dueLoans.map(presentDebt),
     expenses: expensesTotal[0],
-    ads: { total: adSpend },
+    ads: adTotal[0],
     daily,
     advanced,
   };
@@ -837,6 +836,7 @@ export async function listSales(limit?: number) {
       saleId: saleItems.saleId,
       id: saleItems.id,
       productId: saleItems.productId,
+      flavorId: saleItems.flavorId,
       description: saleItems.description,
       quantity: saleItems.quantity,
       unitPrice: saleItems.unitPrice,
@@ -874,6 +874,7 @@ export async function listSales(limit?: number) {
     items: (itemsBySale.get(row.id) ?? []).map(item => ({
       id: item.id,
       productId: item.productId,
+      flavorId: item.flavorId,
       description: item.description,
       quantity: item.quantity,
       unitPrice: Number(item.unitPrice || 0),
@@ -893,25 +894,16 @@ export async function listExpenses() {
   const db = await getDb();
   if (!db) return [];
   await ensureSeeded();
-  await normalizeAdvertisingExpenses(db);
   const rows = await db
     .select()
     .from(expenses)
     .orderBy(desc(expenses.expenseDate), desc(expenses.id));
-  for (const row of rows) {
-    if (row.id === 120001 && Number(row.amount || 0) === 280) {
-      await db.update(expenses).set({
-        category: "Publicista",
-        description: "Asesoría y gestión de publicidad",
-        type: "Operativo",
-      }).where(eq(expenses.id, row.id));
-      row.category = "Publicista";
-      row.description = "Asesoría y gestión de publicidad";
-      row.type = "Operativo";
-      continue;
-    }
-  }
-  return rows;
+  return rows.map(row => {
+    const normalized = classifyExpense(row);
+    return normalized.isAdvertising
+      ? { ...row, category: normalized.category, type: normalized.type, description: normalized.description }
+      : row;
+  });
 }
 export async function listLoans() {
   const db = await getDb();
@@ -948,6 +940,12 @@ export async function listLoans() {
       notes: "Compromiso saldado reconstruido desde el registro histórico del negocio.",
     });
   }
+  // La mentoría fue un gasto/inversión, no una deuda del negocio: retirarla
+  // del historial de compromisos aunque una versión anterior la haya creado.
+  await db.delete(loans).where(and(
+    eq(loans.counterparty, "Mateo Portillo"),
+    eq(loans.description, "Mentoria 1:1 por 3 meses"),
+  ));
   const userSettled = [
     { counterparty: "Lautaro Mires", description: "57 Battery Pack 10.000 mAh", principal: "357.57", startDate: "2026-10-12", dueDate: "2026-10-22" },
     { counterparty: "Bautista Restifo", description: "100 Termitos c/sensor de temperatura", principal: "400.00", startDate: "2026-10-02", dueDate: "2026-10-12" },
@@ -1038,10 +1036,7 @@ export async function getAdsSpendHistory() {
   for (const row of expenseManual) {
     if (row.id === 120001 && Number(row.amount || 0) === 280) continue;
     const searchable = `${row.category || ""} ${row.type || ""} ${row.platform || ""}`.toLocaleLowerCase("es-AR");
-    if (
-      searchable.includes("publicista") ||
-      (!searchable.includes("publicidad") && !searchable.includes("publicitario") && !searchable.includes("meta ads"))
-    ) continue;
+    if (!searchable.includes("publicidad") && !searchable.includes("meta ads")) continue;
     const key = String(row.date).slice(0, 7);
     const current = manualByMonth.get(key) || { spend: 0, entries: 0 };
     current.spend += Number(row.amount || 0);
@@ -1127,6 +1122,44 @@ export async function createProduct(input: {
     updatedBy: input.userId,
   });
   return Number(result[0].insertId);
+}
+
+const flavorCategories = new Set(["Vapes Descartables", "Esencias"]);
+async function assertFlavorProduct(tx: any, productId: number) {
+  const product = (await tx.select().from(products).where(eq(products.id, productId)).limit(1))[0];
+  if (!product) throw new Error("Producto no encontrado");
+  if (!flavorCategories.has(product.category)) throw new Error("Solo Vapes Descartables y Esencias admiten sabores");
+  return product;
+}
+
+export async function listProductFlavors(productId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(productFlavors).where(eq(productFlavors.productId, productId)).orderBy(asc(productFlavors.name));
+}
+
+export async function createProductFlavor(input: { productId: number; name: string; stock: number; minStock?: number; notes?: string; userId?: number }) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  return db.transaction(async tx => {
+    await assertFlavorProduct(tx, input.productId);
+    const result = await tx.insert(productFlavors).values({ productId: input.productId, name: input.name.trim(), stock: input.stock, minStock: input.minStock ?? 0, notes: input.notes || null, createdBy: input.userId, updatedBy: input.userId });
+    return Number(result[0].insertId);
+  });
+}
+
+export async function updateProductFlavor(id: number, input: { name: string; stock: number; minStock?: number; notes?: string; active?: boolean; userId?: number }) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await db.update(productFlavors).set({ name: input.name.trim(), stock: input.stock, minStock: input.minStock ?? 0, notes: input.notes || null, active: input.active ?? true, updatedBy: input.userId }).where(eq(productFlavors.id, id));
+  return { id };
+}
+
+export async function archiveProductFlavor(id: number, userId?: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await db.update(productFlavors).set({ active: false, updatedBy: userId }).where(eq(productFlavors.id, id));
+  return { id, archived: true };
 }
 
 export async function updateProduct(
@@ -1244,6 +1277,7 @@ export async function updateSale(
     status?: "paid" | "pending";
     items?: Array<{
       productId?: number;
+      flavorId?: number;
       description: string;
       quantity: number;
       unitPrice: number;
@@ -1306,6 +1340,7 @@ export async function updateSale(
         await tx.insert(saleItems).values({
           saleId: id,
           productId: item.productId ?? null,
+          flavorId: item.flavorId ?? null,
           description: item.description,
           quantity: item.quantity,
           unitPrice: toMoney(item.unitPrice),
@@ -1496,6 +1531,7 @@ export async function createSale(input: {
   paidAmount?: number;
   items: Array<{
     productId?: number;
+    flavorId?: number;
     description: string;
     quantity: number;
     unitPrice: number;
@@ -1529,8 +1565,14 @@ export async function createSale(input: {
           .limit(1);
         product = rows[0];
         if (!product) throw new Error("Producto de inventario no encontrado");
-        if (product.stock < item.quantity)
+        if (item.flavorId) {
+          if (!flavorCategories.has(product.category)) throw new Error("Ese producto no admite sabores");
+          const flavor = (await tx.select().from(productFlavors).where(and(eq(productFlavors.id, item.flavorId), eq(productFlavors.productId, product.id))).limit(1))[0];
+          if (!flavor || !flavor.active) throw new Error("Sabor no encontrado o inactivo");
+          if (flavor.stock < item.quantity) throw new Error(`Stock insuficiente para ${product.name} · ${flavor.name}`);
+        } else if (product.stock < item.quantity) {
           throw new Error(`Stock insuficiente para ${product.name}`);
+        }
       }
       const itemCostKnown = item.fromInventory || item.unitCost !== undefined;
       const cost = itemCostKnown
@@ -1644,13 +1686,11 @@ export async function createSale(input: {
         updatedBy: input.userId,
       });
       if (product && item.fromInventory) {
-        await tx
-          .update(products)
-          .set({
-            stock: product.stock - item.quantity,
-            updatedBy: input.userId,
-          })
-          .where(eq(products.id, product.id));
+        if (item.flavorId) {
+          await tx.update(productFlavors).set({ stock: sql`${productFlavors.stock} - ${item.quantity}`, updatedBy: input.userId }).where(and(eq(productFlavors.id, item.flavorId), eq(productFlavors.productId, product.id)));
+        } else {
+          await tx.update(products).set({ stock: product.stock - item.quantity, updatedBy: input.userId }).where(eq(products.id, product.id));
+        }
         await tx.insert(stockMovements).values({
           productId: product.id,
           type: "sale",
@@ -1706,14 +1746,13 @@ export async function createExpense(input: {
 }) {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
-  const searchable = `${input.category} ${input.type || ""} ${input.description}`.toLocaleLowerCase("es-AR");
-  const isAdvertising = !input.category.toLocaleLowerCase("es-AR").includes("publicista") && (searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("publicitario") || searchable.includes("rdads"));
+  const classification = classifyExpense(input);
   const result = await db.insert(expenses).values({
     expenseDate: input.date,
-    category: isAdvertising ? "Publicidad" : input.category,
-    description: isAdvertising ? "Publicidad" : input.description,
+    category: classification.category,
+    description: classification.description,
     amount: toMoney(input.amount),
-    type: isAdvertising ? "Meta Ads" : input.type || "Operativo",
+    type: classification.type,
     platform: input.platform,
     campaign: input.campaign,
     notes: input.notes,
@@ -1968,16 +2007,15 @@ export async function updateExpense(
 ) {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
-  const searchable = `${input.category} ${input.type || ""} ${input.description}`.toLocaleLowerCase("es-AR");
-  const isAdvertising = !input.category.toLocaleLowerCase("es-AR").includes("publicista") && (searchable.includes("publicidad") || searchable.includes("meta ads") || searchable.includes("publicitario") || searchable.includes("rdads"));
+  const classification = classifyExpense(input);
   await db
     .update(expenses)
     .set({
       expenseDate: input.date,
-      category: isAdvertising ? "Publicidad" : input.category,
-      description: isAdvertising ? "Publicidad" : input.description,
+      category: classification.category,
+      description: classification.description,
       amount: toMoney(input.amount),
-      type: isAdvertising ? "Meta Ads" : input.type || "Operativo",
+      type: classification.type,
       notes: input.notes || null,
       updatedBy: input.userId,
     })
