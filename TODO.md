@@ -6,7 +6,7 @@
 - [x] Ventas: venta desde inventario propio o manual; el inventario descuenta stock automáticamente, calcula costo/ganancia cuando el costo existe y marca «Costo pendiente» cuando falta.
 - [x] Clientes: compras, gasto, ganancia, última compra, días sin recompra y selección de cliente existente al cargar una venta.
 - [x] Dashboard: filtro de período, facturación, ganancia, margen, ticket promedio, unidades/pedidos, gastos, publicidad manual, deuda, rotación, bajo stock, clientes de mayor aporte y objetivo visible.
-- [x] Gastos y publicidad: las nuevas cargas de Ads se registran como gastos manuales con categoría Publicidad; no requieren sincronización externa.
+- [x] Gastos y publicidad: las cargas de Ads se registran como `Publicidad / Meta Ads / Publicidad`, aparecen únicamente en el panel Publicidad y quedan excluidas del listado común de Finanzas; los nuevos gastos cargados desde Publicidad usan Meta Ads por defecto.
 - [x] Deudores y préstamos: existen cuentas por cobrar separadas de préstamos/mercadería a pagar, con monto, pagos parciales, saldo, vencimiento, estado y formularios de alta/cobro.
 - [x] Objetivos: objetivos mensuales importados, visibles, editables y eliminables desde la interfaz.
 - [x] Acceso móvil: navegación, tablas con scroll y formularios responsive; auditoría básica con usuario y timestamps en registros.
@@ -49,9 +49,10 @@
 
 - [x] Meta Ads: sincronización y formulario de campañas desactivados en la interfaz; las tablas históricas se retienen para no borrar datos ni afectar copias de seguridad.
 
-- [x] Historial manual de Ads: los gastos existentes siguen sumando a finanzas; las cargas nuevas se guardan desde Publicidad como gastos manuales.
+- [x] Historial manual de Ads: los gastos existentes se conservan y las cargas nuevas se guardan desde Publicidad como gastos manuales clasificados como Meta Ads.
 - [x] Finanzas separa los gastos de publicidad del listado y subtotal normales; las cargas de Ads se muestran en Publicidad y se descuentan junto con los gastos no publicitarios para calcular la ganancia neta.
 - [ ] Editor restringido en `/editor`: contraseña separada, allowlist de archivos, propuestas de patch, sin secretos, base de datos, terminal ni publicación automática.
 - [ ] Backup diario completo del negocio a las 23:59 ART, guardado en almacenamiento durable y registrado con checksum.
 - [x] Panel de Publicidad con gasto diario y vistas por día/semana/mes/trimestre; el historial completo se resume por mes para mantener el gráfico legible.
 - [x] Cargas de 25/10 y 26/10 verificadas en el sistema a US$15 por día; no se duplicaron.
+- [x] Variantes de inventario: Vapes Descartables, Vapers Descartables y Esencias permiten crear, editar y archivar sabores con stock propio; las ventas seleccionan sabor, validan disponibilidad y restauran stock al editar o eliminar.

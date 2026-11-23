@@ -12,7 +12,7 @@ React / Express / tRPC / Drizzle starter, adapted from the Sandbox web-db-user t
 
 El código fuente público está en [github.com/leonelgarciaceb12-arch/ThePointCompany](https://github.com/leonelgarciaceb12-arch/ThePointCompany). Cualquiera puede verlo y clonarlo; para escribir directamente se necesita acceso de colaborador o trabajar mediante fork/pull request.
 
-Las variantes de inventario están disponibles únicamente para `Vapes Descartables` y `Esencias`. Los productos y ventas históricos sin sabor se conservan como están. La operación detallada está en `docs/OPERATIONS.md` y las variables locales en `.env.example`.
+Las variantes de inventario están disponibles para `Vapes Descartables`, `Vapers Descartables` y `Esencias`. Cada sabor mantiene stock propio, el stock total del producto se sincroniza con sus sabores activos y las ventas descuentan/devolucionan la variante elegida. Los productos y ventas históricos sin sabor se conservan como están. La operación detallada está en `docs/OPERATIONS.md` y las variables locales en `.env.example`.
 
 Start with the Webdev skill's default-template guide. Platform login, storage, payments and service contracts live in its shared references; read the relevant capability before extending its helper.
 

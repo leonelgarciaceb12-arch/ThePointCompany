@@ -1126,7 +1126,7 @@ async function syncProductFlavorStock(tx: any, productId: number, userId?: numbe
 async function assertFlavorProduct(tx: any, productId: number) {
   const product = (await tx.select().from(products).where(eq(products.id, productId)).limit(1))[0];
   if (!product) throw new Error("Producto no encontrado");
-  if (!flavorCategories.has(product.category)) throw new Error("Solo Vapes Descartables y Esencias admiten sabores");
+  if (!flavorCategories.has(product.category)) throw new Error("Solo Vapes Descartables, Vapers Descartables y Esencias admiten sabores");
   return product;
 }
 

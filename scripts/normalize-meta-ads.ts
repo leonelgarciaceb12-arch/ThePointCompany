@@ -1,7 +1,10 @@
 import "dotenv/config";
 import mysql from "mysql2/promise";
 
-const ids = [600001, 600002, 600003, 630001, 630002];
+// Registros manuales solicitados: 28/10 y del 16/11 al 20/11 de 2026.
+// Se usan IDs explícitos para no tocar otros gastos que eventualmente existan
+// en esas mismas fechas.
+const ids = [660001, 660002, 660003, 660004, 660005, 660006];
 const dryRun = process.argv.includes("--dry-run");
 
 const pool = mysql.createPool(process.env.DATABASE_URL!);
