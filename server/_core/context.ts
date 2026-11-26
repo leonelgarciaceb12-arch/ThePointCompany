@@ -1,6 +1,7 @@
 import type { CreateExpressContextOptions } from "@trpc/server/adapters/express";
 import type { User } from "../../drizzle/schema";
 import { sdk } from "./sdk";
+import { ENV } from "./env";
 import { getSharedSessionToken, isSharedSession, sharedUser } from "./sharedAuth";
 
 export type TrpcContext = {
@@ -14,11 +15,15 @@ export async function createContext(
 ): Promise<TrpcContext> {
   let user: User | null = null;
 
-  try {
-    user = await sdk.authenticateRequest(opts.req);
-  } catch (error) {
-    // Authentication is optional for public procedures.
-    user = null;
+  // Manus OAuth is optional. Independent deployments use only the signed
+  // shared-password session and must not call Manus services at all.
+  if (ENV.oAuthServerUrl || ENV.appId) {
+    try {
+      user = await sdk.authenticateRequest(opts.req);
+    } catch {
+      // Authentication is optional for public procedures.
+      user = null;
+    }
   }
 
   if (!user && (await isSharedSession(getSharedSessionToken(opts.req)))) {

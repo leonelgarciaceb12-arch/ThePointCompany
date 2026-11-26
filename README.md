@@ -19,3 +19,9 @@ Start with the Webdev skill's default-template guide. Platform login, storage, p
 `server/_core/publicConfig.ts` exposes only named public runtime values. Private keys stay server-side. The platform serves managed `/manus-storage/` assets; the application does not register a second proxy.
 
 Platform configuration is readable and editable through `webdev.config`. Default settings are initial values, not enforced constraints. The agent may modify the files, commands and configuration or follow the flexible guide for another stack.
+
+## Despliegue independiente
+
+El proyecto no necesita la cuenta de Manus para ejecutarse: usa MySQL, autenticación propia por contraseña compartida y `JWT_SECRET`. Incluye `railway.json` y un workflow de validación en `.github/workflows/ci.yml`. Conecta la rama `main` a un servicio Docker de Railway y configura los secretos de `.env.example`; cada cambio validado puede publicarse automáticamente.
+
+La guía completa de configuración, migraciones, recuperación y backups está en [docs/INDEPENDENT-DEPLOYMENT.md](docs/INDEPENDENT-DEPLOYMENT.md).

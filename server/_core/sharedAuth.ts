@@ -9,8 +9,8 @@ const SESSION_TTL_SECONDS = 60 * 60 * 24 * 30;
 const cookieOptions: CookieOptions = {
   httpOnly: true,
   path: "/",
-  sameSite: "none",
-  secure: true,
+  sameSite: "lax",
+  secure: ENV.isProduction,
 };
 
 function secretKey() {

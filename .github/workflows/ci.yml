@@ -1,0 +1,37 @@
+name: Validar The Point Company
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Activar pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.18.0
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+      - name: Typecheck y lint
+        run: pnpm check
+      - name: Tests
+        run: pnpm test
+      - name: Build de producción
+        run: pnpm build
+      - name: Validar imagen Docker
+        run: docker build --tag the-point-company:${{ github.sha }} .

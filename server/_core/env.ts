@@ -1,7 +1,8 @@
-// Platform values are read at use time. See the Webdev service/authentication skills.
+// Independent application configuration. Legacy MANUS_* values are retained
+// only for optional backward compatibility and are never required.
 export const ENV = {
   get appId() { return process.env.MANUS_PROJECT_ID ?? ""; },
-  get cookieSecret() { return process.env.MANUS_JWT_SECRET ?? ""; },
+  get cookieSecret() { return process.env.JWT_SECRET ?? process.env.MANUS_JWT_SECRET ?? ""; },
   get sharedPassword() { return process.env.THE_POINT_SHARED_PASSWORD ?? ""; },
   get editorPassword() { return process.env.THE_POINT_EDITOR_PASSWORD ?? ""; },
   get databaseUrl() { return process.env.DATABASE_URL ?? ""; },
