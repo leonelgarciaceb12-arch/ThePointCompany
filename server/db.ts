@@ -327,7 +327,7 @@ export async function ensureSeeded() {
   seedPromise = (async () => {
     const db = await getDb();
     if (!db) return;
-    const raw = JSON.parse(await readFile(seedPath, "utf8")) as {
+    let raw: {
       products: Array<Record<string, unknown>>;
       sales: Array<Record<string, unknown>>;
       customers: Array<Record<string, unknown>>;
@@ -336,6 +336,14 @@ export async function ensureSeeded() {
       loans: Array<Record<string, unknown>>;
       objectives: Array<Record<string, unknown>>;
     };
+    try {
+      raw = JSON.parse(await readFile(seedPath, "utf8")) as typeof raw;
+    } catch (error: any) {
+      // A clean production deployment intentionally has no historical seed.
+      // The first records are entered by the business owner through the UI.
+      if (error?.code === "ENOENT") return;
+      throw error;
+    }
     const now = new Date();
     const count = async (table: any) =>
       Number(

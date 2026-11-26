@@ -45,7 +45,7 @@ El contenedor ejecuta `pnpm db:migrate` antes de iniciar el servidor. Las migrac
 pnpm db:seed
 ```
 
-El archivo `data/seed-normalized.json` contiene el histórico recuperado, aproximadamente hasta el 10/10/2026. No representa datos posteriores que no hayan podido recuperarse de la cuenta suspendida.
+El despliegue independiente comienza vacío de forma intencional. No se incluye ni se carga ningún dato histórico de la cuenta anterior. `pnpm db:seed` solo debe utilizarse si el propietario prepara explícitamente un archivo de importación propio; la ausencia de ese archivo es válida y no impide que la aplicación funcione.
 
 ## Backups independientes
 
