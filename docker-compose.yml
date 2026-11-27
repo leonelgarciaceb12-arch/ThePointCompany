@@ -25,6 +25,8 @@ services:
       PORT: 3000
     ports:
       - "3000:3000"
+    volumes:
+      - ./backups:/backups
     depends_on:
       db:
         condition: service_healthy

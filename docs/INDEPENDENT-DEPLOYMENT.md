@@ -61,7 +61,14 @@ El backup no debe quedar únicamente en el proveedor de hosting. Desde un equipo
 pnpm db:backup -- --output ./backup-$(date -u +%Y%m%dT%H%M%SZ).json
 ```
 
-Guardar el JSON y su SHA-256 en almacenamiento privado externo con retención diaria. Probar periódicamente una restauración en una base separada; `db:restore` requiere confirmación explícita y nunca debe apuntar a producción sin una copia previa.
+En el VPS, el script `scripts/daily-backup.sh` crea una copia completa diaria a las **23:59 de Argentina** (`America/Argentina/Buenos_Aires`), guarda un archivo SHA-256 y conserva por defecto 30 días. El cron del VPS debe ejecutar:
+
+```cron
+CRON_TZ=America/Argentina/Buenos_Aires
+59 23 * * * cd /opt/the-point-company && ./scripts/daily-backup.sh >> /var/log/the-point-backup.log 2>&1
+```
+
+La copia contiene el estado completo de las tablas al cierre del día, incluyendo los datos cargados durante ese día. Guardar además una copia periódica fuera del VPS es recomendable porque una copia en el mismo servidor no protege contra la pérdida del servidor. Probar periódicamente una restauración en una base separada; `db:restore` requiere confirmación explícita y nunca debe apuntar a producción sin una copia previa.
 
 Una alternativa operativa es programar un job externo (GitHub Actions privado, cron de un servidor propio o el scheduler del proveedor) con `DATABASE_URL` guardada como secreto. No subir backups ni archivos `.env` al repositorio.
 
