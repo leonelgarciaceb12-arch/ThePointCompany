@@ -74,7 +74,7 @@ const dateLabel = (value?: unknown) => {
       })
     : "—";
 };
-const flavorCategory = (category?: unknown) => ["Vapes Descartables", "Vapers Descartables", "Esencias"].includes(String(category || ""));
+const flavorCategory = (category?: unknown) => ["Vapes Descartables", "Vapers Descartables", "Esencias", "Silicone Cases", "Body Splash"].includes(String(category || ""));
 const whatsappUrl = (phone?: unknown, name?: unknown) => {
   let digits = String(phone ?? "").replace(/\D/g, "");
   if (!digits) return "";
@@ -3102,11 +3102,11 @@ function InventoryView({
             </div>
             {flavorCategory(p.category) && (
               <div className="flavor-stock-panel">
-                <div className="flavor-panel-head"><strong>Sabores</strong><button className="text-button" onClick={() => { const name = prompt("Nombre del sabor"); if (!name?.trim()) return; const value = prompt("Stock disponible", "0"); createFlavor.mutate({ productId: p.id, name: name.trim(), stock: Math.max(0, Number(value || 0)) }); }}><Plus size={13} /> Agregar</button></div>
+                <div className="flavor-panel-head"><strong>Variantes</strong><button className="text-button" onClick={() => { const name = prompt("Nombre de la variante"); if (!name?.trim()) return; const value = prompt("Stock disponible", "0"); createFlavor.mutate({ productId: p.id, name: name.trim(), stock: Math.max(0, Number(value || 0)) }); }}><Plus size={13} /> Agregar</button></div>
                 {(flavors.data || []).filter(f => f.productId === p.id).map(f => (
                   <div className="flavor-row" key={f.id}><span>{f.name}</span><strong>{f.stock}</strong><button className="text-button" onClick={() => { const value = prompt(`Stock para ${f.name}`, String(f.stock)); if (value !== null) updateFlavor.mutate({ id: f.id, name: f.name, stock: Math.max(0, Number(value)), minStock: f.minStock, notes: f.notes || undefined, active: true }); }}><Pencil size={12} /></button><button className="text-button danger-text" onClick={() => { if (confirmDelete(`el sabor ${f.name}`)) archiveFlavor.mutate({ id: f.id }); }}><Trash2 size={12} /></button></div>
                 ))}
-                {!(flavors.data || []).some(f => f.productId === p.id) && <small className="muted">Sin sabores cargados; agregalos para vender por variante.</small>}
+                {!(flavors.data || []).some(f => f.productId === p.id) && <small className="muted">Sin variantes cargadas; agregalas para vender por modelo, aroma o sabor.</small>}
               </div>
             )}
             <div className="card-actions">

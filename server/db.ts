@@ -1125,7 +1125,7 @@ export async function createProduct(input: {
   return Number(result[0].insertId);
 }
 
-const flavorCategories = new Set(["Vapes Descartables", "Vapers Descartables", "Esencias"]);
+const flavorCategories = new Set(["Vapes Descartables", "Vapers Descartables", "Esencias", "Silicone Cases", "Body Splash"]);
 const isFlavorCategory = (category: string) => flavorCategories.has(String(category || "").trim());
 async function syncProductFlavorStock(tx: any, productId: number, userId?: number) {
   const rows = await tx.select({ total: sql<number>`coalesce(sum(${productFlavors.stock}), 0)` }).from(productFlavors).where(and(eq(productFlavors.productId, productId), eq(productFlavors.active, true)));
@@ -1134,7 +1134,7 @@ async function syncProductFlavorStock(tx: any, productId: number, userId?: numbe
 async function assertFlavorProduct(tx: any, productId: number) {
   const product = (await tx.select().from(products).where(eq(products.id, productId)).limit(1))[0];
   if (!product) throw new Error("Producto no encontrado");
-  if (!flavorCategories.has(product.category)) throw new Error("Solo Vapes Descartables, Vapers Descartables y Esencias admiten sabores");
+  if (!flavorCategories.has(product.category)) throw new Error("Este producto no admite variantes");
   return product;
 }
 
@@ -1154,7 +1154,7 @@ export async function createProductFlavor(input: { productId: number; name: stri
   if (!db) throw new Error("Database is not available");
   return db.transaction(async tx => {
     await assertFlavorProduct(tx, input.productId);
-    if (!input.name.trim()) throw new Error("El sabor necesita un nombre");
+    if (!input.name.trim()) throw new Error("La variante necesita un nombre");
     const result = await tx.insert(productFlavors).values({ productId: input.productId, name: input.name.trim(), stock: input.stock, minStock: input.minStock ?? 0, notes: input.notes || null, createdBy: input.userId, updatedBy: input.userId });
     await syncProductFlavorStock(tx, input.productId, input.userId);
     return Number(result[0].insertId);
@@ -1166,7 +1166,7 @@ export async function updateProductFlavor(id: number, input: { name: string; sto
   if (!db) throw new Error("Database is not available");
   await db.transaction(async tx => {
     const current = (await tx.select().from(productFlavors).where(eq(productFlavors.id, id)).limit(1))[0];
-    if (!current) throw new Error("Sabor no encontrado");
+    if (!current) throw new Error("Variante no encontrada");
     await tx.update(productFlavors).set({ name: input.name.trim(), stock: input.stock, minStock: input.minStock ?? 0, notes: input.notes || null, active: input.active ?? true, updatedBy: input.userId }).where(eq(productFlavors.id, id));
     await syncProductFlavorStock(tx, current.productId, input.userId);
   });
@@ -1178,7 +1178,7 @@ export async function archiveProductFlavor(id: number, userId?: number) {
   if (!db) throw new Error("Database is not available");
   await db.transaction(async tx => {
     const current = (await tx.select().from(productFlavors).where(eq(productFlavors.id, id)).limit(1))[0];
-    if (!current) throw new Error("Sabor no encontrado");
+    if (!current) throw new Error("Variante no encontrada");
     await tx.update(productFlavors).set({ active: false, updatedBy: userId }).where(eq(productFlavors.id, id));
     await syncProductFlavorStock(tx, current.productId, userId);
   });
@@ -1606,9 +1606,9 @@ export async function createSale(input: {
           : [];
         if (activeFlavors.length && !item.flavorId) throw new Error(`Seleccioná un sabor para ${product.name}`);
         if (item.flavorId) {
-          if (!flavorCategories.has(product.category)) throw new Error("Ese producto no admite sabores");
+          if (!flavorCategories.has(product.category)) throw new Error("Ese producto no admite variantes");
           const flavor = (await tx.select().from(productFlavors).where(and(eq(productFlavors.id, item.flavorId), eq(productFlavors.productId, product.id))).limit(1))[0];
-          if (!flavor || !flavor.active) throw new Error("Sabor no encontrado o inactivo");
+          if (!flavor || !flavor.active) throw new Error("Variante no encontrada o inactiva");
           if (flavor.stock < item.quantity) throw new Error(`Stock insuficiente para ${product.name} · ${flavor.name}`);
         } else if (product.stock < item.quantity) {
           throw new Error(`Stock insuficiente para ${product.name}`);
