@@ -1,1 +1,1 @@
-ALTER TABLE `loans` ADD `interestStartDate` date;
+ALTER TABLE `loans` ADD COLUMN IF NOT EXISTS `interestStartDate` date;

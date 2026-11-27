@@ -1,2 +1,2 @@
-ALTER TABLE `loans` MODIFY COLUMN `interestPeriod` enum('daily','monthly','weekly') NOT NULL DEFAULT 'monthly';--> statement-breakpoint
-ALTER TABLE `loans` ADD `interestUnit` varchar(16) DEFAULT 'percent' NOT NULL;
+ALTER TABLE `loans` ADD COLUMN IF NOT EXISTS `interestPeriod` enum('daily','monthly','weekly') NOT NULL DEFAULT 'monthly';--> statement-breakpoint
+ALTER TABLE `loans` ADD COLUMN IF NOT EXISTS `interestUnit` varchar(16) DEFAULT 'percent' NOT NULL;
