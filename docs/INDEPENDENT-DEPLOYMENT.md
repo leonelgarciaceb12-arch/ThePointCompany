@@ -45,7 +45,13 @@ El contenedor ejecuta `pnpm db:migrate` antes de iniciar el servidor. Las migrac
 pnpm db:seed
 ```
 
-El despliegue independiente comienza vacío de forma intencional. No se incluye ni se carga ningún dato histórico de la cuenta anterior. `pnpm db:seed` solo debe utilizarse si el propietario prepara explícitamente un archivo de importación propio; la ausencia de ese archivo es válida y no impide que la aplicación funcione.
+El despliegue independiente comienza vacío de forma intencional. No se incluye ni se carga el histórico completo de la cuenta anterior. Como excepción solicitada por el propietario, se conserva de forma privada la importación de las dos deudas pendientes de **Lucho** y **Leonel**. El archivo con esos datos está excluido de Git mediante `.gitignore` y no se publica en el repositorio. Cuando la base de Oracle esté disponible, se ejecuta una sola vez:
+
+```bash
+pnpm db:import-legacy-debts
+```
+
+El comando es idempotente: si las deudas ya existen, no las duplica. `pnpm db:seed` solo debe utilizarse si el propietario prepara explícitamente otra importación propia; la ausencia de un seed general es válida y no impide que la aplicación funcione.
 
 ## Backups independientes
 
