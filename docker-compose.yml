@@ -5,14 +5,12 @@ services:
     environment:
       MYSQL_DATABASE: pointdesk
       MYSQL_USER: pointdesk
-      MYSQL_PASSWORD: pointdesk
-      MYSQL_ROOT_PASSWORD: root-change-me
-    ports:
-      - "3306:3306"
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?MYSQL_PASSWORD must be set in .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?MYSQL_ROOT_PASSWORD must be set in .env}
     volumes:
       - pointdesk_mysql:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "pointdesk", "-ppointdesk"]
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u pointdesk -p\"$${MYSQL_PASSWORD}\""]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -20,7 +18,7 @@ services:
     build: .
     env_file: .env
     environment:
-      DATABASE_URL: mysql://pointdesk:pointdesk@db:3306/pointdesk
+      DATABASE_URL: mysql://pointdesk:${MYSQL_PASSWORD}@db:3306/pointdesk
       NODE_ENV: production
       PORT: 3000
     ports:
