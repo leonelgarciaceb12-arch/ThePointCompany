@@ -1,1 +1,1 @@
-ALTER TABLE `loans` ADD COLUMN IF NOT EXISTS `interestStartDate` date;
+-- interestStartDate is created in 0001 for fresh installations.

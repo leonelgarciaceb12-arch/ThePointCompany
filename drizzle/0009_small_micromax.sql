@@ -1,1 +1,1 @@
-ALTER TABLE `loans` ADD COLUMN IF NOT EXISTS `interestBase` varchar(24) DEFAULT 'initial_principal' NOT NULL;
+-- interestBase is created in 0001 for fresh installations.
