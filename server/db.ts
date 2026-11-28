@@ -774,7 +774,10 @@ export async function getDashboard(from?: string, to?: string) {
     recentSales,
     dueLoans: dueLoans.map(presentDebt),
     expenses: expensesTotal[0],
-    ads: adTotal[0],
+    ads: {
+      ...(adTotal[0] || {}),
+      total: adSpend,
+    },
     daily,
     advanced,
   };
