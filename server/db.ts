@@ -791,11 +791,21 @@ export async function listProducts(search?: string, category?: string) {
     filters.push(
       sql`lower(${products.name}) like ${`%${search.toLowerCase()}%`}`
     );
-  return db
+  const rows = await db
     .select()
     .from(products)
     .where(and(...filters))
     .orderBy(asc(products.category), asc(products.name));
+  if (!rows.length) return rows;
+  const flavorRows = await db
+    .select()
+    .from(productFlavors)
+    .where(and(inArray(productFlavors.productId, rows.map(row => row.id)), eq(productFlavors.active, true)))
+    .orderBy(asc(productFlavors.name));
+  return rows.map(product => ({
+    ...product,
+    variants: flavorRows.filter(flavor => flavor.productId === product.id),
+  }));
 }
 
 export async function listProductPerformance() {
