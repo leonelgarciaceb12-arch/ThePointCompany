@@ -434,7 +434,7 @@ function SaleForm({
     const unitCost = fromInventory
       ? Number(selected.cost || 0)
       : Number(line.unitCost || 0);
-    const selectedFlavor = flavors.data?.find(f => String(f.id) === line.flavorId && f.productId === selected?.id);
+    const selectedFlavor = flavors.data?.find(f => String(f.id) === line.flavorId && String(f.productId) === String(selected?.id));
     return { line, selected, selectedFlavor, fromInventory, quantity, unitPrice, unitCost };
   });
   const filteredCustomers = customers.filter(customer =>
@@ -659,7 +659,7 @@ function SaleForm({
                     Sabor / variante
                     <select value={line.flavorId} onChange={e => updateLine(index, { flavorId: e.target.value })}>
                       <option value="">Seleccioná un sabor</option>
-                      {(flavors.data || []).filter(f => f.productId === selected.id).map(f => <option key={f.id} value={f.id}>{f.name} · {f.stock} disponibles</option>)}
+                      {(flavors.data || []).filter(f => String(f.productId) === String(selected.id)).map(f => <option key={f.id} value={f.id}>{f.name} · {f.stock} disponibles</option>)}
                     </select>
                     {prepared[index].selectedFlavor && <small className="conversion-note">Stock disponible: {prepared[index].selectedFlavor.stock} unidades</small>}
                   </label>
@@ -1010,7 +1010,7 @@ function SaleEditForm({
                 const product = products.find(p => String(p.id) === value);
                 updateItem(index, { productId: value, flavorId: "", fromInventory: Boolean(product), description: product?.name || item.description, unitCost: product ? String(product.cost) : item.unitCost });
               }}><option value="">Venta manual / externa</option>{visibleEditProducts(index).map(product => <option key={product.id} value={product.id}>{product.name} · stock {product.stock}</option>)}</select></label>
-              {products.find(p => String(p.id) === item.productId) && (flavorCategory(products.find(p => String(p.id) === item.productId)?.category) || (flavors.data || []).some(f => f.productId === Number(item.productId))) && <label>Variante<select value={item.flavorId} onChange={e => updateItem(index, { flavorId: e.target.value })}><option value="">Seleccioná una variante</option>{(flavors.data || []).filter(f => f.productId === Number(item.productId)).map(f => <option key={f.id} value={f.id}>{f.name} · {f.stock} disponibles</option>)}</select></label>}
+              {products.find(p => String(p.id) === item.productId) && (flavorCategory(products.find(p => String(p.id) === item.productId)?.category) || (flavors.data || []).some(f => String(f.productId) === item.productId)) && <label>Variante<select value={item.flavorId} onChange={e => updateItem(index, { flavorId: e.target.value })}><option value="">Seleccioná una variante</option>{(flavors.data || []).filter(f => String(f.productId) === item.productId).map(f => <option key={f.id} value={f.id}>{f.name} · {f.stock} disponibles</option>)}</select></label>}
               <div className="form-grid">
                 <label>Descripción<input value={item.description} onChange={e => updateItem(index, { description: e.target.value })} /></label>
                 <label>Cantidad<input type="number" min="1" step="1" value={item.quantity} onChange={e => updateItem(index, { quantity: e.target.value })} /></label>
@@ -2413,7 +2413,7 @@ export default function Home() {
                   </button>
                 </section>
               </div>
-              <ChartsView data={data} period={period} embedded />
+              <ChartsView data={data} period={period} setPeriod={setPeriod} embedded />
             </>
           )}
           {active === "sales" && (
@@ -2539,7 +2539,7 @@ export default function Home() {
   );
 }
 
-function ChartsView({ data, period, embedded = false }: { data: any; period: string; embedded?: boolean }) {
+function ChartsView({ data, period, setPeriod, embedded = false }: { data: any; period: PeriodKey; setPeriod?: (period: PeriodKey) => void; embedded?: boolean }) {
   const rawDaily = (data?.daily ?? []).map((row: any) => ({
     ...row,
     label: dateLabel(row.day),
@@ -2614,7 +2614,7 @@ function ChartsView({ data, period, embedded = false }: { data: any; period: str
           icon={Package}
         />
       </div>}
-      {embedded && <div className="section-header compact-header"><div><span className="eyebrow">lectura cuantitativa · período seleccionado</span><h3>Gráficos del negocio</h3></div><span className="period-pill">{periodLabel(period)}</span></div>}
+      {embedded && <div className="section-header compact-header"><div><span className="eyebrow">lectura cuantitativa · período seleccionado</span><h3>Gráficos del negocio</h3></div><select className="period-pill period-select" value={period} onChange={e => setPeriod?.(e.target.value as PeriodKey)} aria-label="Seleccionar período de gráficos">{periodOptions.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}</select></div>}
       <div className="main-grid charts-layout">
         <section className="panel chart-panel">
           <SectionHeader
@@ -3100,13 +3100,13 @@ function InventoryView({
               </strong>
               <span>Valor {money(Number(p.stock) * Number(p.cost))}</span>
             </div>
-            {(flavorCategory(p.category) || (flavors.data || []).some(f => f.productId === p.id)) && (
+            {(flavorCategory(p.category) || (flavors.data || []).some(f => String(f.productId) === String(p.id))) && (
               <div className="flavor-stock-panel">
                 <div className="flavor-panel-head"><strong>Variantes</strong><button className="text-button" onClick={() => { const name = prompt("Nombre de la variante"); if (!name?.trim()) return; const value = prompt("Stock disponible", "0"); createFlavor.mutate({ productId: p.id, name: name.trim(), stock: Math.max(0, Number(value || 0)) }); }}><Plus size={13} /> Agregar</button></div>
-                {(flavors.data || []).filter(f => f.productId === p.id).map(f => (
+                {(flavors.data || []).filter(f => String(f.productId) === String(p.id)).map(f => (
                   <div className="flavor-row" key={f.id}><span>{f.name}</span><strong>{f.stock}</strong><button className="text-button" onClick={() => { const value = prompt(`Stock para ${f.name}`, String(f.stock)); if (value !== null) updateFlavor.mutate({ id: f.id, name: f.name, stock: Math.max(0, Number(value)), minStock: f.minStock, notes: f.notes || undefined, active: true }); }}><Pencil size={12} /></button><button className="text-button danger-text" onClick={() => { if (confirmDelete(`el sabor ${f.name}`)) archiveFlavor.mutate({ id: f.id }); }}><Trash2 size={12} /></button></div>
                 ))}
-                {!(flavors.data || []).some(f => f.productId === p.id) && <small className="muted">Sin variantes cargadas; agregalas para vender por modelo, aroma o sabor.</small>}
+                {!(flavors.data || []).some(f => String(f.productId) === String(p.id)) && <small className="muted">Sin variantes cargadas; agregalas para vender por modelo, aroma o sabor.</small>}
               </div>
             )}
             <div className="card-actions">
