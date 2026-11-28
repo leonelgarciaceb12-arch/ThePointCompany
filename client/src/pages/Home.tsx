@@ -1010,7 +1010,7 @@ function SaleEditForm({
                 const product = products.find(p => String(p.id) === value);
                 updateItem(index, { productId: value, flavorId: "", fromInventory: Boolean(product), description: product?.name || item.description, unitCost: product ? String(product.cost) : item.unitCost });
               }}><option value="">Venta manual / externa</option>{visibleEditProducts(index).map(product => <option key={product.id} value={product.id}>{product.name} · stock {product.stock}</option>)}</select></label>
-              {products.find(p => String(p.id) === item.productId) && flavorCategory(products.find(p => String(p.id) === item.productId)?.category) && <label>Sabor / variante<select value={item.flavorId} onChange={e => updateItem(index, { flavorId: e.target.value })}><option value="">Seleccioná un sabor</option>{(flavors.data || []).filter(f => f.productId === Number(item.productId)).map(f => <option key={f.id} value={f.id}>{f.name} · {f.stock} disponibles</option>)}</select></label>}
+              {products.find(p => String(p.id) === item.productId) && (flavorCategory(products.find(p => String(p.id) === item.productId)?.category) || (flavors.data || []).some(f => f.productId === Number(item.productId))) && <label>Variante<select value={item.flavorId} onChange={e => updateItem(index, { flavorId: e.target.value })}><option value="">Seleccioná una variante</option>{(flavors.data || []).filter(f => f.productId === Number(item.productId)).map(f => <option key={f.id} value={f.id}>{f.name} · {f.stock} disponibles</option>)}</select></label>}
               <div className="form-grid">
                 <label>Descripción<input value={item.description} onChange={e => updateItem(index, { description: e.target.value })} /></label>
                 <label>Cantidad<input type="number" min="1" step="1" value={item.quantity} onChange={e => updateItem(index, { quantity: e.target.value })} /></label>
@@ -3100,7 +3100,7 @@ function InventoryView({
               </strong>
               <span>Valor {money(Number(p.stock) * Number(p.cost))}</span>
             </div>
-            {flavorCategory(p.category) && (
+            {(flavorCategory(p.category) || (flavors.data || []).some(f => f.productId === p.id)) && (
               <div className="flavor-stock-panel">
                 <div className="flavor-panel-head"><strong>Variantes</strong><button className="text-button" onClick={() => { const name = prompt("Nombre de la variante"); if (!name?.trim()) return; const value = prompt("Stock disponible", "0"); createFlavor.mutate({ productId: p.id, name: name.trim(), stock: Math.max(0, Number(value || 0)) }); }}><Plus size={13} /> Agregar</button></div>
                 {(flavors.data || []).filter(f => f.productId === p.id).map(f => (
